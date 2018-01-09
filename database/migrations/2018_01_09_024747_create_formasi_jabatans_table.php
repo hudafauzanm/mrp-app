@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFormasiJabatansTable extends Migration
 {
-    protected $tablename = 'formasi_jabatan';
+    public $tablename = 'formasi_jabatan';
 
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateFormasiJabatansTable extends Migration
      */
     public function up()
     {
-        Schema::create($tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('kode_olah')->unique();
             $table->string('legacy_code');
@@ -25,9 +25,9 @@ class CreateFormasiJabatansTable extends Migration
             $table->string('jenjang');
             $table->string('jenjang_txt')->nullable();
             $table->string('nomor_spfj');
-            $table->int('pagu');
-            $table->int('realisasi');
-            $table->int('status_fj')->nullable();
+            $table->integer('pagu');
+            $table->integer('realisasi');
+            $table->integer('status_fj')->nullable();
             $table->char('personnel_area_id', 36);
             $table->timestamps();
 
@@ -42,6 +42,6 @@ class CreateFormasiJabatansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($tablename);
+        Schema::dropIfExists($this->tablename);
     }
 }

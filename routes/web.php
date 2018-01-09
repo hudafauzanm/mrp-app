@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.sdm.home');
-});
+Route::get('/', 'DashboardController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index');
 
-Auth::routes();
+Route::get('/login', 'LoginController@index')->name('login');
+Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
