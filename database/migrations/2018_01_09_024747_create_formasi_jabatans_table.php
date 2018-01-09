@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFormasiJabatansTable extends Migration
 {
-    protected $tablename = 'formasi_jabatan';
+    public $tablename = 'formasi_jabatan';
 
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateFormasiJabatansTable extends Migration
      */
     public function up()
     {
-        Schema::create($tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('kode_olah')->unique();
             $table->string('legacy_code');
@@ -42,6 +42,6 @@ class CreateFormasiJabatansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($tablename);
+        Schema::dropIfExists($this->tablename);
     }
 }

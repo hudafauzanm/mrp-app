@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePersonnelAreasTable extends Migration
 {
-    protected $tablename = 'personnel_area';
+    public $tablename = 'personnel_area';
 
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreatePersonnelAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create($tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('nama');
             $table->string('nama_pendek')->nullable();
@@ -40,6 +40,6 @@ class CreatePersonnelAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($tablename);
+        Schema::dropIfExists($this->tablename);
     }
 }

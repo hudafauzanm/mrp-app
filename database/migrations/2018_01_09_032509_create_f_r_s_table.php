@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFRSTable extends Migration
 {
-    protected $tablename = 'frs';
+    public $tablename = 'frs';
     /**
      * Run the migrations.
      *
@@ -14,7 +14,7 @@ class CreateFRSTable extends Migration
      */
     public function up()
     {
-        Schema::create($tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('nama');
             $table->string('nip')->unique();
@@ -42,6 +42,6 @@ class CreateFRSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($tablename);
+        Schema::dropIfExists($this->tablename);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDiklatPenjenjangansTable extends Migration
 {
-    protected $tablename = 'diklat_penjenjangan';
+    public $tablename = 'diklat_penjenjangan';
     /**
      * Run the migrations.
      *
@@ -14,16 +14,16 @@ class CreateDiklatPenjenjangansTable extends Migration
      */
     public function up()
     {
-        Schema::create($tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->char('tbl_pegawai', 36);
             $table->string('jenis_diklat');
             $table->date('tanggal_usulan');
-            $table->date('tanggal_mulai');
+            $table->date('tanggal_mulai')->nullable();
             $table->date('tanggal_lulus');
             $table->decimal('nilai');
             $table->string('grade');
-            $table->string('nomor_sertifikat')->unique();
+            $table->string('nomor_sertifikat')->unique()->nullable();
             $table->string('hasil_nilai_assesment');
             $table->timestamps();
 
@@ -38,6 +38,6 @@ class CreateDiklatPenjenjangansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($tablename);
+        Schema::dropIfExists($this->tablename);
     }
 }

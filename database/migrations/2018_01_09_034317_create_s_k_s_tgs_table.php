@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSKSTgsTable extends Migration
 {
-    protected $tablename = 'sk_stg';
+    public $tablename = 'sk_stg';
     /**
      * Run the migrations.
      *
@@ -14,7 +14,7 @@ class CreateSKSTgsTable extends Migration
      */
     public function up()
     {
-        Schema::create($tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('no_dokumen_proses_sk')->unique();
             $table->string('tahun_sk');
@@ -26,7 +26,6 @@ class CreateSKSTgsTable extends Migration
 
             $table->timestamps();
 
-            $table->index(['sk_stg_id']);
         });
     }
 
@@ -37,6 +36,6 @@ class CreateSKSTgsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($tablename);
+        Schema::dropIfExists($this->tablename);
     }
 }
