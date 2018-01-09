@@ -16,15 +16,15 @@ class CreateDiklatPenjenjangansTable extends Migration
     {
         Schema::create($tablename, function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('jenis_diklat');
-            $table->date(format)('tanggal_usulan');
-            // $table->string('email')->unique();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('alamat')->nullable();
-            $table->string('kota')->nullable();
-            $table->string('provinsi')->nullable();
             $table->char('tbl_pegawai', 36);
+            $table->string('jenis_diklat');
+            $table->date('tanggal_usulan');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_lulus');
+            $table->decimal('nilai');
+            $table->string('grade');
+            $table->string('nomor_sertifikat')->unique();
+            $table->string('hasil_nilai_assesment');
             $table->timestamps();
 
             $table->index(['tbl_pegawai']);
