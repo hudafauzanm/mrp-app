@@ -1,0 +1,70 @@
+/** Green	#009688
+			#0c5563
+ **************************************************************** **/
+	::selection {
+		background: #009688;
+	}
+	::-moz-selection {
+		background: #009688; /* Firefox */
+	}
+	::-webkit-selection {
+		background: #009688; /* Safari */
+	}
+
+	#aside nav ul li a:active,
+	#aside nav ul li.menu-open,
+	#aside nav ul li.always-open,
+	#aside nav>ul>li>a:hover,
+	#aside nav>ul>li>a:focus,
+	#aside nav ul li.active,
+	.fancy-file-upload.fancy-file-primary>span.button,
+	.datepicker table tr td.active.active,
+	.btn-primary,
+	#header,
+
+	/*.toast-primary,*/
+	.popular .plan-title,
+	body.min #aside ul.nav>li>ul li,
+	body.min #aside ul.nav li.menu-open,
+	body.min #aside ul.nav>li:hover>ul,
+	#aside nav ul li a.dashboard,
+	#aside .logo,
+	body.min #asidesize,
+	#aside, #asidebg {
+		background-color: #0c5563;
+	}
+	
+	body.min #aside ul.nav>li:hover:before {
+		border-right-color: #0c5563;
+	}
+
+	.panel>.panel-heading strong {
+		color:#009688;
+	}
+	
+	.btn-primary {
+		border-color:#009688;
+	}
+
+	.popular {
+		border-color:#0c5563 !important;
+	}
+	
+	/**
+		IMPORTANT
+	**/
+	.btn-primary,
+	.alert-theme-color,
+	.panel-primary>.panel-heading {
+		background-color: #009688 !important;
+	}
+	.panel-primary,
+	.panel-primary>.panel-heading {
+		border-color: #009688 !important;
+	}
+	
+	@media only screen and (min-width: 768px) {
+		body.min #aside ul.nav>li:hover>a span {
+			background-color: #0c5563;
+		}
+	}
