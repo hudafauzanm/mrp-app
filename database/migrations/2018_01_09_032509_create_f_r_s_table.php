@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFRSTable extends Migration
 {
+    protected $tablename = 'frs';
     /**
      * Run the migrations.
      *
@@ -13,8 +14,23 @@ class CreateFRSTable extends Migration
      */
     public function up()
     {
-        Schema::create('f_r_s', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create($tablename, function (Blueprint $table) {
+            $table->uuid('id');
+            $table->string('nama');
+            $table->string('nip')->unique();
+            $table->string('perner')->unique();
+            $table->string('tingkat');
+            $table->string('bidang_profesi');
+            $table->string('jurusan');
+            $table->string('konsentrasi');
+            $table->string('tindaklanjut')->nullable();
+            $table->string('source');
+            $table->string('lt');
+            $table->string('hasil_penjabatan');
+            $table->string('tahun_sk');
+            $table->string('tgl_pegawai_tetap');
+            $table->string('no_sk')->unique();
+            $table->string('instansi_akademik');
             $table->timestamps();
         });
     }
@@ -26,6 +42,6 @@ class CreateFRSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('f_r_s');
+        Schema::dropIfExists($tablename);
     }
 }
