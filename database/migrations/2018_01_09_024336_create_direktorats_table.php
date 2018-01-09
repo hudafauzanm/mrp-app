@@ -30,6 +30,6 @@ class CreateDirektoratsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('direktorats');
+        Schema::dropIfExists($table);
     }
 }
