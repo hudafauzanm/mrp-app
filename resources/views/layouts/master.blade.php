@@ -37,7 +37,7 @@
 						<span class="label label-success pull-right">1</span>
 						<span class="label label-info pull-right">1</span>
 				-->
-				@include('includes.leftbar')
+				@yield('leftbar')
 
 				<span id="asidebg"><!-- aside fixed background --></span>
 			</aside>

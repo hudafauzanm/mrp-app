@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'MRP Dashboard')
+@section('title', 'Beranda')
 
 @section('leftbar')
-	@include('includes.sdm.leftbar')
+	@include('includes.unit.leftbar')
 @endsection
 
 @section('content')

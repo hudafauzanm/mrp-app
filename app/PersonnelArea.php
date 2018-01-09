@@ -11,6 +11,15 @@ class PersonnelArea extends Authenticatable
     protected $primaryKey = 'id';
     public $incrementing = false;
 
+    public function setAttribute($key, $value)
+    {
+        $isRememberTokenAttribute = $key == $this->getRememberTokenName();
+        if (!$isRememberTokenAttribute)
+        {
+          parent::setAttribute($key, $value);
+        }
+    }
+
     public function direktorat()
     {
     	return $this->belongsTo('App\Direktorat');

@@ -41,6 +41,6 @@ class LoginController extends Controller
     	auth()->logout();
         request()->session()->flush();
 
-    	return redirect('/login');
+    	return redirect('/login')->with('success', 'Berhasil log out');
     }
 }

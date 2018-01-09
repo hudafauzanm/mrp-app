@@ -3,7 +3,7 @@
 @section('title', 'MRP Dashboard')
 
 @section('leftbar')
-	@include('includes.sdm.leftbar')
+	@include('includes.karir2.leftbar')
 @endsection
 
 @section('content')
