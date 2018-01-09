@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDirektoratsTable extends Migration
 {
-    protected $table = 'direktorat';
+    protected $tablename = 'direktorat';
 
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateDirektoratsTable extends Migration
      */
     public function up()
     {
-        Schema::create($table, function (Blueprint $table) {
+        Schema::create($tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('nama');
             $table->string('nama_pendek')->unique();
@@ -30,6 +30,6 @@ class CreateDirektoratsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($table);
+        Schema::dropIfExists($tablename);
     }
 }
