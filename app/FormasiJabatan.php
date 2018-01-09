@@ -13,3 +13,4 @@ class FormasiJabatan extends Model
     	return $this->belongsTo('App\PersonnelArea');
     }
 }
+//hfiw
