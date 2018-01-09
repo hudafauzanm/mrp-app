@@ -16,15 +16,17 @@ class CreateSKSTgsTable extends Migration
     {
         Schema::create($tablename, function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('no_dokumen_proses_sk');
+            $table->string('no_dokumen_proses_sk')->unique();
             $table->string('tahun_sk');
             $table->string('no_sk')->unique();
             $table->string('no_dokumen_kirim_sk')->unique();
-            $table->string('tanggal_kirim_sk');
-            $table->string('tanggal_aktivasi');//di erd date
+            $table->date('tanggal_kirim_sk');
+            $table->date('tanggal_aktivasi');//di erd date
             $table->string('no_stg')->unique();
 
             $table->timestamps();
+
+            $table->index(['sk_stg_id']);
         });
     }
 
