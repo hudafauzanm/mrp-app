@@ -24,7 +24,7 @@ class CreateMRPsTable extends Migration
             $table->string('no_dokumen_unit_mutasi');
             $table->date('tgl_dokumen_unit_mutasi');
             $table->string('perner');
-            $table->char('SK_id'),36;
+            $table->char('SK_id',36);
             $table->date('tgl_evaluasi');
             $table->date('tgl_pooling');
             $table->string('no_dokumen_mutasi');
