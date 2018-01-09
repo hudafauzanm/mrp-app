@@ -33,7 +33,7 @@ class LoginController extends Controller
 			return back()->with('error', 'Username/password salah!');
 		}
 		
-	    return redirect('/dashboard')->with('status', 'Selamat bekerja!');
+	    return redirect('/dashboard')->with('success', 'Selamat bekerja!');
     }
 
     public function logout()

@@ -1,6 +1,6 @@
 @if (session('error'))
 	<script>
-		_toastr("{{ session('error') }}","top-right","danger",false);
+		_toastr("{{ session('error') }}","top-center","danger",false);
 	</script>
 @endif
 {{-- @if (count($errors))
@@ -30,13 +30,13 @@
 
 @if (session('success'))
 	<script>
-		_toastr("{{ session('success') }}","top-right","success",false);
+		_toastr("{{ session('success') }}","top-center","success",false);
 	</script>
 @endif
 
 @if (session('warning'))
 	<script>
-		_toastr("{{ session('warning') }}","top-right","warning",false);
+		_toastr("{{ session('warning') }}","top-center","warning",false);
 	</script>
 @endif
 

@@ -22,11 +22,17 @@
 		</li>
 	</ul>
 
-	<h3>Mutasi Unit Saya</h3>
+	<h3>Status Proses Mutasi</h3>
 	<ul class="nav nav-list">
 		<li>
 			<a href="calendar.html">
-				<i class="main-icon fa fa-question-circle"></i> <span>Status Proses Mutasi</span>
+				<i class="main-icon fa fa-arrow-circle-right"></i> <span>Mutasi Diajukan</span>
+			</a>
+		</li>
+
+		<li>
+			<a href="calendar.html">
+				<i class="main-icon fa fa-arrow-circle-left"></i> <span>Mutasi Diterima</span>
 			</a>
 		</li>
 	</ul>
