@@ -23,8 +23,11 @@ class CreateSKSTgsTable extends Migration
             $table->date('tanggal_kirim_sk');
             $table->date('tanggal_aktivasi');//di erd date
             $table->string('no_stg')->unique();
+            $table->char('mrp_id'),36;
 
             $table->timestamps();
+
+            $table->index(['mrp_id']);
 
         });
     }
