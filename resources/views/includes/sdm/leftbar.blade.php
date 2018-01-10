@@ -13,3 +13,11 @@
 	</ul>
 
 </nav>
+
+@section('sdm_leftbar')
+	<script>
+		$("body").addClass('min');
+		$("#mobileMenuBtn").addClass('active');
+		$("#middle").css("margin-left", "0px")
+	</script>
+@append
