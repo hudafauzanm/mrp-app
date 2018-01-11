@@ -25,13 +25,13 @@
 	<h3>Status Proses Mutasi</h3>
 	<ul class="nav nav-list">
 		<li>
-			<a href="calendar.html">
+			<a href="/status?act=req">
 				<i class="main-icon fa fa-arrow-circle-right"></i> <span>Mutasi Diajukan</span>
 			</a>
 		</li>
 
 		<li>
-			<a href="calendar.html">
+			<a href="/status?act=res">
 				<i class="main-icon fa fa-arrow-circle-left"></i> <span>Mutasi Diterima</span>
 			</a>
 		</li>

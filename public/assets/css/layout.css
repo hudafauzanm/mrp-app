@@ -141,7 +141,8 @@ body.boxed #asidebg {
 #header {
 	height:50px; 
 	color: #939da8;
-	position:relative;
+	position:fixed;
+	width: 100%;
 	z-index:1000;
 
 	background:#4b5354;
@@ -320,7 +321,8 @@ body.boxed #asidebg {
 }
 
 #aside {
-	position: absolute;
+	position: fixed;
+	width: 100%;
 	left: 0;
 	top: 49px; 
 	bottom: 0;
@@ -750,6 +752,7 @@ body.boxed #asidebg {
   clear: both;
   /*overflow: hidden;*//* DO NOT USE - autosuggest & pickers are half hidden */
   margin-left: 235px;
+  margin-top: 50px;
 }
 
 

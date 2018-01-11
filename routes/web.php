@@ -19,6 +19,9 @@ Route::get('/login', 'LoginController@index')->name('login');
 Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');
 
+// status proses
+Route::get('/status', 'StatusController@index');
+
 // sdm
 Route::get('/mrp', 'MRPController@index');
 
