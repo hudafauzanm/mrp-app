@@ -2,11 +2,23 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class PersonnelArea extends Model
+class PersonnelArea extends Authenticatable
 {
     protected $table = 'personnel_area';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
+    public function setAttribute($key, $value)
+    {
+        $isRememberTokenAttribute = $key == $this->getRememberTokenName();
+        if (!$isRememberTokenAttribute)
+        {
+          parent::setAttribute($key, $value);
+        }
+    }
 
     public function direktorat()
     {

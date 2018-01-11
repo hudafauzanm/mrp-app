@@ -25,9 +25,9 @@ class CreateFormasiJabatansTable extends Migration
             $table->string('jenjang');
             $table->string('jenjang_txt')->nullable();
             $table->string('nomor_spfj');
-            $table->int('pagu');
-            $table->int('realisasi');
-            $table->int('status_fj')->nullable();
+            $table->integer('pagu');
+            $table->integer('realisasi');
+            $table->integer('status_fj')->nullable();
             $table->char('personnel_area_id', 36);
             $table->timestamps();
 

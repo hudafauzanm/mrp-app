@@ -26,6 +26,7 @@ class CreatePersonnelAreasTable extends Migration
             $table->string('kota')->nullable();
             $table->string('provinsi')->nullable();
             $table->char('direktorat_id', 36);
+            $table->integer('user_role')->default(3);
             // $table->rememberToken();
             $table->timestamps();
 
