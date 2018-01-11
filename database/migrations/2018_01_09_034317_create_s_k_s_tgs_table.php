@@ -21,7 +21,7 @@ class CreateSKSTgsTable extends Migration
             $table->string('no_sk')->unique();
             $table->string('no_dokumen_kirim_sk')->unique();
             $table->date('tanggal_kirim_sk');
-            $table->date('tanggal_aktivasi');//di erd date
+            $table->date('tanggal_aktivasi');
             $table->string('no_stg')->unique();
             $table->char('mrp_id',36);
 

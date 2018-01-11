@@ -67,7 +67,7 @@
 			<script type="text/javascript" src="/assets/js/app.js"></script>
 
 		@show
-		@yield('sdm_leftbar')
+		@yield('sdm_leftbar_scripts')
 		@include('includes.notifications')
 	</body>
 </html>

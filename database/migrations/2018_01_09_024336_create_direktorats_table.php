@@ -18,7 +18,7 @@ class CreateDirektoratsTable extends Migration
         Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('nama');
-            $table->string('nama_pendek')->unique();
+            $table->string('nama_pendek');
             $table->timestamps();
         });
     }

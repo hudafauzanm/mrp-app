@@ -19,15 +19,16 @@ class CreateFormasiJabatansTable extends Migration
             $table->uuid('id');
             $table->string('kode_olah')->unique();
             $table->string('legacy_code');
-            $table->string('unit_div_satuan')->nullable();
+            $table->string('posisi');
             $table->string('formasi');
             $table->string('jabatan');
-            $table->string('jenjang');
-            $table->string('jenjang_txt')->nullable();
+            $table->string('jenjang_id');
+            $table->string('jenjang_txt');
             $table->string('nomor_spfj');
             $table->integer('pagu');
             $table->integer('realisasi');
-            $table->integer('status_fj')->nullable();
+            $table->string('spfj');
+            $table->string('status_fj');
             $table->char('personnel_area_id', 36);
             $table->timestamps();
 

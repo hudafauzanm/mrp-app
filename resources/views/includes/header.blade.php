@@ -4,7 +4,7 @@
 
 	<!-- Logo -->
 	<span class="logo pull-left">
-		<img src="assets/images/logo-header.png" alt="admin panel" height="35" />
+		<img src="/assets/images/logo-header.png" alt="admin panel" height="35" />
 	</span>
 
 	<form method="get" action="page-search.html" class="search pull-left hidden-xs">
@@ -45,7 +45,7 @@
 			<!-- USER OPTIONS -->
 			<li class="dropdown pull-left">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<img class="user-avatar" alt="" src="assets/images/noavatar.png" height="34" /> 
+					<img class="user-avatar" alt="" src="/assets/images/noavatar.png" height="34" /> 
 					<span class="user-name">
 						<span class="hidden-xs">
 							{{ auth()->user()->nama_pendek }} <i class="fa fa-angle-down"></i>

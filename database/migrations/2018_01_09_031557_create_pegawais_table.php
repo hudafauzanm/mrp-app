@@ -15,39 +15,35 @@ class CreatePegawaisTable extends Migration
     public function up()
     {
         Schema::create($this->tablename, function (Blueprint $table) {
-            $table->string('perner')->primary();
+            $table->uuid('id');
+            $table->string('perner')->unique();
             $table->string('nip')->unique();
-            $table->string('no_hp');
-            $table->string('email')->unique();
-            $table->string('kota_asal');
-            $table->string('status_domisili');
+            $table->string('no_hp')->nullable()->unique();
+            $table->string('email')->nullable()->unique();
+            $table->string('kota_asal')->nullable();
+            $table->string('status_domisili')->nullable();
             $table->string('nama_pegawai');
-            $table->string('employee_group');
             $table->string('employee_subgroup');
-            $table->string('ps_group')->nullable();
-            $table->string('jenjang_main_grp_id');
-            $table->string('jenjang_main_grp_txt');
-            $table->string('jenjang_sub_grp_id');
-            $table->string('jenjang_sub_grp_txt');
+            $table->string('ps_group');
             $table->integer('talent_pool_position')->nullable();
-            $table->date('tanggal_grade')->nullable();
+            $table->date('tanggal_grade');
             $table->date('tanggal_lahir');
             $table->date('tanggal_masuk');
             $table->date('tanggal_capeg');
             $table->date('tanggal_pegawai');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('lc_atasan');
+            $table->string('lc_atasan');
             $table->string('nip_atasan');
-            $table->string('top_unit');
-            $table->string('top_0');
-            $table->string('top_1');
-            $table->string('top_2');
-            $table->string('top_3');
-            $table->string('nip_sutri')->unique();
-            $table->integer('kali_jenjang');
-            $table->date('tanggal_jab_unit_akhir');
-            $table->date('tanggal_unit_induk_akhir');
+            $table->string('top_unit')->nullable();
+            $table->string('top_0')->nullable();
+            $table->string('top_1')->nullable();
+            $table->string('top_2')->nullable();
+            $table->string('top_3')->nullable();
+            $table->string('nip_sutri')->nullable();
+            $table->integer('kali_jenjang')->nullable();
+            $table->date('tanggal_jab_unit_akhir')->nullable();
+            $table->date('tanggal_unit_induk_akhir')->nullable();
             $table->char('formasijabatan_id',36)
 
             $table->timestamps();

@@ -67,11 +67,9 @@
 	                            <td>ANALYST PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI (PLT DEPUTI MANAJERADMINISTRASI PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI)SUB BIDANG ADMINISTRASI PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI BIDANG PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI DIVISI PERENCANAAN KORPORAT DIREKTORAT PERENCANAAN KORPORAT PT PLN (PERSERO) KANTOR PUSAT</td>
 	                            <td>DEPUTI MANAJER ADMINISTRASI PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI BIDANG PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI DIVISI PERENCANAAN KORPORAT DIREKTORAT PERENCANAAN KORPORAT PT PLN (PERSERO) KANTOR PUSAT</td>
 	                            <td>
-		                            <button class="btn btn-xs btn-blue"><i class="fa fa-edit"></i> Edit</button>
-		                            <br>
+		                            <button class="btn btn-xs btn-green detail" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail & Edit</button>
 		                            <button class="btn btn-xs btn-red"><i class="fa fa-trash"></i> Hapus</button>
 		                            <br>
-		                            <button class="btn btn-xs btn-green detail" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail</button>
 	                            </td>
 	                        </tr>
 	                        <tr>
@@ -82,11 +80,9 @@
 	                            <td>ANALYST ANGGARAN (PLT DEPUTI MANAJER ANGGARAN 2) SUB BIDANG ANGGARAN 2 BIDANG ANGGARAN II DIVISI ANGGARAN DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</td>
 	                            <td>DEPUTI MANAJER ANGGARAN 2 BIDANG ANGGARAN II DIVISI ANGGARAN DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</td>
 	                            <td>
-	                            	<button class="btn btn-xs btn-blue"><i class="fa fa-edit"></i> Edit</button>
-		                            <br>
+		                            <button class="btn btn-xs btn-green detail" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail & Edit</button>
 		                            <button class="btn btn-xs btn-red"><i class="fa fa-trash"></i> Hapus</button>
 		                            <br>
-		                            <button class="btn btn-xs btn-green detail" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail</button>
 	                            </td>
 	                        </tr>
 	                        <tr>
@@ -97,11 +93,9 @@
 	                            <td>DEPUTI MANAJER SISTEM PROTEKSI DAN SCADATEL BIDANG TRANSMISI DAN DISTRIBUSI PT PLN (PERSERO) WILAYAH SULUTTENGGO</td>
 	                            <td>DEPUTI MANAJER PERENCANAAN REGIONAL BIDANG PERENCANAAN DAN PENGENDALIAN REGIONAL SULAWESI DAN NUSA TENGGARA DIVISI PENGEMBANGAN REGIONAL SULAWESI DAN NUSA TENGGARA DIREKTORAT BISNIS REGIONAL SULAWESI DAN NUSA TENGGARA PT PLN (PERSERO) KANTOR PUSAT</td>
 	                            <td>
-	                            	<button class="btn btn-xs btn-blue"><i class="fa fa-edit"></i> Edit</button>
-		                            <br>
+		                            <button class="btn btn-xs btn-green detail" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail & Edit</button>
 		                            <button class="btn btn-xs btn-red"><i class="fa fa-trash"></i> Hapus</button>
 		                            <br>
-		                            <button class="btn btn-xs btn-green detail" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail</button>
 	                            </td>
 	                        </tr>
 	                        <tr>
@@ -112,11 +106,9 @@
 	                            <td>ASSISTANT ANALYST PENGEMBANGAN SISTEM MANAJEMEN KINERJA PEGAWAI BIDANG MANAJEMEN KINERJA PEGAWAI DIVISI HUMAN CAPITAL MANAGEMENT SYSTEM DIREKTORAT HUMAN CAPITAL MANAGEMENT PT PLN (PERSERO) KANTOR PUSAT</td>
 	                            <td>ASSISTANT ANALYST PEMASARAN DAN PELAYANAN PELANGGAN SEKSI PELAYANAN PELANGGAN BAGIAN PELAYANAN DAN ADMINISTRASI AREA DEPOK PT PLN (PERSERO) DISTRIBUSI JAWA BARAT</td>
 	                            <td>
-	                            	<button class="btn btn-xs btn-blue"><i class="fa fa-edit"></i> Edit</button>
-		                            <br>
+		                            <button class="btn btn-xs btn-green detail" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail & Edit</button>
 		                            <button class="btn btn-xs btn-red"><i class="fa fa-trash"></i> Hapus</button>
 		                            <br>
-		                            <button class="btn btn-xs btn-green detail" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail</button>
 	                            </td>
 	                        </tr>
 	                    </tbody>
@@ -420,7 +412,6 @@
     <script src="/assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="/assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="/assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-    {{-- <script src="/assets/plugins/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script> --}}
 	<script type="text/javascript">
 		jQuery(window).load(function() { /** required .load **/
 

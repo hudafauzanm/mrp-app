@@ -14,7 +14,7 @@
 
 </nav>
 
-@section('sdm_leftbar')
+@section('sdm_leftbar_scripts')
 	<script>
 		$("body").addClass('min');
 		$("#mobileMenuBtn").addClass('active');
