@@ -13,7 +13,7 @@ class Pegawai extends Model
     	return $this->belongsTo('App\FormasiJabatan')
     }
 
-    public function diklat_penjenjangan ()
+    public function diklat_penjenjangan()
     {
     	return $this->hasMany('App\DiklatPenjenjangan')
     }
