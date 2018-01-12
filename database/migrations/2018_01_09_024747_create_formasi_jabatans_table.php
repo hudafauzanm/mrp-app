@@ -24,7 +24,7 @@ class CreateFormasiJabatansTable extends Migration
             $table->string('jabatan');
             $table->string('jenjang_id');
             $table->string('jenjang_txt');
-            $table->string('nomor_spfj');
+            // $table->string('nomor_spfj');
             $table->integer('pagu');
             $table->integer('realisasi');
             $table->string('spfj');

@@ -32,6 +32,10 @@ class LoginController extends Controller
 		{
 			return back()->with('error', 'Username/password salah!');
 		}
+        
+        // $user = auth()->user();
+        // if (!$user->formasi_jabatan->personnel_area->username === $username) 
+        //     return $this->logout();
 		
 	    return redirect('/dashboard')->with('success', 'Selamat bekerja!');
     }

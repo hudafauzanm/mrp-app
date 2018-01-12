@@ -23,4 +23,8 @@ class Pegawai extends Model
     	return $this->hasMany('App\MRP')
     }
 
+    public function penilaian_pegawai()
+    {
+        return $this->hasMany('App\PenilaianPegawai');
+    }
 }
