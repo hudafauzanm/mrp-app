@@ -5067,6 +5067,11 @@ section.dark select>optgroup {
 
 /* @toggle switch elements 
 -------------------------------------------------- */
+
+.scrollable {
+	overflow: scroll;
+	height: 475px;
+}
 .switch {
 	cursor:pointer; 
 	position: relative; 
