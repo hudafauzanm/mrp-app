@@ -52,7 +52,7 @@
 								<td>ASSISTANT ANALYST AUDIT KHUSUS BIDANG AUDIT KHUSUS SATUAN PENGAWASAN INTERN PT PLN (PERSERO) KANTOR PUSAT</td>
 								<td>ASSISTANT ANALYST AUDIT KHUSUS DEPUTY GROUP AUDIT KHUSUS A GROUP HEAD AUDIT KHUSUS SATUAN PENGAWASAN INTERN PT PLN (PERSERO) KANTOR PUSAT</td>
 								<td>Diajukan</td>
-								<td><button class="btn btn-primary"><i class="fa fa-list"> Detail</i></button></td>
+								<td><a href="/status/detail/7807299Z.Rotasi.151666060101_151666060302" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 							</tr>
 							<tr>
 								{{-- <td>7292109M.Promosi.151666020202_151666020202</td> --}}
@@ -61,7 +61,7 @@
 								<td>ANALYST ANGGARAN (PLT DEPUTI MANAJER ANGGARAN 2) SUB BIDANG ANGGARAN 2 BIDANG ANGGARAN II DIVISI ANGGARAN DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</td>
 								<td>ASSISTANT ANALYST AUDIT KHUSUS DEPUTY GROUP AUDIT KHUSUS A GROUP HEAD AUDIT KHUSUS SATUAN PENGAWASAN INTERN PT PLN (PERSERO) KANTOR PUSAT</td>
 								<td>Pending</td>
-								<td><button class="btn btn-primary"><i class="fa fa-list"> Detail</i></button></td>
+								<td><a href="/status/detail/7807299Z.Rotasi.151666060101_151666060302" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 							</tr>
 	                    </tbody>
 	                </table>

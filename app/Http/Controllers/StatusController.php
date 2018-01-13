@@ -15,4 +15,9 @@ class StatusController extends Controller
     {
     	return view('pages.unit.status');
     }
+
+    public function getDetails($reg_num)
+    {
+    	return view('pages.unit.detail_mutasi');
+    }
 }
