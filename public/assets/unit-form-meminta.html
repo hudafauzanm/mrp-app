@@ -21,6 +21,8 @@
 		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
 
+
+
 	</head>
 	<!--
 		.boxed = boxed version
@@ -339,7 +341,7 @@
 							<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
 							<div id="content" >
 								<!-- data pegawainya -->
-								<div class="panel panel-default">
+								<div class="panel panel-default" id="formdp">
 									<div class="panel-heading panel-heading-transparent">
 										<strong>DATA PEGAWAI</strong>
 									</div>
@@ -635,6 +637,13 @@
 														</datalist>
 													</div>
 												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="next1">
+														NEXT
+													</button>
+												</div>
 											</div>											
 										</fieldset>
 									</div>
@@ -642,7 +651,7 @@
 							</div>
 
 							<div id="content" >
-								<div class="panel panel-default">
+								<div class="panel panel-default" id="formdm">
 									<div class="panel-heading panel-heading-transparent">
 										<strong>DATA MUTASI</strong>
 									</div>
@@ -934,13 +943,307 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+													<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="next2">
+														NEXT
+													</button>
+												</div>
+											</div>
 										</fieldset>
 									</div>
+									
 								</div>
 							</div>
 
 							<div id="content" >
-								<div class="panel panel-default">
+								<div class="panel panel-default" id="formp1">
+									<div class="panel-heading panel-heading-transparent">
+										<strong>KEY COMPETENCIES</strong>
+									</div>
+									<div class="panel-body">
+										<fieldset>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Enthusuastic For Challenge</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kc1" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Creative and Innovative</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kc2" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Building Business Partnership</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kc3" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Strategic Orientation</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kc4" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Customer Focus Oriented</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kc5" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Driving Execution</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kc6" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Visionary Leadership</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kc7" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Empowering / Developing Others</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kc1" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									</div>									
+								</div>
+							</div>
+
+							<div id="content" >
+								<div class="panel panel-default" id="formp2">
+									<div class="panel-heading panel-heading-transparent">
+										<strong>KOMPETENSI HARIAN</strong>
+									</div>
+									<div class="panel-body">
+										<fieldset>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Komunikasi</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kh1" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Team Work</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kh2" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>kh_3</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kh3" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>kh_4</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kh4" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>kh_5</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kh5" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Bahasa Indonesia</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kh6" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Bahasa Inggris</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kh7" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-md-5 col-sm-5">
+														<label>Bahasa Asing Lain</label>
+													</div>
+													<div class="col-md-3 col-sm-3">
+														<input type="number" name="kh1" value="" class="form-control required col-md-6" placeholder="Range 0-100">
+													</div>
+													<div class="col-md-4 col-sm-4">
+														<div class="rating rating-0 size-13 width-100 "><!-- rating-0 ... rating-5 --></div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									</div>									
+								</div>
+							</div>
+
+							<div id="content" >
+								<div class="panel panel-default" id="formp3">
+									<div class="panel-heading panel-heading-transparent">
+										<strong>Deskripsi Penilaian</strong>
+									</div>
+									<div class="panel-body">
+										<fieldset>
+											<div class="row">
+												<div class="form-group">
+													<label>Internal Readiness</label>
+													<input type="text" name="nilai1a" value="" class="form-control required col-md-6" placeholder="Kesehatan">
+													<input type="text" name="nilai1b" value="" class="form-control required col-md-6" placeholder="Career Willingness">
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<label>External Readiness</label>
+													<input type="text" name="extready" value="" class="form-control required col-md-6" placeholder="From family, friends, etc">
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<label>Hubungan dengan Sesama</label>
+													<label class="radio">
+														<input type="radio" name="hds-1" value="1" checked="checked">
+														<i></i> Sangat Bagus
+													</label>
+
+													<label class="radio">
+														<input type="radio" name="hds-2" value="1">
+														<i></i> Bermasalah
+													</label>
+													<input type="text" name="hds-3" value="" class="form-control required col-md-6" placeholder="Deskripsi">
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<label>Alasan Mutasi</label>
+													<input type="text" name="almut" value="" class="form-control required col-md-6" placeholder="From family, friends, etc">
+												</div>
+											</div>
+										</fieldset>
+									</div>									
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="next3">
+										NEXT
+									</button>
+								</div>
+							</div>
+
+							<div id="content" >
+								<div class="panel panel-default" id="formdpeng">
 									<div class="panel-heading panel-heading-transparent">
 										<strong>DATA PENGAJU</strong>
 									</div>
@@ -980,7 +1283,7 @@
 
 							<div class="row">
 								<div class="col-md-12">
-									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
+									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="btnKirim">
 										KIRIM
 									</button>
 								</div>
@@ -1163,5 +1466,58 @@
 				});
 			});
 		</script>
+		<script>
+		$(document).ready(function(){
+		    $("#formdp").show();
+			$("#formdm").hide();
+			$("#formp1").hide();
+			$("#formp2").hide();
+			$("#formp3").hide();
+			$("#next3").hide();
+			$("#formdpeng").hide();
+			$("#btnKirim").hide();
+		});
+
+		$(document).ready(function(){
+			$("#next1").click(function(){
+				$("#formdp").hide();
+				$("#formdm").show();
+				$("#formp1").hide();
+				$("#formp2").hide();
+				$("#formp3").hide();
+				$("#next3").hide();
+				$("#formdpeng").hide();
+				$("#btnKirim").hide();
+			});
+		});
+
+		$(document).ready(function(){
+			$("#next2").click(function(){
+				$("#formdp").hide();
+				$("#formdm").hide();
+				$("#formp1").show();
+				$("#formp2").show();
+				$("#formp3").show();
+				$("#next3").show();
+				$("#formdpeng").hide();
+				$("#btnKirim").hide();
+			});
+		});
+
+		$(document).ready(function(){
+			$("#next3").click(function(){
+				$("#formdp").hide();
+				$("#formdm").hide();
+				$("#formp1").hide();
+				$("#formp2").hide();
+				$("#formp3").hide();
+				$("#next3").hide();
+				$("#formdpeng").show();
+				$("#btnKirim").show();
+			});
+		});
+			
+		</script>
+
 	</body>
 </html>
