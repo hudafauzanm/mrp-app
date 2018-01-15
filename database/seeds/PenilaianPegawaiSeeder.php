@@ -12,6 +12,12 @@ class PenilaianPegawaiSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $penpegawai = new PenilaianPegawai;
+        $penpegawai->id = Uuid::generate();
+        $penpegawai->nilai = '';
+        $penpegawai->tindak_lanjut_pengembangan = '';
+        $penpegawai->aspek_penilaian_id = $aspen->id;
+        $penpegawai->pegawai_id = $pegawai->id;
+        $penpegawai->save();
     }
 }
