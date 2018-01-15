@@ -118,7 +118,8 @@
 
 						<div class="tab-content transparent ">
 							<div id="meminta" class="tab-pane active">
-								<table class="footable" id="footable">
+								{{-- <input type="text" id="filter1"> --}}
+								<table class="footable" id="footable1">
 									<thead>
 										<tr>
 											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
@@ -386,6 +387,369 @@
 								</table>
 								<!-- </div> -->
 							</div>
+
+							<div id="bursa" class="tab-pane">
+								<table class="footable" id="footable2" data-filtering="true">
+									<thead>
+										<tr>
+											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
+											<th class="foo-cell">Registry Number</th>
+											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
+											<th data-type="numeric" data-hide = "" class="">Nama</th>
+											<th data-type="numeric" data-hide = "all" class="">Grade</th>
+											<th data-type="numeric" data-hide = "all" class="">Jabatan Saat Ini</th>
+											<th data-type="numeric" data-hide = "all" class="">Proyeksi Jabatan</th>
+											<th data-type="numeric" data-hide = "all" class="">Masa Kerja</th>
+											<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
+											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
+											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
+											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>akjalgjlkajlka</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>DESTA AGUNG SWANDITA</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+											
+									</tbody>
+								</table>
+								<!-- </div> -->
+							</div>
+
+							<div id="request" class="tab-pane">
+								<table class="footable" id="footable3" data-filtering="true">
+									<thead>
+										<tr>
+											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
+											<th class="foo-cell">Registry Number</th>
+											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
+											<th data-type="numeric" data-hide = "" class="">Nama</th>
+											<th data-type="numeric" data-hide = "all" class="">Grade</th>
+											<th data-type="numeric" data-hide = "all" class="">Jabatan Saat Ini</th>
+											<th data-type="numeric" data-hide = "all" class="">Proyeksi Jabatan</th>
+											<th data-type="numeric" data-hide = "all" class="">Masa Kerja</th>
+											<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
+											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
+											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
+											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>DESTA AGUNG SWANDITA</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>DESTA AGUNG SWANDITA</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>DESTA AGUNG SWANDITA</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>DESTA AGUNG SWANDITA</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>DESTA AGUNG SWANDITA</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>DESTA AGUNG SWANDITA</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+											<td>85107001</td>
+											<td>DESTA AGUNG SWANDITA</td>
+											<td>SPE02</td>
+											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
+											<td>ASSISTANT ANALYST ASURANSI</td>
+											<td>7</td>
+											<td>7</td>
+											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai</span>
+												</button>														
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+											
+									</tbody>
+								</table>
+								<!-- </div> -->
+							</div>
 						</div>
 					</div>
 					<!-- /panel content -->
@@ -393,6 +757,7 @@
 		    </div>
 		</div>
 	</div>
+
 	<div id="ceknilai" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -637,43 +1002,43 @@
 	$(document).ready(function(){
 		loadScript(plugin_path + "footable/dist/footable.min.js", function(){
 			loadScript(plugin_path + "footable/dist/footable.sort.min.js", function(){
-				loadScript(plugin_path + "footable/dist/footable.paginate.min.js", function(){ /** remove if pagination not needed **/
+				loadScript(plugin_path + "footable/dist/footable.paginate.min.js", function(){ 
+					loadScript(plugin_path + "footable/dist/footable.filter.min.js", function(){ 
 
-					// footable
-					var $ftable = jQuery('.footable');
+						// footable
+						var $ftable = jQuery('.footable');
 
 
-					/** 01. FOOTABLE INIT
-					******************************************* **/
-					$ftable.footable({
-						
+						/** 01. FOOTABLE INIT
+						******************************************* **/
+						$ftable.footable({
+						});
+
+
+						/** 01. PER PAGE SWITCH
+						******************************************* **/
+						jQuery('#change-page-size').change(function (e) {
+							e.preventDefault();
+							var pageSize = jQuery(this).val();
+							$ftable.data('page-size', pageSize);
+							$ftable.trigger('footable_initialized');
+						});
+
+						jQuery('#change-nav-size').change(function (e) {
+							e.preventDefault();
+							var navSize = jQuery(this).val();
+							$ftable.data('limit-navigation', navSize);
+							$ftable.trigger('footable_initialized');
+						});
+
+
+						/** 02. BOOTSTRAP 3.x PAGINATION FIX
+						******************************************* **/
+						jQuery("div.pagination").each(function() {
+							jQuery("div.pagination ul").addClass('pagination');
+							jQuery("div.pagination").removeClass('pagination');
+						});
 					});
-
-
-					/** 01. PER PAGE SWITCH
-					******************************************* **/
-					jQuery('#change-page-size').change(function (e) {
-						e.preventDefault();
-						var pageSize = jQuery(this).val();
-						$ftable.data('page-size', pageSize);
-						$ftable.trigger('footable_initialized');
-					});
-
-					jQuery('#change-nav-size').change(function (e) {
-						e.preventDefault();
-						var navSize = jQuery(this).val();
-						$ftable.data('limit-navigation', navSize);
-						$ftable.trigger('footable_initialized');
-					});
-
-
-					/** 02. BOOTSTRAP 3.x PAGINATION FIX
-					******************************************* **/
-					jQuery("div.pagination").each(function() {
-						jQuery("div.pagination ul").addClass('pagination');
-						jQuery("div.pagination").removeClass('pagination');
-					});
-
 				});
 			});
 		});
