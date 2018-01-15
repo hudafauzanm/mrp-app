@@ -14,12 +14,12 @@ class MRPTableSeeder extends Seeder
     {
         $mrp = new MRP;
         $mrp->id = Uuid::generate();
-        $mrp->registry_number = '';
-        $mrp->jenis_mutasi = '';
-        $mrp->mutasi = '';
-        $mrp->jalur_mutasi = '';
-        $mrp->no_dokumen_unit_asal = '';
-        $mrp->tgl_dokumen_unit_asal = '';
+        $mrp->registry_number = '7807299Z.Rotasi.151666060101_151666060302';
+        $mrp->jenis_mutasi = 'Dinas';
+        $mrp->mutasi = 'Rotasi';
+        $mrp->jalur_mutasi = 'Intern Divisi Antar Bidang';
+        $mrp->no_dokumen_unit_asal = '00215/SIM.03.01KDIVSTI/2017-R';
+        $mrp->tgl_dokumen_unit_asal = '05.06.2017';
         $mrp->alasan_mutasi = '';
         $mrp->no_dokumen_unit_mutasi = '';
         $mrp->tgl_dokumen_unit_mutasi = '';
