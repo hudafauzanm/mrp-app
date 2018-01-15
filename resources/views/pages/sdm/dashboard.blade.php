@@ -105,21 +105,16 @@
 
 					<!-- panel content -->
 					<div class="panel-body scrollable"  style="height: 580px;">
-						<label><!-- PER PAGE SELECTOR . you can move it to panel-heading -->
-							<select class="form-control pointer" id="change-page-size">
-								<option value="2">2 / page</option>
-								<option value="3">3 / page</option>
-								<option value="5">5 / page</option>
-								<option value="10" selected="selected">10 / page</option>
-								<option value="15">15 / page</option>
-								<option value="20">20 / page</option>
-							</select>
-						</label><!-- /PER PAGE SELECTOR -->
-
 						<div class="tab-content transparent ">
 							<div id="meminta" class="tab-pane active">
-								{{-- <input type="text" id="filter1"> --}}
-								<table class="footable" id="footable1">
+								<div class="row">
+									<div class="col-md-3">
+										<input class="form-control" type="text" id="filter2">
+									</div>
+								</div>
+								
+								<br>
+								<table class="footable" id="footable1" data-filter="#filter1">
 									<thead>
 										<tr>
 											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
@@ -389,7 +384,13 @@
 							</div>
 
 							<div id="bursa" class="tab-pane">
-								<table class="footable" id="footable2" data-filtering="true">
+								<div class="row">
+									<div class="col-md-3">
+										<input class="form-control" type="text" id="filter2">
+									</div>
+								</div>
+								<br>
+								<table class="footable" id="footable2" data-filter="#filter2">
 									<thead>
 										<tr>
 											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
@@ -484,7 +485,13 @@
 							</div>
 
 							<div id="request" class="tab-pane">
-								<table class="footable" id="footable3" data-filtering="true">
+								<div class="row">
+									<div class="col-md-3">
+										<input class="form-control" type="text" id="filter2">
+									</div>
+								</div>
+								<br>
+								<table class="footable" id="footable3" data-filter="#filter3">
 									<thead>
 										<tr>
 											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
@@ -1017,12 +1024,12 @@
 
 						/** 01. PER PAGE SWITCH
 						******************************************* **/
-						jQuery('#change-page-size').change(function (e) {
-							e.preventDefault();
-							var pageSize = jQuery(this).val();
-							$ftable.data('page-size', pageSize);
-							$ftable.trigger('footable_initialized');
-						});
+						// jQuery('#change-page-size').change(function (e) {
+						// 	e.preventDefault();
+						// 	var pageSize = jQuery(this).val();
+						// 	$ftable.data('page-size', pageSize);
+						// 	$ftable.trigger('footable_initialized');
+						// });
 
 						jQuery('#change-nav-size').change(function (e) {
 							e.preventDefault();
