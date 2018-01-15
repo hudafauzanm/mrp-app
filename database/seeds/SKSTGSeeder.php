@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\skstg;
 
 class SKSTGSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class SKSTGSeeder extends Seeder
      */
     public function run()
     {
-        $skstg = new SKSTGSeeder;
+        $skstg = new skstg;
         $skstg->id = Uuid::generate();
         $skstg->no_dokumen_proses_sk = '';
         $skstg->tahun_sk = '';
@@ -23,3 +24,4 @@ class SKSTGSeeder extends Seeder
         $skstg->mrp_id = $mrp->id;
         $skstg->save();
     }
+}
