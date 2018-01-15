@@ -109,7 +109,7 @@
 							<div id="meminta" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-3">
-										<input class="form-control" type="text" id="filter2">
+										<input class="form-control" type="text" placeholder="Search" id="filter2">
 									</div>
 								</div>
 								
@@ -386,7 +386,7 @@
 							<div id="bursa" class="tab-pane">
 								<div class="row">
 									<div class="col-md-3">
-										<input class="form-control" type="text" id="filter2">
+										<input class="form-control" type="text" placeholder="Search" id="filter2">
 									</div>
 								</div>
 								<br>
@@ -487,7 +487,7 @@
 							<div id="request" class="tab-pane">
 								<div class="row">
 									<div class="col-md-3">
-										<input class="form-control" type="text" id="filter2">
+										<input class="form-control" type="text" placeholder="Search" id="filter2">
 									</div>
 								</div>
 								<br>
