@@ -25,6 +25,16 @@ class PersonnelAreaSeeder extends Seeder
 
         $user = new PersonnelArea;
         $user->id = Uuid::generate();
+        $user->nama = 'Unit 2';
+        $user->nama_pendek = 'UNIKEA';
+        $user->username = 'unikea';
+        $user->password = bcrypt('unikea');
+        $user->direktorat_id = $dir->id;
+        $user->user_role = 4;
+        $user->save();
+
+        $user = new PersonnelArea;
+        $user->id = Uuid::generate();
         $user->nama = 'SDM';
         $user->nama_pendek = 'SDM';
         $user->username = 'sdm';

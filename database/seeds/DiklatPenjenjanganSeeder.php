@@ -14,25 +14,15 @@ class DiklatPenjenjanganSeeder extends Seeder
     {
         $dikpen = new DiklatPenjenjangan;
         $dikpen->id = Uuid::generate();
-        $dikpen->nama = 'Unit Oke';
-        $dikpen->nama_pendek = 'UNIKE';
-        $dikpen->username = 'unike';
-        $dikpen->password = bcrypt('unike');
-        $dikpen->direktorat_id = $dir->id;
-        $dikpen->user_role = 1;
+        $dikpen->jenis_diklat = 'EE I';
+        $dikpen->tanggal_usulan = '';
+        $dikpen->tanggal_mulai = '04.12.2010';
+        $dikpen->tanggal_lulus = '13.07.2011';
+        $dikpen->nilai = '81,31';
+        $dikpen->grade = 'GRADE C (MEMUASKAN)';
+        $dikpen->nomor_sertifikat = 'C.2.0.0.01.4.10.01.6493037Z';
+        $dikpen->hasil_nilai_assesment = '';
+        $dikpen->direktorat_id = $pegawai->id;
         $dikpen->save();
     }
 }
- $table->uuid('id');
-            $table->string('jenis_diklat');
-            $table->date('tanggal_usulan');
-            $table->date('tanggal_mulai')->nullable();
-            $table->date('tanggal_lulus');
-            $table->decimal('nilai', 5);
-            $table->char('grade', 2);
-            $table->string('nomor_sertifikat')->unique()->nullable();
-            $table->string('hasil_nilai_assesment');
-            $table->char('pegawai_id', 36);
-            $table->timestamps();
-
-            $table->index(['pegawai_id']);
