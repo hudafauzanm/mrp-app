@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\DiklatPenjenjangan;
+use App\Pegawai;
 
 class DiklatPenjenjanganSeeder extends Seeder
 {
@@ -22,7 +23,7 @@ class DiklatPenjenjanganSeeder extends Seeder
         $dikpen->grade = 'GRADE C (MEMUASKAN)';
         $dikpen->nomor_sertifikat = 'C.2.0.0.01.4.10.01.6493037Z';
         $dikpen->hasil_nilai_assesment = '';
-        $dikpen->direktorat_id = $dir->id;
+        $dikpen->pegawai_id = Pegawai::first()->id;
         $dikpen->save();
 
         $dikpen = new DiklatPenjenjangan;

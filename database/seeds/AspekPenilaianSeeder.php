@@ -13,17 +13,17 @@ class AspekPenilaianSeeder extends Seeder
     public function run()
     {
     	$aspen = new AspekPenilaian;
-        $aspen->id = Uuid::generate();
+
         $aspen->aspek = 'KompetensiHarian';
         $aspen->save();
 
         $aspen = new AspekPenilaian;
-        $aspen->id = Uuid::generate();
+     
         $aspen->aspek = 'KompetensiHarian';
         $aspen->save();
 
         $aspen = new AspekPenilaian;
-        $aspen->id = Uuid::generate();
+      
         $aspen->aspek = 'PenilaianAtasan';
         $aspen->save();
     }
