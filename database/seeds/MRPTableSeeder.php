@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\MRP;
 
-class AllSeeder extends Seeder
+class MRPTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class AllSeeder extends Seeder
      */
     public function run()
     {
-    	//
+        //
     }
 }

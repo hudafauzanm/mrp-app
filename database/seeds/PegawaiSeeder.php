@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Pegawai;
 
-class AllSeeder extends Seeder
+class PegawaiSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class AllSeeder extends Seeder
      */
     public function run()
     {
-    	//
+        //
     }
 }
