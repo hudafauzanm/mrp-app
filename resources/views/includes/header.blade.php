@@ -7,10 +7,6 @@
 		<img src="/assets/images/logo-header.png" alt="admin panel" height="35" />
 	</span>
 
-	<form method="get" action="page-search.html" class="search pull-left hidden-xs">
-		<input type="text" class="form-control" name="k" placeholder="Search for something..." />
-	</form>
-
 	<nav>
 
 		<!-- OPTIONS LIST -->
@@ -19,12 +15,6 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					<i class="fa fa-bell-o" style="margin-top: 12px; font-size: 150%; "></i>
 					<span>7</span>
-					{{-- <img class="user-avatar" alt="" src="assets/images/noavatar.png" height="34" /> 
-					<span class="user-name">
-						<span class="hidden-xs">
-							{{ auth()->user()->nama_pendek }} <i class="fa fa-angle-down"></i>
-						</span>
-					</span> --}}
 				</a>
 				<ul class="dropdown-menu hold-on-click" style="max-height: 250px; overflow-y: scroll;">
 					<li><!-- my calendar -->

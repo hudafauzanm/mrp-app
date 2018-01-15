@@ -23,7 +23,7 @@
 	<!--
 		.boxed = boxed version
 	-->
-	<body>
+	<body style="background-image: url("/assets/images/login-background.jpg");">
 
 		<div class="login-box">
 
@@ -37,16 +37,6 @@
 						Username/password salah!
 					</div>
 				@endif
-
-				<!-- <div class="alert alert-warning noborder text-center weight-400 nomargin noradius">
-					Account Inactive!
-				</div>
-
-				<div class="alert alert-default noborder text-center weight-400 nomargin noradius">
-					<strong>Too many failures!</strong> <br />
-					Please wait: <span class="inlineCountdown" data-seconds="180"></span>
-				</div>
-				-->
 
 				<fieldset>	
 				
@@ -67,6 +57,15 @@
 							<b class="tooltip tooltip-top-right">Password</b>
 						</label>
 					</section>
+
+					{{-- <section>
+						<label class="label">NIP</label>
+						<label class="input">
+							<i class="icon-append fa fa-user"></i>
+							<input type="text" name="nip">
+							<span class="tooltip tooltip-top-right">Masukkan NIP Anda</span>
+						</label>
+					</section> --}}
 
 				</fieldset>
 

@@ -21,6 +21,10 @@ Route::get('/logout', 'LoginController@logout');
 
 // status proses
 Route::get('/status', 'StatusController@index');
+Route::get('/status/detail/{reg_num}', 'StatusController@getDetails');
+
+// form pengajuan mutasi (semua tipe)
+Route::get('/mutasi/pengajuan', 'MutasiController@index');
 
 // sdm
 Route::get('/mrp', 'MRPController@index');
