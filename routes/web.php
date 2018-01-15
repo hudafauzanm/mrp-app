@@ -28,5 +28,6 @@ Route::get('/mutasi/pengajuan', 'MutasiController@index');
 
 // sdm
 Route::get('/mrp', 'MRPController@index');
+Route::get('/mrp/edit/{reg_num}', 'MRPController@showEdit');
 
 Route::get('/home', 'HomeController@index')->name('home');

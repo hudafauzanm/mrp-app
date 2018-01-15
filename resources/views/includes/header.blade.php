@@ -43,6 +43,12 @@
 					</span>
 				</a>
 				<ul class="dropdown-menu hold-on-click">
+					<li><!-- settings -->
+						<a href="/profil"><i class="fa fa-cogs"></i> Edit Profil</a>
+					</li>
+
+					<li class="divider"></li>
+				
 					<li><!-- logout -->
 						<a href="/logout"><i class="fa fa-power-off"></i> Log Out</a>
 					</li>

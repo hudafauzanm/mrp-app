@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" style="height: 100%">
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -23,7 +23,7 @@
 	<!--
 		.boxed = boxed version
 	-->
-	<body style="background-image: url("/assets/images/login-background.jpg");">
+	<body>
 
 		<div class="login-box">
 
@@ -58,14 +58,14 @@
 						</label>
 					</section>
 
-					{{-- <section>
+					<section>
 						<label class="label">NIP</label>
 						<label class="input">
 							<i class="icon-append fa fa-user"></i>
 							<input type="text" name="nip">
 							<span class="tooltip tooltip-top-right">Masukkan NIP Anda</span>
 						</label>
-					</section> --}}
+					</section>
 
 				</fieldset>
 
