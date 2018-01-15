@@ -16,4 +16,9 @@ class MRPController extends Controller
     {
     	return view('pages.sdm.mrp');
     }
+
+    public function showEdit()
+    {
+    	return view('pages.sdm.mrp_edit');
+    }
 }
