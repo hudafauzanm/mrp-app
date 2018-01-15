@@ -1,0 +1,1513 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>Smarty Admin</title>
+		<meta name="description" content="" />
+		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+
+		<!-- mobile settings -->
+		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+
+		<!-- WEB FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="stylesheet" type="text/css" />
+
+		<!-- CORE CSS -->
+		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<!-- THEME CSS -->
+		<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+		<!-- FOOTABLE TABLE -->
+		<link href="assets/plugins/footable/css/footable.core.min.css" rel="stylesheet" type="text/css" />
+		<link href="assets/plugins/footable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
+
+	
+
+		<style>
+			.modal {
+				position: absolute;
+				top: 10px;
+				right: 100px;
+				bottom: 0;
+				left: 0;
+				z-index: 10040;
+			}
+		</style>
+
+		
+
+	</head>
+	<!--
+		.boxed = boxed version
+	-->
+	<body>
+
+
+		<!-- WRAPPER -->
+		<div id="wrapper">
+
+			<!-- 
+				ASIDE 
+				Keep it outside of #wrapper (responsive purpose)
+			-->
+			<aside id="aside">
+				<!--
+					Always open:
+					<li class="active alays-open">
+
+					LABELS:
+						<span class="label label-danger pull-right">1</span>
+						<span class="label label-default pull-right">1</span>
+						<span class="label label-warning pull-right">1</span>
+						<span class="label label-success pull-right">1</span>
+						<span class="label label-info pull-right">1</span>
+				-->
+				<nav id="sideNav"><!-- MAIN MENU -->
+					<ul class="nav nav-list">
+						<li><!-- dashboard -->
+							<a class="dashboard" href="index.html"><!-- warning - url used by default by ajax (if eneabled) -->
+								<i class="main-icon fa fa-dashboard"></i> <span>Dashboard</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-menu-arrow pull-right"></i>
+								<i class="main-icon fa fa-bar-chart-o"></i> <span>Graphs</span>
+							</a>
+							<ul><!-- submenus -->
+								<li><a href="graphs-flot.html">Flot Charts</a></li>
+								<li><a href="graphs-morris.html">Morris Charts</a></li>
+								<li><a href="graphs-inline.html">Inline Charts</a></li>
+								<li><a href="graphs-chartjs.html">Chart.js</a></li>
+							</ul>
+						</li>
+						<li class="active">
+							<a href="#">
+								<i class="fa fa-menu-arrow pull-right"></i>
+								<i class="main-icon fa fa-table"></i> <span>Tables</span>
+							</a>
+							<ul><!-- submenus -->
+								<li class="active"><a href="tables-bootstrap.html">Bootstrap Tables</a></li>
+								<li><a href="tables-jqgrid.html">jQuery Grid</a></li>
+								<li><a href="tables-footable.html">jQuery Footable</a></li>
+								<li>
+									<a href="#">
+										<i class="fa fa-menu-arrow pull-right"></i>
+										Datatables
+									</a>
+									<ul>
+										<li><a href="tables-datatable-managed.html">Managed Datatables</a></li>
+										<li><a href="tables-datatable-editable.html">Editable Datatables</a></li>
+										<li><a href="tables-datatable-advanced.html">Advanced Datatables</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-menu-arrow pull-right"></i>
+								<i class="main-icon fa fa-pencil-square-o"></i> <span>Forms</span>
+							</a>
+							<ul><!-- submenus -->
+								<li><a href="form-elements.html">Smarty Elements</a></li>
+								<li><a href="form-masked-inputs.html">Masked Inputs</a></li>
+								<li><a href="form-pickers.html">Pickers</a></li>
+								<li><a href="form-ui-sliders.html">UI Sliders</a></li>
+								<li><a href="form-validation.html">Validation Form</a></li>
+								<li><a href="form-html-editors.html">Html Editors</a></li>
+								<li><a href="form-autosuggest.html">Autosuggest</a></li>
+								<li><a href="form-x-editable.html">Form X-Editable</a></li>
+								<li><a href="form-dropzone.html">Dropzone File Upload</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-menu-arrow pull-right"></i>
+								<i class="main-icon fa fa-gears"></i> <span>UI Features</span>
+							</a>
+							<ul><!-- submenus -->
+								<li><a href="ui-portlets.html">Portlets</a></li>
+								<li><a href="ui-buttons.html">Buttons</a></li>
+								<li>
+									<a href="#">
+										<i class="fa fa-menu-arrow pull-right"></i>
+										Icons
+									</a>
+									<ul>
+										<li><a href="ui-icons-fontawsome.html">Fontawsome</a></li>
+										<li><a href="ui-icons-etline.html">Et-Line Icons</a></li>
+										<li><a href="ui-icons-glyphicons.html">Glyph Icons</a></li>
+										<li><a href="ui-icons-flags.html">Flags</a></li>
+									</ul>
+								</li>
+								<li><a href="ui-alerts-dialogs.html">Alerts &amp; Dialogs</a></li>
+								<li><a href="ui-tabs-acordion-navs.html">Tabs, Acordion &amp; Navs</a></li>
+								<li><a href="ui-knob.html">Knob Circles</a></li>
+								<li><a href="ui-nestable.html">Nestable List</a></li>
+								<li><a href="ui-toastr.html">Toastr Notifications</a></li>
+								<li><a href="ui-modals.html">Modals</a></li>
+								<li><a href="ui-grid.html">Grid</a></li>
+								<li><a href="ui-google-maps.html">Google Maps</a></li>
+								<li><a href="ui-vector-maps.html">Vector Maps</a></li>
+								<li><a href="ui-essentials.html">Essentials</a></li>
+								<li>
+									<a href="#">
+										<i class="fa fa-menu-arrow pull-right"></i>
+										<i class="fa fa-folder-open"></i>
+										Deep Navigation
+									</a>
+									<!-- 3rd Level -->
+									<ul>
+										<li>
+											<a href="#">
+												3rd Level
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="fa fa-menu-arrow pull-right"></i>
+												<i class="fa fa-folder-open"></i>
+												4rd Level
+											</a>
+											<!-- 4th Level -->
+											<ul>
+												<li>
+													<a href="#">
+														4th Level
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<i class="fa fa-menu-arrow pull-right"></i>
+														<i class="fa fa-folder-open"></i>
+														5th Level
+													</a>
+													<!-- 5th Level -->
+													<ul>
+														<li>
+															<a href="#">
+																5th level
+															</a>
+														</li>
+														<li>
+															<a href="#">
+																<i class="fa fa-menu-arrow pull-right"></i>
+																<i class="fa fa-folder-open"></i>
+																6th level
+															</a>
+															<!-- 6th Level -->
+															<ul>
+																<li>
+																	<a href="#">
+																		6th level
+																	</a>
+																</li>
+																<li>
+																	<a href="#">
+																		6th level
+																	</a>
+																</li>
+															</ul><!-- /6th Level -->
+														</li>
+													</ul><!-- /5th Level -->
+												</li>
+											</ul><!-- /4th Level -->
+										</li>
+									</ul><!-- /3rd Level -->
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-menu-arrow pull-right"></i>
+								<i class="main-icon fa fa-book"></i> <span>Pages</span>
+							</a>
+							<ul><!-- submenus -->
+								<li><a href="page-invoice.html">Invoice</a></li>
+								<li><a href="page-login.html">Login</a></li>
+								<li><a href="page-register.html">Register</a></li>
+								<li><a href="page-lock.html">Lock Screen</a></li>
+								<li><a href="page-forum.html">Forum</a></li>
+								<li><a href="page-404.html">Error 404</a></li>
+								<li><a href="page-500.html">Error 500</a></li>
+								<li><a href="page-pricing.html">Pricing Table</a></li>
+								<li><a href="page-search.html">Search Result</a></li>
+								<li><a href="page-sidebar.html">Sidebar Page</a></li>
+								<li><a href="page-user-profile.html">User Profile</a></li>
+								<li><a href="page-blank-1.html">Blank Page</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="calendar.html">
+								<i class="main-icon fa fa-calendar"></i>
+								<span class="label label-warning pull-right">2</span> <span>Calendar</span>
+							</a>
+						</li>
+					</ul>
+
+					<!-- SECOND MAIN LIST -->
+					<h3>MORE</h3>
+					<ul class="nav nav-list">
+						<li>
+							<a href="calendar.html">
+								<i class="main-icon fa fa-calendar"></i>
+								<span class="label label-warning pull-right">2</span> <span>Calendar</span>
+							</a>
+						</li>
+						<li>
+							<a href="../../HTML/start.html">
+								<i class="main-icon fa fa-link"></i>
+								<span class="label label-danger pull-right">PRO</span> <span>Frontend</span>
+							</a>
+						</li>
+					</ul>
+
+				</nav>
+
+				<span id="asidebg"><!-- aside fixed background --></span>
+			</aside>
+			<!-- /ASIDE -->
+
+
+			<!-- HEADER -->
+			<header id="header">
+
+				<!-- Mobile Button -->
+				<button id="mobileMenuBtn"></button>
+
+				<!-- Logo -->
+				<span class="logo pull-left">
+					<img src="assets/images/logo_light.png" alt="admin panel" height="35" />
+				</span>
+
+				<form method="get" action="page-search.html" class="search pull-left hidden-xs">
+					<input type="text" class="form-control" name="k" placeholder="Search for something..." />
+				</form>
+
+				<nav>
+
+					<!-- OPTIONS LIST -->
+					<ul class="nav pull-right">
+
+						<!-- USER OPTIONS -->
+						<li class="dropdown pull-left">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+								<img class="user-avatar" alt="" src="assets/images/noavatar.jpg" height="34" /> 
+								<span class="user-name">
+									<span class="hidden-xs">
+										John Doe <i class="fa fa-angle-down"></i>
+									</span>
+								</span>
+							</a>
+							<ul class="dropdown-menu hold-on-click">
+								<li><!-- my calendar -->
+									<a href="calendar.html"><i class="fa fa-calendar"></i> Calendar</a>
+								</li>
+								<li><!-- my inbox -->
+									<a href="#"><i class="fa fa-envelope"></i> Inbox
+										<span class="pull-right label label-default">0</span>
+									</a>
+								</li>
+								<li><!-- settings -->
+									<a href="page-user-profile.html"><i class="fa fa-cogs"></i> Settings</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li><!-- lockscreen -->
+									<a href="page-lock.html"><i class="fa fa-lock"></i> Lock Screen</a>
+								</li>
+								<li><!-- logout -->
+									<a href="page-login.html"><i class="fa fa-power-off"></i> Log Out</a>
+								</li>
+							</ul>
+						</li>
+						<!-- /USER OPTIONS -->
+
+					</ul>
+					<!-- /OPTIONS LIST -->
+
+				</nav>
+
+			</header>
+			<!-- /HEADER -->
+
+
+			<!-- 
+				MIDDLE 
+			-->
+			<section id="middle">
+
+
+				<!-- page title -->
+				<header id="page-header">
+					<h1>Verifikasi & Monitoring</h1>
+					<ol class="breadcrumb">
+						<li><a href="#">SDM</a></li>
+						<li class="active">Verifikasi & Monitoring</li>
+					</ol>
+				</header>
+				<!-- /page title -->
+
+
+				<div id="content" class="padding-20">
+
+					<!-- 
+						PANEL CLASSES:
+							panel-default
+							panel-danger
+							panel-warning
+							panel-info
+							panel-success
+
+						INFO: 	panel collapse - stored on user localStorage (handled by app.js _panels() function).
+								All pannels should have an unique ID or the panel collapse status will not be stored!
+					-->
+					
+						<!-- /panel content -->
+					<div class="row">
+						<div class="col-md-6">
+							<h4>Monitoring</h4>	
+							<div id="panel-1" class="panel panel-default">
+								<div class="panel-heading">
+									<!-- tabs nav -->
+									<!-- <ul class="nav nav-tabs pull-left"> -->
+												<!-- <li class="active"><!-- TAB 1 -->
+													<!-- <a href="#ttab1_nobg" data-toggle="tab">Meminta Pegawai</a> -->
+												<!-- </li> -->
+												<!-- <li class="">TAB 2 -->
+													<!-- <a href="" data-toggle="tab">Bursa Pegawai</a> -->
+												<!-- </li> -->
+												<!-- <li class="">TAB 2 -->
+													<!-- <a href="" data-toggle="tab">Request</a> -->
+												<!-- </li> -->
+									<!-- </ul>-->
+									<!-- right options -->
+									<ul class="options pull-right list-inline">
+										<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+										<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+					
+									</ul>
+									<!-- /right options -->
+
+								</div>
+
+								<!-- panel content -->
+								<div class="panel-body" style="overflow-y:scroll; height: 610px;">
+
+									<div class="tab-content transparent">
+										<div class="row">
+												<div class=" col-md-4"> 
+													<input type="text" class="form-control rangepicker" value="2015-01-01 - 2016-12-31" data-format="yyyy-mm-dd" data-from="2015-01-01" data-to="2016-12-31">
+												</div>
+										</div>		
+												<div id="ttab1_nobg" class="tab-pane active">
+													<div class="panel-heading">
+
+														<span class="elipsis"><!-- panel title -->
+															<strong>Sales Graph</strong>
+														</span>
+
+														<!-- right options -->
+														
+														<!-- /right options -->
+
+													</div>
+
+													<!-- panel content -->
+													<div class="panel-body nopadding " >
+
+														<div id="flot-pie" class="flot-chart"><!-- FLOT CONTAINER --></div>
+
+													</div>
+													<div class="panel-heading">
+
+														<span class="elipsis"><!-- panel title -->
+															<strong>Sales Graph</strong>
+														</span>
+
+														<!-- right options -->
+														
+														<!-- /right options -->
+
+													</div>
+
+													<!-- /panel content -->
+													<div class="panel-body nopadding">
+
+														<div id="flot-bar-horizontal" class="flot-chart"><!-- FLOT CONTAINER --></div>
+
+													</div>
+													<div class="panel-heading">
+
+														<span class="elipsis"><!-- panel title -->
+															<strong>Sales Graph</strong>
+														</span>
+
+														<!-- right options -->
+														
+														<!-- /right options -->
+
+													</div>
+
+													<div class="panel-body nopadding">
+
+														<div id="flot-bar" class="flot-chart"><!-- FLOT CONTAINER --></div>
+
+													</div>
+													
+												</div>
+									</div>
+								</div>
+								<!-- /panel content -->
+
+							</div>
+						</div>
+						<div class="col-md-6">
+							<h4>Verifikasi</h4>
+							<div id="panel-2" class="panel panel-default ">
+								<div class="panel-heading">
+									<!-- tabs nav -->
+									<ul class="nav nav-tabs pull-left">
+												<li class="active"><!-- TAB 1 -->
+													<a class="tabselect" href="#meminta" data-toggle="tab">Meminta Pegawai</a>
+												</li>
+												<li class=""><!-- TAB 2 -->
+													<a  class="tabselect" href="#bursa" data-toggle="tab">Bursa Pegawai</a>
+												</li>
+												<li class=""><!-- TAB 2 -->
+													<a class="tabselect" href="#request" data-toggle="tab">Request</a>
+												</li>
+									</ul>									
+
+									<!-- right options -->
+									<ul class="options pull-right list-inline">
+										<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+										<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+					
+									</ul>
+									<!-- /right options -->
+
+								</div>
+
+								<!-- panel content -->
+								<div class="panel-body " style=" overflow-y:scroll;  height: 610px;" >
+
+									<label><!-- PER PAGE SELECTOR . you can move it to panel-heading -->
+										<select class="form-control pointer" id="change-page-size">
+											<option value="2">2 / page</option>
+											<option value="3">3 / page</option>
+											<option value="5">5 / page</option>
+											<option value="10" selected="selected">10 / page</option>
+											<option value="15">15 / page</option>
+											<option value="20">20 / page</option>
+										</select>
+									</label><!-- /PER PAGE SELECTOR -->
+
+									<div class="tab-content transparent ">
+
+												<div id="meminta" class="tab-pane active">
+													<!-- <div class="table-responsive"> -->
+														<table class="footable" id="footable">
+															<thead>
+																<tr>
+																	<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
+																	<th class="foo-cell">Registry Number</th>
+																	<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
+																	<th data-type="numeric" data-hide = "" class="">Nama</th>
+																	<th data-type="numeric" data-hide = "all" class="">Grade</th>
+																	<th data-type="numeric" data-hide = "all" class="">Jabatan Saat Ini</th>
+																	<th data-type="numeric" data-hide = "all" class="">Proyeksi Jabatan</th>
+																	<th data-type="numeric" data-hide = "all" class="">Masa Kerja</th>
+																	<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
+																	<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
+																	<th data-type="numeric" data-hide = "all" class="">Alasan</th>
+																	<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+																	<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td class="text-center" style="width:5px"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																		<i class="fa fa-arrow-circle-down"></i>
+																		<span>Download</span>
+																		</a></td>
+																	<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
+																	<td>85107001</td>
+																	<td>DESTA AGUNG SWANDITA</td>
+																	<td>SPE02</td>
+																	<td>
+																		SUPERVISOR PELAKSANA PENGADAAN
+																	</td>
+																	<td>
+																		ASSISTANT ANALYST ASURANSI
+																	</td>
+																	<td>
+																		7
+																	</td>
+																	<td>
+																		7
+																	</td>
+																	<td>	
+																		SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH
+																	</td>
+																	<td>xxx</td>
+																	<td class="text-center">
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#ceknilai"><i class="fa fa-check-circle"></i>
+																		<span>Nilai</span>
+																		</button>														
+																	</td>
+																	<td class="text-center">
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#myModal"><i class="fa fa-check-circle"></i>
+																		<span>Approve</span>
+																		</button>
+																		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+
+																							<!-- Modal Header -->
+																							<div class="modal-header">
+																								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																								<h4 class="modal-title" id="myModalLabel">Approve</h4>
+																							</div>
+
+																							<!-- Modal Body -->
+																							<div class="modal-body">
+																								
+																								<div class="form-group"> 
+																								<h4>Perintah Cetak</h4>
+																								<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
+																								<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+																								</div>
+
+																								<div class="form-group">
+
+																								<h4>Tanggal Aktifasi</h4>
+																								<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+																								</div>
+																							</div>
+
+																							<!-- Modal Footer -->
+																							<div class="modal-footer">
+																								<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+																								<button type="button" class="btn btn-primary toastr-notify data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button>
+																							</div>
+																						</div>
+																					</div>
+																		</div>
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-red"><i class="fa fa-minus-circle"></i>
+																		<span>Reject</span>
+																		</button>
+																		</td>
+																	</tr>
+																	<tr>
+																				<td class="text-center"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																					<i class="fa fa-arrow-circle-down"></i>
+																					<span>Download</span>
+																					</a></td>
+																				<td>Huda Fauzan M</td>
+																				<td>1231434134</td>
+																				<td>Huda Fauzan M
+																				</td>
+																				<td>
+																					Huda Fauzan M
+																				</td>
+																				<td>
+																					Huda Fauzan M
+																				</td>
+																				<td>
+																					Huda Fauzan M
+																				</td>
+																				<td>
+																					Huda Fauzan M
+																				</td>
+																				<td>
+																					Huda Fauzan M
+																				</td>
+																				<td>	
+																					Huda Fauzan M
+																				</td>
+																				<td class="text-center">
+																					<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#myModal"><i class="fa fa-arrow-circle-down"></i>
+																					<span>Approve</span>
+																					</button>
+																					<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																								<div class="modal-dialog">
+																									<div class="modal-content">
+
+																										<!-- Modal Header -->
+																										<div class="modal-header">
+																											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																											<h4 class="modal-title" id="myModalLabel">Approve</h4>
+																										</div>
+
+																										<!-- Modal Body -->
+																										<div class="modal-body">
+																											
+																											<div class="form-group"> 
+																											<h4>Perintah Cetak</h4>
+																											<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
+																											<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+																											</div>
+
+																											<div class="form-group">
+
+																											<h4>Tanggal Aktifasi</h4>
+																											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+																											</div>
+
+																
+																										</div>
+
+																										<!-- Modal Footer -->
+																										<div class="modal-footer">
+																											<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+																											<button type="button" class="btn btn-primary">Simpan</button>
+																										</div>
+
+																									</div>
+																								</div>
+																							</div>
+																					<button type="button" class="btn btn-3d btn-sm btn-reveal btn-red"><i class="fa fa-arrow-circle-down"></i>
+																					<span>Reject</span>
+																					</button>
+																					</td>
+																	</tr>
+																	<tr>
+																		<td class="text-center" style="width:5px"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																			<i class="fa fa-arrow-circle-down"></i>
+																			<span>Download</span>
+																			</a></td>
+																		<td>8510412Z.Rotasi.152019030430_151666040601</td>
+																		<td>85107001</td>
+																		<td>DESTA AGUNG SWANDITA</td>
+																		<td>SPE02</td>
+																		<td>
+																			SUPERVISOR PELAKSANA PENGADAAN
+																		</td>
+																		<td>
+																			ASSISTANT ANALYST ASURANSI
+																		</td>
+																		<td>
+																			7
+																		</td>
+																		<td>
+																			7
+																		</td>
+																		<td>	
+																			SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH
+																		</td>
+																		<td class="text-center">
+																			<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#myModal"><i class="fa fa-arrow-circle-down"></i>
+																			<span>Approve</span>
+																			</button>
+																			<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																						<div class="modal-dialog">
+																							<div class="modal-content">
+
+																								<!-- Modal Header -->
+																								<div class="modal-header">
+																									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																									<h4 class="modal-title" id="myModalLabel">Approve</h4>
+																								</div>
+
+																								<!-- Modal Body -->
+																								<div class="modal-body">
+																									
+																									<div class="form-group"> 
+																									<h4>Perintah Cetak</h4>
+																									<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
+																									<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+																									</div>
+
+																									<div class="form-group">
+
+																									<h4>Tanggal Aktifasi</h4>
+																									<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+																									</div>
+
+														
+																								</div>
+
+																								<!-- Modal Footer -->
+																								<div class="modal-footer">
+																									<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+																									<button type="button" class="btn btn-primary">Simpan</button>
+																								</div>
+
+																							</div>
+																						</div>
+																					</div>
+																			<button type="button" class="btn btn-3d btn-sm btn-reveal btn-red"><i class="fa fa-arrow-circle-down"></i>
+																			<span>Reject</span>
+																			</button>
+																			</td>
+																		</tr>
+																	</tr>
+																<tr>
+																	<td class="text-center" style="width:5px"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																		<i class="fa fa-arrow-circle-down"></i>
+																		<span>Download</span>
+																		</a></td>
+																	<td>8510412Z.Rotasi.152019030430_151666040601</td>
+																	<td>85107001</td>
+																	<td>DESTA AGUNG SWANDITA</td>
+																	<td>SPE02</td>
+																	<td>
+																		SUPERVISOR PELAKSANA PENGADAAN
+																	</td>
+																	<td>
+																		ASSISTANT ANALYST ASURANSI
+																	</td>
+																	<td>
+																		7
+																	</td>
+																	<td>
+																		7
+																	</td>
+																	<td>	
+																		SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH
+																	</td>
+																	<td class="text-center">
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#myModal"><i class="fa fa-arrow-circle-down"></i>
+																		<span>Approve</span>
+																		</button>
+																		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+
+																							<!-- Modal Header -->
+																							<div class="modal-header">
+																								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																								<h4 class="modal-title" id="myModalLabel">Approve</h4>
+																							</div>
+
+																							<!-- Modal Body -->
+																							<div class="modal-body">
+																								
+																								<div class="form-group"> 
+																								<h4>Perintah Cetak</h4>
+																								<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
+																								<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+																								</div>
+
+																								<div class="form-group">
+
+																								<h4>Tanggal Aktifasi</h4>
+																								<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+																								</div>
+
+													
+																							</div>
+
+																							<!-- Modal Footer -->
+																							<div class="modal-footer">
+																								<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+																								<button type="button" class="btn btn-primary">Simpan</button>
+																							</div>
+
+																						</div>
+																					</div>
+																				</div>
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-red"><i class="fa fa-arrow-circle-down"></i>
+																		<span>Reject</span>
+																		</button>
+																		</td>
+																	</tr>
+
+																<tr>
+																	<td class="text-center" style="width:5px"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																		<i class="fa fa-arrow-circle-down"></i>
+																		<span>Download</span>
+																		</a></td>
+																	<td>8510412Z.Rotasi.152019030430_151666040601</td>
+																	<td>85107001</td>
+																	<td>DESTA AGUNG SWANDITA</td>
+																	<td>SPE02</td>
+																	<td>
+																		SUPERVISOR PELAKSANA PENGADAAN
+																	</td>
+																	<td>
+																		ASSISTANT ANALYST ASURANSI
+																	</td>
+																	<td>
+																		7
+																	</td>
+																	<td>
+																		7
+																	</td>
+																	<td>	
+																		SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH
+																	</td>
+																	<td class="text-center">
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#myModal"><i class="fa fa-arrow-circle-down"></i>
+																		<span>Approve</span>
+																		</button>
+																		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+
+																							<!-- Modal Header -->
+																							<div class="modal-header">
+																								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																								<h4 class="modal-title" id="myModalLabel">Approve</h4>
+																							</div>
+
+																							<!-- Modal Body -->
+																							<div class="modal-body">
+																								
+																								<div class="form-group"> 
+																								<h4>Perintah Cetak</h4>
+																								<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
+																								<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+																								</div>
+
+																								<div class="form-group">
+
+																								<h4>Tanggal Aktifasi</h4>
+																								<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+																								</div>
+
+													
+																							</div>
+
+																							<!-- Modal Footer -->
+																							<div class="modal-footer">
+																								<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+																								<button type="button" class="btn btn-primary">Simpan</button>
+																							</div>
+
+																						</div>
+																					</div>
+																				</div>
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-red"><i class="fa fa-arrow-circle-down"></i>
+																		<span>Reject</span>
+																		</button>
+																		</td>
+																	</tr>
+																<tr>
+																	<td class="text-center" style="width:5px"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																		<i class="fa fa-arrow-circle-down"></i>
+																		<span>Download</span>
+																		</a></td>
+																	<td>8510412Z.Rotasi.152019030430_151666040601</td>
+																	<td>85107001</td>
+																	<td>DESTA AGUNG SWANDITA</td>
+																	<td>SPE02</td>
+																	<td>
+																		SUPERVISOR PELAKSANA PENGADAAN
+																	</td>
+																	<td>
+																		ASSISTANT ANALYST ASURANSI
+																	</td>
+																	<td>
+																		7
+																	</td>
+																	<td>
+																		7
+																	</td>
+																	<td>	
+																		SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH
+																	</td>
+																	<td class="text-center">
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#myModal"><i class="fa fa-arrow-circle-down"></i>
+																		<span>Approve</span>
+																		</button>
+																		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+
+																							<!-- Modal Header -->
+																							<div class="modal-header">
+																								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																								<h4 class="modal-title" id="myModalLabel">Approve</h4>
+																							</div>
+
+																							<!-- Modal Body -->
+																							<div class="modal-body">
+																								
+																								<div class="form-group"> 
+																								<h4>Perintah Cetak</h4>
+																								<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
+																								<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+																								</div>
+
+																								<div class="form-group">
+
+																								<h4>Tanggal Aktifasi</h4>
+																								<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+																								</div>
+
+													
+																							</div>
+
+																							<!-- Modal Footer -->
+																							<div class="modal-footer">
+																								<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+																								<button type="button" class="btn btn-primary">Simpan</button>
+																							</div>
+
+																						</div>
+																					</div>
+																				</div>
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-red"><i class="fa fa-arrow-circle-down"></i>
+																		<span>Reject</span>
+																		</button>
+																		</td>
+																	</tr>
+															</tbody>
+														</table>
+													<!-- </div> -->
+												</div>
+												<div id="bursa" class="tab-pane ">
+													<!-- <div class="table-responsive"> -->
+														<table class="footable">
+															<thead>
+																<tr>
+																	<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
+																	<th class="foo-cell">Registry Number</th>
+																	<th data-type="numeric" data-hide = "" class="">NIP</th>
+																	<th data-type="numeric" data-hide = "all" class="">Nama</th>
+																	<th data-type="numeric" data-hide = "all" class="">Grade</th>
+																	<th data-type="numeric" data-hide = "all" class="">Jenis Mutasi</th>
+																	<th data-type="numeric" data-hide = "all" class="">Jabatan Saat Ini</th>
+																	<th data-type="numeric" data-hide = "all" class="">Proyeksi Jabatan</th>
+																	<th data-type="numeric" data-hide = "all" class="">Kompetensi</th>
+																	<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td class="text-center"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																		<i class="fa fa-arrow-circle-down"></i>
+																		<span>Download</span>
+																		</a></td>
+																	<td>1231434134</td>
+																	<td>Huda Fauzan M
+																	</td>
+																	<td>
+																		Huda Fauzan M
+																	</td>
+																	<td>
+																		Huda Fauzan M
+																	</td>
+																	<td>
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																		Huda Fauzan M
+																	</td>
+																	<td>
+																		Huda Fauzan M
+																	</td>
+																	<td>
+																		Huda Fauzan M
+																	</td>
+																	<td></td>
+																	<td class="text-center">
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#modalbursa"><i class="fa fa-check-circle"></i>
+																		<span>Approve</span>
+																		</button>
+																		<div id="modalbursa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+
+																							<!-- Modal Header -->
+																							<div class="modal-header">
+																								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																								<h4 class="modal-title" id="myModalLabel">Approve</h4>
+																							</div>
+
+																							<!-- Modal Body -->
+																							<div class="modal-body">
+																								
+																								<div class="form-group"> 
+																								<h4>Perintah Cetak</h4>
+																								<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
+																								<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+																								</div>
+
+																								<div class="form-group">
+
+																								<h4>Tanggal Aktifasi</h4>
+																								<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+																								</div>
+
+													
+																							</div>
+
+																							<!-- Modal Footer -->
+																							<div class="modal-footer">
+																								<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+																								<button type="button" class="btn btn-primary toastr-notify data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim"">Simpan</button>
+																							</div>
+
+																						</div>
+																					</div>
+																				</div>
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-red"><i class="fa fa-minus-circle"></i>
+																		<span>Reject</span>
+																		</button>
+																		</td>
+
+																</tr>
+															</tbody>
+														</table>
+													<!-- </div> -->
+												</div>
+												<div id="request" class="tab-pane ">
+													<!-- <div class="table-responsive"> -->
+														<table class="footable" id="footable"">
+															<thead>
+																<tr>
+																	<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
+																	<th class="foo-cell">Registry Number</th>
+																	<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
+																	<th data-type="numeric" data-hide = "all" class="">SPFJ</th>
+																	<th data-type="numeric" data-hide = "all" class="">Formasi Jabatan</th>
+																	<th data-type="numeric" data-hide = "all" class="" >Data Kebutuhan</th>
+																	<th data-type="numeric" data-hide = "all" class="">Jumlah Diminta</th>
+																	<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td class="text-center"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																		<i class="fa fa-arrow-circle-down"></i>
+																		<span>Download</span>
+																		</a></td>
+																	<td>1231434134</td>
+																	<td>Huda Fauzan M
+																	</td>
+																	<td>
+																		Huda Fauzan M
+																	</td>
+																	<td>
+																		Huda Fauzan M
+																	</td>
+																	<td class="text-center"><a href="#" class="btn btn-3d btn-sm btn-reveal btn-primary">
+																		<i class="fa fa-arrow-circle-down"></i>
+																		<span>Download</span>
+																		</a></td>
+																	<td>
+																		Huda Fauzan M
+																	</td>
+																	
+																	<td class="text-center">
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-green" data-toggle="modal" data-target="#modalrequest"><i class="fa fa-check-circle"></i>
+																		<span>Approve</span>
+																		</button>
+																		<div id="modalrequest" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+
+																							<!-- Modal Header -->
+																							<div class="modal-header">
+																								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																								<h4 class="modal-title" id="myModalLabel">Approve</h4>
+																							</div>
+
+																							<!-- Modal Body -->
+																							<div class="modal-body">
+																								
+																								<div class="form-group"> 
+																								<h4>Perintah Cetak</h4>
+																								<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
+																								<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+																								</div>
+
+																								<div class="form-group">
+
+																								<h4>Tanggal Aktifasi</h4>
+																								<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+																								</div>
+
+													
+																							</div>
+
+																							<!-- Modal Footer -->
+																							<div class="modal-footer">
+																								<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+																								<button type="button" class="btn btn-primary">Simpan</button>
+																							</div>
+
+																						</div>
+																					</div>
+																				</div>
+																		<button type="button" class="btn btn-3d btn-sm btn-reveal btn-red"><i class="fa fa-minus-circle"></i>
+																		<span>Reject</span>
+																		</button>
+																		</td>
+
+																</tr>
+																
+															</tbody>
+														</table>
+													<!-- </div> -->
+												</div>
+									</div>
+								</div>
+								<!-- /panel content -->
+						</div>
+				    </div>
+				</div>
+				<div id="ceknilai" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+
+							<!-- header modal -->
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myLargeModalLabel">Penilaian</h4>
+							</div>
+
+							<!-- body modal -->
+							<div class="modal-body">
+
+							<div id="content" class="padding-20" style="overflow-y :scroll; ">	
+								<div class="row">
+									<div class="col-md-6">
+										<div id="panel-graphs-flot-1" class="panel panel-default">
+
+												<div class="panel-heading">
+
+													<span class="elipsis"><!-- panel title -->
+														<strong>Key Competences</strong>
+													</span>
+
+									<!-- right options -->
+														<ul class="options pull-right list-inline">
+															<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+															<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												
+														</ul>
+									<!-- /right options -->
+												</div>
+
+								<!-- panel content -->
+												<div class="panel-body nopadding">
+
+													<div class="table-responsive">
+								<table class="table table-bordered table-vertical-middle nomargin">
+									<thead>
+										<tr>
+											<th>Uraian</th>
+											<th>Skor</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Enthusiasthic for Challenge</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Creative & Innovative</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Building Business Partnership</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Strategic Orientation</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Customer Focus Oriented</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Driving Execution</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Visionary Leadership</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Empowering / Developing Others</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+												</div>
+								<!-- /panel content -->
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div id="panel-graphs-flot-1" class="panel panel-default">
+
+												<div class="panel-heading">
+
+													<span class="elipsis"><!-- panel title -->
+														<strong>Kompetensi Harian</strong>
+													</span>
+
+									<!-- right options -->
+												<ul class="options pull-right list-inline">
+													<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												
+												</ul>
+									<!-- /right options -->
+
+												</div>
+
+								<!-- panel content -->
+												<div class="panel-body nopadding">
+
+													<div class="table-responsive">
+								<table class="table table-bordered table-vertical-middle nomargin">
+									<thead>
+										<tr>
+											<th>Uraian</th>
+											<th>Skor</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Komunikasi</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>KH2</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Bahasa Inggris</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Bahasa Mandarin</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+										<tr>
+											<td>Bahasa Jawa</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+												</div>
+								<!-- /panel content -->
+
+										</div>
+									</div>
+							</div>
+							<div id="panel-graphs-flot-1" class="panel panel-default">
+
+												<div class="panel-heading">
+
+													<span class="elipsis"><!-- panel title -->
+														<strong>Personal Endurance</strong>
+													</span>
+
+									<!-- right options -->
+												<ul class="options pull-right list-inline">
+													<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												
+												</ul>
+									<!-- /right options -->
+
+												</div>
+
+								<!-- panel content -->
+												<div class="panel-body nopadding">
+
+													<div class="table-responsive">
+								<table class="table table-bordered table-vertical-middle nomargin">
+									<thead>
+										<tr>
+											<th></th>
+											<th>Uraian</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Internal Readiness</td>
+											<td>Kesehatan</td>
+											<td><a href="#" class="btn btn-3d btn-xs btn-reveal btn-primary">
+											<i class="fa fa-arrow-circle-down"></i>
+											<span>Download</span>
+											</a>
+										</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>Career Willingness</td>
+											<td> Aasdasdwa dasdasdasd asd asdas asd sdasdasd asda sdaasdasdasd asdasda asdas </td>
+										</tr>
+										<tr>
+											<td>External Readiness</td>
+											<td>Keluarga</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>Hubungan Dengan Sesama</td>
+											<td></td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+												</div>
+								<!-- /panel content -->
+
+							</div>
+							</div>
+						    </div>		
+
+						</div>
+					</div>
+			    </div>	
+			</section>
+			<!-- /MIDDLE -->
+				
+
+		</div>
+		
+		<!-- JAVASCRIPT FILES -->
+		<script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
+		<script type="text/javascript" src="assets/plugins/jquery/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="assets/js/app.js"></script>
+
+		<!-- PAGE LEVEL SCRIPTS -->
+		<script type="text/javascript">
+			loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
+				loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
+					loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
+						loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
+							loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
+								loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
+									loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
+									
+										// demo js script
+										loadScript("assets/js/view/demo.graphs.flot.js");
+
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			loadScript(plugin_path + "footable/dist/footable.min.js", function(){
+				loadScript(plugin_path + "footable/dist/footable.sort.min.js", function(){
+					loadScript(plugin_path + "footable/dist/footable.paginate.min.js", function(){ /** remove if pagination not needed **/
+
+						// footable
+						var $ftable = jQuery('.footable');
+
+
+						/** 01. FOOTABLE INIT
+						******************************************* **/
+						$ftable.footable({
+							
+						});
+
+
+						/** 01. PER PAGE SWITCH
+						******************************************* **/
+						jQuery('#change-page-size').change(function (e) {
+							e.preventDefault();
+							var pageSize = jQuery(this).val();
+							$ftable.data('page-size', pageSize);
+							$ftable.trigger('footable_initialized');
+						});
+
+						jQuery('#change-nav-size').change(function (e) {
+							e.preventDefault();
+							var navSize = jQuery(this).val();
+							$ftable.data('limit-navigation', navSize);
+							$ftable.trigger('footable_initialized');
+						});
+
+
+						/** 02. BOOTSTRAP 3.x PAGINATION FIX
+						******************************************* **/
+						jQuery("div.pagination").each(function() {
+							jQuery("div.pagination ul").addClass('pagination');
+							jQuery("div.pagination").removeClass('pagination');
+						});
+
+					});
+				});
+			});
+		});
+			
+		</script>
+		<script>
+			$(document).ready(function() { 
+			     $('.tabselect').click(function (e) {
+			           e.preventDefault(); //prevents re-size from happening before tab shown
+			           $(this).tab('show'); //show tab panel 
+			           $('.footable').trigger('footable_resize'); //fire re-size of footable
+			      });
+			}); 
+		</script>
+		<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/moment	entjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+		 <script >
+				$(document).ready(function() {
+    				var start = moment().subtract(29, 'days');
+    				var end = moment();
+
+    				function cb(start, end) {
+        				$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    				}
+
+	    			$('#reportrange').daterangepicker({
+	        		startDate: start,
+	        		endDate: end,
+	        		ranges: {
+	           				'Today': [moment(), moment()],
+	           				'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+	           				'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+	           				'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+	           				'This Month': [moment().startOf('month'), moment().endOf('month')],
+	           		'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+	        		}
+	    		}, cb);
+
+    				cb(start, end);
+    
+				});
+		</script> -->
+		<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script> -->
+		<!-- <script>
+				$(document).ready(function() {
+    				$('input[name="daterange"]').daterangepicker();
+				});
+		</script> --> 
+
+	</body>
+</html>
