@@ -18,7 +18,7 @@ class PersonnelAreaSeeder extends Seeder
         $user->id = Uuid::generate();
         $user->nama = 'DIVISI PERIZINAN DAN PERTANAHAN DIREKTORAT PENGADAAN';
         $user->nama_pendek = 'DIVPPT';
-        $user->username = 'divppt';
+        $user->username = 'divppt1';
         $user->password = bcrypt('divppt');
         $user->direktorat_id = Direktorat::first()->id;
         $user->user_role = 1;

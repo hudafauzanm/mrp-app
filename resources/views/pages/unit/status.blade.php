@@ -36,7 +36,7 @@
 	                    <thead>
 	                        <tr>
 
-	                            {{-- <th>Registry Number</th> --}}
+	                            <th>Registry Number</th>
 	                            <th>NIP</th>
 	                            <th>Nama</th>
 	                            <th>Posisi & Unit Asal</th>
@@ -48,11 +48,11 @@
 	                    <tbody>
 							<tr>
 								@foreach ($mrp as $mrps)
-								{{-- <td>{{$mrps->registry_number}}</td> --}}
+								<td>{{ $mrps->registry_number }}</td>
 								<td>{{$mrps->pegawai->nip}}</td>
 								<td>{{$mrps->pegawai->nama_pegawai}}</td>
-								<td>{{$mrps->pegawai->formasi_jabatan->formasi}}.' '.{{$mrps->pegawai->formasi_jabatan->jabatan}}</td>
-								<td>{{$mrps->formasi_jabatan->formasi}}.' '.{{$mrps->formasi_jabatan->jabatan}}</td>
+								<td>{{--$mrps->pegawai->formasi_jabatan->formasi--}}</td>
+								<td>{{--$mrps->formasi_jabatan->formasi--}}</td>
 								<td>{{$mrps->status}}</td>
 								<td><a href="/status/detail/7807299Z.Rotasi.151666060101_151666060302" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 								@endforeach

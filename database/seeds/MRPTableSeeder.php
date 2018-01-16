@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\MRP;
 use App\Pegawai;
+use App\FormasiJabatan;
 use Carbon\Carbon;
 
 class MRPTableSeeder extends Seeder
@@ -21,7 +22,7 @@ class MRPTableSeeder extends Seeder
         $mrp->mutasi = 'Rotasi';
         $mrp->jalur_mutasi = 'Intern Divisi Antar Bidang';
         $mrp->no_dokumen_unit_asal = '00215/SIM.03.01KDIVSTI/2017-R';
-        $mrp->tgl_dokumen_unit_asal = '05.06.2017';
+        $mrp->tgl_dokumen_unit_asal = '2017-06-05';
         $mrp->alasan_mutasi = 'Iseng aja';
         $mrp->no_dokumen_unit_mutasi = '4019289421';
         $mrp->tgl_dokumen_unit_mutasi = Carbon::parse('2017-01-01');
@@ -31,6 +32,7 @@ class MRPTableSeeder extends Seeder
         $mrp->tgl_dokumen_mutasi = Carbon::parse('2017-01-05');
         $mrp->status = 1;
         $mrp->pegawai_id = Pegawai::first()->id;
+        $mrp->formasi_jabatan_id = FormasiJabatan::first()->id;
         $mrp->save();
     }
 }
