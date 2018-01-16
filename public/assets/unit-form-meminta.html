@@ -640,7 +640,7 @@
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="next1">
+													<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30 col-md-6" id="next1">
 														NEXT
 													</button>
 												</div>
@@ -942,13 +942,13 @@
 														<small class="text-muted block">Max file size: 10Mb (zip/rar/pdf)</small>
 													</div>
 												</div>
-											</div>
-
+											</div>											
 											<div class="row">
-												<div class="col-md-12">
-													<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="next2">
-														NEXT
-													</button>
+												<div class="col-md-6">
+													<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="back1">BACK</button>
+												</div>
+												<div class="col-md-6">
+													<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="next2">NEXT</button>
 												</div>
 											</div>
 										</fieldset>
@@ -1235,10 +1235,11 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-12">
-									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="next3">
-										NEXT
-									</button>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="back2">BACK</button>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="next3">NEXT</button>
 								</div>
 							</div>
 
@@ -1267,7 +1268,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="row">
+											<!-- <div class="row">
 												<div class="form-group">
 													<div class="col-md-12 col-sm-12">
 														<label>Administrator</label>
@@ -1275,17 +1276,18 @@
 														<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Formasi Jabatan">
 													</div>
 												</div>
-											</div>
+											</div> -->
 										</fieldset>
 									</div>
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-md-12">
-									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="btnKirim">
-										KIRIM
-									</button>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30" id="back3">BACK</button>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30 btn-info" id="btnKirim">KIRIM</button>
 								</div>
 							</div>
 
@@ -1473,11 +1475,27 @@
 			$("#formp1").hide();
 			$("#formp2").hide();
 			$("#formp3").hide();
+			$("#back2").hide();
 			$("#next3").hide();
 			$("#formdpeng").hide();
+			$("#back3").hide();
 			$("#btnKirim").hide();
-		});
 
+		});
+		$(document).ready(function(){
+			$("#back1").click(function(){
+				$("#formdp").show();
+				$("#formdm").hide();
+				$("#formp1").hide();
+				$("#formp2").hide();
+				$("#formp3").hide();
+				$("#back2").hide();
+				$("#next3").hide();
+				$("#formdpeng").hide();
+				$("#back3").hide();
+				$("#btnKirim").hide();
+			});
+		});
 		$(document).ready(function(){
 			$("#next1").click(function(){
 				$("#formdp").hide();
@@ -1485,12 +1503,27 @@
 				$("#formp1").hide();
 				$("#formp2").hide();
 				$("#formp3").hide();
+				$("#back2").hide();
 				$("#next3").hide();
 				$("#formdpeng").hide();
+				$("#back3").hide();
 				$("#btnKirim").hide();
 			});
 		});
-
+		$(document).ready(function(){
+			$("#back2").click(function(){
+				$("#formdp").hide();
+				$("#formdm").show();
+				$("#formp1").hide();
+				$("#formp2").hide();
+				$("#formp3").hide();
+				$("#back2").hide();
+				$("#next3").hide();
+				$("#formdpeng").hide();
+				$("#back3").hide();
+				$("#btnKirim").hide();
+			});
+		});
 		$(document).ready(function(){
 			$("#next2").click(function(){
 				$("#formdp").hide();
@@ -1498,12 +1531,27 @@
 				$("#formp1").show();
 				$("#formp2").show();
 				$("#formp3").show();
+				$("#back2").show();
 				$("#next3").show();
 				$("#formdpeng").hide();
+				$("#back3").hide();
 				$("#btnKirim").hide();
 			});
 		});
-
+		$(document).ready(function(){
+			$("#back3").click(function(){
+				$("#formdp").hide();
+				$("#formdm").hide();
+				$("#formp1").show();
+				$("#formp2").show();
+				$("#formp3").show();
+				$("#back2").show();
+				$("#next3").show();
+				$("#formdpeng").hide();
+				$("#back3").hide();
+				$("#btnKirim").hide();
+			});
+		});
 		$(document).ready(function(){
 			$("#next3").click(function(){
 				$("#formdp").hide();
@@ -1511,8 +1559,10 @@
 				$("#formp1").hide();
 				$("#formp2").hide();
 				$("#formp3").hide();
+				$("#back2").hide();
 				$("#next3").hide();
 				$("#formdpeng").show();
+				$("#back3").show();
 				$("#btnKirim").show();
 			});
 		});
