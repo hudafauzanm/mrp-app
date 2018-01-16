@@ -32,7 +32,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab = new FormasiJabatan;
         $forjab->id = Uuid::generate();
         $forjab->kode_olah = 'DITDAN-151664020101.F04';
-        // $forjab->legacy_code = '15166401';
+        $forjab->legacy_code = '15166401';
         $forjab->posisi = 'SUB BIDANG PENGADAAN 1 BIDANG PELAKSANA PENGADAAN I DIVISI PENGADAAN STRATEGIS DIREKTORAT PENGADAAN PT PLN (PERSERO) KANTOR PUSAT';
         $forjab->formasi ='Analyst';
         $forjab->jabatan ='Pengadaan';
@@ -54,8 +54,8 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jabatan ='Perencanaan dan Pengendalian Regional Jawa Bagian Barat';
         $forjab->jenjang_id ='MM';
         $forjab->jenjang_txt ='Manajemen Menengah';
-        $forjab->pagu ='';
-        $forjab->realisasi ='';
+        $forjab->pagu =1;
+        $forjab->realisasi =1;
         $forjab->spfj ='0037.P/DIR/2016';
         $forjab->status_fj ='';
         $forjab->personnel_area_id = PersonnelArea::where('user_role', 1)->skip(2)->first()->id;
@@ -70,8 +70,8 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jabatan ='Perencanaan Regional';
         $forjab->jenjang_id ='MD';
         $forjab->jenjang_txt ='Manajemen Dasar';
-        $forjab->pagu ='';
-        $forjab->realisasi ='';
+        $forjab->pagu =1;
+        $forjab->realisasi =1;
         $forjab->spfj ='0037.P/DIR/2016';
         $forjab->status_fj ='';
         $forjab->personnel_area_id = PersonnelArea::where('user_role', 1)->skip(2)->first()->id;;

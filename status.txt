@@ -1,0 +1,8 @@
+Status:
+0. Gagal
+1. Diajuakan
+2. Dievaluasi
+3. Proses SK
+4. SK tercetak
+6. SK pending
+5. Clear
