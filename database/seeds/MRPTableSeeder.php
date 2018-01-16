@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\MRP;
 use App\Pegawai;
+use Carbon\Carbon;
 
 class MRPTableSeeder extends Seeder
 {

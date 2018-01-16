@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(DirektoratSeeder::class);
         $this->call(PersonnelAreaSeeder::class);
-        // $this->call(FormasiJabatanSeeder::class);
-        // $this->call(PegawaiSeeder::class);
-        // $this->call(MRPTablenSeeder::class);
+        $this->call(FormasiJabatanSeeder::class);
+        $this->call(PegawaiSeeder::class);
+        $this->call(MRPTableSeeder::class);
         // $this->call(DiklatPenjenjanganSeeder::class);
         // $this->call(SKSTGSeeder::class);
         // $this->call(DiklatPenjenjanganSeeder::class);
