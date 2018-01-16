@@ -34,5 +34,6 @@ class MRPTableSeeder extends Seeder
         $mrp->pegawai_id = Pegawai::first()->id;
         $mrp->formasi_jabatan_id = FormasiJabatan::first()->id;
         $mrp->save();
+
     }
 }

@@ -36,13 +36,13 @@
 	                    <thead>
 	                        <tr>
 
-	                            <th>Registry Number</th>
-	                            <th>NIP</th>
-	                            <th>Nama</th>
-	                            <th>Posisi & Unit Asal</th>
-	                            <th>Posisi & Unit Tujuan</th>
-	                            <th>Status</th>
-	                            <th></th>
+	                            <th width="20%">Registry Number</th>
+	                            <th width="10%">NIP</th>
+	                            <th width="10%">Nama</th>
+	                            <th width="20%">Posisi & Unit Asal</th>
+	                            <th width="20%">Posisi & Unit Tujuan</th>
+	                            <th width="10%">Status</th>
+	                            <th width="10%">Lihat Detail</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -51,10 +51,10 @@
 								<td>{{ $mrps->registry_number }}</td>
 								<td>{{$mrps->pegawai->nip}}</td>
 								<td>{{$mrps->pegawai->nama_pegawai}}</td>
-								<td>{{--$mrps->pegawai->formasi_jabatan->formasi--}}</td>
-								<td>{{--$mrps->formasi_jabatan->formasi--}}</td>
+								<td><strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrps->pegawai->formasi_jabatan->posisi}}</td>
+								<td><strong>{{$mrps->formasi_jabatan->formasi}} {{$mrps->formasi_jabatan->jabatan}}</strong> {{$mrps->formasi_jabatan->posisi}}</td>
 								<td>{{$mrps->status}}</td>
-								<td><a href="/status/detail/7807299Z.Rotasi.151666060101_151666060302" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
+								<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 								@endforeach
 							</tr>
 	                    </tbody>

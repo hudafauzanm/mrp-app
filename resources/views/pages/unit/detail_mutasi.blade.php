@@ -60,31 +60,33 @@
 								</thead>
 								<tbody>
 									<tr>
+										@foreach ($detail as $detaill)
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>NIP:</strong> 7807299Z</li>
-												<li><strong>Nama:</strong> JOB SYAM</li>
-												<li><strong>Grade:</strong> SYS04</li>
+												<li><strong>NIP:</strong> {{ $detaill->pegawai->nip }}</li>
+												<li><strong>Nama:</strong> {{ $detaill->pegawai->nama_pegawai }}</li>
+												<li><strong>Grade:</strong> NOT YET</li>
 											</ul>
 										</td>
 										<td>
 											<ul class="list-unstyled">
 												<li><strong>Tanggal Aktifasi:</strong> 01.09.2017</li>
-												<li><strong>Jenis Mutasi:</strong> Dinas</li>
-												<li><strong>Mutasi:</strong> Rotasi</li>
-												<li><strong>Jalur Mutasi:</strong> Intern Divisi Antar Bidang</li>
+												<li><strong>Jenis Mutasi:</strong> {{ $detaill->jenis_mutasi}}</li>
+												<li><strong>Mutasi:</strong> {{ $detaill->mutasi }}</li>
+												<li><strong>Jalur Mutasi:</strong> {{ $detaill->jalur_mutasi}}</li>
 											</ul>
 										</td>
 										<td>
-											<div><strong>ANALYST MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI (PLT DEPUTI MANAJER MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI)</strong></div>
-											<small>SUB BIDANG MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI BIDANG PENGEMBANGAN APLIKASI TEKNOLOGI INFORMASI DIVISI SISTEM DAN TEKNOLOGI INFORMASI DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</small>
+											<div><strong>{{$detaill->formasi_jabatan->formasi}} {{$detaill->formasi_jabatan->jabatan}}</strong></div>
+											<small>{{$detaill->formasi_jabatan->posisi}}</small>
 										</td>
 										<td>
-											<div><strong>ANALYST STRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI (PLT DEPUTI MANAJERSTRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI)</strong></div>
-											<small>SUB BIDANG STRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI BIDANG PERENCANAAN DAN ARSITEKTUR TEKNOLOGI INFORMASI DIVISI SISTEM DAN TEKNOLOGI INFORMASI DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</small>
+											<div><strong>{{$detaill->pegawai->formasi_jabatan->formasi}} {{$detaill->pegawai->formasi_jabatan->jabatan}}</strong></div>
+											<small>{{$detaill->pegawai->formasi_jabatan->posisi}}</small>
 										</td>
 										<td>1 Tahun</td>
 										<td>10 tahun</td>
+										@endforeach
 									</tr>
 								</tbody>
 							</table>

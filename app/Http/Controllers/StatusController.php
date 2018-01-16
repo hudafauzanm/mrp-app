@@ -22,6 +22,7 @@ class StatusController extends Controller
 
     public function getDetails($reg_num)
     {
-    	return view('pages.unit.detail_mutasi');
+        $detail = MRP::all();
+    	return view('pages.unit.detail_mutasi',compact('detail'));
     }
 }
