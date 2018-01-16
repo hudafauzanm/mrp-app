@@ -53,4 +53,9 @@ class MutasiController extends Controller
 
         return response()->json($pegawai);
     }
+
+    public function submitForm()
+    {
+        
+    }
 }
