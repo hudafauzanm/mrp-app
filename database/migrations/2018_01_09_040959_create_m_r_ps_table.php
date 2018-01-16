@@ -31,7 +31,7 @@ class CreateMRPsTable extends Migration
             $table->date('tgl_dokumen_mutasi')->nullable();
             $table->integer('status')->default(1);
             $table->string('tindak_lanjut')->nullable();
-            $table->char('formasi_jabatan_id')->nullable();
+            $table->char('formasi_jabatan_id',36)->nullable();
             $table->char('sk_stg_id',36)->nullable();
             $table->char('pegawai_id',36);
             $table->timestamps();
