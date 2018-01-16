@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Middleware\Unit;
+use App\MRP;
 
 class StatusController extends Controller
 {
@@ -14,7 +15,9 @@ class StatusController extends Controller
 
     public function index()
     {
-    	return view('pages.unit.status');
+        $mrp = MRP::all();
+        // $pegawai = Unit::class->get();
+    	return view('pages.unit.status',compact('mrp'));
     }
 
     public function getDetails($reg_num)
