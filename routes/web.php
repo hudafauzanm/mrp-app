@@ -25,6 +25,7 @@ Route::get('/status/detail/{reg_num}', 'StatusController@getDetails');
 
 // form pengajuan mutasi (semua tipe)
 Route::get('/mutasi/pengajuan', 'MutasiController@index');
+Route::post('/mutasi/pengajuan/request_pegawai', 'MutasiController@getInfoPegawai');
 
 // sdm
 Route::get('/mrp', 'MRPController@index');

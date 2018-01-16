@@ -14,13 +14,7 @@ class DirektoratSeeder extends Seeder
     {
         $dir = new Direktorat;
         $dir->id = Uuid::generate();
-        $dir->nama = 'Direktorat Pengadaan Strategis 1';
-        $dir->nama_pendek = 'DITDAN';
-        $dir->save();
-
-        $dir = new Direktorat;
-        $dir->id = Uuid::generate();
-        $dir->nama = 'Direktorat Pengadaan Strategis 2';
+        $dir->nama = 'Direktorat Pengadaan Strategis';
         $dir->nama_pendek = 'DITDAN';
         $dir->save();
 

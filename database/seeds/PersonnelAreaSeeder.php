@@ -13,27 +13,38 @@ class PersonnelAreaSeeder extends Seeder
      */
     public function run()
     {
-
+        // unit
         $user = new PersonnelArea;
         $user->id = Uuid::generate();
-        $user->nama = 'Unit Oke';
-        $user->nama_pendek = 'UNIKE';
-        $user->username = 'unike';
-        $user->password = bcrypt('unike');
+        $user->nama = 'DIVISI PERIZINAN DAN PERTANAHAN DIREKTORAT PENGADAAN';
+        $user->nama_pendek = 'DIVPPT';
+        $user->username = 'divppt';
+        $user->password = bcrypt('divppt');
         $user->direktorat_id = Direktorat::first()->id;
         $user->user_role = 1;
         $user->save();
 
         $user = new PersonnelArea;
         $user->id = Uuid::generate();
-        $user->nama = 'Unit 2';
-        $user->nama_pendek = 'UNIKEA';
-        $user->username = 'unikea';
-        $user->password = bcrypt('unikea');
-        $user->direktorat_id = Direktorat::skip(1)->first()->id;
-        $user->user_role = 4;
+        $user->nama = 'DIVISI PENGADAAN STRATEGIS DIREKTORAT PENGADAAN PT PLN (PERSERO) KANTOR PUSAT';
+        $user->nama_pendek = 'DIVDAS';
+        $user->username = 'divdas';
+        $user->password = bcrypt('divdas');
+        $user->direktorat_id = Direktorat::first()->id;
+        $user->user_role = 1;
         $user->save();
 
+        $user = new PersonnelArea;
+        $user->id = Uuid::generate();
+        $user->nama = 'DISTRIBUSI JAWA BARAT';
+        $user->nama_pendek = 'DISJABAR';
+        $user->username = 'disjabar';
+        $user->password = bcrypt('disjabar');
+        $user->direktorat_id = Direktorat::skip(3)->first()->id;
+        $user->user_role = 1;
+        $user->save();
+
+        // SDM
         $user = new PersonnelArea;
         $user->id = Uuid::generate();
         $user->nama = 'SDM';
@@ -44,6 +55,7 @@ class PersonnelAreaSeeder extends Seeder
         $user->user_role = 3;
         $user->save();
 
+        // karir2
         $user = new PersonnelArea;
         $user->id = Uuid::generate();
         $user->nama = 'Karir 2';

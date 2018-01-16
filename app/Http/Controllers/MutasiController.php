@@ -33,4 +33,9 @@ class MutasiController extends Controller
     		return abort(404);
     	}
     }
+
+    public function getInfoPegawai()
+    {
+        // return response()->json();
+    }
 }

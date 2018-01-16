@@ -33,7 +33,7 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP *</label>
-											<input type="text" name="nip" value="" class="form-control required">
+											<input type="text" name="nip" value="" id="inputnips" class="form-control required">
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>
@@ -834,6 +834,31 @@
 					});
 				});
 			});
+		});
+	</script>
+
+	<script>
+		$("#inputnip").on('keyup', function(){
+			if($(this).val().length > 4)
+			{
+				var nip = $(this).val();
+
+				$.ajax({
+					'url': '/mutasi/pengajuan/request_pegawai',
+					'type': 'POST',
+					'data': [
+						'_token': '{{ csrf_token() }}',
+						'nip': nip,
+					],
+					'dataType': 'json',
+					error: function(){
+
+					},
+					success: function(data){
+						
+					}
+				});
+			}
 		});
 	</script>
 @endsection
