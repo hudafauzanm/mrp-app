@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Pegawai extends Model
 {
@@ -37,6 +38,8 @@ class Pegawai extends Model
 
     public function time_diff($dari, $ke)
     {
+        Carbon::parse($dari);
+        Carbon::parse($ke);
         return $dari->diff($ke)->format('%y tahun, %m bulan, %d hari');
     }
 }
