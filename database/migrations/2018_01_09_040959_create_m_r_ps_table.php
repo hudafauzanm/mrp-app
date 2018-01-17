@@ -19,11 +19,11 @@ class CreateMRPsTable extends Migration
             $table->string('registry_number');
             $table->string('jenis_mutasi');
             $table->string('mutasi');
-            $table->string('jalur_mutasi');
+            $table->string('jalur_mutasi')->nullable();
             $table->string('alasan_mutasi');
-            $table->char('unit_pengusul');
-            $table->string('no_dokumen_unit_asal');
-            $table->date('tgl_dokumen_unit_asal');
+            $table->char('unit_pengusul', 36);
+            $table->string('no_dokumen_unit_asal')->nullable();
+            $table->date('tgl_dokumen_unit_asal')->nullable();
             $table->string('no_dokumen_unit_mutasi')->nullable();
             $table->date('tgl_dokumen_unit_mutasi')->nullable();
             $table->date('tgl_evaluasi')->nullable();

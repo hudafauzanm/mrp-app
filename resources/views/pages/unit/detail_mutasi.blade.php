@@ -143,5 +143,7 @@
 			// window.print();
 		</script>
 
+		@include('includes.notifications')
+
 	</body>
 </html>
