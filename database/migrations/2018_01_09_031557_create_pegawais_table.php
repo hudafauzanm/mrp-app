@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePegawaisTable extends Migration
 {
-    public $tablename = 'pegawai'
+    public $tablename = 'pegawai';
     /**
      * Run the migrations.
      *
@@ -44,11 +44,11 @@ class CreatePegawaisTable extends Migration
             $table->integer('kali_jenjang')->nullable();
             $table->date('tanggal_jab_unit_akhir')->nullable();
             $table->date('tanggal_unit_induk_akhir')->nullable();
-            $table->char('formasijabatan_id',36)
+            $table->char('formasi_jabatan_id',36);
 
             $table->timestamps();
 
-            $table->index(['formasijabatan_id'])
+            $table->index(['formasi_jabatan_id']);
 
 
         });

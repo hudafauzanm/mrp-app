@@ -14,7 +14,7 @@ class CreateAspekPenilaiansTable extends Migration
      */
     public function up()
     {
-        Schema::create($tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table) {
             $table->increments('id');
             $table->string('aspek');
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateAspekPenilaiansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($tablename);
+        Schema::dropIfExists($this->tablename);
     }
 }

@@ -14,7 +14,7 @@ class CreatePenilaianPegawaisTable extends Migration
      */
     public function up()
     {
-        Schema::create($tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table) {
             $table->increments('id');
             $table->integer('nilai');
             $table->string('tindak_lanjut_pengembangan');
@@ -33,6 +33,6 @@ class CreatePenilaianPegawaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($tablename);
+        Schema::dropIfExists($this->tablename);
     }
 }

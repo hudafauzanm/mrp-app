@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\PersonnelArea;
+use App\Pegawai;
 
 class LoginController extends Controller
 {
@@ -33,18 +34,21 @@ class LoginController extends Controller
 			return back()->with('error', 'Username/password salah!');
 		}
         
-        // $user = auth()->user();
-        // if (!$user->formasi_jabatan->personnel_area->username === $username) 
-        //     return $this->logout();
+        $pegawai = Pegawai::where('nip', request('nip'))->first();
+        if (!$pegawai || !$pegawai->formasi_jabatan->personnel_area->username === $username) 
+            return $this->logout('Anda tidak berhak login di unit lain');
 		
 	    return redirect('/dashboard')->with('success', 'Selamat bekerja!');
     }
 
-    public function logout()
+    public function logout($message = NULL)
     {
     	auth()->logout();
         request()->session()->flush();
+        
+        if($message)
+            return redirect('/login')->with('error', $message);
 
-    	return redirect('/login')->with('success', 'Berhasil log out');
+    	return redirect('/login');
     }
 }

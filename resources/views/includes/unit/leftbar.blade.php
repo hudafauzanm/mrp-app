@@ -6,17 +6,17 @@
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="/mutasi/pengajuan?tipe=1">
 				<i class="main-icon fa fa-plus-circle"></i> <span>Meminta Pegawai</span>
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="/mutasi/pengajuan?tipe=2">
 				<i class="main-icon fa fa-user-plus"></i> <span>Bursa Pegawai</span>
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="/mutasi/pengajuan?tipe=3">
 				<i class="main-icon fa fa-book"></i> <span>Bursa Jabatan</span>
 			</a>
 		</li>

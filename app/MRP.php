@@ -17,4 +17,9 @@ class MRP extends Model
     {
     	return $this->hasOne('App\SKSTg');
     }
+
+    public function formasi_jabatan()
+    {
+    	return $this->belongsTo('App\FormasiJabatan');
+    }
 }

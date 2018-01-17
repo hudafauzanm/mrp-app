@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateMRPsTable extends Migration
 {
-    public $tablename = 'mrp'
+    public $tablename = 'mrp';
     /**
      * Run the migrations.
      *
@@ -29,8 +29,9 @@ class CreateMRPsTable extends Migration
             $table->date('tgl_pooling')->nullable();
             $table->string('no_dokumen_mutasi')->nullable();
             $table->date('tgl_dokumen_mutasi')->nullable();
-            $table->int('status')->default(1);
+            $table->integer('status')->default(1);
             $table->string('tindak_lanjut')->nullable();
+            $table->char('formasi_jabatan_id',36)->nullable();
             $table->char('sk_stg_id',36)->nullable();
             $table->char('pegawai_id',36);
             $table->timestamps();
@@ -38,6 +39,7 @@ class CreateMRPsTable extends Migration
 
             $table->index(['pegawai_id']);
             $table->index(['sk_stg_id']);
+            $table->index(['formasi_jabatan_id']);
         });
     }
 

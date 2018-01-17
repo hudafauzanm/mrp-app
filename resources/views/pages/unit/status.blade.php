@@ -35,33 +35,27 @@
 					<table class="table table-striped table-hover dataTable js-exportable" id="statusTable">
 	                    <thead>
 	                        <tr>
-	                            {{-- <th>Registry Number</th> --}}
-	                            <th>NIP</th>
-	                            <th>Nama</th>
-	                            <th>Posisi & Unit Asal</th>
-	                            <th>Posisi & Unit Tujuan</th>
-	                            <th>Status</th>
-	                            <th></th>
+
+	                            <th width="20%">Registry Number</th>
+	                            <th width="10%">NIP</th>
+	                            <th width="10%">Nama</th>
+	                            <th width="20%">Posisi & Unit Asal</th>
+	                            <th width="20%">Posisi & Unit Tujuan</th>
+	                            <th width="10%">Status</th>
+	                            <th width="10%">Lihat Detail</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
 							<tr>
-								{{-- <td>93162702ZY.Rotasi.15160103_1516012201</td> --}}
-								<td>93162702ZY</td>
-								<td>SAKINAH AMALIYAH Z</td>
-								<td>ASSISTANT ANALYST AUDIT KHUSUS BIDANG AUDIT KHUSUS SATUAN PENGAWASAN INTERN PT PLN (PERSERO) KANTOR PUSAT</td>
-								<td>ASSISTANT ANALYST AUDIT KHUSUS DEPUTY GROUP AUDIT KHUSUS A GROUP HEAD AUDIT KHUSUS SATUAN PENGAWASAN INTERN PT PLN (PERSERO) KANTOR PUSAT</td>
-								<td>Diajukan</td>
-								<td><button class="btn btn-primary"><i class="fa fa-list"> Detail</i></button></td>
-							</tr>
-							<tr>
-								{{-- <td>7292109M.Promosi.151666020202_151666020202</td> --}}
-								<td>7292109M</td>
-								<td>RASTITO</td>
-								<td>ANALYST ANGGARAN (PLT DEPUTI MANAJER ANGGARAN 2) SUB BIDANG ANGGARAN 2 BIDANG ANGGARAN II DIVISI ANGGARAN DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</td>
-								<td>ASSISTANT ANALYST AUDIT KHUSUS DEPUTY GROUP AUDIT KHUSUS A GROUP HEAD AUDIT KHUSUS SATUAN PENGAWASAN INTERN PT PLN (PERSERO) KANTOR PUSAT</td>
-								<td>Pending</td>
-								<td><button class="btn btn-primary"><i class="fa fa-list"> Detail</i></button></td>
+								@foreach ($mrp as $mrps)
+								<td>{{ $mrps->registry_number }}</td>
+								<td>{{$mrps->pegawai->nip}}</td>
+								<td>{{$mrps->pegawai->nama_pegawai}}</td>
+								<td><strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrps->pegawai->formasi_jabatan->posisi}}</td>
+								<td><strong>{{$mrps->formasi_jabatan->formasi}} {{$mrps->formasi_jabatan->jabatan}}</strong> {{$mrps->formasi_jabatan->posisi}}</td>
+								<td>{{$mrps->status}}</td>
+								<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
+								@endforeach
 							</tr>
 	                    </tbody>
 	                </table>
