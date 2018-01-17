@@ -15,7 +15,8 @@ class StatusController extends Controller
 
     public function index()
     {
-        $mrp = MRP::all();
+        $statusbase = ['formasi_jabatan_id->formasi_jabatan->personnel_area->id' => $this];
+        $mrp = MRP::where($statusbase);
         // $pegawai = Unit::class->get();
     	return view('pages.unit.status',compact('mrp'));
     }

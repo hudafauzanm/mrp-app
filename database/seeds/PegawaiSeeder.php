@@ -69,5 +69,33 @@ class PegawaiSeeder extends Seeder
         $pegawai->tanggal_unit_induk_akhir = Carbon::parse('2013-07-17');
         $pegawai->formasi_jabatan_id = FormasiJabatan::skip(1)->first()->id;
         $pegawai->save();
+
+        $pegawai = new Pegawai;
+        $pegawai->id = Uuid::generate();
+        $pegawai->perner = '79060600';
+        $pegawai->nip = '7906091Z';
+        $pegawai->no_hp = '081234567123';
+        $pegawai->email = 'endahc@gmail.com';
+        $pegawai->kota_asal = 'Jakarta';
+        // $pegawai->status_domisili = 'Daerah C';
+        $pegawai->nama_pegawai = 'Y ENDAH CAHYANINGRUM';
+        $pegawai->employee_subgroup = 'Struktural';
+        $pegawai->ps_group = 'SYS03';
+        // $pegawai->talent_pool_position = '1';
+        $pegawai->tanggal_grade = Carbon::parse('2016-07-01');
+        $pegawai->tanggal_lahir = Carbon::parse('1979-10-06');
+        $pegawai->tanggal_masuk = Carbon::parse('2006-01-01');
+        $pegawai->tanggal_capeg = Carbon::parse('2006-01-01');
+        $pegawai->tanggal_pegawai = Carbon::parse('2006-01-01');
+        $pegawai->start_date = Carbon::parse('2017-11-01');
+        $pegawai->end_date = Carbon::parse('');
+        $pegawai->lc_atasan = 'test';
+        $pegawai->nip_atasan = 'test';
+        $pegawai->nip_sutri = '';
+        $pegawai->kali_jenjang = 2;
+        $pegawai->tanggal_jab_unit_akhir = Carbon::parse('2017-11-01');
+        $pegawai->tanggal_unit_induk_akhir = Carbon::parse('2017-11-01');
+        $pegawai->formasi_jabatan_id = FormasiJabatan::skip(3)->first()->id;
+        $pegawai->save();
     }
 }

@@ -24,6 +24,7 @@
 
 		<!-- WRAPPER -->
 		<div id="wrapper">
+			@foreach ($detail as $detaill)
 
 			<div class="padding-20">
 
@@ -35,13 +36,13 @@
 							<div class="col-md-6 col-xs-6 text-right">
 								<h4>Registry<strong> Number</strong></h4>
 								<ul class="list-unstyled ">
-									<li><strong>7807299Z.Rotasi.151666060101_151666060302</strong></li>
+									<li><strong>{{$detaill->registry_number}}</strong></li>
 								</ul>
 							</div>
 							<div class="col-md-6 col-xs-6 text-left">
 								<h4><strong>Nomor</strong> Nota Dinas</h4>
 								<ul class="list-unstyled ">
-									<li><strong>00215/SIM.03.01KDIVSTI/2017-R</strong></li>
+									<li><strong>{{$detaill->no_dokumen_unit_asal}}</strong></li>
 								</ul>
 							</div>
 						</div>
@@ -60,17 +61,17 @@
 								</thead>
 								<tbody>
 									<tr>
-										@foreach ($detail as $detaill)
+										
 										<td>
 											<ul class="list-unstyled">
 												<li><strong>NIP:</strong> {{ $detaill->pegawai->nip }}</li>
 												<li><strong>Nama:</strong> {{ $detaill->pegawai->nama_pegawai }}</li>
-												<li><strong>Grade:</strong> NOT YET</li>
+												<li><strong>Grade:</strong> (((NOT YET)))</li>
 											</ul>
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>Tanggal Aktifasi:</strong> 01.09.2017</li>
+												<li><strong>Tanggal Aktifasi:</strong> (((NOT YET)))</li>
 												<li><strong>Jenis Mutasi:</strong> {{ $detaill->jenis_mutasi}}</li>
 												<li><strong>Mutasi:</strong> {{ $detaill->mutasi }}</li>
 												<li><strong>Jalur Mutasi:</strong> {{ $detaill->jalur_mutasi}}</li>
@@ -84,9 +85,9 @@
 											<div><strong>{{$detaill->pegawai->formasi_jabatan->formasi}} {{$detaill->pegawai->formasi_jabatan->jabatan}}</strong></div>
 											<small>{{$detaill->pegawai->formasi_jabatan->posisi}}</small>
 										</td>
-										<td>1 Tahun</td>
-										<td>10 tahun</td>
-										@endforeach
+										<td>(((NOT YET)))</td>
+										<td>(((NOT YET)))</td>
+										
 									</tr>
 								</tbody>
 							</table>
@@ -99,11 +100,11 @@
 							<div class="col-xs-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>Kantor Pusat PLN</strong><br>
+									<strong>(((NOT YET)))</strong><!-- <br>
 									Jalan Trunojoyo Blok M – I No 135<br>
 									Kebayoran Baru, Jakarta 12160, Indonesia<br>
 									Telp : 021 – 7251234, 7261122<br>
-									fax : 021 – 7221330
+									fax : 021 – 7221330 -->
 								</address>
 
 							</div>
@@ -126,7 +127,7 @@
 				</div>
 
 			</div>
-
+			@endforeach
 		</div>
 		<!-- /WRAPPER -->
 
