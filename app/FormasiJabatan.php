@@ -19,4 +19,9 @@ class FormasiJabatan extends Model
     {
     	return $this->hasMany('App\Pegawai');
     }
+
+    public function mrp()
+    {
+        return $this->belongsTo('App\FormasiJabatan');
+    }
 }

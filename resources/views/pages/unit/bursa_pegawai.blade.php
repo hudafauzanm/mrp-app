@@ -18,7 +18,7 @@
 			<!-- formulir -->
 			<div class="col-md-6 scrollable">
 			
-				<form action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data">
+				<form action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
 					{{ csrf_field() }}
 					<input type="hidden" name="mrp[tipe]" value="{{ request('tipe') }}">
 					<!-- data pegawai -->
@@ -34,12 +34,12 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP *</label>
-											<input type="text" name="nip" id="nip" value="{{ old('nip') }}" class="form-control required">
+											<input type="text" name="nip" id="nip" value="{{ old('nip') }}" class="form-control required" autocomplete="off" required>
 											<span class="tooltip tooltip-top-right" id="error_tooltip" style="display: none"></span>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Nama Pegawai</label>
-											<input type="text" id="nama_pegawai" value="" class="form-control required" disabled>
+											<input type="text" id="nama_pegawai" value="" class="form-control" disabled>
 										</div>
 									</div>
 								</div>
@@ -48,7 +48,7 @@
 									<div class="form-group">
 						                <div class="col-md-12 col-sm-12">
 						                    <label>Personel Area</label>
-											<input type="text" id="personnel_area" value="" class="form-control required" disabled>
+											<input type="text" id="personnel_area" value="" class="form-control" disabled>
 										</div>
 									</div>
 								</div>
@@ -57,7 +57,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Formasi Jabatan</label>
-											<textarea type="text" rows="2" id="formasi_jabatan" value="" class="form-control required" disabled></textarea>
+											<textarea type="text" rows="2" id="formasi_jabatan" value="" class="form-control" disabled></textarea>
 										</div>
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 									<div class="form-group">
 						                <div class="col-md-12 col-sm-12">
 						                    <label>Pada</label>
-											<textarea type="text" id="posisi" value="" class="form-control required" disabled></textarea>
+											<textarea type="text" id="posisi" value="" class="form-control" disabled></textarea>
 										</div>
 									</div>
 								</div>
@@ -76,11 +76,11 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Masa Kerja <small class="text-muted">(di Jabatan Terakhir)</small></label>
-											<input type="text" id="masa_kerja" value="" class="form-control required" disabled>
+											<input type="text" id="masa_kerja" value="" class="form-control" disabled>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Sisa Masa Kerja</label>
-											<input type="text" id="sisa_kerja" value="" class="form-control required" disabled>
+											<input type="text" id="sisa_kerja" value="" class="form-control" disabled>
 										</div>
 									</div>
 								</div>
@@ -92,7 +92,7 @@
 											<label>Enthusiastic For Challenge</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[enthusiastic]" value="{{ old('nilai["enthusiastic"]') }}" class="form-control required rating_number" target="#rating1" placeholder="0-100">
+											<input type="number" name="nilai[enthusiastic]" value="{{ old('nilai["enthusiastic"]') }}" min="0" max="100" class="form-control required rating_number" required target="#rating1" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating1"><!-- rating-0 ... rating-5 --></div>
@@ -105,7 +105,7 @@
 											<label>Creative and Innovative</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[creative]" value="{{ old('nilai["creative"]') }}" class="form-control required rating_number" target="#rating2" placeholder="0-100">
+											<input type="number" name="nilai[creative]" value="{{ old('nilai["creative"]') }}" min="0" max="100" class="form-control required rating_number" required target="#rating2" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100 " id="rating2"><!-- rating-0 ... rating-5 --></div>
@@ -118,7 +118,7 @@
 											<label>Building Business Partnership</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[building]" value="{{ old('nilai["building"]') }}" class="form-control required rating_number" target="#rating3" placeholder="0-100">
+											<input type="number" name="nilai[building]" min="0" max="100" value="{{ old('nilai["building"]') }}" class="form-control required rating_number" required target="#rating3" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100 " id="rating3"><!-- rating-0 ... rating-5 --></div>
@@ -131,7 +131,7 @@
 											<label>Strategic Orientation</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[strategic]" value="{{ old('nilai["strategic"]') }}" class="form-control required rating_number" target="#rating4" placeholder="0-100">
+											<input type="number" name="nilai[strategic]" min="0" max="100" value="{{ old('nilai["strategic"]') }}" class="form-control required rating_number" required target="#rating4" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100 " id="rating4"><!-- rating-0 ... rating-5 --></div>
@@ -144,7 +144,7 @@
 											<label>Customer Focus Oriented</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[customer]" value="{{ old('nilai["customer"]') }}" class="form-control required rating_number" target="#rating5" placeholder="0-100">
+											<input type="number" name="nilai[customer]" min="0" max="100" value="{{ old('nilai["customer"]') }}" class="form-control required rating_number" required target="#rating5" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100 " id="rating5"><!-- rating-0 ... rating-5 --></div>
@@ -157,7 +157,7 @@
 											<label>Driving Execution</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[driving]" value="{{ old('nilai["driving"]') }}" class="form-control required rating_number" target="#rating6" placeholder="0-100">
+											<input type="number" name="nilai[driving]" min="0" max="100" value="{{ old('nilai["driving"]') }}" class="form-control required rating_number" required target="#rating6" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100 " id="rating6"><!-- rating-0 ... rating-5 --></div>
@@ -170,7 +170,7 @@
 											<label>Visionary Leadership</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[visionary]" value="{{ old('nilai["visionary"]') }}" class="form-control required rating_number" target="#rating7" placeholder="0-100">
+											<input type="number" name="nilai[visionary]" min="0" max="100" value="{{ old('nilai["visionary"]') }}" class="form-control required rating_number" required target="#rating7" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating7"><!-- rating-0 ... rating-5 --></div>
@@ -183,7 +183,7 @@
 											<label>Empowering / Developing Others</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[empowering]" value="{{ old('nilai["empowering"]') }}" class="form-control required rating_number" target="#rating8" placeholder="0-100">
+											<input type="number" name="nilai[empowering]" min="0" max="100" value="{{ old('nilai["empowering"]') }}" class="form-control required rating_number" required target="#rating8" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating8"><!-- rating-0 ... rating-5 --></div>
@@ -199,7 +199,7 @@
 											<label>Komunikasi</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[komunikasi]" value="{{ old('nilai["komunikasi"]') }}" class="form-control required rating_number" target="#rating9" placeholder="0-100">
+											<input type="number" name="nilai[komunikasi]" min="0" max="100" value="{{ old('nilai["komunikasi"]') }}" class="form-control required rating_number" required target="#rating9" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating9"><!-- rating-0 ... rating-5 --></div>
@@ -212,7 +212,7 @@
 											<label>Team Work</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[team_work]" value="{{ old('nilai["team_work"]') }}" class="form-control required rating_number" target="#rating10" placeholder="0-100">
+											<input type="number" name="nilai[team_work]" min="0" max="100" value="{{ old('nilai["team_work"]') }}" class="form-control required rating_number" required target="#rating10" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating10"><!-- rating-0 ... rating-5 --></div>
@@ -225,7 +225,7 @@
 											<label>Bahasa Indonesia</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[bahasa_1_nilai]" value="{{ old('nilai["bahasa_1_nilai"]') }}" class="form-control required rating_number" target="#rating11" placeholder="0-100">
+											<input type="number" name="nilai[bahasa_1_nilai]" min="0" max="100" value="{{ old('nilai["bahasa_1_nilai"]') }}" class="form-control required rating_number" required target="#rating11" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating11"><!-- rating-0 ... rating-5 --></div>
@@ -238,7 +238,7 @@
 											<label>Bahasa Inggris</label>
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[bahasa_2_nilai]" value="{{ old('nilai["bahasa_2_nilai"]') }}" class="form-control required rating_number" target="#rating12" placeholder="0-100">
+											<input type="number" name="nilai[bahasa_2_nilai]" min="0" max="100" value="{{ old('nilai["bahasa_2_nilai"]') }}" class="form-control required rating_number" required target="#rating12" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating12"><!-- rating-0 ... rating-5 --></div>
@@ -248,10 +248,10 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-5 col-sm-5">
-											<input type="text" name="nilai[bahasa_3]" id="bahasa_3" value="{{ old('nilai["bahasa_3"]') }}" class="form-control required" placeholder="Bahasa .... (opsional)">
+											<input type="text" name="nilai[bahasa_3]" id="bahasa_3" min="0" max="100" value="{{ old('nilai["bahasa_3"]') }}" class="form-control required" placeholder="Bahasa .... (opsional)">
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[bahasa_3_nilai]" value="{{ old('nilai["bahasa_3_nilai"]') }}" class="form-control required rating_number" target="#rating13" placeholder="0-100">
+											<input type="number" name="nilai[bahasa_3_nilai]" min="0" max="100" value="{{ old('nilai["bahasa_3_nilai"]') }}" class="form-control required rating_number" required target="#rating13" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating13"><!-- rating-0 ... rating-5 --></div>
@@ -265,8 +265,8 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Internal Readiness</label>
-											<input type="text" name="nilai[kesehatan]" value="{{ old('nilai["kesehatan"]') }}" class="form-control required col-md-6" placeholder="Kesehatan">
-											<input type="text" name="nilai[career_willingness]" value="{{ old('nilai["career_willingness"]') }}"class="form-control required col-md-6" placeholder="Career Willingness">
+											<input type="text" name="nilai[kesehatan]" value="{{ old('nilai["kesehatan"]') }}" class="form-control required col-md-6" placeholder="Kesehatan" required>
+											<input type="text" name="nilai[career_willingness]" value="{{ old('nilai["career_willingness"]') }}" class="form-control required col-md-6" placeholder="Career Willingness">
 										</div>
 									</div>
 								</div>
@@ -274,7 +274,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>External Readiness</label>
-											<input type="text" name="nilai[external_rediness]" value="{{ old('nilai["external_rediness"]') }}" class="form-control required col-md-6" placeholder="From family, friends, etc">
+											<input type="text" name="nilai[external_rediness]" value="{{ old('nilai["external_rediness"]') }}" class="form-control required col-md-6" placeholder="From family, friends, etc" required>
 										</div>
 									</div>
 								</div>
@@ -283,15 +283,15 @@
 										<div class="form-group">
 											<label>Hubungan dengan Sesama</label>
 											<label class="radio">
-												<input type="radio" name="hds" value="1" checked="checked">
+												<input type="radio" name="hds" value="Sangat Bagus - " checked="checked">
 												<i></i> Sangat Bagus
 											</label>
 
 											<label class="radio">
-												<input type="radio" name="hds" value="1">
+												<input type="radio" name="hds" value="Bermasalah - ">
 												<i></i> Bermasalah
 											</label>
-											<input type="text" name="nilai[hubungan_sesama]" value="{{ old('nilai["hubungan_sesama"]') }}" class="form-control required col-md-6" placeholder="Deskripsi">
+											<input type="text" name="nilai[hubungan_sesama]" value="{{ old('nilai["hubungan_sesama"]') }}" class="form-control required col-md-6" placeholder="Deskripsi" required>
 										</div>
 									</div>
 								</div>
@@ -312,80 +312,20 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Pengusul*</label>
-											<input type="text" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp["nip_pengusul"]') }}" class="form-control required">
+											<input type="text" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp["nip_pengusul"]') }}" class="form-control required" autocomplete="off" required>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Nama Pengusul</label>
-											<input type="text" id="nama_pengusul" value="" class="form-control required" disabled>
+											<input type="text" id="nama_pengusul" value="" class="form-control" disabled>
 										</div>
 									</div>
 								</div>
-
-								{{-- <div class="row">
-									<div class="form-group">
-						                <div class="col-md-12 col-sm-12">
-						                    <label>Direktorat</label>
-											<input type="text" name="contact[last_name]" value="" class="form-control required" list="daftarnama">
-											<datalist id="daftarnama">
-						                        <option value="AB"></option>
-					                        	<option value="AB"></option>
-				                        		<option value="AC"></option>
-			                        			<option value="AD"></option>
-						                    </datalist>
-										</div>
-									</div>
-								</div> --}}
-
-								{{-- <div class="row">
-									<div class="form-group">
-						                <div class="col-md-12 col-sm-12">
-						                    <label>Personel Area</label>
-											<input type="text" name="" value="" class="form-control required" list="daftarnama">
-											<datalist id="daftarnama">
-						                        <option value="AB"></option>
-					                        	<option value="AB"></option>
-				                        		<option value="AC"></option>
-			                        			<option value="AD"></option>
-						                    </datalist>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="form-group">
-						                <div class="col-md-12 col-sm-12">
-						                    <label>Posisi Pada Unit</label>
-											<input type="text" name="contact[last_name]" value="" class="form-control required" list="daftarnama">
-											<datalist id="daftarnama">
-						                        <option value="AB"></option>
-					                        	<option value="AB"></option>
-				                        		<option value="AC"></option>
-			                        			<option value="AD"></option>
-						                    </datalist>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Formasi Jabatan</label>
-											<input type="text" name="contact[last_name]" value="" class="form-control required" list="daftarnama">
-											<datalist id="daftarnama">
-						                        <option value="AB"></option>
-					                        	<option value="AB"></option>
-				                        		<option value="AC"></option>
-			                        			<option value="AD"></option>
-						                    </datalist>
-										</div>
-									</div>
-								</div> --}}
 
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Alasan Memutasi *</label>
-											<textarea rows="3" name="mrp[alasan_mutasi]" value="{{ old('mrp["alasan_mutasi"]]') }}" class="form-control" placeholder=""></textarea>
+											<textarea rows="3" name="mrp[alasan_mutasi]" value="{{ old('mrp["alasan_mutasi"]]') }}" class="form-control" placeholder="" required></textarea>
 										</div>
 									</div>
 								</div>
@@ -405,7 +345,7 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Jenis Mutasi *</label>
-											<select name="mrp[jenis_mutasi]" class="form-control required">
+											<select name="mrp[jenis_mutasi]" class="form-control required" required>
 												<option>--- Pilih ---</option>
 												<option value="Dinas">Dinas</option>
 												<option value="APS">APS</option>
@@ -415,7 +355,7 @@
 
 										<div class="col-md-6 col-sm-6">
 											<label>Tipe</label>
-											<select name="mrp[mutasi]" class="form-control required">
+											<select name="mrp[mutasi]" class="form-control required" required>
 												<option>--- Pilih ---</option>
 												<option value="Rotasi">Rotasi</option>
 												<option value="Promosi">Promosi</option>
@@ -429,7 +369,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Rekomendasi Proyeksi Jabatan <small class="text-muted">- opsional</small></label>
-											<select class="form-control required">
+											<select class="form-control required" required>
 												<option>--- Pilih ---</option>
 												<option value="SDM">Pohon Profesi SDM</option>
 												<option value="Developer">Web Developer</option>
@@ -444,7 +384,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>No. Dokumen Mutasi *</label>
-											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp["no_dokumen_unit_asal"]') }}" class="form-control required">
+											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp["no_dokumen_unit_asal"]') }}" class="form-control required" required>
 										</div>
 									</div>
 								</div>
@@ -453,7 +393,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Tanggal Dokumen Mutasi *</label>
-											<input type="text" name="mrp[tgl_dokumen_unit_asal]" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+											<input type="text" name="mrp[tgl_dokumen_unit_asal]" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" required>
 										</div>
 									</div>
 								</div>
@@ -468,7 +408,7 @@
 
 											<div class="fancy-file-upload fancy-file-primary">
 												<i class="fa fa-upload"></i>
-												<input type="file" name="file_dokumen_mutasi" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+												<input type="file" name="file_dokumen_mutasi" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" required />
 												<input type="text" class="form-control" placeholder="no file selected" readonly="" />
 												<span class="button">Pilih Dokumen</span>
 											</div>
@@ -532,9 +472,8 @@
 	</script>
 
 	<script>
-		$("#nip_pengusul").keyup(function(){
+		$("#nip_pengusul").on('keyup paste', function(){
 			var nip = $(this).val();
-
 			if(nip.length >= 6)
 			{
 				$.ajax({
@@ -555,6 +494,7 @@
 						}
 					}
 				});
+
 			}
 			else
 			{

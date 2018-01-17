@@ -77,6 +77,7 @@ class MutasiController extends Controller
                 'unit_pengusul' => auth()->user()->id,
                 'pegawai_id' => $pegawai_id,
             );
+            request('nilai')['hubungan_sesama'] = request('hds').request('nilai')['hubungan_sesama'];
 
             $data_mrp = array_merge($tambahan_mrp, request('mrp'));
             $data_nilai = array_merge(request('nilai'), array('pegawai_id' => $pegawai_id));
@@ -89,7 +90,8 @@ class MutasiController extends Controller
             $foldername = $mrp->registry_number.'/';
             $filename = $mrp->no_dokumen_unit_asal.'.'.$file->getClientOriginalExtension();
             // dd($foldername, $filename);
-            //$file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+            // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+            $file->move(base_path(). '/public/storage/uploads/dok_asal/'.$foldername, $filename);
 
             return redirect('/dashboard')->with('success', 'Pegawai berhasil dibursakan');
         }
