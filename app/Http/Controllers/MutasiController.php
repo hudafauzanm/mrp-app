@@ -89,7 +89,7 @@ class MutasiController extends Controller
             $foldername = $mrp->registry_number.'/';
             $filename = $mrp->no_dokumen_unit_asal.'.'.$file->getClientOriginalExtension();
             // dd($foldername, $filename);
-            $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+            //$file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
 
             return redirect('/dashboard')->with('success', 'Pegawai berhasil dibursakan');
         }

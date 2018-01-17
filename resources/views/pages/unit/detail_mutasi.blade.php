@@ -78,8 +78,12 @@
 											</ul>
 										</td>
 										<td>
+											@if(isset($detaill->formasi_jabatan))
 											<div><strong>{{$detaill->formasi_jabatan->formasi}} {{$detaill->formasi_jabatan->jabatan}}</strong></div>
 											<small>{{$detaill->formasi_jabatan->posisi}}</small>
+											@else
+												Perlu saran
+											@endif
 										</td>
 										<td>
 											<div><strong>{{$detaill->pegawai->formasi_jabatan->formasi}} {{$detaill->pegawai->formasi_jabatan->jabatan}}</strong></div>
@@ -100,7 +104,7 @@
 							<div class="col-xs-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>(((NOT YET)))</strong><!-- <br>
+									<strong>{{$detaill->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$detaill->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</strong><!-- <br>
 									Jalan Trunojoyo Blok M – I No 135<br>
 									Kebayoran Baru, Jakarta 12160, Indonesia<br>
 									Telp : 021 – 7251234, 7261122<br>
