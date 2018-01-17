@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PenilaianPegawai extends Model
 {
     protected $table = 'penilaian_pegawai';
+    protected $guarded = ['id'];
 
     public function aspek_penilaian()
     {

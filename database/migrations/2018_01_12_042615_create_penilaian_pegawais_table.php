@@ -26,17 +26,15 @@ class CreatePenilaianPegawaisTable extends Migration
             $table->integer('visionary');
             $table->integer('empowering');
             $table->integer('komunikasi');
-            $table->integer('teamwork');
-            $table->string('bahasa_1');
+            $table->integer('team_work');
             $table->integer('bahasa_1_nilai');
-            $table->string('bahasa_2');
             $table->integer('bahasa_2_nilai');
-            $table->string('bahasa_3');
-            $table->integer('bahasa_3_nilai');
-            $table->integer('kesehatan');
-            $table->integer('career_willingness');
-            $table->integer('external_rediness');
-            $table->integer('hubungan_sesama');
+            $table->string('bahasa_3')->nullable();
+            $table->integer('bahasa_3_nilai')->nullable();
+            $table->string('kesehatan');
+            $table->string('career_willingness');
+            $table->string('external_rediness');
+            $table->string('hubungan_sesama');
             $table->timestamps();
 
             $table->index('pegawai_id');

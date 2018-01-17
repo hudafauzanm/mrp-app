@@ -10,6 +10,8 @@ class MRP extends Model
     protected $primaryKey='id';
     public $incrementing = false;
 
+    protected $guarded = [];
+
     public function pegawai()
     {
     	return $this->belongsTo('App\Pegawai');
