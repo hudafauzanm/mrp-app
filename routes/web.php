@@ -13,6 +13,7 @@
 
 Route::get('/', 'DashboardController@index')->name('home');
 Route::get('/dashboard', 'DashboardController@index');
+Route::get('/home', 'DashboardController@index');
 
 // authentication
 Route::get('/login', 'LoginController@index')->name('login');
@@ -32,4 +33,3 @@ Route::post('/mutasi/pengajuan/submit_form', 'MutasiController@submitForm');
 Route::get('/mrp', 'MRPController@index');
 Route::get('/mrp/edit/{reg_num}', 'MRPController@showEdit');
 
-Route::get('/home', 'HomeController@index')->name('home');

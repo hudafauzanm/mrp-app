@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class FormasiJabatan extends Model
 {
     protected $table = 'formasi_jabatan';
+	protected $primaryKey='id';
+    public $incrementing = false;
 
     public function personnel_area()
     {

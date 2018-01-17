@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class SKSTg extends Model
 {
     protected $table = 'sk_stg';
+    protected $primaryKey='id';
+    public $incrementing = false;
     
     public function mrp()
     {

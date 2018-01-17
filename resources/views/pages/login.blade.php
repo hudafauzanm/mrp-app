@@ -34,7 +34,7 @@
 				
 				@if (session('error'))
 					<div class="alert alert-danger noborder text-center weight-400 nomargin noradius">
-						Username/password salah!
+						{{ session('error') }}
 					</div>
 				@endif
 
