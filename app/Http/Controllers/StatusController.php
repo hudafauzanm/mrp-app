@@ -21,7 +21,8 @@ class StatusController extends Controller
         }
         else if(request('act')=='res')
         {
-            // $mrp = MRP::where('formasi_jabatan_id->formasi_jabatan->personnel_area', auth()->user()->id)->get();
+            $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
+             $mrp = MRP::whereIn('formasi_jabatan_id', $fj);
         }
     	return view('pages.unit.status',compact('mrp'));
     }

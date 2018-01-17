@@ -1,3 +1,7 @@
+<?php 
+use Carbon\Carbon;
+
+?>
 <!doctype html>
 <html lang="en-US">
 	<head>
@@ -66,12 +70,12 @@
 											<ul class="list-unstyled">
 												<li><strong>NIP:</strong> {{ $detaill->pegawai->nip }}</li>
 												<li><strong>Nama:</strong> {{ $detaill->pegawai->nama_pegawai }}</li>
-												<li><strong>Grade:</strong> (((NOT YET)))</li>
+												<li><strong>Grade:</strong> {{ $detaill->pegawai->ps_group }}</li>
 											</ul>
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>Tanggal Aktifasi:</strong> (((NOT YET)))</li>
+												<li><strong>Tanggal Aktifasi:</strong> {{ $detaill->tgl_pooling}}</li>
 												<li><strong>Jenis Mutasi:</strong> {{ $detaill->jenis_mutasi}}</li>
 												<li><strong>Mutasi:</strong> {{ $detaill->mutasi }}</li>
 												<li><strong>Jalur Mutasi:</strong> {{ $detaill->jalur_mutasi}}</li>
@@ -89,8 +93,9 @@
 											<div><strong>{{$detaill->pegawai->formasi_jabatan->formasi}} {{$detaill->pegawai->formasi_jabatan->jabatan}}</strong></div>
 											<small>{{$detaill->pegawai->formasi_jabatan->posisi}}</small>
 										</td>
-										<td>(((NOT YET)))</td>
-										<td>(((NOT YET)))</td>
+
+										<td>{{$detaill->pegawai->time_diff(Carbon::parse($detaill->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+										<td>{{$detaill->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($detaill->pegawai->end_date))}}</td>
 										
 									</tr>
 								</tbody>
