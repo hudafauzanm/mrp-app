@@ -34,9 +34,9 @@ class LoginController extends Controller
 			return back()->with('error', 'Username/password salah!');
 		}
         
-        // $pegawai = Pegawai::where('nip', request('nip'))->first();
-        // if (!$pegawai->formasi_jabatan->personnel_area->username === $username) 
-        //     return $this->logout('Anda tidak berhak mengakses halaman ini');
+        $pegawai = Pegawai::where('nip', request('nip'))->first();
+        if (!$pegawai || !$pegawai->formasi_jabatan->personnel_area->username === $username) 
+            return $this->logout('Anda tidak berhak login di unit lain');
 		
 	    return redirect('/dashboard')->with('success', 'Selamat bekerja!');
     }
@@ -45,7 +45,7 @@ class LoginController extends Controller
     {
     	auth()->logout();
         request()->session()->flush();
-
+        
         if($message)
             return redirect('/login')->with('error', $message);
 
