@@ -15,15 +15,20 @@ class StatusController extends Controller
 
     public function index()
     {
-        $statusbase = ['formasi_jabatan_id->formasi_jabatan->personnel_area->id' => $this];
-        $mrp = MRP::where($statusbase);
-        // $pegawai = Unit::class->get();
+        if(request('act')=='req')
+        {
+            $mrp = MRP::where('unit_pengusul', auth()->user()->id)->get();
+        }
+        else if(request('act')=='res')
+        {
+            // $mrp = MRP::where('formasi_jabatan_id->formasi_jabatan->personnel_area', auth()->user()->id)->get();
+        }
     	return view('pages.unit.status',compact('mrp'));
     }
 
     public function getDetails($reg_num)
     {
-        $detail = MRP::all();
+        $detail = MRP::where('registry_number', $reg_num)->get();
     	return view('pages.unit.detail_mutasi',compact('detail'));
     }
 }

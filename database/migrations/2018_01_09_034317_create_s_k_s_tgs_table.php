@@ -16,7 +16,7 @@ class CreateSKSTgsTable extends Migration
     {
         Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('no_dokumen_proses_sk')->unique();
+            $table->string('no_dokumen_proses_sk')->nullable();
             $table->string('tahun_sk');
             $table->string('no_sk')->unique();
             $table->string('no_dokumen_kirim_sk')->unique();
