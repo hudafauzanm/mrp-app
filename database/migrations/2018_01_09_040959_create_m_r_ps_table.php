@@ -22,7 +22,8 @@ class CreateMRPsTable extends Migration
             $table->string('jalur_mutasi');
             $table->string('no_dokumen_unit_asal');
             $table->date('tgl_dokumen_unit_asal');
-            $table->text('alasan_mutasi');
+            $table->string('alasan_mutasi');
+            $table->char('unit_pengusul', 36);
             $table->string('no_dokumen_unit_mutasi')->nullable();
             $table->date('tgl_dokumen_unit_mutasi')->nullable();
             $table->date('tgl_evaluasi')->nullable();
