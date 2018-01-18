@@ -117,7 +117,7 @@ use Carbon\Carbon;
 								</address>
 
 							</div>
-							@if (session('status'))
+							@if (session('success'))
 								<div class="col-md-6 text-right">
 									<a href="/dashboard" class="btn btn-lg btn-primary btn-3d">
 										<i class="fa fa-home"></i>
