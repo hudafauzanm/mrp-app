@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(DiklatPenjenjanganSeeder::class);
         // $this->call(FRSSeeder::class);
         // $this->call(PenilaianPegawaiSeeder::class);
+        $this->call(ProvinsiKotaSeeder::class);
     }
 }

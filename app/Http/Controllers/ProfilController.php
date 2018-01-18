@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PersonnelArea;
+use App\Kota;
+use App\Provinsi;
 
 class ProfilController extends Controller
 {
@@ -14,14 +16,28 @@ class ProfilController extends Controller
 
     public function index()
     {
-    	return view('pages.editprofil');
+    	$personnelarea = auth()->user();
+    	$provinsis = Provinsi::all();
+    	$selectedprovinsi = $personnelarea->provinsi;
+    	if ($personnelarea->provinsi)
+    		{
+		    		$kotas=Kota::where('provinsi_id',$personnelarea->provinsi)->get();
+		    	}
+		    	else
+		    	{
+		    		$kotas=NULL;
+    		}
+    	$selectedkota = $personnelarea->kota;
+
+    	return view('pages.editprofil',compact('personnelarea','provinsis','selectedprovinsi','selectedkota','kotas'));
     }
 
-    public function store()
+    public function getKota()
     {
-    	$personnelarea = auth()->user();
+    	$kotas = Kota::where('provinsi_id',request('provinsi_id'))->get();
 
-    	return view('pages.editprofil', compact('personnelarea')); 
+    		return response()->json($kotas);
+    	
     }
 
     public function input(Request $request)
@@ -43,5 +59,4 @@ class ProfilController extends Controller
 
     	return redirect('/profil')->with('success','Berhasil Update Profil');
     } 
-}
 }

@@ -37,11 +37,10 @@
 										<hr class="half-margins" />
 										
 										<!-- About -->
-										<h3 class="text-black">
-											Nama 
-											<small class="text-gray size-14"> / Unit</small>
+										<h3 class="text-black" > 
+											<small class="text-gray size-14">{{ $personnelarea->nama }} </small>
 										</h3>
-										<p class="size-12">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.</p>
+										<p class="size-12">{{$personnelarea->alamat}}</p>
 
 									</div>
 								</section>
@@ -68,33 +67,39 @@
 											{{csrf_field()}}
 												<fieldset>
 													<div class="form-group">
-														<label class="col-md-3 control-label" for="profileAlamat">Alamat</label>
+														<label class="col-md-4 control-label" for="profileAlamat">Alamat</label>
 														<div class="col-md-8">
 															<input type="text" class="form-control" name="alamat" id="profileAlamat" value="{{ $personnelarea->alamat }}">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-3 control-label" for="profileProvinsi">Provinsi</label>
-														<div class="col-md-9">
-															<select class="form-control select2" name="provinsi">
-																<option></option>
-																<option value="1">Jawa Timur</option>
-																<option value="2">Jawa Tengah</option>
-																<option value="3">Jawa Barat</option>
-																<option value="4">DIY</option>
+														<label class="col-md-4 control-label" for="profileProvinsi">Provinsi</label>
+														<div class="col-md-8">
+															<select class="form-control select2" name="provinsi" id="provinsiid">
+																<option>Pilih Provinsi</option>
+																@if($personnelarea->provinsi)
+																	@foreach($provinsis as $provinsi)
+																		<option value="{{$provinsi->id}}" {{ $selectedprovinsi == $provinsi->id ? 'selected="selected"' : ''}}>{{$provinsi->provinsi}}</option>
+																	@endforeach
+																@endif
+
 															</select>
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-3 control-label" for="profileKota">Kota</label>
-														<div class="col-md-9">
-															<select class="form-control select2" name="kota">
-																<option></option>
-																<option value="1">Yogya</option>
-																<option value="2">Jogja</option>
-																<option value="3">Yogyakarta</option>
-																<option value="4">Jogjakarta</option>
-															</select>
+														<label class="col-md-4 control-label" for="profileKota">Kota</label>
+														<div class="col-md-8">
+															@if($personnelarea->kota)
+																<select class="form-control select2" name="kota" id="kotaid" >
+																	@foreach($kotas as $kota)	
+																		<option value= "{{$kota->id}}" {{$selectedkota == $kota->id  ? 'selected="selected"' : '' }}>{{$kota->kota}}</option>
+																	@endforeach	
+																</select>
+															@else
+																<select class="form-control select2" name="kota" id="kotaid" disabled="" >
+																		<option>Pilih Kota</option>
+																</select>
+															@endif
 														</div>
 													</div>
 												</fieldset>
@@ -103,21 +108,21 @@
 												<h4>Ganti Password</h4>
 												<fieldset class="mb-xl">
 													<div class="form-group">
-														<label class="col-md-3 control-label" for="profileNewPassword">Password Baru</label>
+														<label class="col-md-4 control-label" for="profileNewPassword">Password Baru</label>
 														<div class="col-md-8">
-															<input type="password" class="form-control" name="password" id="profileNewPassword">
+															<input type="password" class="form-control" name="password" id="profileNewPassword" placeholder="Optional">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-3 control-label" for="profileNewPasswordRepeat">Konfirmasi Password</label>
+														<label class="col-md-4 control-label" for="profileNewPasswordRepeat">Konfirmasi Password</label>
 														<div class="col-md-8">
-															<input type="password" name="password_confirmation" class="form-control" id="profileNewPasswordRepeat">
+															<input type="password" name="password_confirmation" class="form-control" id="profileNewPasswordRepeat" placeholder="Diisi sama dengan password baru">
 														</div>
 													</div>
 												</fieldset>
 
 												<div class="row">
-													<div class="col-md-9 col-md-offset-3">
+													<div class="col-md-8 col-md-offset-4">
 														<button type="submit" class="btn btn-primary">Submit</button>
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
@@ -135,4 +140,35 @@
 					</div>
 
 				</div>
+@endsection
+
+@section('includes-scripts')
+	@parent
+	<script>
+		$("#provinsiid").change(function(){
+			var provinsi_id = $(this).val();
+
+			$.ajax({
+				url : '/profil/getKota',
+				type : 'GET',
+				data : { 'provinsi_id': provinsi_id, },
+				dataType : 'json',
+
+				error: function(){
+
+				},
+
+				success: function (data){
+					var kota = $("#kotaid");
+					kota.empty();
+					kota.append('<option>Pilih Provinsi</option>');
+					kota.removeAttr('disabled');
+					$.each(data, function(key, value){
+						console.log(value);
+						kota.append('<option value="'+value.id+'">'+value.kota+'</option>');
+					});
+				}
+			});
+		});
+	</script>
 @endsection
