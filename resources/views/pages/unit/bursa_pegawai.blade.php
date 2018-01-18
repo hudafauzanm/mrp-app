@@ -21,6 +21,7 @@
 				<form action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
 					{{ csrf_field() }}
 					<input type="hidden" name="mrp[tipe]" value="{{ request('tipe') }}">
+					<input type="hidden" id="kode_olah_pegawai" value="">
 					<!-- data pegawai -->
 					<div class="panel panel-default">
 						<div class="panel-heading panel-heading-transparent">
@@ -35,7 +36,6 @@
 										<div class="col-md-6 col-sm-6">
 											<label>NIP *</label>
 											<input type="text" name="nip" id="nip" value="{{ old('nip') }}" class="form-control required" autocomplete="off" required>
-											<span class="tooltip tooltip-top-right" id="error_tooltip" style="display: none"></span>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Nama Pegawai</label>
@@ -84,6 +84,7 @@
 										</div>
 									</div>
 								</div>
+								
 								<hr>
 								<p><strong>KEY COMPETENCIES</strong></p>
 								<div class="row">
@@ -439,7 +440,7 @@
 											</div>
 
 											<div class="col-md-6 col-sm-6">
-												<select class="form-control" id="rekom_jabatan" disabled>
+												<select class="form-control" name="kode_olah" id="rekom_jabatan" disabled>
 													<option>--- Jabatan ---</option>
 												</select>
 											</div>
@@ -505,6 +506,9 @@
 	<script>
 		$("#rekom_checkbox").click(function(){
 			$('#rekom_unit').prop('disabled', function(i, v) { return !v; });
+			$('#rekom_unit').prop('required', function(i, v) { return !v; });
+			$('#rekom_formasi').prop('required', function(i, v) { return !v; });
+			$('#rekom_jabatan').prop('required', function(i, v) { return !v; });
 		});
 	</script>
 
@@ -564,6 +568,7 @@
 							$("#posisi").val(data.posisi);
 							$("#masa_kerja").val(data.masa_kerja);
 							$("#sisa_kerja").val(data.sisa_masa_kerja);
+							$("#kode_olah_pegawai").val(data.kode_olah_forja);
 						}
 						else
 						{
@@ -573,6 +578,7 @@
 							$("#posisi").val('');
 							$("#masa_kerja").val('');
 							$("#sisa_kerja").val('');
+							$("#kode_olah_pegawai").val('');
 						}
 					}
 				});
@@ -585,19 +591,12 @@
 				$("#posisi").val('');
 				$("#masa_kerja").val('');
 				$("#sisa_kerja").val('');
+				$("#kode_olah_pegawai").val('');
 			}
 		});
 	</script>
 
 	<script>
-		// $("#rekom_checkbox").click(function(){
-		// 	var cek = $(this).attr('checked');
-
-		// 	if(cek)
-		// 	{
-		// 		$("#rekom_proyeksi").show();
-		// 	}
-		// })
 		$("#rekom_unit").change(function(){
 			var unit_id = $(this).val();
 
@@ -634,6 +633,7 @@
 				'data': {
 					'unit_id': unit_id,
 					'formasi': formasi,
+					'kode_olah': $("#kode_olah_pegawai").val(),
 				},
 				'dataType': 'json',
 				error: function(){
@@ -646,7 +646,7 @@
 					jabatan.removeAttr('disabled');
 					$.each(data, function(key, value){
 						console.log(value);
-						jabatan.append('<option value="'+value+'">'+value+'</option>');
+						jabatan.append('<option value="'+key+'">'+value+'</option>');
 					});
 				}
 			});
