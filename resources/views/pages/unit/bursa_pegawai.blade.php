@@ -542,9 +542,8 @@
 			{
 				$.ajax({
 					'url': '/mutasi/pengajuan/get_pegawai_info',
-					'type': 'POST',
+					'type': 'GET',
 					'data': {
-						'_token': '{{ csrf_token() }}',
 						'nip': nip
 					},
 					'dataType': 'json',
@@ -573,9 +572,8 @@
 			{
 				$.ajax({
 					'url': '/mutasi/pengajuan/get_pegawai_info',
-					'type': 'POST',
+					'type': 'GET',
 					'data': {
-						'_token': '{{ csrf_token() }}',
 						'nip': nip
 					},
 					'dataType': 'json',
