@@ -65,112 +65,6 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="modal fade bs-example-modal-full" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-full">
-			<div class="modal-content">
-				<!-- header modal -->
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="detailModalLabel">8005002H2.Promosi.151663040401_151663040401</h4>
-				</div>
-
-				<!-- body modal -->
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-3 col-xs-3">
-							<h4>Data<strong> Pegawai</strong></h4>
-							<ul class="list-unstyled">
-								<li><strong>NIP:</strong> 7807299Z</li>
-								<li><strong>Nama:</strong> JOB SYAM</li>
-								<li><strong>Grade:</strong> SYS04</li>
-								<li><strong>Subgroup:</strong> Aktif</li>
-								<li><strong>Jenjang:</strong> Struktural (04)</li>
-								<li><strong>Sisa Masa Kerja:</strong> 30 Tahun</li>
-								<li><strong>Lama & Kali Jenjang:</strong> 1 tahun 2 bulan, 1x</li>
-								<li><strong>Diklat Penjenjangan:</strong> EE III</li>
-							</ul>
-						</div>
-						<div class="col-md-3 col-xs-3">
-							<h4>Data<strong> Sutri</strong></h4>
-							<ul class="list-unstyled">
-								<li><strong>NIP:</strong> 7807299Z</li>
-								<li><strong>Nama:</strong> ISTRINYA JOB SYAM</li>
-								<li><strong>Unit:</strong> Distribusi Banten</li>
-								<li><strong>(Beda Unit)</strong></li>
-							</ul>
-						</div>
-						<div class="col-md-3 col-xs-3 text-right">
-						</div>
-						<div class="col-md-3 col-xs-3 text-right">
-							<h4><strong>Download</strong> Dokumen</h4>
-							<ul class="list-unstyled ">
-								<button type="button" class="btn btn-sm btn-3d btn-blue">00215/SIM.03.01KDIVSTI/MINTA</button>
-								<button type="button" class="btn btn-sm btn-3d btn-info">00215/SIM.03.01KDIVSTI/LOLOS</button>
-								<button type="button" class="btn btn-sm btn-3d btn-red">00215/SIM.03.01KDIVSTI/SK</button>
-							</ul>
-						</div>
-					</div>
-
-					<div class="table-responsive">
-						<table class="table table-condensed nomargin">
-							<thead>
-								<tr>
-									<th width="22%">Detail Mutasi</th>
-									<th width="30%">Proyeksi Jabatan</th>
-									<th width="30%">Jabatan Saat Ini</th>
-									<th width="3%">Tipe</th>
-									<th width="3%">Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<ul class="list-unstyled">
-											<li><strong>Tanggal Aktifasi:</strong> 1 September 2017</li>
-											<li><strong>Tanggal Permintaan:</strong> 30 Februari 2018</li>
-											<li><strong>Tanggal Pooling:</strong> 2 Maret 2018</li>
-											<li><strong>Jenis Mutasi:</strong> Dinas</li>
-											<li><strong>Mutasi:</strong> Rotasi</li>
-											<li><strong>Jalur Mutasi:</strong> Intern Divisi Antar Bidang</li>
-										</ul>
-									</td>
-									<td>
-										<div><strong>ANALYST MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI (PLT DEPUTI MANAJER MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI)</strong></div>
-										<small>SUB BIDANG MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI BIDANG PENGEMBANGAN APLIKASI TEKNOLOGI INFORMASI DIVISI SISTEM DAN TEKNOLOGI INFORMASI DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</small>
-									</td>
-									<td>
-										<div><strong>ANALYST STRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI (PLT DEPUTI MANAJERSTRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI)</strong></div>
-										<small>SUB BIDANG STRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI BIDANG PERENCANAAN DAN ARSITEKTUR TEKNOLOGI INFORMASI DIVISI SISTEM DAN TEKNOLOGI INFORMASI DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</small>
-									</td>
-									<td>1</td>
-									<td>Pending</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
-					<hr class="nomargin-top" />
-
-					<div class="row">
-
-						<div class="col-xs-6">
-							<h4><strong>Unit</strong> Peminta</h4>
-							<address>
-								<strong>Kantor Pusat PLN</strong><br>
-								Jalan Trunojoyo Blok M – I No 135<br>
-								Kebayoran Baru, Jakarta 12160, Indonesia<br>
-								Telp : 021 – 7251234, 7261122<br>
-								fax : 021 – 7221330
-							</address>
-
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
 @endsection
 
 @section('includes-scripts')
@@ -199,6 +93,25 @@
                 ]
             });
         });
+    </script>
+
+    <script>
+    	$(".detail").click(function(){
+    		var reg_num = $(this).attr('target');
+
+    		$.ajax({
+			    "url": "/mrp/getDetails",
+			    "dataType": "json",
+			    "type": "GET",
+			    "data":{ reg_num: reg_num},
+			    error: function(){
+
+			    },
+			    success: function(){
+
+			    }
+    		});
+    	});
     </script>
 
 	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
