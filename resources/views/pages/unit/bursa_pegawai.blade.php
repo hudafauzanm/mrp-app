@@ -248,10 +248,10 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-5 col-sm-5">
-											<input type="text" name="nilai[bahasa_3]" id="bahasa_3" min="0" max="100" value="{{ old('nilai["bahasa_3"]') }}" class="form-control required" placeholder="Bahasa .... (opsional)">
+											<input type="text" name="nilai[bahasa_3]" id="bahasa_3" min="0" max="100" value="{{ old('nilai["bahasa_3"]') }}" class="form-control" placeholder="Bahasa .... (opsional)">
 										</div>
 										<div class="col-md-3 col-sm-3">
-											<input type="number" name="nilai[bahasa_3_nilai]" min="0" max="100" value="{{ old('nilai["bahasa_3_nilai"]') }}" class="form-control required rating_number" required target="#rating13" placeholder="0-100">
+											<input type="number" name="nilai[bahasa_3_nilai]" min="0" max="100" value="{{ old('nilai["bahasa_3_nilai"]') }}" class="form-control rating_number" target="#rating13" placeholder="0-100">
 										</div>
 										<div class="col-md-4 col-sm-4">
 											<div class="rating rating-0 size-13 width-100" id="rating13"><!-- rating-0 ... rating-5 --></div>
@@ -368,21 +368,6 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
-											<label>Rekomendasi Proyeksi Jabatan <small class="text-muted">- opsional</small></label>
-											<select class="form-control required" required>
-												<option>--- Pilih ---</option>
-												<option value="SDM">Pohon Profesi SDM</option>
-												<option value="Developer">Web Developer</option>
-												<option value="php">PHP Programmer</option>
-												<option value="Javascript">Javascript Programmer</option>
-											</select>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
 											<label>No. Dokumen Mutasi *</label>
 											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp["no_dokumen_unit_asal"]') }}" class="form-control required" required>
 										</div>
@@ -415,6 +400,52 @@
 											<small class="text-muted block">File Maksimal 10 MB (zip/rar)</small>
 										</div>
 									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<label class="switch switch">
+											<input type="checkbox" id="rekom_checkbox">
+											<span class="switch-label" data-on="YES" data-off="NO"></span>
+											<span> Rekomendasikan proyeksi jabatan? <small> - opsional</small></span>
+										</label>
+									</div>
+								</div>
+
+								<div id="rekom_proyeksi">
+									<div class="row">
+										<div class="form-group">
+											<div class="col-md-12 col-sm-12">
+												<div class="fancy-form fancy-form-select">
+													<select class="form-control select2" id="rekom_unit" disabled>
+														<option>--- Pilih Unit Rekomendasi ---</option>
+														@foreach ($units as $unit)
+															<option value="{{ $unit->id }}">{{ $unit->nama }}</option>
+														@endforeach
+													</select>
+
+													<i class="fancy-arrow"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group">
+											<div class="col-md-6 col-sm-6">
+												<select class="form-control" id="rekom_formasi" disabled>
+													<option>--- Formasi ---</option>
+												</select>
+											</div>
+
+											<div class="col-md-6 col-sm-6">
+												<select class="form-control" id="rekom_jabatan" disabled>
+													<option>--- Jabatan ---</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
 								</div>
 
 								<div class="row">
@@ -461,13 +492,19 @@
 
 			if(masukan != "")
 			{
-				var angka = parseInt(masukan / 20) + 1;
+				var angka = Math.ceil(masukan / 20);
 				$($(this).attr('target')).removeClass().addClass('rating rating-'+angka+' size-13 width-100');
 			}
 			else
 			{
 				$($(this).attr('target')).removeClass().addClass('rating rating-0 size-13 width-100');	
 			}
+		});
+	</script>
+
+	<script>
+		$("#rekom_checkbox").click(function(){
+			$('#rekom_unit').prop('disabled', function(i, v) { return !v; });
 		});
 	</script>
 
@@ -550,5 +587,69 @@
 				$("#sisa_kerja").val('');
 			}
 		});
+	</script>
+
+	<script>
+		// $("#rekom_checkbox").click(function(){
+		// 	var cek = $(this).attr('checked');
+
+		// 	if(cek)
+		// 	{
+		// 		$("#rekom_proyeksi").show();
+		// 	}
+		// })
+		$("#rekom_unit").change(function(){
+			var unit_id = $(this).val();
+
+			$.ajax({
+				'url': '/mutasi/pengajuan/getFormasi',
+				'type': 'GET',
+				'data': {
+					'unit_id': unit_id,
+				},
+				'dataType': 'json',
+				error: function(){
+
+				},
+				success: function(data){
+					var formasi = $("#rekom_formasi");
+					formasi.empty();
+					formasi.append('<option>--- Formasi ---</option>');
+					formasi.removeAttr('disabled');
+					$.each(data, function(key, value){
+						console.log(value);
+						formasi.append('<option value="'+value.formasi+'">'+value.formasi+'</option>');
+					});
+				}
+			});
+		});
+
+		$("#rekom_formasi").change(function(){
+			var formasi = $(this).val();
+			var unit_id = $("#rekom_unit").val();
+
+			$.ajax({
+				'url': '/mutasi/pengajuan/getJabatan',
+				'type': 'GET',
+				'data': {
+					'unit_id': unit_id,
+					'formasi': formasi,
+				},
+				'dataType': 'json',
+				error: function(){
+
+				},
+				success: function(data){
+					var jabatan = $("#rekom_jabatan");
+					jabatan.empty();
+					jabatan.append('<option>--- Jabatan ---</option>');
+					jabatan.removeAttr('disabled');
+					$.each(data, function(key, value){
+						console.log(value);
+						jabatan.append('<option value="'+value+'">'+value+'</option>');
+					});
+				}
+			});
+		})
 	</script>
 @endsection

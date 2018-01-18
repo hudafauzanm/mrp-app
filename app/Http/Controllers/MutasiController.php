@@ -10,6 +10,7 @@ use Uuid;
 use App\MRP;
 use App\Pegawai;
 use App\PenilaianPegawai;
+use App\PersonnelArea;
 
 class MutasiController extends Controller
 {
@@ -28,7 +29,9 @@ class MutasiController extends Controller
     	}
     	else if($tipe === '2')
     	{
-    		return view('pages.unit.bursa_pegawai');
+            $units = PersonnelArea::all();
+
+    		return view('pages.unit.bursa_pegawai', compact('units'));
     	}
     	else if($tipe === '3')
     	{
@@ -61,11 +64,34 @@ class MutasiController extends Controller
         return response()->json($pegawai);
     }
 
+    public function getFormasi()
+    {
+        $unit = PersonnelArea::find(request('unit_id'));
+
+        if($unit)
+        {
+            $retval = $unit->formasi_jabatan()->select('formasi')->distinct()->get()->all();
+            return response()->json($retval);
+        }
+        else
+            return response()->json(NULL);
+    }
+
+    public function getJabatan()
+    {
+        $unit = PersonnelArea::find(request('unit_id'));
+
+        if($unit)
+        {
+            $retval = $unit->formasi_jabatan->where('formasi', request('formasi'))->pluck('jabatan')->toArray();
+            return response()->json($retval);
+        }
+        else
+            return response()->json(NULL);
+    }
+
     public function submitForm()
     {
-        $tipe = request('mrp')['tipe'];
-        $nip = request('nip');
-
         if($tipe === '2')
         {
             $pegawai_id = Pegawai::where('nip', $nip)->first()->id;
