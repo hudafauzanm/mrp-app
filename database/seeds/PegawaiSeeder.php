@@ -39,7 +39,7 @@ class PegawaiSeeder extends Seeder
         $pegawai->kali_jenjang = 1;
         $pegawai->tanggal_jab_unit_akhir = Carbon::parse('2013-07-17');
         $pegawai->tanggal_unit_induk_akhir = Carbon::parse('2013-07-17');
-        $pegawai->formasi_jabatan_id = FormasiJabatan::skip(2)->first()->id;
+        $pegawai->formasi_jabatan_id = FormasiJabatan::where('kode_olah', 'DITREG-JBB-1516730101.MM')->first()->id;
         $pegawai->save();
 
         $pegawai = new Pegawai;
@@ -67,7 +67,7 @@ class PegawaiSeeder extends Seeder
         $pegawai->kali_jenjang = 1;
         $pegawai->tanggal_jab_unit_akhir = Carbon::parse('2013-07-17');
         $pegawai->tanggal_unit_induk_akhir = Carbon::parse('2013-07-17');
-        $pegawai->formasi_jabatan_id = FormasiJabatan::skip(1)->first()->id;
+        $pegawai->formasi_jabatan_id = FormasiJabatan::where('kode_olah', 'DITDAN-151664020101.F04')->first()->id;
         $pegawai->save();
 
         $pegawai = new Pegawai;
@@ -95,7 +95,7 @@ class PegawaiSeeder extends Seeder
         $pegawai->kali_jenjang = 2;
         $pegawai->tanggal_jab_unit_akhir = Carbon::parse('2017-11-01');
         $pegawai->tanggal_unit_induk_akhir = Carbon::parse('2017-11-01');
-        $pegawai->formasi_jabatan_id = FormasiJabatan::skip(3)->first()->id;
+        $pegawai->formasi_jabatan_id = FormasiJabatan::where('kode_olah', 'DITREG-JBB-151673010101.MD')->first()->id;
         $pegawai->save();
     }
 }
