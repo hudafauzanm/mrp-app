@@ -77,5 +77,21 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->personnel_area_id = PersonnelArea::where('user_role', 1)->skip(2)->first()->id;;
         $forjab->save();
 
+        $forjab = new FormasiJabatan;
+        $forjab->id = Uuid::generate();
+        $forjab->kode_olah = 'DITHCM-1516650301.MM';
+        $forjab->legacy_code = '1516650301';
+        $forjab->posisi = 'DIVISI PENGEMBANGAN TALENTA DIREKTORAT HUMAN CAPITAL MANAGEMENT PT PLN (PERSERO) KANTOR PUSAT';
+        $forjab->formasi ='Manajer Senior';
+        $forjab->jabatan ='Rekrutmen dan Seleksi';
+        $forjab->jenjang_id ='MM';
+        $forjab->jenjang_txt ='Manajemen Menengah';
+        $forjab->pagu =1;
+        $forjab->realisasi =1;
+        $forjab->spfj ='0032.P/DIR/2017';
+        $forjab->status_fj ='';
+        $forjab->personnel_area_id = PersonnelArea::where('user_role', 1)->skip(3)->first()->id;;
+        $forjab->save();
+
     }
 }

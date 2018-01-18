@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class MRP extends Model
 {
     protected $table = 'mrp';
+    protected $primaryKey='id';
+    public $incrementing = false;
+
+    protected $guarded = [];
 
     public function pegawai()
     {

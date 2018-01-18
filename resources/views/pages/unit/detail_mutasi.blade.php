@@ -1,3 +1,7 @@
+<?php 
+use Carbon\Carbon;
+
+?>
 <!doctype html>
 <html lang="en-US">
 	<head>
@@ -24,6 +28,7 @@
 
 		<!-- WRAPPER -->
 		<div id="wrapper">
+			@foreach ($detail as $detaill)
 
 			<div class="padding-20">
 
@@ -35,13 +40,13 @@
 							<div class="col-md-6 col-xs-6 text-right">
 								<h4>Registry<strong> Number</strong></h4>
 								<ul class="list-unstyled ">
-									<li><strong>7807299Z.Rotasi.151666060101_151666060302</strong></li>
+									<li><strong>{{$detaill->registry_number}}</strong></li>
 								</ul>
 							</div>
 							<div class="col-md-6 col-xs-6 text-left">
 								<h4><strong>Nomor</strong> Nota Dinas</h4>
 								<ul class="list-unstyled ">
-									<li><strong>00215/SIM.03.01KDIVSTI/2017-R</strong></li>
+									<li><strong>{{$detaill->no_dokumen_unit_asal}}</strong></li>
 								</ul>
 							</div>
 						</div>
@@ -60,33 +65,38 @@
 								</thead>
 								<tbody>
 									<tr>
-										@foreach ($detail as $detaill)
+										
 										<td>
 											<ul class="list-unstyled">
 												<li><strong>NIP:</strong> {{ $detaill->pegawai->nip }}</li>
 												<li><strong>Nama:</strong> {{ $detaill->pegawai->nama_pegawai }}</li>
-												<li><strong>Grade:</strong> NOT YET</li>
+												<li><strong>Grade:</strong> {{ $detaill->pegawai->ps_group }}</li>
 											</ul>
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>Tanggal Aktifasi:</strong> 01.09.2017</li>
+												<li><strong>Tanggal Aktifasi:</strong> {{ $detaill->tgl_pooling}}</li>
 												<li><strong>Jenis Mutasi:</strong> {{ $detaill->jenis_mutasi}}</li>
 												<li><strong>Mutasi:</strong> {{ $detaill->mutasi }}</li>
 												<li><strong>Jalur Mutasi:</strong> {{ $detaill->jalur_mutasi}}</li>
 											</ul>
 										</td>
 										<td>
+											@if(isset($detaill->formasi_jabatan))
 											<div><strong>{{$detaill->formasi_jabatan->formasi}} {{$detaill->formasi_jabatan->jabatan}}</strong></div>
 											<small>{{$detaill->formasi_jabatan->posisi}}</small>
+											@else
+												Perlu saran
+											@endif
 										</td>
 										<td>
 											<div><strong>{{$detaill->pegawai->formasi_jabatan->formasi}} {{$detaill->pegawai->formasi_jabatan->jabatan}}</strong></div>
 											<small>{{$detaill->pegawai->formasi_jabatan->posisi}}</small>
 										</td>
-										<td>1 Tahun</td>
-										<td>10 tahun</td>
-										@endforeach
+
+										<td>{{$detaill->pegawai->time_diff(Carbon::parse($detaill->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+										<td>{{$detaill->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($detaill->pegawai->end_date))}}</td>
+										
 									</tr>
 								</tbody>
 							</table>
@@ -99,11 +109,11 @@
 							<div class="col-xs-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>Kantor Pusat PLN</strong><br>
+									<strong>{{$detaill->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$detaill->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</strong><!-- <br>
 									Jalan Trunojoyo Blok M – I No 135<br>
 									Kebayoran Baru, Jakarta 12160, Indonesia<br>
 									Telp : 021 – 7251234, 7261122<br>
-									fax : 021 – 7221330
+									fax : 021 – 7221330 -->
 								</address>
 
 							</div>
@@ -126,7 +136,7 @@
 				</div>
 
 			</div>
-
+			@endforeach
 		</div>
 		<!-- /WRAPPER -->
 
@@ -141,6 +151,8 @@
 		<script type="text/javascript">
 			// window.print();
 		</script>
+
+		@include('includes.notifications')
 
 	</body>
 </html>

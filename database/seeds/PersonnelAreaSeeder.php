@@ -44,6 +44,16 @@ class PersonnelAreaSeeder extends Seeder
         $user->user_role = 1;
         $user->save();
 
+        $user = new PersonnelArea;
+        $user->id = Uuid::generate();
+        $user->nama = 'DIVISI PENGEMBANGAN TALENTA';
+        $user->nama_pendek = 'DIVTLN';
+        $user->username = 'divtln';
+        $user->password = bcrypt('divtln');
+        $user->direktorat_id = Direktorat::skip(1)->first()->id;
+        $user->user_role = 1;
+        $user->save();
+
         // SDM
         $user = new PersonnelArea;
         $user->id = Uuid::generate();

@@ -15,14 +15,21 @@ class StatusController extends Controller
 
     public function index()
     {
-        $mrp = MRP::all();
-        // $pegawai = Unit::class->get();
+        if(request('act')=='req')
+        {
+            $mrp = MRP::where('unit_pengusul', auth()->user()->id)->get();
+        }
+        else if(request('act')=='res')
+        {
+            $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
+             $mrp = MRP::whereIn('formasi_jabatan_id', $fj);
+        }
     	return view('pages.unit.status',compact('mrp'));
     }
 
     public function getDetails($reg_num)
     {
-        $detail = MRP::all();
+        $detail = MRP::where('registry_number', $reg_num)->get();
     	return view('pages.unit.detail_mutasi',compact('detail'));
     }
 }
