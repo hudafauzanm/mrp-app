@@ -35,7 +35,7 @@ class LoginController extends Controller
 		}
         
         $pegawai = Pegawai::where('nip', request('nip'))->first();
-        if (!$pegawai || !$pegawai->formasi_jabatan->personnel_area->username === $username) 
+        if (!$pegawai || $pegawai->formasi_jabatan->personnel_area->username != $username) 
             return $this->logout('Anda tidak berhak login di unit lain');
 
         session(['nip_operator' => $pegawai->nip]);
