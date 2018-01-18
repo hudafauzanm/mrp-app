@@ -106,7 +106,7 @@ use Carbon\Carbon;
 
 						<div class="row">
 
-							<div class="col-xs-6">
+							<div class="col-md-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
 									<strong>{{$detaill->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$detaill->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</strong><!-- <br>
@@ -117,17 +117,14 @@ use Carbon\Carbon;
 								</address>
 
 							</div>
-
-							<!-- <div class="col-xs-6 text-right">
-
-								<ul class="list-unstyled">
-									<li><strong>Sub - Total Amount:</strong> $2162.00</li>
-									<li><strong>Discount:</strong> 10.0%</li>
-									<li><strong>VAT ($6):</strong> $12.0</li>
-									<li><strong>Grand Total:</strong> $1958.0</li>
-								</ul>
-
-							</div> -->
+							@if (session('status'))
+								<div class="col-md-6 text-right">
+									<a href="/dashboard" class="btn btn-lg btn-primary btn-3d">
+										<i class="fa fa-home"></i>
+										Kembali Ke Beranda
+									</a>
+								</div>
+							@endif
 
 						</div>
 

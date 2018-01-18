@@ -11,6 +11,7 @@ use App\MRP;
 use App\Pegawai;
 use App\PenilaianPegawai;
 use App\PersonnelArea;
+use App\FormasiJabatan;
 
 class MutasiController extends Controller
 {
@@ -59,6 +60,7 @@ class MutasiController extends Controller
             $pegawai->personnel_area = $fj->personnel_area->nama;
             $pegawai->masa_kerja = $pegawai->time_diff(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta'));
             $pegawai->sisa_masa_kerja = $pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->end_date));
+            $pegawai->kode_olah_forja = $fj->kode_olah;
         }
 
         return response()->json($pegawai);
@@ -83,7 +85,7 @@ class MutasiController extends Controller
 
         if($unit)
         {
-            $retval = $unit->formasi_jabatan->where('formasi', request('formasi'))->pluck('jabatan')->toArray();
+            $retval = $unit->formasi_jabatan->where('formasi', request('formasi'))->where('kode_olah', '!=', request('kode_olah'))->pluck('jabatan', 'kode_olah')->toArray();
             return response()->json($retval);
         }
         else
@@ -92,9 +94,18 @@ class MutasiController extends Controller
 
     public function submitForm()
     {
+        $tipe = request('mrp')['tipe'];
+        $nip = request('nip');
+
         if($tipe === '2')
         {
             $pegawai_id = Pegawai::where('nip', $nip)->first()->id;
+
+            if(request('kode_olah'))
+                $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
+            else
+                $id_proyeksi = NULL;
+
             $tambahan_mrp = array(
                 'id' => Uuid::generate(),
                 'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.\Carbon\Carbon::now('Asia/Jakarta'),
@@ -102,6 +113,7 @@ class MutasiController extends Controller
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => auth()->user()->id,
                 'pegawai_id' => $pegawai_id,
+                'formasi_jabatan_id' => $id_proyeksi,
             );
             request('nilai')['hubungan_sesama'] = request('hds').request('nilai')['hubungan_sesama'];
 
@@ -114,12 +126,12 @@ class MutasiController extends Controller
 
             $file = request('file_dokumen_mutasi');
             $foldername = $mrp->registry_number.'/';
-            $filename = $mrp->no_dokumen_unit_asal.'.'.$file->getClientOriginalExtension();
+            $filename = str_replace('/', '.', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
             // dd($foldername, $filename);
             // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
             $file->move(base_path(). '/public/storage/uploads/dok_asal/'.$foldername, $filename);
 
-            return redirect('/dashboard')->with('success', 'Pegawai berhasil dibursakan');
+            return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');
         }
     }
 }
