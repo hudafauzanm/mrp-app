@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\SDM;
 
 use App\MRP;
+use App\Pegawai;
 
 class MRPController extends Controller
 {
@@ -22,6 +23,15 @@ class MRPController extends Controller
     public function showEdit()
     {
     	return view('pages.sdm.mrp_edit');
+    }
+
+    public function showDetail()
+    {  
+        $mrp = MRP::where('registry_number', request('reg_num'))->firstOrFail();
+        $pegawai = $mrp->pegawai;
+        $sutri = Pegawai::where('nip', $pegawai->nip_sutri)->first();
+
+        return view('pages.sdm.mrp_detail', compact('mrp', 'pegawai', 'sutri'));
     }
 
     public function ajaxDatatables(Request $request)
@@ -125,9 +135,9 @@ class MRPController extends Controller
                 '<a href="/mrp/edit/'.$mrp->registry_number.'" class="btn btn-xs btn-info">
                     <i class="fa fa-pencil-square-o"></i> Edit
                 </a>
-                <button class="btn btn-xs btn-green" data-toggle="modal" data-target="#detailModal" target="'.$mrp->registry_number.'">
+                <a class="btn btn-xs btn-green" href="/mrp/detail/'.$mrp->registry_number.'" >
                     <i class="fa fa-list"></i> Detail
-                </button>
+                </a>
                 <button class="btn btn-xs btn-red delete">
                     <i class="fa fa-trash"></i> Hapus
                 </button>';
