@@ -46,13 +46,13 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                    	@foreach ($mrp as $mrps)
+	                    	@foreach ($mrp as $mrps) , ($pegawai as $pegawaii)
 							<tr>
 								
 								<td>{{ $mrps->registry_number }}</td>
 								<td>{{$mrps->pegawai->nip}}</td>
 								<td>{{$mrps->pegawai->nama_pegawai}}</td>
-								<td><strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrps->pegawai->formasi_jabatan->posisi}}</td>
+								<td><strong>{{$pegawaii->formasi_jabatan->formasi}} {{$pegawaii->formasi_jabatan->jabatan}}</strong> {{$pegawaii->formasi_jabatan->posisi}}</td>
 								<td>
 									@if(isset($mrps->formasi_jabatan))
 										<strong>{{$mrps->formasi_jabatan->formasi}}{{$mrps->formasi_jabatan->jabatan}}</strong> {{$mrps->formasi_jabatan->posisi}}

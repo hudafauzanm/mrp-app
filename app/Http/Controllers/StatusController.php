@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Unit;
 use App\MRP;
-
+use App\Pegawai;
 class StatusController extends Controller
 {
     public function __construct()
@@ -17,14 +17,16 @@ class StatusController extends Controller
     {
         if(request('act')=='req')
         {
+            $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             $mrp = MRP::where('unit_pengusul', auth()->user()->id)->get();
+            $pegawai = Pegawai::where('formasi_jabatan_id', $fj);
         }
         else if(request('act')=='res')
         {
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
              $mrp = MRP::whereIn('formasi_jabatan_id', $fj);
         }
-    	return view('pages.unit.status',compact('mrp'));
+    	return view('pages.unit.status',compact('mrp','pegawai'));
     }
 
     public function getDetails($reg_num)

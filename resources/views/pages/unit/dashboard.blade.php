@@ -21,9 +21,13 @@
 		-->
 		<div class="row">
 			<div class="col-md-6 margin-top-80">
+
 				<div class="text-center">
-					<h2 class="text-primary weight-600">Selamat Datang di MRP-App</h2>
+					
+					<h2 class="text-primary weight-600">Selamat Datang {{auth()->user()->nama_pendek}}</h2>
+					<h4 class="text-primary weight-600">Operator: {{request()->session()->get('nip_operator')}}</h4> 
 				</div>
+					
 			</div>
 
 			<div class="col-md-6">
