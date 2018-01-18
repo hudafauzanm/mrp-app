@@ -46,16 +46,18 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                    	@foreach ($mrp as $mrps) , ($pegawai as $pegawaii)
+	                    	@foreach ($mrp as $mrps) 
+	                    		
 							<tr>
 								
 								<td>{{ $mrps->registry_number }}</td>
 								<td>{{$mrps->pegawai->nip}}</td>
 								<td>{{$mrps->pegawai->nama_pegawai}}</td>
-								<td><strong>{{$pegawaii->formasi_jabatan->formasi}} {{$pegawaii->formasi_jabatan->jabatan}}</strong> {{$pegawaii->formasi_jabatan->posisi}}</td>
+								<td><strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrps->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
 								<td>
 									@if(isset($mrps->formasi_jabatan))
 										<strong>{{$mrps->formasi_jabatan->formasi}}{{$mrps->formasi_jabatan->jabatan}}</strong> {{$mrps->formasi_jabatan->posisi}}
+										<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
 									@else
 										Perlu saran
 									@endif
@@ -63,7 +65,9 @@
 								<td>{{$mrps->status}}</td>
 								<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 								
-							</tr>@endforeach
+							</tr>
+							
+							@endforeach
 	                    </tbody>
 	                </table>
 				{{-- </div> --}}

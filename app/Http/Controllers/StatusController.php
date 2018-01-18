@@ -17,16 +17,20 @@ class StatusController extends Controller
     {
         if(request('act')=='req')
         {
-            $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
+           // $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             $mrp = MRP::where('unit_pengusul', auth()->user()->id)->get();
-            $pegawai = Pegawai::where('formasi_jabatan_id', $fj);
+           // $pegawai = Pegawai::where('formasi_jabatan_id', $fj);
+        }
+        else if(request('act')=='reqjab')
+        {
+            $mrp = MRP::where('unit_pengusul', auth()->user()->id)->get();
         }
         else if(request('act')=='res')
         {
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             $mrp = MRP::whereIn('formasi_jabatan_id', $fj);
         }
-    	return view('pages.unit.status',compact('mrp','pegawai'));
+    	return view('pages.unit.status',compact('mrp'));
     }
 
     public function getDetails($reg_num)
