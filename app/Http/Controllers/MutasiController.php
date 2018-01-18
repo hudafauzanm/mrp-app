@@ -99,9 +99,14 @@ class MutasiController extends Controller
 
         if($tipe === '2')
         {
+
+            // $this->validate(request(), [
+            //     'file_dokumen_mutasi' => 'required|mimes:zip,rar|max:10240'
+            // ]);
+
             $pegawai_id = Pegawai::where('nip', $nip)->first()->id;
 
-            if(request('kode_olah'))
+            if(request('rekom_checkbox') === '1')
                 $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
             else
                 $id_proyeksi = NULL;
@@ -115,11 +120,12 @@ class MutasiController extends Controller
                 'pegawai_id' => $pegawai_id,
                 'formasi_jabatan_id' => $id_proyeksi,
             );
-            request('nilai')['hubungan_sesama'] = request('hds').request('nilai')['hubungan_sesama'];
+            // dd(request('nilai')['hubungan_sesama']);
 
             $data_mrp = array_merge($tambahan_mrp, request('mrp'));
-            $data_nilai = array_merge(request('nilai'), array('pegawai_id' => $pegawai_id));
-            // dd($data_mrp, $data_nilai);
+            $data_nilai = array_merge(request('nilai'), array('pegawai_id' => $pegawai_id));;
+            $data_nilai['hubungan_sesama'] = request('hds').'-'.$data_nilai['hubungan_sesama'];
+            // dd($data_mrp, $data_nilai, request('hds'));
 
             $mrp = MRP::create($data_mrp);
             $nilai = PenilaianPegawai::create($data_nilai);
