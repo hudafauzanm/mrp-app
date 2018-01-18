@@ -37,85 +37,28 @@
 					<table class="table table-bordered table-striped table-hover dataTable js-exportable" id="mrpTable">
 	                    <thead>
 	                        <tr>
-	                            {{-- <th>Registry Number</th> --}}
-	                            <th>NIP</th>
+	                            <th>Tanggal Usulan</th>
+	                            <th>Registry Number</th>
 	                            <th>Nama</th>
 	                            <th>Tipe</th>
+	                            <th>Unit Pengusul</th>
 	                            <th>Status</th>
-	                            <th>Posisi & Unit Asal</th>
-	                            <th>Posisi & Unit Tujuan</th>
 	                            <th></th>
 	                        </tr>
 	                    </thead>
 	                    <tfoot>
 	                        <tr>
-	                            {{-- <th>Registry Number</th> --}}
-	                            <th>NIP</th>
+	                            <th>Tanggal Usulan</th>
+	                            <th>Registry Number</th>
 	                            <th>Nama</th>
 	                            <th>Tipe</th>
+	                            <th>Unit Pengusul</th>
 	                            <th>Status</th>
-	                            <th>Posisi & Unit Asal</th>
-	                            <th>Posisi & Unit Tujuan</th>
 	                            <th></th>
 	                        </tr>
 	                    </tfoot>
 	                    <tbody>
-	                        <tr>
-	                            <td>8007317Z</td>
-	                            <td>NOOR RAHMANIA</td>
-	                            <td>I</td>
-	                            <td><span class="label label-info">Verifikasi SDM</span></td>
-	                            <td>ANALYST PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI (PLT DEPUTI MANAJERADMINISTRASI PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI)SUB BIDANG ADMINISTRASI PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI BIDANG PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI DIVISI PERENCANAAN KORPORAT DIREKTORAT PERENCANAAN KORPORAT PT PLN (PERSERO) KANTOR PUSAT</td>
-	                            <td>DEPUTI MANAJER ADMINISTRASI PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI BIDANG PERENCANAAN PINJAMAN DAN HIBAH LUAR NEGERI DIVISI PERENCANAAN KORPORAT DIREKTORAT PERENCANAAN KORPORAT PT PLN (PERSERO) KANTOR PUSAT</td>
-	                            <td>
-		                            <a href="/mrp/edit/id" class="btn btn-xs btn-info"><i class="fa fa-pencil-square-o"></i> Edit</a>
-		                            <button class="btn btn-xs btn-green"><i class="fa fa-list"></i> Detail</button>
-		                            <button class="btn btn-xs btn-red"><i class="fa fa-trash"></i> Hapus</button>
-		                            <br>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td>7292109M</td>
-	                            <td>RASTITO</td>
-	                            <td>II</td>
-	                            <td><span class="label label-warning">Pending - Karir II</span></td>
-	                            <td>ANALYST ANGGARAN (PLT DEPUTI MANAJER ANGGARAN 2) SUB BIDANG ANGGARAN 2 BIDANG ANGGARAN II DIVISI ANGGARAN DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</td>
-	                            <td>DEPUTI MANAJER ANGGARAN 2 BIDANG ANGGARAN II DIVISI ANGGARAN DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</td>
-	                            <td>
-		                            <a href="/mrp/edit/id" class="btn btn-xs btn-info"><i class="fa fa-pencil-square-o"></i> Edit</a>
-		                            <button class="btn btn-xs btn-green" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail</button>
-		                            <button class="btn btn-xs btn-red"><i class="fa fa-trash"></i> Hapus</button>
-		                            <br>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td>7502017F</td>
-	                            <td>WILLIAM RANDA KASOA</td>
-	                            <td>III</td>
-	                            <td><span class="label label-warning">Pending - Unit Tujuan</span></td>
-	                            <td>DEPUTI MANAJER SISTEM PROTEKSI DAN SCADATEL BIDANG TRANSMISI DAN DISTRIBUSI PT PLN (PERSERO) WILAYAH SULUTTENGGO</td>
-	                            <td>DEPUTI MANAJER PERENCANAAN REGIONAL BIDANG PERENCANAAN DAN PENGENDALIAN REGIONAL SULAWESI DAN NUSA TENGGARA DIVISI PENGEMBANGAN REGIONAL SULAWESI DAN NUSA TENGGARA DIREKTORAT BISNIS REGIONAL SULAWESI DAN NUSA TENGGARA PT PLN (PERSERO) KANTOR PUSAT</td>
-	                            <td>
-		                            <a href="/mrp/edit/id" class="btn btn-xs btn-info"><i class="fa fa-pencil-square-o"></i> Edit</a>
-		                            <button class="btn btn-xs btn-green" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail</button>
-		                            <button class="btn btn-xs btn-red"><i class="fa fa-trash"></i> Hapus</button>
-		                            <br>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td>8306665Z</td>
-	                            <td>MOHAMAD ISWANDI</td>
-	                            <td>I</td>
-	                            <td><span class="label label-success">Cetak SK</span></td>
-	                            <td>ASSISTANT ANALYST PENGEMBANGAN SISTEM MANAJEMEN KINERJA PEGAWAI BIDANG MANAJEMEN KINERJA PEGAWAI DIVISI HUMAN CAPITAL MANAGEMENT SYSTEM DIREKTORAT HUMAN CAPITAL MANAGEMENT PT PLN (PERSERO) KANTOR PUSAT</td>
-	                            <td>ASSISTANT ANALYST PEMASARAN DAN PELAYANAN PELANGGAN SEKSI PELAYANAN PELANGGAN BAGIAN PELAYANAN DAN ADMINISTRASI AREA DEPOK PT PLN (PERSERO) DISTRIBUSI JAWA BARAT</td>
-	                            <td>
-		                            <a href="/mrp/edit/id" class="btn btn-xs btn-info"><i class="fa fa-pencil-square-o"></i> Edit</a>
-		                            <button class="btn btn-xs btn-green" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i> Detail</button>
-		                            <button class="btn btn-xs btn-red"><i class="fa fa-trash"></i> Hapus</button>
-		                            <br>
-	                            </td>
-	                        </tr>
+	                        
 	                    </tbody>
 	                </table>
 				</div>
@@ -235,24 +178,25 @@
 	<script>
         $(function(){
             $('#mrpTable').DataTable({
-                // "processing": true,
-                // "serverSide": true,
-                // "autoWidth": false,
-                // "ajax":{
-                //     "url": "/jadwal/datatables/paginate",
-                //     "dataType": "json",
-                //     "type": "POST",
-                //     "data":{ _token: ""}
-                // },
-                // "columns": [
-                //     { "width": "10%"},
-                //     { "width": "10%"},
-                //     { "width": "5%"},
-                //     { "width": "5%"},
-                //     { "width": "27.5%"},
-                //     { "width": "27.5%"},
-                //     { "orderable": false, "width": "15%"}
-                // ]
+                "processing": true,
+                "serverSide": true,
+                "autoWidth": true,
+                "order": [[ 0, "desc" ]],
+                "ajax":{
+                    "url": "/mrp/datatables/ajax",
+                    "dataType": "json",
+                    "type": "POST",
+                    "data":{ _token: "{{ csrf_token() }}"}
+                },
+                "columns": [
+                    { "data": "created_at" },
+                    { "data": "registry_number" },
+                    { "data": "nama_pegawai" },
+                    { "data": "tipe" },
+                    { "data": "unit_pengusul" },
+                    { "data": "status" },
+                    { "data": "action", "orderable": false}
+                ]
             });
         });
     </script>

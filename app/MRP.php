@@ -26,4 +26,9 @@ class MRP extends Model
     {
     	return $this->belongsTo('App\FormasiJabatan');
     }
+
+    public function personnel_area_pengusul()
+    {
+        return $this->belongsTo('App\PersonnelArea', 'unit_pengusul');
+    }
 }

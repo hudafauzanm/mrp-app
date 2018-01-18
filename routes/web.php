@@ -33,6 +33,7 @@ Route::get('/mutasi/pengajuan/getJabatan', 'MutasiController@getJabatan');
 // sdm
 Route::get('/mrp', 'MRPController@index');
 Route::get('/mrp/edit/{reg_num}', 'MRPController@showEdit');
+Route::post('/mrp/datatables/ajax', 'MRPController@ajaxDatatables');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

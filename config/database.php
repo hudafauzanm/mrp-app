@@ -13,7 +13,7 @@ return [
     | 
     */ 
  
-    'default' => env('DB_CONNECTION', 'mysql'), 
+    'default' => env('DB_CONNECTION', 'sqlsrv'), 
  
     /* 
     |-------------------------------------------------------------------------- 
@@ -75,7 +75,11 @@ return [
             'username' => env('DB_USERNAME', 'forge'), 
             'password' => env('DB_PASSWORD', ''), 
             'charset' => 'utf8', 
-            'prefix' => '', 
+            'prefix' => '',
+            'options'   => array(
+                PDO::ATTR_STRINGIFY_FETCHES => false,
+                PDO::SQLSRV_ATTR_FETCHES_NUMERIC_TYPE => true
+            ),
         ], 
  
     ], 
