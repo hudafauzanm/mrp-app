@@ -111,7 +111,7 @@ use Carbon\Carbon;
 					<!-- panel content -->
 					<div class="panel-body scrollable"  style="height: 580px;">
 						<div class="tab-content transparent ">
-							<div id="meminta" class="tab-pane active">
+							<div id="bursa" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-3">
 										<input class="form-control" type="text" placeholder="Search" id="filter2">
@@ -186,7 +186,7 @@ use Carbon\Carbon;
 								<!-- </div> -->
 							</div>
 
-							<div id="bursa" class="tab-pane">
+							<div id="meminta" class="tab-pane">
 								<div class="row">
 									<div class="col-md-3">
 										<input class="form-control" type="text" placeholder="Search" id="filter2">
