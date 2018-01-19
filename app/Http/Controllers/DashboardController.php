@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pegawai;
+use App\MRP;
 
 class DashboardController extends Controller
 {
@@ -18,7 +19,12 @@ class DashboardController extends Controller
     	
     	if($user->user_role == 1)
     	{
-    		return view('pages.unit.dashboard');
+            $nip = request()->session()->get('nip_operator');
+            $nama = Pegawai::where('nip', $nip)->get();
+            $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray(); 
+            $ajumut = MRP::where('unit_pengusul', auth()->user()->id)->count();
+            $dptmut = MRP::where('status', 1)->where('formasi_jabatan_id', $fj)->count();
+    		return view('pages.unit.dashboard', compact('ajumut', 'dptmut', 'nip', 'nama'));
     	}
     	else if($user->user_role == 2)
     	{

@@ -22,8 +22,10 @@
 		<div class="row">
 			<div class="col-md-6 margin-top-30">
 				<div class="text-center">
+					@foreach ($nama as $name)
 					<h2 class="text-primary weight-600">Selamat Datang {{auth()->user()->nama_pendek}}</h2>
-					<h4 class="text-primary weight-400">Operator: {{request()->session()->get('nip_operator')}}</h4> 
+					<h4 class="text-primary weight-400">Operator: {{$name->nama_pegawai}} - {{$nip}}</h4> 
+					@endforeach
 				</div>
 					
 			</div>
@@ -32,9 +34,9 @@
 				<div class="row margin-top-20">
 					<div class="col-md-6">
 						<div class="box success"><!-- default, danger, warning, info, success -->
-
+							
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
-								<h4>x Pengajuan Mutasi</h4>
+								<h4>{{$ajumut}} Pengajuan Mutasi</h4>
 								<small class="block">periksa tindak lanjut</small>
 								<i class="fa fa-exclamation"></i>
 							</div>
@@ -44,14 +46,13 @@
 									<i class="fa fa-arrow-circle-right"></i> Lihat Mutasi Diajukan
 								</a>
 							</div>
-
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="box info"><!-- default, danger, warning, info, success -->
 
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
-								<h4>y Permintaan Mutasi</h4>
+								<h4>{{$dptmut}} Permintaan Mutasi</h4>
 								<small class="block">berikan respon</small>
 								<i class="fa fa-exclamation"></i>
 							</div>

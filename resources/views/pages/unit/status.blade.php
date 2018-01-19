@@ -55,7 +55,7 @@
 								<td>{{$mrps->pegawai->nama_pegawai}}</td>
 								<td><strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrps->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
 								<td>
-									@if(isset($mrps->formasi_jabatan))
+									@if(isset($mrps->formasi_jabatan_id))
 										<strong>{{$mrps->formasi_jabatan->formasi}}{{$mrps->formasi_jabatan->jabatan}}</strong> {{$mrps->formasi_jabatan->posisi}}
 										<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
 									@else
