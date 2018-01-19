@@ -100,9 +100,9 @@ class MutasiController extends Controller
         if($tipe === '2')
         {
 
-            // $this->validate(request(), [
-            //     'file_dokumen_mutasi' => 'required|mimes:zip,rar|max:10240'
-            // ]);
+            $this->validate(request(), [
+                'file_dokumen_mutasi' => 'required|mimes:zip|max:10240'
+            ]);
 
             $pegawai_id = Pegawai::where('nip', $nip)->first()->id;
 
@@ -132,10 +132,10 @@ class MutasiController extends Controller
 
             $file = request('file_dokumen_mutasi');
             $foldername = $mrp->registry_number.'/';
-            $filename = str_replace('/', '.', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+            $filename = 'pengusul_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
             // dd($foldername, $filename);
             // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
-            $file->move(base_path(). '/public/storage/uploads/dok_asal/'.$foldername, $filename);
+            $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
 
             return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');
         }

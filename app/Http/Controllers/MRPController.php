@@ -28,10 +28,19 @@ class MRPController extends Controller
     public function showDetail()
     {  
         $mrp = MRP::where('registry_number', request('reg_num'))->firstOrFail();
+        $proyeksi = $mrp->proyeksi_jabatan;
         $pegawai = $mrp->pegawai;
+        $pengusul = $mrp->personnel_area_pengusul;
         $sutri = Pegawai::where('nip', $pegawai->nip_sutri)->first();
 
-        return view('pages.sdm.mrp_detail', compact('mrp', 'pegawai', 'sutri'));
+        return view('pages.sdm.mrp_detail', compact('mrp', 'pegawai', 'sutri', 'proyeksi', 'pengusul'));
+    }
+
+    public function downloadDokumen($reg_num, $no_dokumen)
+    {
+        $path = public_path('storage/uploads/').$reg_num.'/'.$no_dokumen.'.zip';
+
+        return response()->download($path);
     }
 
     public function ajaxDatatables(Request $request)
@@ -135,7 +144,7 @@ class MRPController extends Controller
                 '<a href="/mrp/edit/'.$mrp->registry_number.'" class="btn btn-xs btn-info">
                     <i class="fa fa-pencil-square-o"></i> Edit
                 </a>
-                <a class="btn btn-xs btn-green" href="/mrp/detail/'.$mrp->registry_number.'" >
+                <a class="btn btn-xs btn-green" href="/mrp/detail/'.$mrp->registry_number.'" target="_blank">
                     <i class="fa fa-list"></i> Detail
                 </a>
                 <button class="btn btn-xs btn-red delete">

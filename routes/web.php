@@ -35,6 +35,7 @@ Route::get('/mrp', 'MRPController@index');
 Route::get('/mrp/edit/{reg_num}', 'MRPController@showEdit');
 Route::get('/mrp/detail/{reg_num}', 'MRPController@showDetail');
 Route::post('/mrp/datatables/ajax', 'MRPController@ajaxDatatables');
+Route::get('/mrp/download/{reg_num}/{no_dokumen}', 'MRPController@downloadDokumen');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
