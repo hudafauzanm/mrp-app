@@ -7,6 +7,7 @@ use App\Http\Middleware\SDM;
 
 use App\MRP;
 use App\Pegawai;
+use App\PersonnelArea;
 
 class MRPController extends Controller
 {
@@ -22,7 +23,23 @@ class MRPController extends Controller
 
     public function showEdit()
     {
-    	return view('pages.sdm.mrp_edit');
+        $mrp = MRP::where('registry_number', request('reg_num'))->firstOrFail();
+        $all_unit = PersonnelArea::select('id', 'nama')->get()->all();
+        $pengusul = Pegawai::where('nip', $mrp->nip_pengusul)->first();
+        $operator = Pegawai::where('nip', $mrp->nip_operator)->first();
+        $fj_tujuan = $mrp->formasi_jabatan;
+        if ($fj_tujuan)
+        {
+            $unit_tujuan = $fj_tujuan->personnel_area;
+            $formasi = $unit_tujuan->formasi_jabatan;
+            $formasi_selected = $mrp->formasi_jabatan->formasi;
+            $jabatan = $unit_tujuan->formasi_jabatan()->where('formasi', $formasi_selected)->get();
+            $jabatan_selected = $mrp->formasi_jabatan->jabatan;
+        }
+        else
+            $unit_tujuan = NULL;
+
+    	return view('pages.sdm.mrp_edit', compact('mrp', 'fj_tujuan', 'unit_tujuan', 'all_unit', 'pengusul', 'operator', 'formasi', 'jabatan', 'formasi_selected', 'jabatan_selected'));
     }
 
     public function showDetail()
