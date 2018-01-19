@@ -93,5 +93,21 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->personnel_area_id = PersonnelArea::where('user_role', 1)->skip(3)->first()->id;;
         $forjab->save();
 
+        $forjab = new FormasiJabatan;
+        $forjab->id = Uuid::generate();
+        $forjab->kode_olah = 'DITHCM-151665030401.F05';
+        $forjab->legacy_code = '151665030401';
+        $forjab->posisi = 'SUB BIDANG PENGELOLAAN KARIR DAN TALENTA BIDANG PENGELOLAAN KARIR DAN TALENTA II DIVISI PENGEMBANGAN TALENTA DIREKTORAT HUMAN CAPITAL MANAGEMENT PT PLN (PERSERO) KANTOR PUSAT';
+        $forjab->formasi ='Assistant Analyst';
+        $forjab->jabatan ='Pengelolaan Karir';
+        $forjab->jenjang_id ='05';
+        $forjab->jenjang_txt ='Fungsional V';
+        $forjab->pagu =1;
+        $forjab->realisasi =1;
+        $forjab->spfj ='0032.P/DIR/2017';
+        $forjab->status_fj ='';
+        $forjab->personnel_area_id = PersonnelArea::where('username', 'sdm')->first()->id;
+        $forjab->save();
+
     }
 }
