@@ -8,6 +8,7 @@ use App\Http\Middleware\SDM;
 use App\MRP;
 use App\Pegawai;
 use App\PersonnelArea;
+use App\FormasiJabatan;
 
 class MRPController extends Controller
 {
@@ -42,15 +43,51 @@ class MRPController extends Controller
     	return view('pages.sdm.mrp_edit', compact('mrp', 'fj_tujuan', 'unit_tujuan', 'all_unit', 'pengusul', 'operator', 'formasi', 'jabatan', 'formasi_selected', 'jabatan_selected'));
     }
 
+    public function edit()
+    {
+        $mrp = MRP::find(request('mrp_id'));
+        $pegawai = Pegawai::where('nip', request('nip'))->first();
+        $formasi_jabatan_id = FormasiJabatan::where('kode_olah', request('kode_olah'))->first()->id;
+        $data = array_merge(request('mrp'), [
+            'pegawai_id' => $pegawai->id,
+            'formasi_jabatan_id' => $formasi_jabatan_id
+        ]);
+        // dd($data);
+        $mrp->update($data);
+
+        if(request('unit_asal_attachment'))
+        {
+            $file = request('unit_asal_attachment');
+            $foldername = $mrp->registry_number.'/';
+            $filename = 'pengusul_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+            // dd($foldername, $filename);
+            // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+            $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+        }
+
+        if(request('unit_mutasi_attachment'))
+        {
+            $file = request('unit_mutasi_attachment');
+            $foldername = $mrp->registry_number.'/';
+            $filename = 'balasan_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+            // dd($foldername, $filename);
+            // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+            $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+        }
+
+        return redirect('/mrp')->with('success', 'Data berhasil di update');
+    }
+
     public function showDetail()
     {  
         $mrp = MRP::where('registry_number', request('reg_num'))->firstOrFail();
-        $proyeksi = $mrp->proyeksi_jabatan;
+        $proyeksi = $mrp->formasi_jabatan;
         $pegawai = $mrp->pegawai;
         $pengusul = $mrp->personnel_area_pengusul;
         $sutri = Pegawai::where('nip', $pegawai->nip_sutri)->first();
+        $skstg = $mrp->skstg;
 
-        return view('pages.sdm.mrp_detail', compact('mrp', 'pegawai', 'sutri', 'proyeksi', 'pengusul'));
+        return view('pages.sdm.mrp_detail', compact('mrp', 'pegawai', 'sutri', 'proyeksi', 'pengusul', 'skstg'));
     }
 
     public function downloadDokumen($reg_num, $no_dokumen)

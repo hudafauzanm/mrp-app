@@ -19,7 +19,7 @@ class MRP extends Model
 
     public function skstg()
     {
-    	return $this->hasOne('App\SKSTg');
+    	return $this->hasOne('App\SKSTg', 'mrp_id');
     }
 
     public function formasi_jabatan()
@@ -30,5 +30,15 @@ class MRP extends Model
     public function personnel_area_pengusul()
     {
         return $this->belongsTo('App\PersonnelArea', 'unit_pengusul');
+    }
+
+    public function getTglPoolingAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value);
+    }
+
+    public function getTglDokumenMutasiAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value);
     }
 }

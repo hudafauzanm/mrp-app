@@ -15,7 +15,10 @@
 
 	<div id="content" class="padding-20">
 		<div class="row">
-			<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
+			<form action="/mrp/edit" method="post" enctype="multipart/form-data">
+				{{ csrf_field() }}
+				<input type="hidden" name="mrp_id" value="{{ $mrp->id }}">
+
 				<div class="col-md-6" >
 					<!-- data pegawainya -->
 					<div class="panel panel-default">
@@ -29,7 +32,7 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP *</label>
-											<input type="text" name="nip" value="{{ $mrp->pegawai->nip }}" class="form-control required">
+											<input type="text" name="nip" value="{{ $mrp->pegawai->nip }}" class="form-control">
 										</div>
 									</div>
 								</div>
@@ -38,12 +41,12 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Nomor Nota Dinas</label>
-											<input type="email" name="" value="{{ $mrp->no_dokumen_unit_asal }}" class="form-control required">
+											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ $mrp->no_dokumen_unit_asal }}" class="form-control">
 										</div>
 									
 										<div class="col-md-6 col-sm-6">
 											<label>Tanggal Nota Dinas</label>
-											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_unit_asal }}">
+											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_unit_asal]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_unit_asal }}">
 										</div>													
 									</div>
 								</div>
@@ -59,7 +62,7 @@
 											<!-- custom file upload -->
 											<div class="fancy-file-upload fancy-file-primary">
 												<i class="fa fa-upload"></i>
-												<input type="file" class="form-control" name="attachmentMintaPegawai" onchange="jQuery(this).next('input').val(this.value);" />
+												<input type="file" class="form-control" name="unit_asal_attachment" onchange="jQuery(this).next('input').val(this.value);" />
 												<input type="text" class="form-control" placeholder="no file selected" readonly="" />
 												<span class="button">Choose File</span>
 											</div>
@@ -80,7 +83,7 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Jenis Mutasi *</label>
-											<select name="" class="form-control pointer required">
+											<select name="mrp[jenis_mutasi]" class="form-control pointer">
 													<option value="">--- Jenis Mutasi ---</option>
 													@if ($mrp->jenis_mutasi == 'APS')
 														<option value="APS" selected>APS</option>
@@ -99,7 +102,7 @@
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Mutasi *</label>
-											<select name="" class="form-control pointer required">
+											<select name="mrp[mutasi]" class="form-control pointer">
 												<option value="">--- Mutasi ---</option>
 												@if ($mrp->mutasi == 'Rotasi')
 													<option value="Rotasi" selected>Rotasi</option>
@@ -123,7 +126,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Jalur Mutasi</label>
-											<select name="" class="form-control pointer required" id="jalur_mutasi">
+											<select name="mrp[jalur_mutasi]" class="form-control pointer" id="jalur_mutasi">
 												<option value="">--- Jalur Mutasi ---</option>
 												<option value="1">Aktif dari Tugas Belajar</option>
 												<option value="2">Antar Unit</option>
@@ -185,12 +188,12 @@
 										<div class="col-md-12 col-sm-12">
 											<label>Jabatan</label>
 											@if ($unit_tujuan)
-												<select class="form-control select2" name="" id="rekom_jabatan">
+												<select class="form-control select2" name="kode_olah" id="rekom_jabatan">
 												@foreach ($jabatan as $jab)
 													<option value="{{ $jab->id }}" {{ $jabatan_selected == $for->jabatan ? 'selected="selected"' : '' }}>{{ $jab->jabatan }}</option>
 												@endforeach
 											@else
-												<select class="form-control select2" name="" id="rekom_jabatan" disabled>
+												<select class="form-control select2" name="kode_olah" id="rekom_jabatan" disabled>
 											@endif
 												</select>
 											</option>
@@ -202,14 +205,14 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Nomor Dokumen Mutasi</label>
-											<input type="text" name="contact[phone]" value="{{ $mrp->no_dokumen_unit_mutasi }}" class="form-control required">
+											<input type="text" name="mrp[no_dokumen_unit_mutasi]" value="{{ $mrp->no_dokumen_unit_mutasi }}" class="form-control">
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>
 												Tanggal Dokumen Mutasi
 											</label>
 											<!-- date picker -->
-											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_unit_mutasi }}">
+											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_unit_mutasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_unit_mutasi }}">
 										</div>
 									</div>
 								</div>
@@ -225,7 +228,7 @@
 											<!-- custom file upload -->
 											<div class="fancy-file-upload fancy-file-primary">
 												<i class="fa fa-upload"></i>
-												<input type="file" class="form-control" name="attachmentMintaPegawai" onchange="jQuery(this).next('input').val(this.value);" />
+												<input type="file" class="form-control" name="unit_mutasi_attachment" onchange="jQuery(this).next('input').val(this.value);" />
 												<input type="text" class="form-control" placeholder="no file selected" readonly="" />
 												<span class="button">Choose File</span>
 											</div>
@@ -260,12 +263,12 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Pengusul</label>
-											<input type="text" name="contact[phone]" value="{{ $pengusul->nip }}" class="form-control required col-md-6 nip_to_nama" target="#nama_pengusul">
+											<input type="text" name="mrp[nip_pengusul]" value="{{ $pengusul->nip }}" class="form-control required col-md-6 nip_to_nama" target="#nama_pengusul">
 										</div>
 
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Operator</label>
-											<input type="text" name="contact[phone]" value="{{ $operator->nip }}" class="form-control required col-md-6 nip_to_nama" target="#nama_operator">
+											<input type="text" name="mrp[nip_operator]" value="{{ $operator->nip }}" class="form-control required col-md-6 nip_to_nama" target="#nama_operator">
 										</div>
 									</div>
 								</div>
@@ -311,7 +314,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Tipe</label>
-											<select class="form-control">
+											<select class="form-control" name="mrp[tipe]">
 												@if ($mrp->tipe == 1)
 													<option value="1" selected>1</option>
 													<option value="2">2</option>
@@ -334,7 +337,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Status</label>
-											<select class="form-control" id="status">
+											<select class="form-control" name="mrp[status]" id="status">
 												<option value="0">Ditolak</option>
 												<option value="1">Diajukan</option>
 												<option value="2">Proses Evaluasi (SDM)</option>
@@ -356,12 +359,12 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Tanggal Pooling</label>
-											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_pooling }}">
+											<input type="text" class="form-control datepicker" name="mrp[tgl_pooling]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_pooling }}">
 										</div>
 
 										<div class="col-md-6 col-sm-6">
 											<label>Tanggal Dokumen Mutasi</label>
-											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_mutasi }}">
+											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_mutasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_mutasi }}">
 										</div>
 									</div>
 								</div>
@@ -370,7 +373,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Tindak Lanjut</label>
-											<textarea rows="3" name="mrp[alasan_mutasi]" class="form-control" required>{{ $mrp->tindak_lanjut }}</textarea>
+											<textarea rows="3" name="mrp[tindak_lanjut]" class="form-control" required>{{ $mrp->tindak_lanjut }}</textarea>
 										</div>
 									</div>
 								</div>

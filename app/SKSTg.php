@@ -12,6 +12,11 @@ class SKSTg extends Model
     
     public function mrp()
     {
-    	return $this->hasOne('App\MRP');
+    	return $this->hasOne('App\MRP', 'mrp_id');
+    }
+
+    public function getTglAktivasiAttribute($value)
+    {
+    	return \Carbon\Carbon::parse($value);
     }
 }

@@ -92,13 +92,13 @@ use Carbon\Carbon;
 										<td>
 											<ul class="list-unstyled">
 												<li><strong>Tanggal Permintaan:</strong> {{ $mrp->created_at->format("d F Y h:i:s") }}</li>
-												<li><strong>Tanggal Pooling:</strong> {{ $mrp->tanggal_pooling ? $mrp->tanggal_pooling->format("d F Y h:i:s") : '-' }}
+												<li><strong>Tanggal Pooling:</strong> {{ $mrp->tgl_pooling ? $mrp->tgl_pooling->format("d F Y") : '-' }}
 												</li>
-												<li><strong>Tanggal Aktifasi:</strong> {{ $mrp->tanggal_aktifasi ? $mrp->tanggal_aktifasi->format("d F Y h:i:s") : '-' }}
+												<li><strong>Tanggal Aktivasi:</strong> {{ $skstg ? $skstg->tgl_aktivasi->format("d F Y") : '-' }}
 												</li>
 												<li><strong>Jenis Mutasi:</strong> {{ $mrp->jenis_mutasi }}</li>
 												<li><strong>Mutasi:</strong> {{ $mrp->mutasi }}</li>
-												<li><strong>Jalur Mutasi:</strong> {{ $mrp->jalur_mutasi ? $mrp->jalur_mutasi->format("d F Y h:i:s") : '-' }}
+												<li><strong>Jalur Mutasi:</strong> {{ $mrp->jalur_mutasi ? $mrp->jalur_mutasi : '-' }}
 												</li>
 											</ul>
 										</td>
