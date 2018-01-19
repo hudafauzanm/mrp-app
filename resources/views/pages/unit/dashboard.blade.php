@@ -20,12 +20,10 @@
 					All pannels should have an unique ID or the panel collapse status will not be stored!
 		-->
 		<div class="row">
-			<div class="col-md-6 margin-top-80">
-
+			<div class="col-md-6 margin-top-30">
 				<div class="text-center">
-					
 					<h2 class="text-primary weight-600">Selamat Datang {{auth()->user()->nama_pendek}}</h2>
-					<h4 class="text-primary weight-600">Operator: {{request()->session()->get('nip_operator')}}</h4> 
+					<h4 class="text-primary weight-400">Operator: {{request()->session()->get('nip_operator')}}</h4> 
 				</div>
 					
 			</div>
@@ -33,16 +31,33 @@
 			<div class="col-md-6">
 				<div class="row margin-top-20">
 					<div class="col-md-6">
-						<div class="box info"><!-- default, danger, warning, info, success -->
+						<div class="box success"><!-- default, danger, warning, info, success -->
 
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
-								<h4>5 Permintaan Mutasi</h4>
-								<small class="block">belum anda respon</small>
+								<h4>x Pengajuan Mutasi</h4>
+								<small class="block">periksa tindak lanjut</small>
 								<i class="fa fa-exclamation"></i>
 							</div>
 
 							<div class="box-body text-center">
-								<a href="http://localhost:10000/status?act=res" class="btn btn-3d btn-leaf margin-top-6">
+								<a href="http://localhost:8000/status?act=req" class="btn btn-3d btn-leaf margin-top-6">
+									<i class="fa fa-arrow-circle-right"></i> Lihat Mutasi Diajukan
+								</a>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="box info"><!-- default, danger, warning, info, success -->
+
+							<div class="box-title"><!-- add .noborder class if box-body is removed -->
+								<h4>y Permintaan Mutasi</h4>
+								<small class="block">berikan respon</small>
+								<i class="fa fa-exclamation"></i>
+							</div>
+
+							<div class="box-body text-center">
+								<a href="http://localhost:8000/status?act=res" class="btn btn-3d btn-leaf margin-top-6">
 									<i class="fa fa-arrow-circle-left"></i> Lihat Mutasi Diterima
 								</a>
 							</div>
@@ -50,30 +65,13 @@
 						</div>
 					</div>
 
-					<div class="col-md-6">
-						<div class="box success"><!-- default, danger, warning, info, success -->
-
-							<div class="box-title"><!-- add .noborder class if box-body is removed -->
-								<h4>$10M Profit</h4>
-								<small class="block">1,2 M Profit for this month</small>
-								<i class="fa fa-bar-chart-o"></i>
-							</div>
-
-							<div class="box-body text-center">
-								<span class="sparkline" data-plugin-options='{"type":"bar","barColor":"#ffffff","height":"35px","width":"100%","zeroAxis":"false","barSpacing":"2"}'>
-									331,265,456,411,367,319,402,312,300,312,283,384,372,269,402,319,416,355,416,371,423,259,361,312,269,402,327
-								</span>
-							</div>
-
-						</div>
-					</div>
 				</div>
 				
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<div id="panelHelp" class="panel panel-default" style="overflow-y: scroll">
 					<div class="panel-heading">
 						<span class="elipsis"><!-- panel title -->
@@ -93,17 +91,17 @@
 									<li class="active">
 										<a href="#tab_a" data-toggle="tab">
 											<span class="badge badge-warning pull-right">3</span>
-											Stacked Tab 1
+											Meminta Pegawai
 										</a>
 									</li>
 									<li>
 										<a href="#tab_b" data-toggle="tab">
-											Stacked Tab 2
+											Membursakan Pegawai
 										</a>
 									</li>
 									<li>
 										<a href="#tab_c" data-toggle="tab">
-											Stacked Tab 3
+											Membursakan Jabatan
 										</a>
 									</li>
 								</ul>

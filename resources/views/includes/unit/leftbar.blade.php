@@ -5,6 +5,10 @@
 				<i class="main-icon fa fa-home"></i> <span>Beranda</span>
 			</a>
 		</li>
+	</ul>
+	
+	<h3>Form Mutasi</h3>
+	<ul class="nav nav-list">
 		<li>
 			<a href="/mutasi/pengajuan?tipe=1">
 				<i class="main-icon fa fa-plus-circle"></i> <span>Meminta Pegawai</span>
@@ -25,9 +29,14 @@
 	<h3>Status Proses Mutasi</h3>
 	<ul class="nav nav-list">
 		<li>
-			<a href="/status?act=req">
+			<a href="#">
+				<i class="fa fa-menu-arrow pull-right"></i>
 				<i class="main-icon fa fa-arrow-circle-right"></i> <span>Mutasi Diajukan</span>
 			</a>
+			<ul><!-- submenus -->
+				<li><a href="/status?act=req"><span>Pengajuan Pegawai</span></a></li>
+				<li><a href="/status?act=reqjab"><span>Pengajuan Jabatan</span></a></li>
+			</ul>
 		</li>
 
 		<li>
