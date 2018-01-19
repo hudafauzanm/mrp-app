@@ -40,8 +40,8 @@ use Carbon\Carbon;
 									<li><strong>Grade:</strong> {{ $pegawai->ps_group }} </li>
 									<li><strong>Subgroup:</strong> {{ $pegawai->employee_subgroup }}</li>
 									<li><strong>Jenjang:</strong> {{ $pegawai->formasi_jabatan->jenjang_txt }} ({{  $pegawai->formasi_jabatan->jenjang_id }})</li>
-									<li><strong>Sisa Masa Kerja:</strong> {{ $pegawai->time_diff(\Carbon\Carbon::now('Asia/Jakarta'), \Carbon\Carbon::parse($pegawai->end_date)) }}</li>
-									<li><strong>Lama & Kali Jenjang:</strong> {{ $pegawai->time_diff(\Carbon\Carbon::parse($pegawai->start_date), \Carbon\Carbon::now('Asia/Jakarta')) }}, {{ $pegawai->kali_jenjang }}x</li>
+									<li><strong>Sisa Masa Kerja:</strong> {{ $pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->end_date)) }}</li>
+									<li><strong>Lama & Kali Jenjang:</strong> {{ $pegawai->time_diff(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta')) }}, {{ $pegawai->kali_jenjang }}x</li>
 									{{-- <li><strong>Diklat Penjenjangan:</strong> EE III</li> --}}
 								</ul>
 							</div>
@@ -64,13 +64,13 @@ use Carbon\Carbon;
 								<h4><strong>Download</strong> Dokumen</h4>
 								<ul class="list-unstyled ">
 									@if ($mrp->no_dokumen_unit_asal)
-										<button type="button" class="btn btn-sm btn-3d btn-blue">{{ $mrp->no_dokumen_unit_asal }}</button>
+										<a href="/mrp/download/{{ $mrp->registry_number.'/pengusul_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal) }}" class="btn btn-sm btn-3d btn-blue">{{ $mrp->no_dokumen_unit_asal }}</a>
 									@endif
 									@if ($mrp->no_dokumen_unit_mutasi)
-										<button type="button" class="btn btn-sm btn-3d btn-info">{{ $mrp->no_dokumen_unit_mutasi }}</button>
+										<a href="/mrp/download/{{ $mrp->registry_number.'/unit_mutasi'.str_replace('/', '_', $mrp->no_dokumen_unit_mutasi) }}" class="btn btn-sm btn-3d btn-info">{{ $mrp->no_dokumen_unit_mutasi }}</a>
 									@endif
 									@if ($mrp->sk_stg_id)
-										<button type="button" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_proses_sk }}</button>
+										<a href="/mrp/download/{{ $mrp->registry_number.'/skstg_'.str_replace('/', '_', $mrp->skstg->no_dokumen_proses_sk) }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_proses_sk }}</a>
 									@endif
 								</ul>
 							</div>
@@ -91,24 +91,53 @@ use Carbon\Carbon;
 									<tr>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>Tanggal Aktifasi:</strong> 1 September 2017</li>
-												<li><strong>Tanggal Permintaan:</strong> 30 Februari 2018</li>
-												<li><strong>Tanggal Pooling:</strong> 2 Maret 2018</li>
-												<li><strong>Jenis Mutasi:</strong> Dinas</li>
-												<li><strong>Mutasi:</strong> Rotasi</li>
-												<li><strong>Jalur Mutasi:</strong> Intern Divisi Antar Bidang</li>
+												<li><strong>Tanggal Permintaan:</strong> {{ $mrp->created_at->format("d F Y h:i:s") }}</li>
+												<li><strong>Tanggal Pooling:</strong> {{ $mrp->tanggal_pooling ? $mrp->tanggal_pooling->format("d F Y h:i:s") : '-' }}
+												</li>
+												<li><strong>Tanggal Aktifasi:</strong> {{ $mrp->tanggal_aktifasi ? $mrp->tanggal_aktifasi->format("d F Y h:i:s") : '-' }}
+												</li>
+												<li><strong>Jenis Mutasi:</strong> {{ $mrp->jenis_mutasi }}</li>
+												<li><strong>Mutasi:</strong> {{ $mrp->mutasi }}</li>
+												<li><strong>Jalur Mutasi:</strong> {{ $mrp->jalur_mutasi ? $mrp->jalur_mutasi->format("d F Y h:i:s") : '-' }}
+												</li>
 											</ul>
 										</td>
 										<td>
-											<div><strong>ANALYST MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI (PLT DEPUTI MANAJER MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI)</strong></div>
-											<small>SUB BIDANG MANAJEMEN PROGRAM DAN SUMBER DAYA TEKNOLOGI INFORMASI BIDANG PENGEMBANGAN APLIKASI TEKNOLOGI INFORMASI DIVISI SISTEM DAN TEKNOLOGI INFORMASI DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</small>
+											<div><strong>{{ $proyeksi ? $proyeksi->formasi.' '.$proyeksi->jabatan : '-' }}</strong></div>
+											<small>{{ $proyeksi ? $proyeksi->posisi.' '.$proyeksi->personnel_area->nama : '' }}</small>
 										</td>
 										<td>
-											<div><strong>ANALYST STRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI (PLT DEPUTI MANAJERSTRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI)</strong></div>
-											<small>SUB BIDANG STRATEGI DAN ARSITEKTUR TEKNOLOGI INFORMASI BIDANG PERENCANAAN DAN ARSITEKTUR TEKNOLOGI INFORMASI DIVISI SISTEM DAN TEKNOLOGI INFORMASI DIREKTORAT KEUANGAN PT PLN (PERSERO) KANTOR PUSAT</small>
+											<div><strong>{{ $pegawai->formasi_jabatan->formasi.' '.$pegawai->formasi_jabatan->jabatan }}</strong></div>
+											<small>{{ $pegawai->formasi_jabatan->posisi.' '.$pegawai->formasi_jabatan->personnel_area->nama }}</small>
 										</td>
-										<td>1</td>
-										<td>Pending</td>
+										<td>{{ $mrp->tipe }}</td>
+										<td>
+											@if($mrp->status == 0)
+												<span class="label label-danger">Ditolak</span>
+											@elseif($mrp->status == 1)
+												<span class="label label-primary">Diajukan</span>
+											@elseif($mrp->status == 2)
+												<span class="label label-warning">Proses Evaluasi (SDM)</span>
+											@elseif($mrp->status == 3)
+												<span class="label label-info">Proses Evaluasi (Karir II)</span>
+											@elseif($mrp->status == 4)
+												<span class="label label-info">Proses Evaluasi (Karir II)</span>
+											@elseif($mrp->status == 5)
+												<span class="label label-success">Proses SK</span>
+											@elseif($mrp->status == 6)
+												<span class="label label-success">SK Tercetak</span>
+											@elseif($mrp->status == 7)
+												<span class="label label-success">SK Pending</span>
+											@elseif($mrp->status == 8)
+												<span class="label label-success">Clear</span>
+											@elseif($mrp->status == 99)
+												<span class="label label-success">Ditolak (SDM Pusat)</span>
+											@elseif($mrp->status == 98)
+												<span class="label label-success">Ditolak (Karir II Pusat)</span>
+											@else											   
+												<span class="label label-danger">???</span>
+											@endif
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -121,11 +150,9 @@ use Carbon\Carbon;
 							<div class="col-xs-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>Kantor Pusat PLN</strong><br>
-									Jalan Trunojoyo Blok M – I No 135<br>
-									Kebayoran Baru, Jakarta 12160, Indonesia<br>
-									Telp : 021 – 7251234, 7261122<br>
-									fax : 021 – 7221330
+									<strong>{{ $pengusul->nama }}</strong><br>
+									{{ $pengusul->alamat }}<br>
+									{{ $pengusul->kota }} {{ $pengusul->provinsi }}<br>
 								</address>
 
 							</div>
