@@ -43,6 +43,9 @@
 	                            <th width="20%">Posisi & Unit Tujuan</th>
 	                            <th width="10%">Status</th>
 	                            <th width="10%">Lihat Detail</th>
+	                            @if(request('act')=='res')
+	                            <th width="10%">Tindak Lanjut</th>
+	                            @endif
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -62,9 +65,40 @@
 										Perlu saran
 									@endif
 								</td>
-								<td>{{$mrps->status}}</td>
+								<td>
+									@if($mrps->status == 0)
+										<span class="label label-danger">Ditolak</span>
+									@elseif($mrps->status == 1)
+										<span class="label label-primary">Diajukan</span>
+									@elseif($mrps->status == 2)
+										<span class="label label-warning">Proses Evaluasi (SDM)</span>
+									@elseif($mrps->status == 3)
+										<span class="label label-info">Proses Evaluasi (Karir II)</span>
+									@elseif($mrps->status == 4)
+										<span class="label label-info">Proses Evaluasi (Karir II)</span>
+									@elseif($mrps->status == 5)
+										<span class="label label-success">Proses SK</span>
+									@elseif($mrps->status == 6)
+										<span class="label label-success">SK Tercetak</span>
+									@elseif($mrps->status == 7)
+										<span class="label label-success">SK Pending</span>
+									@elseif($mrps->status == 8)
+										<span class="label label-success">Clear</span>
+									@elseif($mrps->status == 99)
+										<span class="label label-success">Ditolak (SDM Pusat)</span>
+									@elseif($mrps->status == 98)
+										<span class="label label-success">Ditolak (Karir II Pusat)</span>
+									@else											   
+										<span class="label label-danger">???</span>
+									@endif
+								</td>
 								<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
-								
+								@if(request('act')=='res')
+	                            <td class="text-center">
+	                            	<button type="button" class="btn btn-success btn-3d btn-sm">Approved</button>
+									<button type="button" class="btn btn-danger btn-3d btn-sm">Decline</button>
+	                            </td>
+	                            @endif
 							</tr>
 							
 							@endforeach

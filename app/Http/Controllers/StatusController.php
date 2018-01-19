@@ -28,7 +28,9 @@ class StatusController extends Controller
         else if(request('act')=='res')
         {
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
-            $mrp = MRP::where('formasi_jabatan_id', $fj);
+            
+            $mrp = MRP::where('formasi_jabatan_id', $fj)->get();
+            // dd($mrp);
         }
     	return view('pages.unit.status',compact('mrp'));
     }

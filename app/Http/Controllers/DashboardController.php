@@ -32,7 +32,8 @@ class DashboardController extends Controller
     	}
     	else if($user->user_role == 3)
     	{
-    		return view('pages.sdm.dashboard');
+            $mrp = MRP::where('status', 2)->get();
+    		return view('pages.sdm.dashboard', compact('mrp'));
     	}
     }
 }

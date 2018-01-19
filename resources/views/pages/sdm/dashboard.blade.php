@@ -1,3 +1,7 @@
+<?php 
+use Carbon\Carbon;
+
+?>
 @extends('layouts.master')
 
 @section('title', 'MRP Dashboard')
@@ -17,6 +21,7 @@
 @endsection
 
 @section('content')
+
 	<div id="content" class="padding-20">
 		<div class="row">
 			<div class="col-md-6">
@@ -133,6 +138,7 @@
 										</tr>
 									</thead>
 									<tbody>
+										@foreach ($mrp as $mrps) 
 										<tr>
 											<td class="text-center">
 												<a href="#" class="btn btn-3d btn-sm btn-primary">
@@ -140,15 +146,22 @@
 													<span>Download</span>
 												</a>
 											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td class="foo-cell">{{ $mrps->registry_number }}</td>
+											<td>{{$mrps->pegawai->nip}}</td>
+											<td>{{$mrps->pegawai->nama_pegawai}}</td>
+											<td>{{$mrps->pegawai->ps_group}}</td>
+											<td><strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrps->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+											<td>
+												@if(isset($mrps->formasi_jabatan_id))
+													<strong>{{$mrps->formasi_jabatan->formasi}}{{$mrps->formasi_jabatan->jabatan}}</strong> {{$mrps->formasi_jabatan->posisi}}
+													<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
+												@else
+													Perlu saran
+												@endif
+											</td>
+											<td>{{$mrps->pegawai->time_diff(Carbon::parse($mrps->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+											<td>{{$mrps->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrps->pegawai->end_date))}}</td>
+											<td>{{$mrps->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrps->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
@@ -167,217 +180,7 @@
 												</button>
 											</td>
 										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-											
+										@endforeach	
 									</tbody>
 								</table>
 								<!-- </div> -->
