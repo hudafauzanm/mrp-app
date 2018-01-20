@@ -37,12 +37,12 @@ use Carbon\Carbon;
 					</div>
 
 					<!-- panel content -->
-					<div class="panel-body scrollable" style="height: 580px;">
+					<div class="panel-body" style="overflow-y: auto" id="monitoring_body">
 						<div class="tab-content transparent">
 							<div class="row">
-									<div class=" col-md-4"> 
-										<input type="text" class="form-control rangepicker" value="2015-01-01 - 2016-12-31" data-format="yyyy-mm-dd" data-from="2015-01-01" data-to="2016-12-31">
-									</div>
+								<div class="col-md-4 pull-right"> 
+									<input type="text" class="form-control rangepicker" value="2015-01-01 - 2016-12-31" data-format="yyyy-mm-dd" data-from="2015-01-01" data-to="2016-12-31">
+								</div>
 							</div>		
 							<div id="ttab1_nobg" class="tab-pane active">
 
@@ -109,9 +109,10 @@ use Carbon\Carbon;
 					</div>
 
 					<!-- panel content -->
-					<div class="panel-body scrollable"  style="height: 580px;">
+					<div class="panel-body" style="overflow-y: auto" id="verifikasi_body">
 						<div class="tab-content transparent ">
-							<div id="bursa" class="tab-pane active">
+							<div id="meminta" class="tab-pane active">
+								@if ($mrp_1->count())
 								<div class="row">
 									<div class="col-md-3">
 										<input class="form-control" type="text" placeholder="Search" id="filter2">
@@ -138,7 +139,7 @@ use Carbon\Carbon;
 										</tr>
 									</thead>
 									<tbody>
-										@foreach ($mrp as $mrps) 
+										@foreach ($mrp_1 as $mrp)
 										<tr>
 											<td class="text-center">
 												<a href="#" class="btn btn-3d btn-sm btn-primary">
@@ -146,22 +147,22 @@ use Carbon\Carbon;
 													<span>Download</span>
 												</a>
 											</td>
-											<td class="foo-cell">{{ $mrps->registry_number }}</td>
-											<td>{{$mrps->pegawai->nip}}</td>
-											<td>{{$mrps->pegawai->nama_pegawai}}</td>
-											<td>{{$mrps->pegawai->ps_group}}</td>
-											<td><strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrps->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+											<td class="foo-cell">{{ $mrp->registry_number }}</td>
+											<td>{{$mrp->pegawai->nip}}</td>
+											<td>{{$mrp->pegawai->nama_pegawai}}</td>
+											<td>{{$mrp->pegawai->ps_group}}</td>
+											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
 											<td>
-												@if(isset($mrps->formasi_jabatan_id))
-													<strong>{{$mrps->formasi_jabatan->formasi}}{{$mrps->formasi_jabatan->jabatan}}</strong> {{$mrps->formasi_jabatan->posisi}}
-													<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
+												@if(isset($mrp->formasi_jabatan_id))
+													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
+													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
 												@else
 													Perlu saran
 												@endif
 											</td>
-											<td>{{$mrps->pegawai->time_diff(Carbon::parse($mrps->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
-											<td>{{$mrps->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrps->pegawai->end_date))}}</td>
-											<td>{{$mrps->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrps->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
+											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
+											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
@@ -183,10 +184,13 @@ use Carbon\Carbon;
 										@endforeach	
 									</tbody>
 								</table>
-								<!-- </div> -->
+								@else
+									<h3 class="text-center">Tidak ada data</h3>
+								@endif
 							</div>
 
-							<div id="meminta" class="tab-pane">
+							<div id="bursa" class="tab-pane">
+								@if($mrp_2->count())
 								<div class="row">
 									<div class="col-md-3">
 										<input class="form-control" type="text" placeholder="Search" id="filter2">
@@ -212,6 +216,7 @@ use Carbon\Carbon;
 										</tr>
 									</thead>
 									<tbody>
+										@foreach ($mrp_2 as $mrp)
 										<tr>
 											<td class="text-center">
 												<a href="#" class="btn btn-3d btn-sm btn-primary">
@@ -219,15 +224,22 @@ use Carbon\Carbon;
 													<span>Download</span>
 												</a>
 											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>akjalgjlkajlka</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td class="foo-cell">{{ $mrp->registry_number }}</td>
+											<td>{{$mrp->pegawai->nip}}</td>
+											<td>{{$mrp->pegawai->nama_pegawai}}</td>
+											<td>{{$mrp->pegawai->ps_group}}</td>
+											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+											<td>
+												@if(isset($mrp->formasi_jabatan_id))
+													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
+													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
+												@else
+													Perlu saran
+												@endif
+											</td>
+											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
+											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
@@ -246,48 +258,16 @@ use Carbon\Carbon;
 												</button>
 											</td>
 										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-											
+										@endforeach	
 									</tbody>
 								</table>
-								<!-- </div> -->
+								@else
+									<h3 class="text-center">Tidak ada data</h3>
+								@endif
 							</div>
 
 							<div id="request" class="tab-pane">
+								@if ($mrp_3->count())
 								<div class="row">
 									<div class="col-md-3">
 										<input class="form-control" type="text" placeholder="Search" id="filter2">
@@ -313,6 +293,7 @@ use Carbon\Carbon;
 										</tr>
 									</thead>
 									<tbody>
+										@foreach ($mrp_3 as $mrp)
 										<tr>
 											<td class="text-center">
 												<a href="#" class="btn btn-3d btn-sm btn-primary">
@@ -320,15 +301,22 @@ use Carbon\Carbon;
 													<span>Download</span>
 												</a>
 											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
+											<td class="foo-cell">{{ $mrp->registry_number }}</td>
+											<td>{{$mrp->pegawai->nip}}</td>
+											<td>{{$mrp->pegawai->nama_pegawai}}</td>
+											<td>{{$mrp->pegawai->ps_group}}</td>
+											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+											<td>
+												@if(isset($mrp->formasi_jabatan_id))
+													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
+													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
+												@else
+													Perlu saran
+												@endif
+											</td>
+											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
+											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
@@ -347,218 +335,12 @@ use Carbon\Carbon;
 												</button>
 											</td>
 										</tr>
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
-											<td class="foo-cell">8510412Z.Rotasi.152019030430_151666040601</td>
-											<td>85107001</td>
-											<td>DESTA AGUNG SWANDITA</td>
-											<td>SPE02</td>
-											<td>SUPERVISOR PELAKSANA PENGADAAN</td>
-											<td>ASSISTANT ANALYST ASURANSI</td>
-											<td>7</td>
-											<td>7</td>
-											<td>SEKTOR PEMBANGKITAN ASAM-ASAM PT PLN (PERSERO) WILAYAH KALIMANTAN SELATAN DAN KALIMANTAN TENGAH</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-											
+										@endforeach	
 									</tbody>
 								</table>
-								<!-- </div> -->
+								@else
+									<h3 class="text-center">Tidak ada data</h3>
+								@endif
 							</div>
 						</div>
 					</div>
@@ -857,11 +639,15 @@ use Carbon\Carbon;
 	</script>
 	<script>
 		$(document).ready(function() { 
-		     $('.tabselect').click(function (e) {
-		           e.preventDefault(); //prevents re-size from happening before tab shown
-		           $(this).tab('show'); //show tab panel 
-		           $('.footable').trigger('footable_resize'); //fire re-size of footable
-		      });
+			$('.tabselect').click(function (e) {
+				e.preventDefault(); //prevents re-size from happening before tab shown
+				$(this).tab('show'); //show tab panel 
+				$('.footable').trigger('footable_resize'); //fire re-size of footable
+			});
+
+			var height = $(document).height();
+			$("#monitoring_body").css('height', height*0.45);
+			$("#verifikasi_body").css('height', height*0.45);
 		}); 
 	</script>
 @endsection

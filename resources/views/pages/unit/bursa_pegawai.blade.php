@@ -188,7 +188,7 @@
 												<input type="text" class="form-control" placeholder="no file selected" readonly="" />
 												<span class="button">Pilih Dokumen</span>
 											</div>
-											<small class="text-muted block">File Maksimal 10 MB (zip/rar)</small>
+											<small class="text-muted block">File Maksimal 10 MB (pdf)</small>
 										</div>
 									</div>
 								</div>

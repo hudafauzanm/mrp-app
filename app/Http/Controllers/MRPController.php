@@ -92,7 +92,7 @@ class MRPController extends Controller
 
     public function downloadDokumen($reg_num, $no_dokumen)
     {
-        $path = public_path('storage/uploads/').$reg_num.'/'.$no_dokumen.'.zip';
+        $path = public_path('storage/uploads/').$reg_num.'/'.$no_dokumen.'.pdf';
 
         return response()->download($path);
     }

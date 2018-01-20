@@ -101,7 +101,7 @@ class MutasiController extends Controller
         {
 
             $this->validate(request(), [
-                'file_dokumen_mutasi' => 'required|mimes:zip|max:10240'
+                'file_dokumen_mutasi' => 'required|mimes:pdf|max:10240'
             ]);
 
             $pegawai_id = Pegawai::where('nip', $nip)->first()->id;

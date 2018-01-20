@@ -43,11 +43,13 @@
 					</span>
 				</a>
 				<ul class="dropdown-menu hold-on-click">
-					<li><!-- settings -->
-						<a href="/profil"><i class="fa fa-cogs"></i> Edit Profil</a>
-					</li>
+					@if (auth()->user()->user_role === 1)
+						<li><!-- settings -->
+							<a href="/profil"><i class="fa fa-cogs"></i> Edit Profil</a>
+						</li>
 
-					<li class="divider"></li>
+						<li class="divider"></li>
+					@endif
 				
 					<li><!-- logout -->
 						<a href="/logout"><i class="fa fa-power-off"></i> Log Out</a>
