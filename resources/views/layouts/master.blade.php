@@ -26,17 +26,6 @@
 		<!-- WRAPPER -->
 		<div id="wrapper" class="clearfix">
 			<aside id="aside">
-				<!--
-					Always open:
-					<li class="active alays-open">
-
-					LABELS:
-						<span class="label label-danger pull-right">1</span>
-						<span class="label label-default pull-right">1</span>
-						<span class="label label-warning pull-right">1</span>
-						<span class="label label-success pull-right">1</span>
-						<span class="label label-info pull-right">1</span>
-				-->
 				@yield('leftbar')
 
 				<span id="asidebg"><!-- aside fixed background --></span>

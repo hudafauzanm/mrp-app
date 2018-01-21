@@ -42,7 +42,7 @@
 							</div>
 
 							<div class="box-body text-center">
-								<a href="http://localhost:8000/status?act=req" class="btn btn-3d btn-leaf margin-top-6">
+								<a href="/status?act=req" class="btn btn-3d btn-leaf margin-top-6">
 									<i class="fa fa-arrow-circle-right"></i> Lihat Mutasi Diajukan
 								</a>
 							</div>
@@ -58,7 +58,7 @@
 							</div>
 
 							<div class="box-body text-center">
-								<a href="http://localhost:8000/status?act=res" class="btn btn-3d btn-leaf margin-top-6">
+								<a href="/status?act=res" class="btn btn-3d btn-leaf margin-top-6">
 									<i class="fa fa-arrow-circle-left"></i> Lihat Mutasi Diterima
 								</a>
 							</div>

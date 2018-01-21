@@ -44,7 +44,7 @@
 						<label class="label">Username</label>
 						<label class="input">
 							<i class="icon-append fa fa-user"></i>
-							<input type="text" name="username">
+							<input type="text" name="username" required="">
 							<span class="tooltip tooltip-top-right">Username</span>
 						</label>
 					</section>
@@ -53,7 +53,7 @@
 						<label class="label">Password</label>
 						<label class="input">
 							<i class="icon-append fa fa-lock"></i>
-							<input type="password" name="password">
+							<input type="password" name="password" required="">
 							<b class="tooltip tooltip-top-right">Password</b>
 						</label>
 					</section>
@@ -62,7 +62,7 @@
 						<label class="label">NIP</label>
 						<label class="input">
 							<i class="icon-append fa fa-user"></i>
-							<input type="text" name="nip">
+							<input type="text" name="nip" required="">
 							<span class="tooltip tooltip-top-right">Masukkan NIP Anda</span>
 						</label>
 					</section>

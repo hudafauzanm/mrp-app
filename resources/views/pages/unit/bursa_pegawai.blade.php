@@ -14,7 +14,11 @@
 	</header>
 	<!-- /page title -->
 
+
+
 	<div id="content" class="padding-20" >
+		@include('includes.validation_errors')
+		
 		<div class="row">
 			<form action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
 				<div class="col-md-6">
@@ -40,7 +44,7 @@
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Nama Pegawai</label>
-											<input type="text" id="nama_pegawai" value="" class="form-control" disabled>
+											<input type="text" name="dis_nama" id="nama_pegawai" value="{{ old('dis_nama') }}" class="form-control" disabled>
 										</div>
 									</div>
 								</div>
@@ -49,7 +53,7 @@
 									<div class="form-group">
 						                <div class="col-md-12 col-sm-12">
 						                    <label>Personel Area</label>
-											<input type="text" id="personnel_area" value="" class="form-control" disabled>
+											<input type="text" name="dis_pa" id="personnel_area" value="{{ old('dis_pa') }}" class="form-control" disabled>
 										</div>
 									</div>
 								</div>
@@ -58,7 +62,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Formasi Jabatan</label>
-											<textarea type="text" rows="2" id="formasi_jabatan" value="" class="form-control" disabled></textarea>
+											<textarea type="text" name="dis_fj" rows="2" id="formasi_jabatan" class="form-control" disabled>{{ old('dis_fj') }}</textarea>
 										</div>
 									</div>
 								</div>
@@ -67,7 +71,7 @@
 									<div class="form-group">
 						                <div class="col-md-12 col-sm-12">
 						                    <label>Pada</label>
-											<textarea type="text" id="posisi" value="" class="form-control" disabled></textarea>
+											<textarea type="text" name="dis_pada" id="posisi" value="" class="form-control" disabled>{{ old('dis_pada') }}</textarea>
 										</div>
 									</div>
 								</div>
@@ -77,11 +81,11 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Masa Kerja <small class="text-muted">(di Jabatan Terakhir)</small></label>
-											<input type="text" id="masa_kerja" value="" class="form-control" disabled>
+											<input type="text" name="dis_mk" id="masa_kerja" value="{{ old('dis_mk') }}" class="form-control" disabled>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Sisa Masa Kerja</label>
-											<input type="text" id="sisa_kerja" value="" class="form-control" disabled>
+											<input type="text" name="dis_sisa" id="sisa_kerja" value="{{ old('dis_sisa') }}" class="form-control" disabled>
 										</div>
 									</div>
 								</div>
@@ -103,11 +107,11 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Pengusul*</label>
-											<input type="text" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp["nip_pengusul"]') }}" class="form-control required" autocomplete="off" required>
+											<input type="text" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp.nip_pengusul') }}" class="form-control required" autocomplete="off" required>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Nama Pengusul</label>
-											<input type="text" id="nama_pengusul" value="" class="form-control" disabled>
+											<input type="text" name="dis_pengusul" id="nama_pengusul" value="{{ old('dis_pengusul') }}" class="form-control" disabled>
 										</div>
 									</div>
 								</div>
@@ -116,7 +120,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Alasan Memutasi *</label>
-											<textarea rows="3" name="mrp[alasan_mutasi]" value="{{ old('mrp["alasan_mutasi"]]') }}" class="form-control" placeholder="" required></textarea>
+											<textarea rows="3" name="mrp[alasan_mutasi]" class="form-control" placeholder="" required>{{ old('mrp.alasan_mutasi') }}</textarea>
 										</div>
 									</div>
 								</div>
@@ -138,9 +142,9 @@
 											<label>Jenis Mutasi *</label>
 											<select name="mrp[jenis_mutasi]" class="form-control required" required>
 												<option>--- Pilih ---</option>
-												<option value="Dinas">Dinas</option>
-												<option value="APS">APS</option>
-												<option value="Non-dinas">Non-dinas</option>
+												<option value="Dinas" {{ old('mrp.jenis_mutasi') == 'Dinas' ? 'selected="selected"' : "" }}>Dinas</option>
+												<option value="APS" {{ old('mrp.jenis_mutasi') == 'APS' ? 'selected="selected"' : '' }}>APS</option>
+												<option value="Non-dinas" {{ old('mrp.jenis_mutasi') == 'Non-dinas' ? 'selected="selected"' : "" }}>Non-dinas</option>
 											</select>
 										</div>
 
@@ -148,9 +152,9 @@
 											<label>Tipe *</label>
 											<select name="mrp[mutasi]" class="form-control required" required>
 												<option>--- Pilih ---</option>
-												<option value="Rotasi">Rotasi</option>
-												<option value="Promosi">Promosi</option>
-												<option value="Demosi">Demosi</option>
+												<option value="Rotasi" {{ old('mrp.mutasi') == 'Rotasi' ? 'selected="selected"' : "" }}>Rotasi</option>
+												<option value="Promosi" {{ old('mrp.mutasi') == 'Promosi' ? 'selected="selected"' : "" }}>Promosi</option>
+												<option value="Demosi" {{ old('mrp.mutasi') == 'Demosi' ? 'selected="selected"' : "" }}>Demosi</option>
 											</select>
 										</div>
 									</div>
@@ -160,7 +164,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>No. Dokumen Mutasi *</label>
-											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp["no_dokumen_unit_asal"]') }}" class="form-control required" required>
+											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp.no_dokumen_unit_asal') }}" class="form-control required" required>
 										</div>
 									</div>
 								</div>
@@ -169,7 +173,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Tanggal Dokumen Mutasi *</label>
-											<input type="text" name="mrp[tgl_dokumen_unit_asal]" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" required>
+											<input type="text" name="mrp[tgl_dokumen_unit_asal]" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('mrp.tgl_dokumen_unit_asal') }}" required>
 										</div>
 									</div>
 								</div>
@@ -257,7 +261,7 @@
 										<label>Enthusiastic For Challenge *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[enthusiastic]" value="{{ old('nilai["enthusiastic"]') }}" min="0" max="100" class="form-control required rating_number" required target="#rating1" placeholder="0-100">
+										<input type="number" name="nilai[enthusiastic]" value="{{ old('nilai.enthusiastic') }}" min="0" max="100" class="form-control required rating_number" required target="#rating1" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100" id="rating1"><!-- rating-0 ... rating-5 --></div>
@@ -270,7 +274,7 @@
 										<label>Creative and Innovative *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[creative]" value="{{ old('nilai["creative"]') }}" min="0" max="100" class="form-control required rating_number" required target="#rating2" placeholder="0-100">
+										<input type="number" name="nilai[creative]" value="{{ old('nilai.creative') }}" min="0" max="100" class="form-control required rating_number" required target="#rating2" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100 " id="rating2"><!-- rating-0 ... rating-5 --></div>
@@ -283,7 +287,7 @@
 										<label>Building Business Partnership *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[building]" min="0" max="100" value="{{ old('nilai["building"]') }}" class="form-control required rating_number" required target="#rating3" placeholder="0-100">
+										<input type="number" name="nilai[building]" min="0" max="100" value="{{ old('nilai.building') }}" class="form-control required rating_number" required target="#rating3" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100 " id="rating3"><!-- rating-0 ... rating-5 --></div>
@@ -296,7 +300,7 @@
 										<label>Strategic Orientation *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[strategic]" min="0" max="100" value="{{ old('nilai["strategic"]') }}" class="form-control required rating_number" required target="#rating4" placeholder="0-100">
+										<input type="number" name="nilai[strategic]" min="0" max="100" value="{{ old('nilai.strategic') }}" class="form-control required rating_number" required target="#rating4" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100 " id="rating4"><!-- rating-0 ... rating-5 --></div>
@@ -309,7 +313,7 @@
 										<label>Customer Focus Oriented *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[customer]" min="0" max="100" value="{{ old('nilai["customer"]') }}" class="form-control required rating_number" required target="#rating5" placeholder="0-100">
+										<input type="number" name="nilai[customer]" min="0" max="100" value="{{ old('nilai.customer') }}" class="form-control required rating_number" required target="#rating5" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100 " id="rating5"><!-- rating-0 ... rating-5 --></div>
@@ -322,7 +326,7 @@
 										<label>Driving Execution *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[driving]" min="0" max="100" value="{{ old('nilai["driving"]') }}" class="form-control required rating_number" required target="#rating6" placeholder="0-100">
+										<input type="number" name="nilai[driving]" min="0" max="100" value="{{ old('nilai.driving') }}" class="form-control required rating_number" required target="#rating6" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100 " id="rating6"><!-- rating-0 ... rating-5 --></div>
@@ -335,7 +339,7 @@
 										<label>Visionary Leadership *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[visionary]" min="0" max="100" value="{{ old('nilai["visionary"]') }}" class="form-control required rating_number" required target="#rating7" placeholder="0-100">
+										<input type="number" name="nilai[visionary]" min="0" max="100" value="{{ old('nilai.visionary') }}" class="form-control required rating_number" required target="#rating7" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100" id="rating7"><!-- rating-0 ... rating-5 --></div>
@@ -348,7 +352,7 @@
 										<label>Empowering / Developing Others *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[empowering]" min="0" max="100" value="{{ old('nilai["empowering"]') }}" class="form-control required rating_number" required target="#rating8" placeholder="0-100">
+										<input type="number" name="nilai[empowering]" min="0" max="100" value="{{ old('nilai.empowering') }}" class="form-control required rating_number" required target="#rating8" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100" id="rating8"><!-- rating-0 ... rating-5 --></div>
@@ -364,7 +368,7 @@
 										<label>Komunikasi *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[komunikasi]" min="0" max="100" value="{{ old('nilai["komunikasi"]') }}" class="form-control required rating_number" required target="#rating9" placeholder="0-100">
+										<input type="number" name="nilai[komunikasi]" min="0" max="100" value="{{ old('nilai.komunikasi') }}" class="form-control required rating_number" required target="#rating9" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100" id="rating9"><!-- rating-0 ... rating-5 --></div>
@@ -377,7 +381,7 @@
 										<label>Team Work *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[team_work]" min="0" max="100" value="{{ old('nilai["team_work"]') }}" class="form-control required rating_number" required target="#rating10" placeholder="0-100">
+										<input type="number" name="nilai[team_work]" min="0" max="100" value="{{ old('nilai.team_work') }}" class="form-control required rating_number" required target="#rating10" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100" id="rating10"><!-- rating-0 ... rating-5 --></div>
@@ -390,7 +394,7 @@
 										<label>Bahasa Indonesia *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[bahasa_1_nilai]" min="0" max="100" value="{{ old('nilai["bahasa_1_nilai"]') }}" class="form-control required rating_number" required target="#rating11" placeholder="0-100">
+										<input type="number" name="nilai[bahasa_1_nilai]" min="0" max="100" value="{{ old('nilai.bahasa_1_nilai') }}" class="form-control required rating_number" required target="#rating11" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100" id="rating11"><!-- rating-0 ... rating-5 --></div>
@@ -403,7 +407,7 @@
 										<label>Bahasa Inggris *</label>
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[bahasa_2_nilai]" min="0" max="100" value="{{ old('nilai["bahasa_2_nilai"]') }}" class="form-control required rating_number" required target="#rating12" placeholder="0-100">
+										<input type="number" name="nilai[bahasa_2_nilai]" min="0" max="100" value="{{ old('nilai.bahasa_2_nilai') }}" class="form-control required rating_number" required target="#rating12" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100" id="rating12"><!-- rating-0 ... rating-5 --></div>
@@ -413,10 +417,10 @@
 							<div class="row">
 								<div class="form-group">
 									<div class="col-md-5 col-sm-5">
-										<input type="text" name="nilai[bahasa_3]" id="bahasa_3" min="0" max="100" value="{{ old('nilai["bahasa_3"]') }}" class="form-control" placeholder="Bahasa .... (opsional)">
+										<input type="text" name="nilai[bahasa_3]" id="bahasa_3" min="0" max="100" value="{{ old('nilai.bahasa_3') }}" class="form-control" placeholder="Bahasa .... (opsional)">
 									</div>
 									<div class="col-md-3 col-sm-3">
-										<input type="number" name="nilai[bahasa_3_nilai]" min="0" max="100" value="{{ old('nilai["bahasa_3_nilai"]') }}" class="form-control rating_number" target="#rating13" placeholder="0-100">
+										<input type="number" name="nilai[bahasa_3_nilai]" min="0" max="100" value="{{ old('nilai.bahasa_3_nilai') }}" class="form-control rating_number" target="#rating13" placeholder="0-100">
 									</div>
 									<div class="col-md-4 col-sm-4">
 										<div class="rating rating-0 size-13 width-100" id="rating13"><!-- rating-0 ... rating-5 --></div>
@@ -430,8 +434,8 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>Internal Readiness *</label>
-										<input type="text" name="nilai[kesehatan]" value="{{ old('nilai["kesehatan"]') }}" class="form-control required col-md-6" placeholder="Kesehatan" required>
-										<input type="text" name="nilai[career_willingness]" value="{{ old('nilai["career_willingness"]') }}" class="form-control required col-md-6" placeholder="Career Willingness">
+										<input type="text" name="nilai[kesehatan]" value="{{ old('nilai.kesehatan') }}" class="form-control required col-md-6" placeholder="Kesehatan" required>
+										<input type="text" name="nilai[career_willingness]" value="{{ old('nilai.career_willingness') }}" class="form-control required col-md-6" placeholder="Career Willingness">
 									</div>
 								</div>
 							</div>
@@ -439,7 +443,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>External Readiness *</label>
-										<input type="text" name="nilai[external_rediness]" value="{{ old('nilai["external_rediness"]') }}" class="form-control required col-md-6" placeholder="From family, friends, etc" required>
+										<input type="text" name="nilai[external_rediness]" value="{{ old('nilai.external_rediness') }}" class="form-control required col-md-6" placeholder="From family, friends, etc" required>
 									</div>
 								</div>
 							</div>
@@ -448,15 +452,15 @@
 									<div class="form-group">
 										<label>Hubungan dengan Sesama *</label>
 										<label class="radio">
-											<input type="radio" name="hds" value="Sangat Bagus" checked="checked">
+											<input type="radio" name="hds" value="Sangat Bagus" {{ old('hds') == 'Sangat Bagus' ? 'selected="selected"' : '' }}>
 											<i></i> Sangat Bagus
 										</label>
 
 										<label class="radio">
-											<input type="radio" name="hds" value="Bermasalah">
+											<input type="radio" name="hds" value="Bermasalah" {{ old('hds') == 'Bermasalah' ? 'selected="selected"' : '' }}>
 											<i></i> Bermasalah
 										</label>
-										<input type="text" name="nilai[hubungan_sesama]" value="{{ old('nilai["hubungan_sesama"]') }}" class="form-control required col-md-6" placeholder="Deskripsi" required>
+										<input type="text" name="nilai[hubungan_sesama]" value="{{ old('nilai.hubungan_sesama') }}" class="form-control required col-md-6" placeholder="Deskripsi" required>
 									</div>
 								</div>
 							</div>
