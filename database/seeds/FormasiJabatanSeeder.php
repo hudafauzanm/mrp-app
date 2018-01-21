@@ -58,7 +58,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->realisasi =1;
         $forjab->spfj ='0037.P/DIR/2016';
         $forjab->status_fj ='';
-        $forjab->personnel_area_id = PersonnelArea::where('user_role', 1)->skip(2)->first()->id;
+        $forjab->personnel_area_id = PersonnelArea::where('nama_pendek', 'DISJABAR')->first()->id;
         $forjab->save();
 
         $forjab = new FormasiJabatan;
@@ -74,7 +74,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->realisasi =1;
         $forjab->spfj ='0037.P/DIR/2016';
         $forjab->status_fj ='';
-        $forjab->personnel_area_id = PersonnelArea::where('user_role', 1)->skip(2)->first()->id;;
+        $forjab->personnel_area_id = PersonnelArea::where('nama_pendek', 'DISJABAR')->first()->id;
         $forjab->save();
 
         $forjab = new FormasiJabatan;

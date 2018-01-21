@@ -40,7 +40,7 @@ class PersonnelAreaSeeder extends Seeder
         $user->nama_pendek = 'DISJABAR';
         $user->username = 'disjabar';
         $user->password = bcrypt('disjabar');
-        $user->direktorat_id = Direktorat::skip(3)->first()->id;
+        $user->direktorat_id = Direktorat::where('nama_pendek', 'DITREG-JBB')->first()->id;
         $user->user_role = 1;
         $user->save();
 

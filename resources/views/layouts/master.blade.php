@@ -18,6 +18,7 @@
 			<!-- THEME CSS -->
 			<link href="/assets/css/essentials.css" rel="stylesheet" type="text/css" />
 			<link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
+			<link href="/assets/css/notifications.css" rel="stylesheet" type="text/css" />
 			<link href="/assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
 			<!-- CORE CSS -->
 		@show

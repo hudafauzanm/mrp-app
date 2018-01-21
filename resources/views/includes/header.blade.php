@@ -12,24 +12,104 @@
 		<!-- OPTIONS LIST -->
 		<ul class="nav pull-right">
 			<li class="dropdown pull-left">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<i class="fa fa-bell-o" style="margin-top: 12px; font-size: 150%; "></i>
-					<span>7</span>
-				</a>
-				<ul class="dropdown-menu hold-on-click" style="max-height: 250px; overflow-y: scroll;">
-					<li><!-- my calendar -->
-						<a href="calendar.html"><i class="fa fa-calendar"></i> Permintaan rotasi baru dari unit OPAIDSOAJFSN</a>
-					</li>
-					<li><!-- my inbox -->
-						<a href="#"><i class="fa fa-envelope"></i> Inbox
-							<span class="pull-right label label-default">0</span>
-						</a>
-					</li>
-					<li><!-- settings -->
-						<a href="page-user-profile.html"><i class="fa fa-cogs"></i> Settings</a>
-					</li>
-				</ul>
-			</li>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-bell" style="margin-top: 12px; font-size: 150%; "></i>
+				<span>7</span>
+			</a>
+			<ul class="dropdown-menu notify-drop">
+            	<div class="notify-drop-title">
+            		<div class="row">
+            			<div class="col-md-6 col-sm-6 col-xs-6">Belum Dibaca (<b>2</b>)</div>
+            			<div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="Tandai telah dibaca semua"><i class="fa fa-check"></i></a></div>
+            		</div>
+            	</div>
+	            <!-- end notify title -->
+	            <!-- notify content -->
+	            <div class="drop-content">
+	            	<li>
+	            		<div class="col-md-3 col-sm-3 col-xs-3">
+	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+	            		</div>
+	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
+	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
+	            			<br>
+		            		<p class="time">baru saja</p>
+	            		</div>
+	            		<div class="col-md-2 col-sm-2 col-xs-2">
+	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
+	            		</div>
+	            	</li>
+	            	<li>
+	            		<div class="col-md-3 col-sm-3 col-xs-3">
+	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+	            		</div>
+	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
+	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
+	            			<br>
+		            		<p class="time">baru saja</p>
+	            		</div>
+	            		<div class="col-md-2 col-sm-2 col-xs-2">
+	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
+	            		</div>
+	            	</li>
+	            	<li>
+	            		<div class="col-md-3 col-sm-3 col-xs-3">
+	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+	            		</div>
+	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
+	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
+	            			<br>
+		            		<p class="time">baru saja</p>
+	            		</div>
+	            		<div class="col-md-2 col-sm-2 col-xs-2">
+	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
+	            		</div>
+	            	</li>
+	            	<li>
+	            		<div class="col-md-3 col-sm-3 col-xs-3">
+	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+	            		</div>
+	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
+	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
+	            			<br>
+		            		<p class="time">baru saja</p>
+	            		</div>
+	            		<div class="col-md-2 col-sm-2 col-xs-2">
+	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
+	            		</div>
+	            	</li>
+	            	<li>
+	            		<div class="col-md-3 col-sm-3 col-xs-3">
+	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+	            		</div>
+	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
+	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
+	            			<br>
+		            		<p class="time">baru saja</p>
+	            		</div>
+	            		<div class="col-md-2 col-sm-2 col-xs-2">
+	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
+	            		</div>
+	            	</li>
+	            	<li>
+	            		<div class="col-md-3 col-sm-3 col-xs-3">
+	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+	            		</div>
+	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
+	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
+	            			<br>
+		            		<p class="time">baru saja</p>
+	            		</div>
+	            		<div class="col-md-2 col-sm-2 col-xs-2">
+	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
+	            		</div>
+	            	</li>
+	            </div>
+	            <div class="notify-drop-footer text-center">
+	            	<a href=""><i class="fa fa-eye"></i> Lihat semua notifikasi</a>
+	            </div>
+	          </ul>
+	        </li>
 
 
 			<!-- USER OPTIONS -->
