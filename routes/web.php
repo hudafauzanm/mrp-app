@@ -44,3 +44,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profil','ProfilController@index');
 Route::post('/profil/edit','ProfilController@input');
 Route::get('/profil/getKota','ProfilController@getKota');
+
+//evaluasi
+Route::get('/dashboard/dataevaluasi', 'DashboardController@detail');

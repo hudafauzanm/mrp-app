@@ -1,3 +1,8 @@
+<?php 
+use Carbon\Carbon;
+
+?>
+
 @extends('layouts.master')
 
 @section('title', 'MRP Dashboard')
@@ -10,6 +15,10 @@
 	@parent
 
 	<link href="/assets/css/layout-datatables.css" rel="stylesheet" type="text/css" />
+	<!-- FOOTABLE TABLE -->
+	<link href="/assets/plugins/footable/css/footable.core.min.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/plugins/footable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/css/sdm_dashboard.css" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -44,63 +53,116 @@
 
 			<!-- panel content -->
 			<div class="panel-body" >
+				<button type="button" class="btn btn-default"><a href="/dashboard/dataevaluasi">Export All Tabels</a></button>
 
-				<table class="table table-striped table-bordered table-hover" id="sample_3" id="sample_1">
+				<table class="footable" id="footable1" data-filter="#filter1">
 					<thead>
 						<tr>
-							<th>
+							<!-- <th style="text-align: center;">
+								 Download
+							</th> -->
+							<th style="text-align: center;">
 								 No. Surat Nota Dinas
 							</th>
-							<th>
+							<th style="text-align: center;">
 								 Registry Number
 							</th>
-							<th class="hidden-xs">
+							<th class="hidden-xs" style="text-align: center;">
 								 NIP
 							</th>
-							<th class="hidden-xs">
+							<th class="hidden-xs" style="text-align: center;">
 								 Nama Pegawai
 							</th>
 							<th class="hidden-xs" style="text-align: center;" width="200">
 								 Tindak Lanjut
 							</th>
+											<th data-type="numeric" data-hide = "all" class="">PS GROUP<br></th>
+											<!-- <th data-type="numeric" data-hide = "" class="">Nama</th> -->
+											<th data-type="numeric" data-hide = "all" class="">Jabatan Lama</th>
+											<th data-type="numeric" data-hide = "all" class="">Jabatan Baru</th>
+											<th data-type="numeric" data-hide = "all" class="">Evaluasi dan Tindak Lanjut</th>
+											<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
+											<th data-type="numeric" data-hide = "all" class="">Masa Kerja di Jabatan Terakhir</th>
+											<th data-type="numeric" data-hide = "all" class="">Mutasi</th>
+											<th data-type="numeric" data-hide = "all" class="">Diklat Penjenjangan Terakhir</th>
+											<th data-type="numeric" data-hide = "all" class="">No Sertifikat</th>
+											<th data-type="numeric" data-hide = "all" class="">Jalur Mutasi</th>
+											<th data-type="numeric" data-hide = "all" class="">PERDIR Formasi Jabatan untuk Unit yang dituju</th>
+											<th data-type="numeric" data-hide = "all" class="">Letak Domisili dengan Unit Mutasi</th>
+											<th data-type="numeric" data-hide = "all" class="">Suami/Istri</th>
+											<th data-type="numeric" data-hide = "all" class="">Tindaklanjut</th>
+											<th data-type="numeric" data-hide = "all" class="">Tanggal Aktivasi</th>
+											<!-- <th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th> -->
 						</tr>
 					</thead>
 					<tbody>
+						@foreach ($mrp_e as $mrp)
 						<tr>
+							<!-- <td style="text-align: center;">
+								 <button type="button" class="btn btn-info" style="height: 35px;">Download</button>
+							</td> -->
 							<td>
-								 01205/SDM.03.01/KSPI/2017-R<br>Konfirmasi Manajemen SPI
+								 {{$mrp->no_dokumen_unit_asal}}
 							</td>
 							<td>
-								 6693102Z.R.1010101010
+								 {{$mrp->registry_number}}
 							</td>
 							<td>
-								 6693102Z
+								 {{$mrp->pegawai->nip}}
 							</td>
 							<td>
-								 DIRGO WAHANTO
+								 {{$mrp->pegawai->nama_pegawai}}
 							</td>
 							<td style="text-align: center;">
 								 <button type="button" class="btn btn-success" style="height: 35px;">Approve</button> <button type="button" class="btn btn-danger" style="height: 35px">Reject</button>
 							</td>
-						</tr>
-						<tr>
+							<td>{{$mrp->pegawai->ps_group}}</td>
+							<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+							<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
 							<td>
-								 Trident
+								 
 							</td>
 							<td>
-								 Internet Explorer 5.0
+								 ... Tahun
 							</td>
 							<td>
-								 Win 95+
+								 s.d. .... Tahun
 							</td>
 							<td>
-								 5
+								 {{$mrp->jenis_mutasi}} ( {{$mrp->mutasi}} )
 							</td>
 							<td>
-								 C
+								 jenis diklat
+							</td>
+							<td>
+								 no sertif
+
+							</td>
+							<td>
+								 {{ $mrp->jalur_mutasi }}
+							</td>
+							<td>
+								 0146.P/DIR/2016
+							</td>
+							<td>
+								 {{ $mrp->pegawai->status_domisili}} <!-- status domisili -->
+							</td>
+							<td>
+								@if(isset($mrp->pegawai->nip_sutri))
+									<strong>PLN</strong> ; {{$mrp->pegawai->nama_pegawai}} ; {{$mrp->pegawai->nama_pegawai}}
+								@else
+									Non-PLN ; N/A ; N/A
+								@endif
+							</td>
+							<td>
+								 {{ $mrp->tindak_lanjut}}
+							</td>
+							<td>
+								 Tanggal Aktivasi
 							</td>
 						</tr>
 						
+						@endforeach
 					</tbody>
 				</table>
 
@@ -261,6 +323,7 @@
 										function fnFormatDetails(oTable, nTr) {
 											var aData = oTable.fnGetData(nTr);
 											var sOut = '<table>';
+
 											sOut += '<tr><th><strong>PS Group</strong></th> <td valign="top" width="5">' + ':' + '</td> <td>' + 'OPT04' + '</td></tr>';
 											sOut += '<tr><th width="250" valign="top"><strong>Jabatan Lama</strong></th> <td valign="top" width="5">' + ':' + '</td> <td>' + 'DEPUTY GROUP AUDIT REGIONAL 11C <br> pada GROUP HEAD AUDIT REGIONAL 11 INSPEKTORAT AUDIT <br> REGIONAL JAWA BAGIAN TIMUR <br>SATUAN PENGAWASAN INTERN PT PLN (PERSERO) KANTOR PUSAT' + '</td></tr>';
 											sOut += '<tr><td valign="top"><strong>Jabatan Baru</strong></td><td valign="top" width="5">' + ':' + '</td><td>' + 'DEPUTY GROUP AUDIT REGIONAL 12A <br> pada GROUP HEAD AUDIT REGIONAL 12 INSPEKTORAT AUDIT <br> REGIONAL JAWA BAGIAN TIMUR DAN BALI <br> SATUAN PENGAWASAN INTERN PT PLN (PERSERO) KANTOR PUSAT' + '</td></tr>';
@@ -442,4 +505,84 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
+			loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
+				loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
+					loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
+						loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
+							loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
+								loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
+								
+									// demo js script
+									loadScript("assets/js/view/demo.graphs.flot.js");
+
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		loadScript(plugin_path + "footable/dist/footable.min.js", function(){
+			loadScript(plugin_path + "footable/dist/footable.sort.min.js", function(){
+				loadScript(plugin_path + "footable/dist/footable.paginate.min.js", function(){ 
+					loadScript(plugin_path + "footable/dist/footable.filter.min.js", function(){ 
+
+						// footable
+						var $ftable = jQuery('.footable');
+
+
+						/** 01. FOOTABLE INIT
+						******************************************* **/
+						$ftable.footable({
+						});
+
+
+						/** 01. PER PAGE SWITCH
+						******************************************* **/
+						// jQuery('#change-page-size').change(function (e) {
+						// 	e.preventDefault();
+						// 	var pageSize = jQuery(this).val();
+						// 	$ftable.data('page-size', pageSize);
+						// 	$ftable.trigger('footable_initialized');
+						// });
+
+						jQuery('#change-nav-size').change(function (e) {
+							e.preventDefault();
+							var navSize = jQuery(this).val();
+							$ftable.data('limit-navigation', navSize);
+							$ftable.trigger('footable_initialized');
+						});
+
+
+						/** 02. BOOTSTRAP 3.x PAGINATION FIX
+						******************************************* **/
+						jQuery("div.pagination").each(function() {
+							jQuery("div.pagination ul").addClass('pagination');
+							jQuery("div.pagination").removeClass('pagination');
+						});
+					});
+				});
+			});
+		});
+	});
+		
+	</script>
+	<script>
+		$(document).ready(function() { 
+			$('.tabselect').click(function (e) {
+				e.preventDefault(); //prevents re-size from happening before tab shown
+				$(this).tab('show'); //show tab panel 
+				$('.footable').trigger('footable_resize'); //fire re-size of footable
+			});
+
+			var height = $(document).height();
+			$("#monitoring_body").css('height', height*0.45);
+			$("#verifikasi_body").css('height', height*0.45);
+		}); 
+	</script> 
 @endsection

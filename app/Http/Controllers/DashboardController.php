@@ -28,7 +28,9 @@ class DashboardController extends Controller
     	}
     	else if($user->user_role == 2)
     	{
-    		return view('pages.karir2.dashboard');
+            $mrp_e = MRP::where('status', 3)->get();
+    		return view('pages.karir2.dashboard', compact('mrp_e'));
+
     	}
     	else if($user->user_role == 3)
     	{
@@ -37,5 +39,10 @@ class DashboardController extends Controller
             $mrp_3 = MRP::where('status', 2)->where('tipe', 3)->get();
     		return view('pages.sdm.dashboard', compact('mrp_1', 'mrp_2', 'mrp_3'));
     	}
+    }
+
+    public function detail()
+    {
+        return view('pages.karir2.dataevaluasi');
     }
 }
