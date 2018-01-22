@@ -273,6 +273,7 @@ use Carbon\Carbon;
 										<input class="form-control" type="text" placeholder="Search" id="filter2">
 									</div>
 								</div>
+								
 								<br>
 								<table class="footable" id="footable3" data-filter="#filter3">
 									<thead>
