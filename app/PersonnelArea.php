@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class PersonnelArea extends Authenticatable
 {
+    use Notifiable;
+
     protected $table = 'personnel_area';
     protected $primaryKey = 'id';
     public $incrementing = false;

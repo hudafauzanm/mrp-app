@@ -30,6 +30,10 @@ Route::post('/mutasi/pengajuan/submit_form', 'MutasiController@submitForm');
 Route::get('/mutasi/pengajuan/getFormasi', 'MutasiController@getFormasi'); 
 Route::get('/mutasi/pengajuan/getJabatan', 'MutasiController@getJabatan');
 
+Route::post('/notifications/read', 'NotificationController@read');
+Route::post('/notifications/readAll', 'NotificationController@readAll');
+Route::post('/notifications/delete/{id}', 'NotificationController@delete');
+
 // sdm
 Route::get('/mrp', 'MRPController@index');
 Route::get('/mrp/edit/{reg_num}', 'MRPController@showEdit');

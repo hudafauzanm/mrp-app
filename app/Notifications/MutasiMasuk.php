@@ -7,18 +7,22 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use App\PersonnelArea;
+
 class MutasiMasuk extends Notification
 {
     use Queueable;
+
+    protected $data;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -29,7 +33,7 @@ class MutasiMasuk extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -56,6 +60,16 @@ class MutasiMasuk extends Notification
     {
         return [
             //
+        ];
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'personnel_area_id' => $this->data['user_id'],
+            'nama_personnel_area' => $this->data['nama_pendek'],
+            'mrp_id' => $this->data['mrp_id'],
+            'nip_pegawai' => $this->data['nip_pegawai'],
         ];
     }
 }

@@ -1,3 +1,7 @@
+@php
+	$notif_count = auth()->user()->unreadNotifications->count();
+@endphp
+
 <header id="header">
 	<!-- Mobile Button -->
 	<button id="mobileMenuBtn"></button>
@@ -14,96 +18,40 @@
 			<li class="dropdown pull-left">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 				<i class="fa fa-bell" style="margin-top: 12px; font-size: 150%; "></i>
-				<span>7</span>
 			</a>
 			<ul class="dropdown-menu notify-drop">
             	<div class="notify-drop-title">
             		<div class="row">
-            			<div class="col-md-6 col-sm-6 col-xs-6">Belum Dibaca (<b>2</b>)</div>
-            			<div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="Tandai telah dibaca semua"><i class="fa fa-check"></i></a></div>
+            			<div class="col-md-6 col-sm-6 col-xs-6">Belum Dibaca (<b id="notif_count">{{ auth()->user()->unreadNotifications->count() }}</b>)</div>
+            			@if ($notif_count)
+            				<div class="col-md-6 col-sm-6 col-xs-6 text-right"><button onclick=" event.stopPropagation();" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="Tandai telah dibaca semua" id="markAllRead"><i class="fa fa-check"></i></button></div>
+            			@endif
             		</div>
             	</div>
 	            <!-- end notify title -->
 	            <!-- notify content -->
 	            <div class="drop-content">
-	            	<li>
-	            		<div class="col-md-3 col-sm-3 col-xs-3">
-	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+	            	@if ($notif_count)
+		            	@foreach (auth()->user()->unreadNotifications as $notification)
+			            	<li id="notif_{{ $notification->id }}">
+			            		<div class="col-md-3 col-sm-3 col-xs-3">
+			            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+			            		</div>
+			            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
+			            			<a href="" style="padding-left: 0">Permintaan mutasi baru dari {{ $notification->data['nama_personnel_area'] }}</a>
+			            			<br>
+				            		<p class="time">{{ $notification->created_at->diffForHumans() }}</p>
+			            		</div>
+			            		<div class="col-md-2 col-sm-2 col-xs-2">
+			            			<button onclick=" event.stopPropagation();" class="markRead" title="Tandai sudah dibaca" target="{{ $notification->id }}"><i class="fa fa-dot-circle-o"></i></button>
+			            		</div>
+			            	</li>
+		            	@endforeach
+	            	@else
+	            		<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+	            			<p>Tidak ada notifikasi baru</p>
 	            		</div>
-	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
-	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
-	            			<br>
-		            		<p class="time">baru saja</p>
-	            		</div>
-	            		<div class="col-md-2 col-sm-2 col-xs-2">
-	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
-	            		</div>
-	            	</li>
-	            	<li>
-	            		<div class="col-md-3 col-sm-3 col-xs-3">
-	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-	            		</div>
-	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
-	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
-	            			<br>
-		            		<p class="time">baru saja</p>
-	            		</div>
-	            		<div class="col-md-2 col-sm-2 col-xs-2">
-	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
-	            		</div>
-	            	</li>
-	            	<li>
-	            		<div class="col-md-3 col-sm-3 col-xs-3">
-	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-	            		</div>
-	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
-	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
-	            			<br>
-		            		<p class="time">baru saja</p>
-	            		</div>
-	            		<div class="col-md-2 col-sm-2 col-xs-2">
-	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
-	            		</div>
-	            	</li>
-	            	<li>
-	            		<div class="col-md-3 col-sm-3 col-xs-3">
-	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-	            		</div>
-	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
-	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
-	            			<br>
-		            		<p class="time">baru saja</p>
-	            		</div>
-	            		<div class="col-md-2 col-sm-2 col-xs-2">
-	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
-	            		</div>
-	            	</li>
-	            	<li>
-	            		<div class="col-md-3 col-sm-3 col-xs-3">
-	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-	            		</div>
-	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
-	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
-	            			<br>
-		            		<p class="time">baru saja</p>
-	            		</div>
-	            		<div class="col-md-2 col-sm-2 col-xs-2">
-	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
-	            		</div>
-	            	</li>
-	            	<li>
-	            		<div class="col-md-3 col-sm-3 col-xs-3">
-	            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-	            		</div>
-	            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
-	            			<a href="" style="padding-left: 0">Permintaan mutasi baru - Rotasi 5115100006</a>
-	            			<br>
-		            		<p class="time">baru saja</p>
-	            		</div>
-	            		<div class="col-md-2 col-sm-2 col-xs-2">
-	            			<a href="" title="Tandai sudah dibaca"><i class="fa fa-dot-circle-o"></i></a></a>
-	            		</div>
-	            	</li>
+	            	@endif
 	            </div>
 	            <div class="notify-drop-footer text-center">
 	            	<a href=""><i class="fa fa-eye"></i> Lihat semua notifikasi</a>

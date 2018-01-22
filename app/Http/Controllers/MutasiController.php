@@ -13,6 +13,8 @@ use App\PenilaianPegawai;
 use App\PersonnelArea;
 use App\FormasiJabatan;
 
+use App\Notifications\MutasiMasuk;
+
 class MutasiController extends Controller
 {
     public function __construct()
@@ -99,6 +101,7 @@ class MutasiController extends Controller
 
         if($tipe === '2')
         {
+            $user = auth()->user();
 
             $this->validate(request(), [
                 'file_dokumen_mutasi' => 'required|mimes:pdf|max:10240'
@@ -116,7 +119,7 @@ class MutasiController extends Controller
                 'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.\Carbon\Carbon::now('Asia/Jakarta'),
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
-                'unit_pengusul' => auth()->user()->id,
+                'unit_pengusul' => $user->id,
                 'pegawai_id' => $pegawai_id,
                 'formasi_jabatan_id' => $id_proyeksi,
             );
@@ -136,6 +139,15 @@ class MutasiController extends Controller
             // dd($foldername, $filename);
             // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
             $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+
+            $user_sdm = PersonnelArea::where('user_role', 3)->first();
+            $data = array(
+                'user_id' => $user->id,
+                'nama_pendek' => $user->nama_pendek,
+                'mrp_id' => $mrp->id->string, 
+                'nip_pegawai' => $nip
+            );
+            $user_sdm->notify(new MutasiMasuk($data));
 
             return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');
         }
