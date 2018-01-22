@@ -165,7 +165,7 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai" id="nilaiBtn">
 													<i class="fa fa-check-circle"></i>
 													<span>Nilai</span>
 												</button>														
@@ -242,9 +242,9 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" value="{{$mrp->pegawai->nip}}">
 													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
+													<span>Nilai {{$mrp->pegawai->nama_pegawai}}</span>
 												</button>														
 											</td>
 											<td class="text-center">
@@ -319,7 +319,7 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai">
 													<i class="fa fa-check-circle"></i>
 													<span>Nilai</span>
 												</button>														
@@ -384,37 +384,40 @@ use Carbon\Carbon;
 												</tr>
 											</thead>
 											<tbody>
+
 												<tr>
 													<td>Enthusiasthic for Challenge</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													
+													<td><div class="rating rating-0 size-13 width-100" id="rating1"><!-- rating-0 ... rating-5 --></div></td>
+													
 												</tr>
 												<tr>
 													<td>Creative & Innovative</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating2"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Building Business Partnership</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating3"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Strategic Orientation</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating4"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Customer Focus Oriented</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating5"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Driving Execution</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating6"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Visionary Leadership</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating7"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Empowering / Developing Others</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating8"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 											</tbody>
 										</table>
@@ -447,23 +450,23 @@ use Carbon\Carbon;
 											<tbody>
 												<tr>
 													<td>Komunikasi</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating9"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>KH2</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating10"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Bahasa Inggris</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating11"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Bahasa Mandarin</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating12"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 												<tr>
 													<td>Bahasa Jawa</td>
-													<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+													<td><div class="rating rating-0 size-13 width-100" id="rating13"><!-- rating-0 ... rating-5 --></div></td>
 												</tr>
 											</tbody>
 										</table>
@@ -560,7 +563,7 @@ use Carbon\Carbon;
 				<!-- Modal Footer -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-					<button type="button" class="btn btn-primary toastr-notify data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button>
+					<button type="button" class="btn btn-primary toastr-notify" data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button>
 				</div>
 			</div>
 		</div>
@@ -637,6 +640,36 @@ use Carbon\Carbon;
 	});
 		
 	</script>
+
+	<script>
+		$(".nilaiBtn").click(function(){
+			var nip = $(this).val();
+
+			$.ajax({
+				'url': '/dashboard/get_pegawai_nilai',
+				'type': 'GET',
+				'data': {
+					'pegawai_id': nip
+				},
+				'dataType': 'json',
+				error: function(){
+
+				},
+				success: function(data){
+					if(data)
+					{
+						for(var prop in data) {
+							var angka = Math.ceil(data[prop] / 20);
+							$('#rating'+prop).removeClass().addClass('rating rating-'+angka+' size-13 width-100');
+						}
+					}
+				}
+			});
+				
+			
+		});
+	</script>
+
 	<script>
 		$(document).ready(function() { 
 			$('.tabselect').click(function (e) {
