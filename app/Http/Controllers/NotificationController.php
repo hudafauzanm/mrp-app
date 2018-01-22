@@ -13,6 +13,15 @@ class NotificationController extends Controller
     	return $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $notifications = auth()->user()->notifications;
+        $unread_notif_count = auth()->user()->unreadNotifications->count();
+        $notif_count = $notifications->count();
+
+        return view('pages.notifications', compact('notifications', 'notif_count', 'unread_notif_count'));
+    }
+
     public function read()
     {
         $id = request('id');

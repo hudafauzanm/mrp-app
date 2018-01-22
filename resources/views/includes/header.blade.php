@@ -54,7 +54,7 @@
 	            	@endif
 	            </div>
 	            <div class="notify-drop-footer text-center">
-	            	<a href=""><i class="fa fa-eye"></i> Lihat semua notifikasi</a>
+	            	<a href="/notifications"><i class="fa fa-eye"></i> Lihat semua notifikasi</a>
 	            </div>
 	          </ul>
 	        </li>
