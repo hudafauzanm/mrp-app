@@ -91,7 +91,7 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
-											<label>SPFJ *</label>
+											<label>SPFJ</label>
 											<input type="text" name="spfj" id="spfj_id" value="" class="form-control required" disabled>
 										</div>
 										<div class="col-md-6 col-sm-6">
@@ -105,7 +105,7 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Pengusul*</label>
-											<input type="text" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp.nip_pengusul') }}" class="form-control required" autocomplete="off" required>
+											<input type="text" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp.nip_pengusul') }}" class="form-control required" autocomplete="off" required style="text-transform: uppercase">
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Nama Pengusul</label>
@@ -181,7 +181,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>
-												Tanggal Aktifasi
+												Tanggal Aktifasi*
 											</label>
 											<!-- date picker -->
 											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
@@ -202,7 +202,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>No. Dokumen Mutasi *</label>
-											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp.no_dokumen_unit_asal') }}" class="form-control required" required>
+											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp.no_dokumen_unit_asal') }}" class="form-control required" required style="text-transform: uppercase">
 										</div>
 									</div>
 								</div>
