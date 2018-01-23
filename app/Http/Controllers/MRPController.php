@@ -176,14 +176,12 @@ class MRPController extends Controller
                 else if($mrp->status == 3)
                     $nestedData['status'] = '<span class="label label-info">Proses Evaluasi (Karir II)</span>';
                 else if($mrp->status == 4)
-                    $nestedData['status'] = '<span class="label label-info">Proses Evaluasi (Karir II)</span>';
-                else if($mrp->status == 5)
                     $nestedData['status'] = '<span class="label label-success">Proses SK</span>';
-                else if($mrp->status == 6)
+                else if($mrp->status == 5)
                     $nestedData['status'] = '<span class="label label-success">SK Tercetak</span>';
-                else if($mrp->status == 7)
+                else if($mrp->status == 6)
                     $nestedData['status'] = '<span class="label label-success">SK Pending</span>';
-                else if($mrp->status == 8)
+                else if($mrp->status == 7)
                     $nestedData['status'] = '<span class="label label-success">Clear</span>';
                 else if($mrp->status == 99)
                     $nestedData['status'] = '<span class="label label-success">Ditolak (SDM Pusat)</span>';

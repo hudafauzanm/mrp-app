@@ -23,6 +23,8 @@ use Carbon\Carbon;
 @section('content')
 
 	<div id="content" class="padding-20">
+		@include('includes.validation_errors')
+
 		<div class="row">
 			<div class="col-md-6">
 				<h4>Monitoring</h4>	
@@ -96,7 +98,7 @@ use Carbon\Carbon;
 								<a  class="tabselect" href="#bursa" data-toggle="tab">Bursa Pegawai</a>
 							</li>
 							<li class="">
-								<a class="tabselect" href="#request" data-toggle="tab">Request</a>
+								<a class="tabselect" href="#request" data-toggle="tab">Request Jabatan</a>
 							</li>
 						</ul>									
 
@@ -123,7 +125,6 @@ use Carbon\Carbon;
 								<table class="footable" id="footable1" data-filter="#filter1">
 									<thead>
 										<tr>
-											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
 											<th class="foo-cell">Registry Number</th>
 											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
 											<th data-type="numeric" data-hide = "" class="">Nama</th>
@@ -135,18 +136,13 @@ use Carbon\Carbon;
 											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
 											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
 											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach ($mrp_1 as $mrp)
 										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
 											<td class="foo-cell">{{ $mrp->registry_number }}</td>
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
@@ -165,17 +161,26 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai" id="nilaiBtn">
+												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
 													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
+													<span>Nilai {{$mrp->pegawai->nama_pegawai}}</span>
+												</button>												
+											</td>
+											<td>
+												<div class="btn-group">
+													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Download <span class="caret"></span></button>
+													<ul class="dropdown-menu" role="menu">
+														<li><a href="#"><i class="fa fa-question-circle"></i> Usulan</a></li>
+														<li><a href="#"><i class="fa fa-edit"></i> Lolos Butuh</a></li>
+													</ul>
+												</div>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
+												<button type="button" class="btn btn-3d btn-sm btn-red" data-toggle="modal" data-target="#rejectModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -200,7 +205,6 @@ use Carbon\Carbon;
 								<table class="footable" id="footable2" data-filter="#filter2">
 									<thead>
 										<tr>
-											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
 											<th class="foo-cell">Registry Number</th>
 											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
 											<th data-type="numeric" data-hide = "" class="">Nama</th>
@@ -212,18 +216,13 @@ use Carbon\Carbon;
 											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
 											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
 											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach ($mrp_2 as $mrp)
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
+										<tr id="{{ $mrp->id }}">
 											<td class="foo-cell">{{ $mrp->registry_number }}</td>
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
@@ -242,17 +241,23 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" value="{{$mrp->pegawai->nip}}">
+												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Nilai {{$mrp->pegawai->nama_pegawai}}</span>
-												</button>														
+												</button>													
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
+												<button type="button" class="btn btn-3d btn-sm btn-red" data-toggle="modal" data-target="#rejectModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -278,59 +283,40 @@ use Carbon\Carbon;
 								<table class="footable" id="footable3" data-filter="#filter3">
 									<thead>
 										<tr>
-											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
 											<th class="foo-cell">Registry Number</th>
-											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
-											<th data-type="numeric" data-hide = "" class="">Nama</th>
-											<th data-type="numeric" data-hide = "all" class="">Grade</th>
-											<th data-type="numeric" data-hide = "all" class="">Jabatan Saat Ini</th>
-											<th data-type="numeric" data-hide = "all" class="">Proyeksi Jabatan</th>
-											<th data-type="numeric" data-hide = "all" class="">Masa Kerja</th>
-											<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
-											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
-											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
-											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Unit Peminta</th>
+											<th data-type="numeric" data-hide = "" class="">Proyeksi Formasi</th>
+											<th data-type="numeric" data-hide = "" class="">Proyeksi Jabatan</th>
+											<th data-type="numeric" data-hide = "all" class="">Pengusul</th>
+											<th data-type="numeric" data-hide = "all" class="">Source</th>
+											<th data-type="numeric" data-hide = "all" class="">Tanggal Aktivasi</th>
+											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach ($mrp_3 as $mrp)
 										<tr>
+											<td class="foo-cell">{{ $mrp->registry_number }}</td>
+											<td>{{ $mrp->personnel_area_pengusul->nama_pendek }}</td>
+											<td>{{ $mrp->formasi_jabatan->formasi }}</td>
+											<td>{{ $mrp->formasi_jabatan->jabatan }}</td>
+											<td>{{ \App\Pegawai::where('nip', $mrp->nip_pengusul)->first()->nama_pegawai }} ({{ $mrp->nip_pengusul }})</td>
+											<td>Existing</td>
+											{{-- <td>{{ $mrp->tanggal_aktivasi }}</td> --}}
+											<td>sementara</td>
 											<td class="text-center">
 												<a href="#" class="btn btn-3d btn-sm btn-primary">
 													<i class="fa fa-arrow-circle-down"></i>
 													<span>Download</span>
 												</a>
 											</td>
-											<td class="foo-cell">{{ $mrp->registry_number }}</td>
-											<td>{{$mrp->pegawai->nip}}</td>
-											<td>{{$mrp->pegawai->nama_pegawai}}</td>
-											<td>{{$mrp->pegawai->ps_group}}</td>
-											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
-											<td>
-												@if(isset($mrp->formasi_jabatan_id))
-													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
-													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
-												@else
-													Perlu saran
-												@endif
-											</td>
-											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
-											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
-											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
-											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#approveReqJabatan" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
+												<button type="button" class="btn btn-3d btn-sm btn-red" data-toggle="modal" data-target="#rejectModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -376,53 +362,51 @@ use Carbon\Carbon;
 									</ul>
 								</div>
 								<div class="panel-body nopadding">
-									<div class="table-responsive">
-										<table class="table table-bordered table-vertical-middle nomargin">
-											<thead>
-												<tr>
-													<th>Uraian</th>
-													<th>Skor</th>
-												</tr>
-											</thead>
-											<tbody>
+									<table class="table table-bordered table-vertical-middle nomargin">
+										<thead>
+											<tr>
+												<th>Uraian</th>
+												<th>Skor</th>
+											</tr>
+										</thead>
+										<tbody>
 
-												<tr>
-													<td>Enthusiasthic for Challenge</td>
-													
-													<td><div class="rating rating-0 size-13 width-100" id="rating1"><!-- rating-0 ... rating-5 --></div></td>
-													
-												</tr>
-												<tr>
-													<td>Creative & Innovative</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating2"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Building Business Partnership</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating3"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Strategic Orientation</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating4"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Customer Focus Oriented</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating5"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Driving Execution</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating6"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Visionary Leadership</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating7"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Empowering / Developing Others</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating8"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+											<tr>
+												<td>Enthusiastic for Challenge</td>
+												
+												<td><div class="rating rating-0 size-13 width-100" id="enthusiastic"><!-- rating-0 ... rating-5 --></div></td>
+												
+											</tr>
+											<tr>
+												<td>Creative & Innovative</td>
+												<td><div class="rating rating-0 size-13 width-100" id="creative"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Building Business Partnership</td>
+												<td><div class="rating rating-0 size-13 width-100" id="building"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Strategic Orientation</td>
+												<td><div class="rating rating-0 size-13 width-100" id="strategic"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Customer Focus Oriented</td>
+												<td><div class="rating rating-0 size-13 width-100" id="customer"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Driving Execution</td>
+												<td><div class="rating rating-0 size-13 width-100" id="driving"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Visionary Leadership</td>
+												<td><div class="rating rating-0 size-13 width-100" id="visionary"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Empowering / Developing Others</td>
+												<td><div class="rating rating-0 size-13 width-100" id="empowering"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -440,38 +424,36 @@ use Carbon\Carbon;
 								</div>
 
 								<div class="panel-body nopadding">
-									<div class="table-responsive">
-										<table class="table table-bordered table-vertical-middle nomargin">
-											<thead>
-												<tr>
-													<th>Uraian</th>
-													<th>Skor</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Komunikasi</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating9"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>KH2</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating10"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Bahasa Inggris</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating11"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Bahasa Mandarin</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating12"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Bahasa Jawa</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating13"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+									<table class="table table-bordered table-vertical-middle nomargin">
+										<thead>
+											<tr>
+												<th>Uraian</th>
+												<th>Skor</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Komunikasi</td>
+												<td><div class="rating rating-0 size-13 width-100" id="komunikasi"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>KH2</td>
+												<td><div class="rating rating-0 size-13 width-100" id="team_work"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Bahasa Indonesia</td>
+												<td><div class="rating rating-0 size-13 width-100" id="bahasa_1_nilai"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Bahasa Inggris</td>
+												<td><div class="rating rating-0 size-13 width-100" id="bahasa_2_nilai"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td id="bahasa_3">Bahasa 3</td>
+												<td><div class="rating rating-0 size-13 width-100" id="bahasa_3_nilai"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -503,27 +485,23 @@ use Carbon\Carbon;
 									<tbody>
 										<tr>
 											<td>Internal Readiness</td>
-											<td>Kesehatan</td>
-											<td><a href="#" class="btn btn-3d btn-xs btn-primary">
-											<i class="fa fa-arrow-circle-down"></i>
-											<span>Download</span>
-											</a>
-										</td>
+											<td><b>Kesehatan</b></td>
+											<td id="kesehatan"></td>
 										</tr>
 										<tr>
 											<td></td>
-											<td>Career Willingness</td>
-											<td> Aasdasdwa dasdasdasd asd asdas asd sdasdasd asda sdaasdasdasd asdasda asdas </td>
+											<td><b>Career Willingness</b></td>
+											<td id="career_willingness"></td>
 										</tr>
 										<tr>
 											<td>External Readiness</td>
-											<td>Keluarga</td>
-											<td></td>
+											<td><b>Keluarga</b></td>
+											<td id="external_rediness"></td>
 										</tr>
 										<tr>
 											<td>Hubungan Dengan Sesama</td>
 											<td></td>
-											<td></td>
+											<td id="hubungan_sesama"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -535,37 +513,138 @@ use Carbon\Carbon;
 		</div>
     </div>
 
-    <div id="myModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="approveModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Approve</h4>
+					<h4 class="modal-title" id="approveModalLabel">Approve</h4>
 				</div>
 
 				<!-- Modal Body -->
-				<div class="modal-body">
-					
-					<div class="form-group"> 
-					<h4>Perintah Cetak</h4>
-					<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
-					<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+				<form action="/dashboard/approve_mutasi" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<input class="mrp_id" type="hidden" name="id" value="">
+					<div class="modal-body">
+							
+						<div class="form-group"> 
+							<h4>Perintah Cetak</h4>
+							<input class="custom-file-upload" type="file" id="file" name="dokumen_mutasi" id="contact:attachment" data-btn-text="Select a File" />
+							<small class="text-muted block">Max file size: 10Mb (pdf)</small>
+						</div>
+						
+						<div class="form-group">
+							<h4>No. Dokumen</h4>
+							<input type="text" class="form-control" name="no_dokumen_mutasi">
+						</div>
+
+						<div class="form-group">
+							<h4>Tanggal Aktifasi</h4>
+							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+						</div>
 					</div>
 
-					<div class="form-group">
-
-					<h4>Tanggal Aktifasi</h4>
-					<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+						{{-- <button type="button" class="btn btn-primary toastr-notify" data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button> --}}
 					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+
+    <div id="approveReqJabatan" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="approveReqJabatanLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="approveReqJabatanLabel">Approve</h4>
 				</div>
 
-				<!-- Modal Footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-					<button type="button" class="btn btn-primary toastr-notify" data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button>
+				<!-- Modal Body -->
+				<form action="/dashboard/approve_mutasi" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<input class="mrp_id" type="hidden" name="id" value="">
+					<div class="modal-body">
+
+						<div class="form-group">
+							<h4>NIP Penerima Mutasi</h4>
+							<input type="text" class="form-control" style="text-transform: uppercase" name="nip">
+						</div>
+							
+						<div class="form-group"> 
+							<h4>Perintah Cetak</h4>
+							<input class="custom-file-upload" type="file" id="file" name="dokumen_mutasi" id="contact:attachment" data-btn-text="Select a File" />
+							<small class="text-muted block">Max file size: 10Mb (pdf)</small>
+						</div>
+						
+						<div class="form-group">
+							<h4>No. Dokumen</h4>
+							<input type="text" class="form-control" name="no_dokumen_mutasi">
+						</div>
+
+						<div class="form-group">
+							<h4>Tanggal Aktifasi</h4>
+							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+						</div>
+					</div>
+
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+						{{-- <button type="button" class="btn btn-primary toastr-notify" data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button> --}}
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+
+    <div id="rejectModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="rejectModalLabel">Reject</h4>
 				</div>
+
+				<!-- Modal Body -->
+				<form action="/dashboard/reject_mutasi" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<input class="mrp_id" type="hidden" name="id" value="">
+					<div class="modal-body">
+							
+						<div class="form-group"> 
+							<h4>Surat Penolakan</h4>
+							<input class="custom-file-upload" type="file" name="dokumen_mutasi" id="file" id="contact:attachment" data-btn-text="Select a File" />
+							<small class="text-muted block">Max file size: 10Mb (pdf)</small>
+						</div>
+						
+						<div class="form-group">
+							<h4>No. Dokumen</h4>
+							<input type="text" class="form-control" name="no_dokumen_mutasi">
+						</div>
+
+						<div class="form-group">
+							<h4>Tanggal Aktifasi</h4>
+							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+						</div>
+					</div>
+
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+					</div>
+				</form>
 			</div>
 		</div>
     </div>	
@@ -643,14 +722,12 @@ use Carbon\Carbon;
 	</script>
 
 	<script>
-		$(".nilaiBtn").click(function(){
-			var nip = $(this).val();
-
+		function getNilai(id){
 			$.ajax({
 				'url': '/dashboard/get_pegawai_nilai',
 				'type': 'GET',
 				'data': {
-					'pegawai_id': nip
+					'pegawai': id
 				},
 				'dataType': 'json',
 				error: function(){
@@ -659,16 +736,47 @@ use Carbon\Carbon;
 				success: function(data){
 					if(data)
 					{
+						for(var prop in data.bintang) {
+							var angka = Math.ceil(data.bintang[prop] / 20);
+							$('#'+prop).removeClass().addClass('rating rating-'+angka+' size-13 width-100');
+						}
+
 						for(var prop in data) {
-							var angka = Math.ceil(data[prop] / 20);
-							$('#rating'+prop).removeClass().addClass('rating rating-'+angka+' size-13 width-100');
+							if(prop == 'bintang')
+								break;
+							$("#"+prop).empty().html(data[prop]);
 						}
 					}
 				}
 			});
-				
-			
-		});
+		}
+	</script>
+
+	<script>
+		function rejectApproveFunct(id){
+			$(".mrp_id").val(id);
+			// if(confirm('Anda yakin akan reject permintaan mutasi ini?'))
+			// {
+			// 	$.ajax({
+			// 		'url': '/dashboard/reject_mutasi',
+			// 		'type': 'post',
+			// 		'data': {
+			// 			'_token': '{{ csrf_token() }}',
+			// 			'id': id
+			// 		},
+			// 		'dataType': 'json',
+			// 		error: function(){
+
+			// 		},
+			// 		success: function(data){
+			// 			if(data)
+			// 			{
+			// 				$("tr#"+id).remove();
+			// 			}
+			// 		}
+			// 	});
+			// }
+		};
 	</script>
 
 	<script>
