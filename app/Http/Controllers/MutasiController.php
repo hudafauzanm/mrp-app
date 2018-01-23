@@ -14,6 +14,7 @@ use App\PersonnelArea;
 use App\FormasiJabatan;
 
 use App\Notifications\MutasiMasuk;
+use App\Notifications\ProyeksiJabatan;
 
 class MutasiController extends Controller
 {
@@ -145,9 +146,18 @@ class MutasiController extends Controller
                 'user_id' => $user->id,
                 'nama_pendek' => $user->nama_pendek,
                 'mrp_id' => $mrp->id->string, 
-                'nip_pegawai' => $nip
+                'nip' => $nip
             );
             $user_sdm->notify(new MutasiMasuk($data));
+
+            if($id_proyeksi)
+            {
+                $fj_proyeksi = FormasiJabatan::find($id_proyeksi);
+                array_push($data, ['formasi_jabatan' => $fj_proyeksi->formasi.' '.$fj_proyeksi->jabatan]);
+
+                $user_proyeksi = $fj_proyeksi->personnel_area;
+                $user_proyeksi->notify(new ProyeksiJabatan($data));
+            }
 
             return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');
         }
