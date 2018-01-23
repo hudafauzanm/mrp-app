@@ -19,6 +19,7 @@
 			<li class="dropdown pull-left">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 				<i class="fa fa-bell" style="margin-top: 12px; font-size: 150%; "></i>
+				{!! $notif_count ? '<i class="fa fa-star size-11" id="star"></i>' : '' !!}
 			</a>
 			<ul class="dropdown-menu notify-drop">
             	<div class="notify-drop-title">
@@ -35,8 +36,9 @@
 	            	@if ($notif_count)
 		            	@foreach ($user->unreadNotifications as $notification)
 			            	<li id="notif_{{ $notification->id }}">
-			            		<div class="col-md-3 col-sm-3 col-xs-3">
-			            			<div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+			            		<div class="col-md-3 col-sm-3 col-xs-3 text-center">
+			            			{{-- <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div> --}}
+			            			<h3><i class="fa fa-question-circle"></i></h3>
 			            		</div>
 			            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
 			            			<a href="" style="padding-left: 0">{{ $notification->data['message'] }}</a>

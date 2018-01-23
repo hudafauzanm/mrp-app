@@ -20,6 +20,7 @@ $(document).ready(function(){
 					if(!$.trim($(".drop-content").html()))
 					{
 						$(".drop-content").html('<div class="col-md-12 col-sm-12 col-xs-12 text-center"><p>Tidak ada notifikasi baru</p></div>');
+						$("#star").remove();
 					}
 					var dec = parseInt($("#notif_count").html()) - 1;
 					$("#notif_count").html(dec);
@@ -45,6 +46,7 @@ $(document).ready(function(){
 					$(".drop-content").empty();
 					$(".drop-content").html('<div class="col-md-12 col-sm-12 col-xs-12 text-center"><p>Tidak ada notifikasi baru</p></div>');
 					$("#notif_count").html('0');
+					$("#star").remove();
 				}
 			}
 		});
