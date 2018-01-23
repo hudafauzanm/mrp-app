@@ -42,9 +42,8 @@ Route::get('/mrp/edit/{reg_num}', 'MRPController@showEdit');
 Route::post('/mrp/edit', 'MRPController@edit');
 Route::get('/mrp/detail/{reg_num}', 'MRPController@showDetail');
 Route::post('/mrp/datatables/ajax', 'MRPController@ajaxDatatables');
-Route::get('/mrp/download/{reg_num}/{no_dokumen}', 'MRPController@downloadDokumen');
 
-Route::get('/download/{reg_num}/{no_dokumen}', 'DownloadController@downloader');
+Route::get('/download/{reg_num}/{filename}', 'DownloadController@downloader');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

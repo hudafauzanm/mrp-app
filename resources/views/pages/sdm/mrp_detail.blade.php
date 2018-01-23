@@ -63,14 +63,17 @@ use Carbon\Carbon;
 							<div class="col-md-3 col-xs-3 text-right">
 								<h4><strong>Download</strong> Dokumen</h4>
 								<ul class="list-unstyled ">
-									@if ($mrp->no_dokumen_unit_asal)
-										<a href="/mrp/download/{{ $mrp->registry_number.'/pengusul_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal) }}" class="btn btn-sm btn-3d btn-blue">{{ $mrp->no_dokumen_unit_asal }}</a>
+									@if ($mrp->no_dokumen_unit_usul)
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-sm btn-3d btn-blue">{{ $mrp->no_dokumen_unit_usul }}</a>
 									@endif
-									@if ($mrp->no_dokumen_unit_mutasi)
-										<a href="/mrp/download/{{ $mrp->registry_number.'/unit_mutasi'.str_replace('/', '_', $mrp->no_dokumen_unit_mutasi) }}" class="btn btn-sm btn-3d btn-info">{{ $mrp->no_dokumen_unit_mutasi }}</a>
+									@if ($mrp->no_dokumen_unit_jawab)
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_jawab }}" class="btn btn-sm btn-3d btn-info">{{ $mrp->no_dokumen_unit_jawab }}</a>
+									@endif
+									@if ($mrp->no_dokumen_respon_sdm)
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_proses_sk }}</a>
 									@endif
 									@if ($mrp->sk_stg_id)
-										<a href="/mrp/download/{{ $mrp->registry_number.'/skstg_'.str_replace('/', '_', $mrp->skstg->no_dokumen_proses_sk) }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_proses_sk }}</a>
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->skstg->filename_dokumen_proses_sk }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_proses_sk }}</a>
 									@endif
 								</ul>
 							</div>

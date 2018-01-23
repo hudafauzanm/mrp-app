@@ -28,8 +28,6 @@ use Carbon\Carbon;
 
 		<!-- WRAPPER -->
 		<div id="wrapper">
-			@foreach ($detail as $detaill)
-
 			<div class="padding-20">
 
 				<div class="panel panel-default">
@@ -40,13 +38,13 @@ use Carbon\Carbon;
 							<div class="col-md-6 col-xs-6 text-right">
 								<h4>Registry<strong> Number</strong></h4>
 								<ul class="list-unstyled ">
-									<li><strong>{{$detaill->registry_number}}</strong></li>
+									<li><strong>{{$detail->registry_number}}</strong></li>
 								</ul>
 							</div>
 							<div class="col-md-6 col-xs-6 text-left">
 								<h4><strong>Nomor</strong> Nota Dinas</h4>
 								<ul class="list-unstyled ">
-									<li><strong>{{$detaill->no_dokumen_unit_asal}}</strong></li>
+									<li><strong>{{$detail->no_dokumen_unit_asal}}</strong></li>
 								</ul>
 							</div>
 						</div>
@@ -68,34 +66,34 @@ use Carbon\Carbon;
 										
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>NIP:</strong> {{ $detaill->pegawai->nip }}</li>
-												<li><strong>Nama:</strong> {{ $detaill->pegawai->nama_pegawai }}</li>
-												<li><strong>Grade:</strong> {{ $detaill->pegawai->ps_group }}</li>
+												<li><strong>NIP:</strong> {{ $detail->pegawai->nip }}</li>
+												<li><strong>Nama:</strong> {{ $detail->pegawai->nama_pegawai }}</li>
+												<li><strong>Grade:</strong> {{ $detail->pegawai->ps_group }}</li>
 											</ul>
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>Tanggal Aktifasi:</strong> {{ $detaill->tgl_pooling}}</li>
-												<li><strong>Jenis Mutasi:</strong> {{ $detaill->jenis_mutasi}}</li>
-												<li><strong>Mutasi:</strong> {{ $detaill->mutasi }}</li>
-												<li><strong>Jalur Mutasi:</strong> {{ $detaill->jalur_mutasi}}</li>
+												<li><strong>Tanggal Aktifasi:</strong> {{ $detail->tgl_pooling}}</li>
+												<li><strong>Jenis Mutasi:</strong> {{ $detail->jenis_mutasi}}</li>
+												<li><strong>Mutasi:</strong> {{ $detail->mutasi }}</li>
+												<li><strong>Jalur Mutasi:</strong> {{ $detail->jalur_mutasi}}</li>
 											</ul>
 										</td>
 										<td>
-											@if(isset($detaill->formasi_jabatan))
-											<div><strong>{{$detaill->formasi_jabatan->formasi}} {{$detaill->formasi_jabatan->jabatan}}</strong></div>
-											<small>{{$detaill->formasi_jabatan->posisi}}</small>
+											@if(isset($detail->formasi_jabatan))
+											<div><strong>{{$detail->formasi_jabatan->formasi}} {{$detail->formasi_jabatan->jabatan}}</strong></div>
+											<small>{{$detail->formasi_jabatan->posisi}}</small>
 											@else
 												Perlu saran
 											@endif
 										</td>
 										<td>
-											<div><strong>{{$detaill->pegawai->formasi_jabatan->formasi}} {{$detaill->pegawai->formasi_jabatan->jabatan}}</strong></div>
-											<small>{{$detaill->pegawai->formasi_jabatan->posisi}}</small>
+											<div><strong>{{$detail->pegawai->formasi_jabatan->formasi}} {{$detail->pegawai->formasi_jabatan->jabatan}}</strong></div>
+											<small>{{$detail->pegawai->formasi_jabatan->posisi}}</small>
 										</td>
 
-										<td>{{$detaill->pegawai->time_diff(Carbon::parse($detaill->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
-										<td>{{$detaill->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($detaill->pegawai->end_date))}}</td>
+										<td>{{$detail->pegawai->time_diff(Carbon::parse($detail->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+										<td>{{$detail->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($detail->pegawai->end_date))}}</td>
 										
 									</tr>
 								</tbody>
@@ -109,7 +107,7 @@ use Carbon\Carbon;
 							<div class="col-md-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>{{$detaill->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$detaill->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</strong><!-- <br>
+									<strong>{{$detail->personnel_area_pengusul->nama}}<br>{{$detail->personnel_area_pengusul->direktorat->nama}}</strong><!-- <br>
 									Jalan Trunojoyo Blok M – I No 135<br>
 									Kebayoran Baru, Jakarta 12160, Indonesia<br>
 									Telp : 021 – 7251234, 7261122<br>
@@ -133,7 +131,6 @@ use Carbon\Carbon;
 				</div>
 
 			</div>
-			@endforeach
 		</div>
 		<!-- /WRAPPER -->
 

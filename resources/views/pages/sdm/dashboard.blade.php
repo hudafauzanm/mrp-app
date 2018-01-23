@@ -170,8 +170,8 @@ use Carbon\Carbon;
 												<div class="btn-group">
 													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Download <span class="caret"></span></button>
 													<ul class="dropdown-menu" role="menu">
-														<li><a href="#"><i class="fa fa-question-circle"></i> Usulan</a></li>
-														<li><a href="#"><i class="fa fa-edit"></i> Lolos Butuh</a></li>
+														<li><a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}"><i class="fa fa-question-circle"></i> Usulan</a></li>
+														<li><a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_jawab }}"><i class="fa fa-edit"></i> Lolos Butuh</a></li>
 													</ul>
 												</div>
 											</td>
@@ -247,7 +247,7 @@ use Carbon\Carbon;
 												</button>													
 											</td>
 											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
+												<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-3d btn-sm btn-primary">
 													<i class="fa fa-arrow-circle-down"></i>
 													<span>Download</span>
 												</a>
@@ -306,7 +306,7 @@ use Carbon\Carbon;
 											{{-- <td>{{ $mrp->tanggal_aktivasi }}</td> --}}
 											<td>sementara</td>
 											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
+												<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-3d btn-sm btn-primary">
 													<i class="fa fa-arrow-circle-down"></i>
 													<span>Download</span>
 												</a>
