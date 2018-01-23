@@ -36,16 +36,16 @@
 	            	@if ($notif_count)
 		            	@foreach ($user->unreadNotifications as $notification)
 			            	<li id="notif_{{ $notification->id }}">
-			            		<div class="col-md-3 col-sm-3 col-xs-3 text-center">
+			            		<div class="col-md-2 col-sm-2 col-xs-2 text-center">
 			            			{{-- <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div> --}}
 			            			<h3><i class="fa fa-question-circle"></i></h3>
 			            		</div>
-			            		<div class="col-md-7 col-sm-7 col-xs-7 pd-l0">
+			            		<div class="col-md-8 col-sm-8 col-xs-8 pd-l0">
 			            			<a href="" style="padding-left: 0">{{ $notification->data['message'] }}</a>
 			            			<br>
 				            		<p class="time">{{ $notification->created_at->diffForHumans() }}</p>
 			            		</div>
-			            		<div class="col-md-2 col-sm-2 col-xs-2">
+			            		<div class="col-md-1 col-sm-1 col-xs-1">
 			            			<button onclick=" event.stopPropagation();" class="markRead" title="Tandai sudah dibaca" target="{{ $notification->id }}"><i class="fa fa-dot-circle-o"></i></button>
 			            		</div>
 			            	</li>
