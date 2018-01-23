@@ -18,21 +18,24 @@ class StatusController extends Controller
         if(request('act')=='req')
         {
            // $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
-            $mrp = MRP::where('unit_pengusul', auth()->user()->id)->get();
+            $mrp = MRP::where('tipe', 2)->where('unit_pengusul', auth()->user()->id)->get();
            // $pegawai = Pegawai::where('formasi_jabatan_id', $fj);
+            return view('pages.unit.status',compact('mrp'));
         }
-        else if(request('act')=='reqjab')
+        if(request('act')=='reqjab')
         {
-            $mrp = MRP::where('unit_pengusul', auth()->user()->id)->get();
+            $mrp = MRP::where('tipe', 3)->where('unit_pengusul', auth()->user()->id)->get();
+            return view('pages.unit.status',compact('mrp'));
         }
-        else if(request('act')=='res')
+        if(request('act')=='res')
         {
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             
-            $mrp = MRP::where('formasi_jabatan_id', $fj)->get();
+            $mrp = MRP::where('tipe', 2)->whereIn('formasi_jabatan_id', $fj)->get();
+            return view('pages.unit.status',compact('mrp'));
             // dd($mrp);
         }
-    	return view('pages.unit.status',compact('mrp'));
+    	
     }
 
     public function getDetails($reg_num)
@@ -42,9 +45,11 @@ class StatusController extends Controller
         // dd($detail);
         if($detail->tipe == '3')
         {
-            return view('pages.unit.detail_bursa',compact('detail'));
+           return view('pages.unit.detail_bursa',compact('detail'));
         }
-
-    	return view('pages.unit.detail_mutasi',compact('detail'));
+        else if($detail->tipe == '2')
+        {
+    	   return view('pages.unit.detail_mutasi',compact('detail'));
+        }
     }
 }

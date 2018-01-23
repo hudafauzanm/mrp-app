@@ -17,7 +17,13 @@
 		<div id="panel-1" class="panel panel-default">
 			<div class="panel-heading">
 				<span class="title elipsis">
-					<strong>Status Mutasi</strong> <!-- panel title -->
+					@if(request('act')=='req')
+						<strong>Status Mutasi - Membursakan Pegawai</strong>
+					@elseif(request('act')=='reqjab')
+						<strong>Status Mutasi - Membursakan Jabatan</strong>
+					@elseif(request('act')=='res')
+						<strong>Status Mutasi - Mengajukan Pegawai</strong>
+					@endif <!-- panel title -->
 				</span>
 
 				<!-- right options -->
@@ -35,36 +41,48 @@
 					<table class="table table-striped table-hover dataTable js-exportable" id="statusTable">
 	                    <thead>
 	                        <tr>
-
 	                            <th width="20%">Registry Number</th>
-	                            <th width="10%">NIP</th>
-	                            <th width="10%">Nama</th>
-	                            <th width="20%">Posisi & Unit Asal</th>
-	                            <th width="20%">Posisi & Unit Tujuan</th>
-	                            <th width="10%">Status</th>
-	                            <th width="10%">Lihat Detail</th>
+	                            @if(request('act')!='reqjab')
+	                            <th>NIP</th>
+	                            <th>Nama</th>
+	                            <th>Posisi & Unit Asal</th>
+	                            @endif
+	                            <th>Posisi & Unit Tujuan</th>
+	                            @if(request('act')=='reqjab')
+	                            <th>Source</th>
+	                            @endif
+	                            <th >Status</th>
+	                            <th >Lihat Detail</th>
 	                            @if(request('act')=='res')
-	                            <th width="10%">Tindak Lanjut</th>
+	                            <th> Tindak Lanjut</th>
 	                            @endif
 	                        </tr>
 	                    </thead>
 	                    <tbody>
 	                    	@foreach ($mrp as $mrps) 
-	                    		
 							<tr>
-								
-								<td>{{ $mrps->registry_number }}</td>
+								<td>{{$mrps->registry_number}}</td>
+								@if(request('act')!='reqjab')
 								<td>{{$mrps->pegawai->nip}}</td>
 								<td>{{$mrps->pegawai->nama_pegawai}}</td>
-								<td><strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrps->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+								<td>
+									<strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong>
+									<br>{{$mrps->pegawai->formasi_jabatan->posisi}}<br>
+									<small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small>
+								</td>
+								@endif
 								<td>
 									@if(isset($mrps->formasi_jabatan_id))
-										<strong>{{$mrps->formasi_jabatan->formasi}}{{$mrps->formasi_jabatan->jabatan}}</strong> {{$mrps->formasi_jabatan->posisi}}
+										<strong>{{$mrps->formasi_jabatan->formasi}} {{$mrps->formasi_jabatan->jabatan}}</strong>
+										<br>{{$mrps->formasi_jabatan->posisi}}
 										<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
 									@else
 										Perlu saran
 									@endif
 								</td>
+								@if(request('act')=='reqjab')
+	                            <td>Existing</td>
+	                            @endif
 								<td>
 									@if($mrps->status == 0)
 										<span class="label label-danger">Ditolak</span>
@@ -95,8 +113,8 @@
 								<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 								@if(request('act')=='res')
 	                            <td class="text-center">
-	                            	<button type="button" class="btn btn-success btn-3d btn-sm">Approved</button>
-									<button type="button" class="btn btn-danger btn-3d btn-sm">Decline</button>
+	                            	<button type="button" class="btn btn-success btn-md fa fa-check"> Approve</button>
+									<button type="button" class="btn btn-danger btn-md fa fa-close"> Decline</button>
 	                            </td>
 	                            @endif
 							</tr>
