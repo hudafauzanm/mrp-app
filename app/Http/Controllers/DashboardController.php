@@ -49,4 +49,15 @@ class DashboardController extends Controller
         
         return response()->json($nilpegawai);
     }
+
+    public function rejectMutasi()
+    {
+        // var_dump('wew');
+        // die();
+        $mrp = MRP::find(request('id'));
+        $mrp->status = 99;
+        $mrp->save();
+
+        return response()->json(1);
+    }
 }

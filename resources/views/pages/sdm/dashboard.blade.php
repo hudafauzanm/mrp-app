@@ -123,7 +123,6 @@ use Carbon\Carbon;
 								<table class="footable" id="footable1" data-filter="#filter1">
 									<thead>
 										<tr>
-											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
 											<th class="foo-cell">Registry Number</th>
 											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
 											<th data-type="numeric" data-hide = "" class="">Nama</th>
@@ -135,18 +134,13 @@ use Carbon\Carbon;
 											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
 											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
 											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach ($mrp_1 as $mrp)
 										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
 											<td class="foo-cell">{{ $mrp->registry_number }}</td>
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
@@ -171,11 +165,21 @@ use Carbon\Carbon;
 												</button>														
 											</td>
 											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Usulan</span>
+												</a>
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Lolos Butuh</span>
+												</a>
+											</td>
+											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
+												<button type="button" class="btn btn-3d btn-sm btn-red" onclick="rejectFunct('{{ $mrp->id }}')">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -200,7 +204,6 @@ use Carbon\Carbon;
 								<table class="footable" id="footable2" data-filter="#filter2">
 									<thead>
 										<tr>
-											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
 											<th class="foo-cell">Registry Number</th>
 											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
 											<th data-type="numeric" data-hide = "" class="">Nama</th>
@@ -212,18 +215,13 @@ use Carbon\Carbon;
 											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
 											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
 											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach ($mrp_2 as $mrp)
-										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
+										<tr id="{{ $mrp->id }}">
 											<td class="foo-cell">{{ $mrp->registry_number }}</td>
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
@@ -248,11 +246,17 @@ use Carbon\Carbon;
 												</button>														
 											</td>
 											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Download</span>
+												</a>
+											</td>
+											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
+												<button type="button" class="btn btn-3d btn-sm btn-red" onclick="rejectFunct('{{ $mrp->id }}')">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -278,7 +282,6 @@ use Carbon\Carbon;
 								<table class="footable" id="footable3" data-filter="#filter3">
 									<thead>
 										<tr>
-											<th data-type="numeric" data-hide = "" class="">Evaluasi/Dokumen</th>
 											<th class="foo-cell">Registry Number</th>
 											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
 											<th data-type="numeric" data-hide = "" class="">Nama</th>
@@ -290,18 +293,13 @@ use Carbon\Carbon;
 											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
 											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
 											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach ($mrp_3 as $mrp)
 										<tr>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
-											</td>
 											<td class="foo-cell">{{ $mrp->registry_number }}</td>
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
@@ -326,11 +324,17 @@ use Carbon\Carbon;
 												</button>														
 											</td>
 											<td class="text-center">
+												<a href="#" class="btn btn-3d btn-sm btn-primary">
+													<i class="fa fa-arrow-circle-down"></i>
+													<span>Usulan</span>
+												</a>
+											</td>
+											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red">
+												<button type="button" class="btn btn-3d btn-sm btn-red" onclick="rejectFunct('{{ $mrp->id }}')">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -663,36 +667,32 @@ use Carbon\Carbon;
 				}
 			});
 		}
+	</script>
 
-		// $('#ceknilai').on('shown.bs.modal', function (e) {
-		//   alert('ok');
-		// })
-		// $(".nilaiBtn").click(function(){
-		// 	var id = $(this).val();
+	<script>
+		function rejectFunct(id){
+			if(confirm('Anda yakin akan reject permintaan mutasi ini?'))
+			{
+				$.ajax({
+					'url': '/dashboard/reject_mutasi',
+					'type': 'post',
+					'data': {
+						'_token': '{{ csrf_token() }}',
+						'id': id
+					},
+					'dataType': 'json',
+					error: function(){
 
-		// 	$.ajax({
-		// 		'url': '/dashboard/get_pegawai_nilai',
-		// 		'type': 'GET',
-		// 		'data': {
-		// 			'pegawai': id
-		// 		},
-		// 		'dataType': 'json',
-		// 		error: function(){
-
-		// 		},
-		// 		success: function(data){
-		// 			if(data)
-		// 			{
-		// 				for(var prop in data) {
-		// 					var angka = Math.ceil(data[prop] / 20);
-		// 					$('#rating'+prop).removeClass().addClass('rating rating-'+angka+' size-13 width-100');
-		// 				}
-		// 			}
-		// 		}
-		// 	});
-				
-			
-		// });
+					},
+					success: function(data){
+						if(data)
+						{
+							$("tr#"+id).remove();
+						}
+					}
+				});
+			}
+		};
 	</script>
 
 	<script>

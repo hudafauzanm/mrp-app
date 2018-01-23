@@ -14,6 +14,7 @@
 Route::get('/', 'DashboardController@index')->name('home');
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/get_pegawai_nilai', 'DashboardController@getPenilaianPegawai');
+Route::post('/dashboard/reject_mutasi', 'DashboardController@rejectMutasi');
 
 // authentication
 Route::get('/login', 'LoginController@index')->name('login');
