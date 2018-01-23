@@ -47,4 +47,4 @@ Route::post('/profil/edit','ProfilController@input');
 Route::get('/profil/getKota','ProfilController@getKota');
 
 //evaluasi
-Route::get('/dashboard/dataevaluasi', 'DashboardController@detail');
+Route::get('/dashboard/dataevaluasi', 'DashboardController@detaileval');

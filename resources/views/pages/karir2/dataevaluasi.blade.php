@@ -17,9 +17,9 @@
 		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		
 		<!-- THEME CSS -->
-		<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+		<link href="/assets/css/essentials.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
 
 	</head>
 	<!--
@@ -50,15 +50,15 @@
 							<button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars" ></i> Export Table Data</button>
 							<ul class="dropdown-menu " role="menu">
 								<li class="divider"></li>
-								<li><a href="#" onClick ="$('#customers').tableExport({type:'excel',escape:'false'});"> <img src='icons/xls.png' width='24px'> XLS</a></li>
-								<!-- <li><a href="#" onClick ="$('#customers').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});"><img src='icons/pdf.png' width='24px'> PDF</a></li>	 -->
+								<li><a href="#" onClick ="$('#customers').tableExport({type:'excel',escape:'false'});"> <img src='/assets/icons/xls.png' width='24px'> XLS</a></li>
+								<li><a href="#" onClick ="$('#customers').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});"><img src='/assets/icons/pdf.png' width='24px'> PDF</a></li>	
 							</ul>
 						</div>
 
 						<!-- <button type="button" class="btn btn-default"><a href="dataevaluasi-print.html">Back</a></button> -->
 
-						<div class="table-responsive">
-							<table id="customers" class="table table-striped">
+						<div class="">
+							<table id="customers" class="">
 								<thead>
 									<tr class="warning">
 										<th>No. Surat Nota Dinas</th>
@@ -69,6 +69,7 @@
 										<th width="300">Jabatan Lama</th>
 										<th width="300">Jabatan Baru</th>
 										<th width="350">Evaluasi dan Tindak Lanjut</th>
+										<th width="350">Konfirmasi</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -93,6 +94,73 @@
 									</tr>
 								</tbody>
 							</table> 
+
+							<table class="minimalistBlack">
+								<thead>
+								<tr>
+								<th>head1</th>
+								<th>head2</th>
+								<th>head3</th>
+								<th>head4</th>
+								<th>head5</th>
+								<th>head6</th>
+								<th>head7</th>
+								<th>head8</th>
+								<th>head9</th>
+								<th>head10</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+								<td>cell1_1</td>
+								<td>cell2_1</td>
+								<td>cell3_1</td>
+								<td>cell4_1</td>
+								<td>cell5_1</td>
+								<td>cell6_1</td>
+								<td>cell7_1</td>
+								<td>cell8_1</td>
+								<td>cell9_1</td>
+								<td>cell10_1</td>
+								</tr>
+								<tr>
+								<td>cell1_2</td>
+								<td>cell2_2</td>
+								<td>cell3_2</td>
+								<td>cell4_2</td>
+								<td>cell5_2</td>
+								<td>cell6_2</td>
+								<td>cell7_2</td>
+								<td>cell8_2</td>
+								<td>cell9_2</td>
+								<td>cell10_2</td>
+								</tr>
+								<tr>
+								<td>cell1_3</td>
+								<td>cell2_3</td>
+								<td>cell3_3</td>
+								<td>cell4_3</td>
+								<td>cell5_3</td>
+								<td>cell6_3</td>
+								<td>cell7_3</td>
+								<td>cell8_3</td>
+								<td>cell9_3</td>
+								<td>cell10_3</td>
+								</tr>
+								<tr>
+								<td>cell1_4</td>
+								<td>cell2_4</td>
+								<td>cell3_4</td>
+								<td>cell4_4</td>
+								<td>cell5_4</td>
+								<td>cell6_4</td>
+								<td>cell7_4</td>
+								<td>cell8_4</td>
+								<td>cell9_4</td>
+								<td>cell10_4</td>
+								</tr>
+								</tbody>
+								</table>
 							
 						</div>
 
