@@ -1,0 +1,5 @@
+Meminta pegawai, bursa pegawai :
+nip_tipe_registrynumber_tanggaldanwaktupermintaan
+
+Request jabatan :
+request_unit_jenjang_tanggaldanwaktupermintaan

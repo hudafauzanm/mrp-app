@@ -1,0 +1,6 @@
+Semua ada di dalam /storage/app/public/uploads/registry_number
+
+1. pengajuan :
+usul_tahun_no.dokumen.dipisah.dengan.titik.pdf
+jawab_tahun_no.dokumen.dipisah.dengan.titik.pdf
+sdm-jawab_tahun_no.dokumen.dipisah.dengan.titik.pdf
