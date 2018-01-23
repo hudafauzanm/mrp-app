@@ -312,7 +312,7 @@ use Carbon\Carbon;
 												</a>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#approveReqJabatan" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
@@ -513,14 +513,14 @@ use Carbon\Carbon;
 		</div>
     </div>
 
-    <div id="myModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="approveModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Approve</h4>
+					<h4 class="modal-title" id="approveModalLabel">Approve</h4>
 				</div>
 
 				<!-- Modal Body -->
@@ -528,6 +528,55 @@ use Carbon\Carbon;
 					{{ csrf_field() }}
 					<input class="mrp_id" type="hidden" name="id" value="">
 					<div class="modal-body">
+							
+						<div class="form-group"> 
+							<h4>Perintah Cetak</h4>
+							<input class="custom-file-upload" type="file" id="file" name="dokumen_mutasi" id="contact:attachment" data-btn-text="Select a File" />
+							<small class="text-muted block">Max file size: 10Mb (pdf)</small>
+						</div>
+						
+						<div class="form-group">
+							<h4>No. Dokumen</h4>
+							<input type="text" class="form-control" name="no_dokumen_mutasi">
+						</div>
+
+						<div class="form-group">
+							<h4>Tanggal Aktifasi</h4>
+							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+						</div>
+					</div>
+
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+						{{-- <button type="button" class="btn btn-primary toastr-notify" data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button> --}}
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+
+    <div id="approveReqJabatan" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="approveReqJabatanLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="approveReqJabatanLabel">Approve</h4>
+				</div>
+
+				<!-- Modal Body -->
+				<form action="/dashboard/approve_mutasi" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<input class="mrp_id" type="hidden" name="id" value="">
+					<div class="modal-body">
+
+						<div class="form-group">
+							<h4>NIP Penerima Mutasi</h4>
+							<input type="text" class="form-control" style="text-transform: uppercase" name="nip">
+						</div>
 							
 						<div class="form-group"> 
 							<h4>Perintah Cetak</h4>

@@ -82,6 +82,12 @@ class DashboardController extends Controller
         $mrp->no_dokumen_mutasi = request('no_dokumen_mutasi');
         $mrp->tgl_dokumen_mutasi = request('tgl_dokumen_mutasi');
         $mrp->status = 3;
+
+        if($mrp->tipe == 3)
+        {
+            $mrp->pegawai_id = Pegawai::where('nip', request('nip'))->first()->id;
+        }
+
         $mrp->save();
 
         $file = request('dokumen_mutasi');
