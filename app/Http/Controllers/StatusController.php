@@ -36,8 +36,15 @@ class StatusController extends Controller
     }
 
     public function getDetails($reg_num)
-    {
-        $detail = MRP::where('registry_number', $reg_num)->get();
+    {   
+        
+        $detail = MRP::where('registry_number', $reg_num)->first();
+        // dd($detail);
+        if($detail->tipe == '3')
+        {
+            return view('pages.unit.detail_bursa',compact('detail'));
+        }
+
     	return view('pages.unit.detail_mutasi',compact('detail'));
     }
 }

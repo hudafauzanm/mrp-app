@@ -17,10 +17,10 @@ class CreateMRPsTable extends Migration
         Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('registry_number');
-            $table->string('jenis_mutasi');
-            $table->string('mutasi');
+            $table->string('jenis_mutasi')->nullable();
+            $table->string('mutasi')->nullable();
             $table->string('jalur_mutasi')->nullable();
-            $table->string('alasan_mutasi');
+            $table->string('alasan_mutasi')->nullable();
             $table->char('unit_pengusul', 36);
             $table->string('no_dokumen_unit_asal')->nullable();
             $table->date('tgl_dokumen_unit_asal')->nullable();
@@ -34,7 +34,7 @@ class CreateMRPsTable extends Migration
             $table->integer('status')->default(1);
             $table->string('tindak_lanjut')->nullable();
             $table->char('sk_stg_id',36)->nullable();
-            $table->char('pegawai_id',36);
+            $table->char('pegawai_id',36)->nullable();
             $table->string('nip_pengusul');
             $table->string('nip_operator');
             $table->char('formasi_jabatan_id',36)->nullable();

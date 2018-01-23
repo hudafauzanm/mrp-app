@@ -15,9 +15,7 @@ class Unit
      */
     public function handle($request, Closure $next)
     {
-        $user_role = auth()->user()->user_role;
-
-        if(auth()->check() && ($user_role === 1 || $user_role === 3))
+        if(auth()->check() && auth()->user()->user_role === 1)
             return $next($request);
         else
             return redirect('/')->with('error', 'Anda tidak mempunyai akses ke halaman ini');

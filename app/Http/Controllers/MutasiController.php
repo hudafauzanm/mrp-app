@@ -36,7 +36,10 @@ class MutasiController extends Controller
     	}
     	else if($tipe === '3')
     	{
-    		return view('pages.unit.request_jabatan');
+            $personnelarea = auth()->user();
+            $formasis = $personnelarea->formasi_jabatan()->select('formasi')->distinct()->get()->all();            
+            
+    		return view('pages.unit.request_jabatan',compact('personnelarea','formasis'));
     	}
     	else
     	{
@@ -93,6 +96,31 @@ class MutasiController extends Controller
             return response()->json(NULL);
     }
 
+    //request jabatan
+
+    public function getFormasiJabs()
+    {
+        $unit = auth()->user();
+
+        if($unit)
+        {
+            $retval = $unit->formasi_jabatan->where('formasi', request('formasi'))->pluck('jabatan', 'kode_olah')->toArray();
+            return response()->json($retval);
+        }
+        else
+            return response()->json(NULL);
+    }
+
+    public function getJabatanInfo()
+    {
+        $jabatans = FormasiJabatan::where('kode_olah', request('jabatan_id'))->first();
+
+        return response()->json($jabatans);
+                 
+    }
+
+    //
+
     public function submitForm()
     {
         $tipe = request('mrp')['tipe'];
@@ -136,9 +164,40 @@ class MutasiController extends Controller
             $filename = 'pengusul_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
             // dd($foldername, $filename);
             // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
-            $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+            // $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
 
-            return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');
+            return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');       
         }
+        else if($tipe === '3') 
+         {  
+            //dd(request()->all());
+
+            $this->validate(request(), [
+                'file_dokumen_mutasi' => 'required|mimes:pdf|max:10240'
+            ]);
+
+            $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
+            
+            $input_mrp = array(
+                'id' => Uuid::generate(),
+                'registry_number' => $nip.'.Request.'.\Carbon\Carbon::now('Asia/Jakarta'),
+                'status' => 1,
+                'nip_operator' => request()->session()->get('nip_operator'),
+                'unit_pengusul' => auth()->user()->id,
+                'formasi_jabatan_id' => $id_proyeksi,
+            );
+
+            $data_mrp = array_merge($input_mrp, request('mrp'));
+
+            $mrp = MRP::create($data_mrp);
+
+            $file = request('file_dokumen_mutasi');
+            $foldername = $mrp->registry_number.'/';
+            $filename = str_replace('/', '.', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+            //$file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+
+            return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Berhasil Bursa Jabatan');
+
+         } 
     }
 }

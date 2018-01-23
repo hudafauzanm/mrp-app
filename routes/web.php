@@ -24,12 +24,15 @@ Route::get('/logout', 'LoginController@logout');
 Route::get('/status', 'StatusController@index');
 Route::get('/status/detail/{reg_num}', 'StatusController@getDetails');
 
+
 // form pengajuan mutasi (semua tipe)
 Route::get('/mutasi/pengajuan', 'MutasiController@index');
 Route::get('/mutasi/pengajuan/get_pegawai_info', 'MutasiController@getPegawaiInfo');
 Route::post('/mutasi/pengajuan/submit_form', 'MutasiController@submitForm');
 Route::get('/mutasi/pengajuan/getFormasi', 'MutasiController@getFormasi'); 
 Route::get('/mutasi/pengajuan/getJabatan', 'MutasiController@getJabatan');
+Route::get('/mutasi/pengajuan/getFormasiJabs', 'MutasiController@getFormasiJabs');
+Route::get('/mutasi/pengajuan/getJabatanInfo', 'MutasiController@getJabatanInfo');
 
 // sdm
 Route::get('/mrp', 'MRPController@index');

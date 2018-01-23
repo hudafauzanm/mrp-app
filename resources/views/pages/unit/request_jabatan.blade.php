@@ -14,105 +14,32 @@
 	<!-- /page title -->
 
 	<div id="content" class="padding-20">
+		@include('includes.validation_errors')
+
 		<div class="row">
 			<div class="col-md-6 scrollable">
-				<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
+				<form class="" action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
 				<div id="content" >
+					{{ csrf_field() }}
+					<input type="hidden" name="mrp[tipe]" value="{{ request('tipe') }}">
+					<input type="hidden" id="kode_olah_pegawai" value="">
 					<!-- data pegawainya -->
 					<div class="panel panel-default">
 						<div class="panel-heading panel-heading-transparent">
 							<strong>DATA JABATAN</strong>
 						</div>
-
 						<div class="panel-body">
 							<fieldset>
 								<!-- required [php action request] -->
 								<input type="hidden" name="action" value="contact_send" />
 
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-6 col-sm-6">
-											<label>Jenjang - Main Group</label>
-											<select name="" class="form-control pointer required">
-												<option value="">--- Jenjang - Main Group ---</option>
-												<option value="str">Struktural</option>
-												<option value="fung">Fungsional</option>
-											</select> 
-										</div>
-										<div class="col-md-6 col-sm-6">
-											<label>Jenjang - Sub Group</label>
-											<select name="" class="form-control pointer required">
-												<option value="">--- Jenjang - Sub Group ---</option>
-												<option value="F1">Fungsional III</option>
-												<option value="F2">Fungsional IV</option>
-												<option value="F3">Fungsional V</option>
-												<option value="F4">Fungsional VI</option>
-												<option value="SD">Supervisori Dasar</option>
-												<option value="SA">Supervisori Atas</option>
-												<option value="MD">Manajemen Dasar</option>
-											</select> 
-										</div>
-									</div>
-								</div>
+								
 
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Unit</label>
-											<input type="text" class="form-control" list="unitsi" name="" class="form-control pointer required">
-											<datalist id="unitsi">
-												<option value="PLN Kantor Pusat">
-												<option value="Distribusi A-Z">
-												<option value="Wilayah A-Z">
-											</datalist>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Direktorat</label>
-											<input type="text" class="form-control" list="dirsi" name="" class="form-control pointer required">
-											<datalist id="dirsi">
-												<option value="dari database">
-											</datalist>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Personel Area</label>
-											<input type="text" class="form-control" list="pasi" name="" class="form-control pointer required">
-											<datalist id="pasi">
-												<option value="dari database">
-											</datalist>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Bidang</label>
-											<input type="text" class="form-control" list="pasi" name="" class="form-control pointer required">
-											<datalist id="pasi">
-												<option value="dari database">
-											</datalist>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Sub Bidang</label>
-											<input type="text" class="form-control" list="pasi" name="" class="form-control pointer required">
-											<datalist id="pasi">
-												<option value="dari database">
-											</datalist>
+											<input type="text" class="form-control"  id="unit_id" class="form-control pointer required" required value="{{$personnelarea->nama}}" disabled>
 										</div>
 									</div>
 								</div>
@@ -121,10 +48,12 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Formasi</label>
-											<input type="text" class="form-control" list="forsi" name="" class="form-control pointer required">
-											<datalist id="forsi">
-												<option value="dari database">
-											</datalist>
+												<select class="form-control select2" name="formasi" id="formasi_id" required> 
+													<option>---Pilih Formasi---</option>
+													@foreach($formasis as $formasi)
+														<option value="{{$formasi->formasi}}"> {{$formasi->formasi }} </option>
+													@endforeach
+												</select>
 										</div>
 									</div>
 								</div>
@@ -133,10 +62,9 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Jabatan</label>
-											<input type="text" class="form-control" list="jbtnsi" name="" class="form-control pointer required">
-											<datalist id="jbtnsi">
-												<option value="dari database">
-											</datalist>
+												<select class="form-control select2" name="kode_olah" id="jabatan_id" disabled>
+													<option>---Pilih Jabatan---</option>
+												</select>
 										</div>
 									</div>
 								</div>
@@ -144,8 +72,31 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
-											<label>Posisi Pada Unit(?)</label>
-											<input type="text" name="contact[phone]" value="" class="form-control required">
+											<label>Jenjang</label>
+											<input type="text" class="form-control required"  name="jenjang" id="jenjang_id" disabled>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-12 col-sm-12">
+											<label>Posisi</label>
+											<input type="text" class="form-control" id="posisi_id" name="posisi" class="form-control pointer required" disabled>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6 col-sm-6">
+											<label>SPFJ *</label>
+											<input type="text" name="spfj" id="spfj_id" value="" class="form-control required" disabled>
+										</div>
+										<div class="col-md-6 col-sm-6">
+											<label>Legacy Code</label>
+											<input type="text" class="form-control" id="lc_id" name="legacy" class="form-control pointer required" disabled>
 										</div>
 									</div>
 								</div>
@@ -153,21 +104,12 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
-											<label>SPFJ *</label>
-											<input type="text" name="contact[phone]" value="" class="form-control required">
+											<label>NIP Pengusul*</label>
+											<input type="text" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp.nip_pengusul') }}" class="form-control required" autocomplete="off" required>
 										</div>
 										<div class="col-md-6 col-sm-6">
-											<label>Legacy Code</label>
-											<input type="text" class="form-control" list="daftarLC" name="" class="form-control pointer required">
-											<datalist id="daftarLC">
-												<option value="1">
-												<option value="2">
-												<option value="3">
-												<option value="4">
-												<option value="5">
-												<option value="6">
-												<option value="7">
-											</datalist>
+											<label>Nama Pengusul</label>
+											<input type="text" name="dis_pengusul" id="nama_pengusul" value="{{ old('dis_pengusul') }}" class="form-control" disabled>
 										</div>
 									</div>
 								</div>	
@@ -176,23 +118,23 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Source</label>
-											<select name="src" class="form-control pointer required">
+											<select name="source" id="sourceid" class="form-control pointer required" required>
 												<option value="">--- Source ---</option>
-												<option value="frs1">FRS Fresh Graduate</option>
-												<option value="frs2">FRS PRO</option>
-												<option value="exist">Exist</option>
+												<option id="frs1" value="frs1">FRS-FreshGraduate</option>
+												<option value="frs2">EXT-Pro</option>
+												<option value="exist">Existing</option>
 											</select> 
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Jumlah yang Dibutuhkan <small class="text-muted block">(per formasi)</small></label>
-											<input type="text" class="form-control" list="jml" name="jml" class="form-control pointer required">
-											<datalist id="jml">
-												<option value="1">
-												<option value="2">
-												<option value="3">
-												<option value="4">
-												<option value="5">
-											</datalist>
+											<select name="jumlah" id="jumlahid" class="form-control pointer required" required>
+												<option>---Pilih Jumlah---</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>	
 										</div>
 									</div>
 								</div>
@@ -201,11 +143,11 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Jurusan</label>
-											<input type="text" name="jrsn" value="" class="form-control required">
+											<input type="text" name="jrsn" value="" class="form-control required" disabled>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Konsentrasi</label>
-											<input type="text" name="kons" value="" class="form-control required">
+											<input type="text" name="kons" value="" class="form-control required" disabled>
 										</div>
 									</div>
 								</div>
@@ -214,11 +156,11 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Pendidikan</label>
-											<input type="text" name="spfj" value="" class="form-control required">
+											<input type="text" name="spfj" value="" class="form-control required" disabled>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Level Pendidikan</label>
-											<select name="lvpdn" class="form-control pointer required">
+											<select name="lvpdn" class="form-control pointer required" disabled>
 												<option value="">--- Level Pendidikan ---</option>
 												<option value="smp">SMP</option>
 												<option value="sma">SMA</option>
@@ -249,6 +191,24 @@
 
 								<div class="row">
 									<div class="form-group">
+										<div class="col-md-12 col-sm-12">
+											<label>Tanggal Dokumen Mutasi *</label>
+											<input type="text" name="mrp[tgl_dokumen_unit_asal]" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('mrp.tgl_dokumen_unit_asal') }}" required>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-12 col-sm-12">
+											<label>No. Dokumen Mutasi *</label>
+											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp.no_dokumen_unit_asal') }}" class="form-control required" required>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="form-group">
 										<div class="col-md-12">
 											<label>
 												Upload Dokumen
@@ -257,11 +217,11 @@
 											<!-- custom file upload -->
 											<div class="fancy-file-upload fancy-file-primary">
 												<i class="fa fa-upload"></i>
-												<input type="file" class="form-control" name="attachmentRequest" onchange="jQuery(this).next('input').val(this.value);" />
+												<input type="file" class="form-control" name="file_dokumen_mutasi" onchange="jQuery(this).next('input').val(this.value);" />
 												<input type="text" class="form-control" placeholder="no file selected" readonly="" />
 												<span class="button">Choose File</span>
 											</div>
-											<small class="text-muted block">Max file size: 10Mb (zip/rar/pdf)</small>
+											<small class="text-muted block">Max file size: 10Mb (pdf)</small>
 										</div>
 									</div>
 								</div>
@@ -448,6 +408,93 @@
 					});
 				});
 			});
+		});
+	</script>
+
+	<script>
+		$("#jabatan_id").change(function(){
+			var formasis = $(this).val();
+
+			$.ajax({
+				'url' : '/mutasi/pengajuan/getJabatanInfo',
+				'type' : 'GET',
+				'data' : {
+					'jabatan_id' : formasis,
+				},
+				'dataType' : 'json',
+				error: function(data){
+
+				},
+				success: function(data){
+
+					$("#jenjang_id").val(data.jenjang_txt+' ('+data.jenjang_id+')');
+					$("#posisi_id").val(data.posisi);
+					$("#spfj_id").val(data.spfj);
+					$("#lc_id").val(data.legacy_code);
+				}
+			});
+
+		})
+	</script>
+
+	<script>
+		$("#formasi_id").change(function(){
+			var formasi = $(this).val();
+			var unit_id = $("#unit_id").val();
+
+			$.ajax({
+				'url': '/mutasi/pengajuan/getFormasiJabs',
+				'type': 'GET',
+				'data': {
+					'unit_id': unit_id,
+					'formasi': formasi,
+					'kode_olah': $("#kode_olah_pegawai").val(),
+				},
+				'dataType': 'json',
+				error: function(){
+
+				},
+				success: function(data){
+					var jabatan = $("#jabatan_id");
+					jabatan.empty();
+					jabatan.append('<option>---Pilih Jabatan---</option>');
+					jabatan.removeAttr('disabled');
+					$.each(data, function(key, value){
+						console.log(value);
+						jabatan.append('<option value="'+key+'">'+value+'</option>');
+					});
+				}
+			});
+		})
+	</script>
+	<script>
+		$("#nip_pengusul").on('keyup paste', function(){
+			var nip = $(this).val();
+			if(nip.length >= 6)
+			{
+				$.ajax({
+					'url': '/mutasi/pengajuan/get_pegawai_info',
+					'type': 'GET',
+					'data': {
+						'nip': nip
+					},
+					'dataType': 'json',
+					error: function(){
+
+					},
+					success: function(data){
+						if(data)
+						{
+							$("#nama_pengusul").val(data.nama_pegawai);
+						}
+					}
+				});
+
+			}
+			else
+			{
+				$("#nama_pengusul").val('');
+			}
 		});
 	</script>
 @endsection
