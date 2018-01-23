@@ -165,7 +165,7 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai" id="nilaiBtn">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
 													<i class="fa fa-check-circle"></i>
 													<span>Nilai</span>
 												</button>														
@@ -242,7 +242,7 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" value="{{$mrp->pegawai->nip}}">
+												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Nilai {{$mrp->pegawai->nama_pegawai}}</span>
 												</button>														
@@ -376,53 +376,51 @@ use Carbon\Carbon;
 									</ul>
 								</div>
 								<div class="panel-body nopadding">
-									<div class="table-responsive">
-										<table class="table table-bordered table-vertical-middle nomargin">
-											<thead>
-												<tr>
-													<th>Uraian</th>
-													<th>Skor</th>
-												</tr>
-											</thead>
-											<tbody>
+									<table class="table table-bordered table-vertical-middle nomargin">
+										<thead>
+											<tr>
+												<th>Uraian</th>
+												<th>Skor</th>
+											</tr>
+										</thead>
+										<tbody>
 
-												<tr>
-													<td>Enthusiasthic for Challenge</td>
-													
-													<td><div class="rating rating-0 size-13 width-100" id="rating1"><!-- rating-0 ... rating-5 --></div></td>
-													
-												</tr>
-												<tr>
-													<td>Creative & Innovative</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating2"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Building Business Partnership</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating3"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Strategic Orientation</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating4"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Customer Focus Oriented</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating5"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Driving Execution</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating6"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Visionary Leadership</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating7"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Empowering / Developing Others</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating8"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+											<tr>
+												<td>Enthusiastic for Challenge</td>
+												
+												<td><div class="rating rating-0 size-13 width-100" id="enthusiastic"><!-- rating-0 ... rating-5 --></div></td>
+												
+											</tr>
+											<tr>
+												<td>Creative & Innovative</td>
+												<td><div class="rating rating-0 size-13 width-100" id="creative"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Building Business Partnership</td>
+												<td><div class="rating rating-0 size-13 width-100" id="building"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Strategic Orientation</td>
+												<td><div class="rating rating-0 size-13 width-100" id="strategic"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Customer Focus Oriented</td>
+												<td><div class="rating rating-0 size-13 width-100" id="customer"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Driving Execution</td>
+												<td><div class="rating rating-0 size-13 width-100" id="driving"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Visionary Leadership</td>
+												<td><div class="rating rating-0 size-13 width-100" id="visionary"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Empowering / Developing Others</td>
+												<td><div class="rating rating-0 size-13 width-100" id="empowering"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -440,38 +438,36 @@ use Carbon\Carbon;
 								</div>
 
 								<div class="panel-body nopadding">
-									<div class="table-responsive">
-										<table class="table table-bordered table-vertical-middle nomargin">
-											<thead>
-												<tr>
-													<th>Uraian</th>
-													<th>Skor</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Komunikasi</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating9"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>KH2</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating10"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Bahasa Inggris</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating11"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Bahasa Mandarin</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating12"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-												<tr>
-													<td>Bahasa Jawa</td>
-													<td><div class="rating rating-0 size-13 width-100" id="rating13"><!-- rating-0 ... rating-5 --></div></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+									<table class="table table-bordered table-vertical-middle nomargin">
+										<thead>
+											<tr>
+												<th>Uraian</th>
+												<th>Skor</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Komunikasi</td>
+												<td><div class="rating rating-0 size-13 width-100" id="komunikasi"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>KH2</td>
+												<td><div class="rating rating-0 size-13 width-100" id="team_work"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Bahasa Indonesia</td>
+												<td><div class="rating rating-0 size-13 width-100" id="bahasa_1_nilai"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td>Bahasa Inggris</td>
+												<td><div class="rating rating-0 size-13 width-100" id="bahasa_2_nilai"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+											<tr>
+												<td id="bahasa_3">Bahasa </td>
+												<td><div class="rating rating-0 size-13 width-100" id="bahasa_3_nilai"><!-- rating-0 ... rating-5 --></div></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -503,27 +499,23 @@ use Carbon\Carbon;
 									<tbody>
 										<tr>
 											<td>Internal Readiness</td>
-											<td>Kesehatan</td>
-											<td><a href="#" class="btn btn-3d btn-xs btn-primary">
-											<i class="fa fa-arrow-circle-down"></i>
-											<span>Download</span>
-											</a>
-										</td>
+											<td><b>Kesehatan</b></td>
+											<td id="kesehatan"></td>
 										</tr>
 										<tr>
 											<td></td>
-											<td>Career Willingness</td>
-											<td> Aasdasdwa dasdasdasd asd asdas asd sdasdasd asda sdaasdasdasd asdasda asdas </td>
+											<td><b>Career Willingness</b></td>
+											<td id="career_willingness"></td>
 										</tr>
 										<tr>
 											<td>External Readiness</td>
-											<td>Keluarga</td>
-											<td></td>
+											<td><b>Keluarga</b></td>
+											<td id="external_rediness"></td>
 										</tr>
 										<tr>
 											<td>Hubungan Dengan Sesama</td>
 											<td></td>
-											<td></td>
+											<td id="hubungan_sesama"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -643,14 +635,12 @@ use Carbon\Carbon;
 	</script>
 
 	<script>
-		$(".nilaiBtn").click(function(){
-			var nip = $(this).val();
-
+		function getNilai(id){
 			$.ajax({
 				'url': '/dashboard/get_pegawai_nilai',
 				'type': 'GET',
 				'data': {
-					'pegawai_id': nip
+					'pegawai': id
 				},
 				'dataType': 'json',
 				error: function(){
@@ -659,16 +649,50 @@ use Carbon\Carbon;
 				success: function(data){
 					if(data)
 					{
+						for(var prop in data.bintang) {
+							var angka = Math.ceil(data.bintang[prop] / 20);
+							$('#'+prop).removeClass().addClass('rating rating-'+angka+' size-13 width-100');
+						}
+
 						for(var prop in data) {
-							var angka = Math.ceil(data[prop] / 20);
-							$('#rating'+prop).removeClass().addClass('rating rating-'+angka+' size-13 width-100');
+							if(prop == 'bintang')
+								break;
+							$("#"+prop).empty().html(data[prop]);
 						}
 					}
 				}
 			});
+		}
+
+		// $('#ceknilai').on('shown.bs.modal', function (e) {
+		//   alert('ok');
+		// })
+		// $(".nilaiBtn").click(function(){
+		// 	var id = $(this).val();
+
+		// 	$.ajax({
+		// 		'url': '/dashboard/get_pegawai_nilai',
+		// 		'type': 'GET',
+		// 		'data': {
+		// 			'pegawai': id
+		// 		},
+		// 		'dataType': 'json',
+		// 		error: function(){
+
+		// 		},
+		// 		success: function(data){
+		// 			if(data)
+		// 			{
+		// 				for(var prop in data) {
+		// 					var angka = Math.ceil(data[prop] / 20);
+		// 					$('#rating'+prop).removeClass().addClass('rating rating-'+angka+' size-13 width-100');
+		// 				}
+		// 			}
+		// 		}
+		// 	});
 				
 			
-		});
+		// });
 	</script>
 
 	<script>

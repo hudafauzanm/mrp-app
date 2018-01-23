@@ -34,15 +34,17 @@ class DashboardController extends Controller
     	else if($user->user_role == 3)
     	{
             $mrp_1 = MRP::where('status', 2)->where('tipe', 1)->get();
-            $mrp_2 = MRP::where('status', 2)->where('tipe', 2)->get();
-            $mrp_3 = MRP::where('status', 2)->where('tipe', 3)->get();
+            $mrp_2 = MRP::where('status', 1)->where('tipe', 2)->get();
+            $mrp_3 = MRP::where('status', 1)->where('tipe', 3)->get();
             $nilai = MRP::where('status', 2)->get();
+
     		return view('pages.sdm.dashboard', compact('mrp_1', 'mrp_2', 'mrp_3', 'nilai'));
     	}
     }
     public function getPenilaianPegawai()
     {
-        $nilpegawai = PenilaianPegawai::select('creative', 'enthusiastic', 'building', 'strategic', 'customer', 'driving', 'visionary', 'empowering', 'komunikasi', 'team_work', 'bahasa_1_nilai', 'bahasa_2_nilai', 'bahasa_3_nilai')->where('pegawai_id', request('nip'))->first();
+        $nilpegawai = PenilaianPegawai::select('kesehatan', 'career_willingness', 'external_rediness', 'hubungan_sesama')->where('pegawai_id', request('pegawai'))->first();
+        $nilpegawai->bintang = PenilaianPegawai::select('creative', 'enthusiastic', 'building', 'strategic', 'customer', 'driving', 'visionary', 'empowering', 'komunikasi', 'team_work', 'bahasa_1_nilai', 'bahasa_2_nilai', 'bahasa_3_nilai')->where('pegawai_id', request('pegawai'))->first();
         //$user = auth()->user();
         
         return response()->json($nilpegawai);
