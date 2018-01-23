@@ -98,7 +98,7 @@ use Carbon\Carbon;
 								<a  class="tabselect" href="#bursa" data-toggle="tab">Bursa Pegawai</a>
 							</li>
 							<li class="">
-								<a class="tabselect" href="#request" data-toggle="tab">Request</a>
+								<a class="tabselect" href="#request" data-toggle="tab">Request Jabatan</a>
 							</li>
 						</ul>									
 
@@ -161,20 +161,19 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
 											<td>xxx</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#ceknilai">
+												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
 													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
+													<span>Nilai {{$mrp->pegawai->nama_pegawai}}</span>
+												</button>												
 											</td>
-											<td class="text-center">
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Usulan</span>
-												</a>
-												<a href="#" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Lolos Butuh</span>
-												</a>
+											<td>
+												<div class="btn-group">
+													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Download <span class="caret"></span></button>
+													<ul class="dropdown-menu" role="menu">
+														<li><a href="#"><i class="fa fa-question-circle"></i> Usulan</a></li>
+														<li><a href="#"><i class="fa fa-edit"></i> Lolos Butuh</a></li>
+													</ul>
+												</div>
 											</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
@@ -245,7 +244,7 @@ use Carbon\Carbon;
 												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Nilai {{$mrp->pegawai->nama_pegawai}}</span>
-												</button>														
+												</button>													
 											</td>
 											<td class="text-center">
 												<a href="#" class="btn btn-3d btn-sm btn-primary">
@@ -285,16 +284,12 @@ use Carbon\Carbon;
 									<thead>
 										<tr>
 											<th class="foo-cell">Registry Number</th>
-											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
-											<th data-type="numeric" data-hide = "" class="">Nama</th>
-											<th data-type="numeric" data-hide = "all" class="">Grade</th>
-											<th data-type="numeric" data-hide = "all" class="">Jabatan Saat Ini</th>
-											<th data-type="numeric" data-hide = "all" class="">Proyeksi Jabatan</th>
-											<th data-type="numeric" data-hide = "all" class="">Masa Kerja</th>
-											<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
-											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
-											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
-											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Unit Peminta</th>
+											<th data-type="numeric" data-hide = "" class="">Proyeksi Formasi</th>
+											<th data-type="numeric" data-hide = "" class="">Proyeksi Jabatan</th>
+											<th data-type="numeric" data-hide = "all" class="">Pengusul</th>
+											<th data-type="numeric" data-hide = "all" class="">Source</th>
+											<th data-type="numeric" data-hide = "all" class="">Tanggal Aktivasi</th>
 											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
@@ -303,32 +298,17 @@ use Carbon\Carbon;
 										@foreach ($mrp_3 as $mrp)
 										<tr>
 											<td class="foo-cell">{{ $mrp->registry_number }}</td>
-											<td>{{$mrp->pegawai->nip}}</td>
-											<td>{{$mrp->pegawai->nama_pegawai}}</td>
-											<td>{{$mrp->pegawai->ps_group}}</td>
-											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
-											<td>
-												@if(isset($mrp->formasi_jabatan_id))
-													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
-													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
-												@else
-													Perlu saran
-												@endif
-											</td>
-											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
-											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
-											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai</span>
-												</button>														
-											</td>
+											<td>{{ $mrp->personnel_area_pengusul->nama_pendek }}</td>
+											<td>{{ $mrp->formasi_jabatan->formasi }}</td>
+											<td>{{ $mrp->formasi_jabatan->jabatan }}</td>
+											<td>{{ \App\Pegawai::where('nip', $mrp->nip_pengusul)->first()->nama_pegawai }} ({{ $mrp->nip_pengusul }})</td>
+											<td>Existing</td>
+											{{-- <td>{{ $mrp->tanggal_aktivasi }}</td> --}}
+											<td>sementara</td>
 											<td class="text-center">
 												<a href="#" class="btn btn-3d btn-sm btn-primary">
 													<i class="fa fa-arrow-circle-down"></i>
-													<span>Usulan</span>
+													<span>Download</span>
 												</a>
 											</td>
 											<td class="text-center">
@@ -469,7 +449,7 @@ use Carbon\Carbon;
 												<td><div class="rating rating-0 size-13 width-100" id="bahasa_2_nilai"><!-- rating-0 ... rating-5 --></div></td>
 											</tr>
 											<tr>
-												<td id="bahasa_3">Bahasa </td>
+												<td id="bahasa_3">Bahasa 3</td>
 												<td><div class="rating rating-0 size-13 width-100" id="bahasa_3_nilai"><!-- rating-0 ... rating-5 --></div></td>
 											</tr>
 										</tbody>
