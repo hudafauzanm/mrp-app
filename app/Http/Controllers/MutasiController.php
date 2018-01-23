@@ -26,7 +26,9 @@ class MutasiController extends Controller
 
     	if($tipe === '1')
     	{
-    		return view('pages.unit.meminta');
+            $units = PersonnelArea::all();
+
+    		return view('pages.unit.meminta',compact('units'));
     	}
     	else if($tipe === '2')
     	{
@@ -126,7 +128,43 @@ class MutasiController extends Controller
         $tipe = request('mrp')['tipe'];
         $nip = request('nip');
 
-        if($tipe === '2')
+        if($tipe === '1')
+        {
+            $this->validate(request(), [
+                'file_dokumen_mutasi' => 'required|mimes:pdf|max:10240'
+            ]);
+
+            $pegawai_id = Pegawai::where('nip', $nip)->first()->id;
+
+            if(request('rekom_checkbox') === '1')
+                $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
+            else
+                $id_proyeksi = NULL;
+
+            $tambahan_mrp = array(
+                'id' => Uuid::generate(),
+                'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.\Carbon\Carbon::now('Asia/Jakarta'),
+                'status' => 1,
+                'nip_operator' => request()->session()->get('nip_operator'),
+                'unit_pengusul' => auth()->user()->id,
+                'pegawai_id' => $pegawai_id,
+                'formasi_jabatan_id' => $id_proyeksi,
+            );
+
+            $data_mrp = array_merge($tambahan_mrp, request('mrp'));
+
+            $mrp = MRP::create($data_mrp);
+
+            $file = request('file_dokumen_mutasi');
+            $foldername = $mrp->registry_number.'/';
+            $filename = 'USUL_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+
+            // $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+
+            return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Berhasil Meminta Pegawai');
+        }
+
+        else if($tipe === '2')
         {
 
             $this->validate(request(), [
@@ -161,7 +199,7 @@ class MutasiController extends Controller
 
             $file = request('file_dokumen_mutasi');
             $foldername = $mrp->registry_number.'/';
-            $filename = 'pengusul_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+            $filename = 'USUL_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
             // dd($foldername, $filename);
             // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
             // $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
@@ -193,7 +231,7 @@ class MutasiController extends Controller
 
             $file = request('file_dokumen_mutasi');
             $foldername = $mrp->registry_number.'/';
-            $filename = str_replace('/', '.', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+            $filename = 'USUL_'.str_replace('/', '.', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
             //$file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
 
             return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Berhasil Bursa Jabatan');
