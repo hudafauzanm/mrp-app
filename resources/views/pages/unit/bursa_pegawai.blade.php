@@ -40,7 +40,7 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP *</label>
-											<input type="text" name="nip" id="nip" value="{{ old('nip') }}" class="form-control required" autocomplete="off" required>
+											<input type="text" name="nip" style="text-transform: uppercase" id="nip" value="{{ old('nip') }}" class="form-control required" autocomplete="off" required>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Nama Pegawai</label>
@@ -89,6 +89,19 @@
 										</div>
 									</div>
 								</div>
+
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6 col-sm-6">
+											<label>Lama Menjabat <small class="text-muted">(di Jabatan Terakhir)</small></label>
+											<input type="text" id="lama_menjabat" value="" class="form-control" disabled>
+										</div>
+										<div class="col-md-6 col-sm-6">
+											<label>Kali jenjang</label>
+											<input type="text" id="kali_jenjang" value="" class="form-control" disabled>
+										</div>
+									</div>
+								</div>
 								
 							</div>
 						</fieldset>
@@ -107,7 +120,7 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Pengusul*</label>
-											<input type="text" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp.nip_pengusul') }}" class="form-control required" autocomplete="off" required>
+											<input type="text"  style="text-transform: uppercase" name="mrp[nip_pengusul]" id="nip_pengusul" value="{{ old('mrp.nip_pengusul') }}" class="form-control required" autocomplete="off" required>
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>Nama Pengusul</label>
@@ -593,6 +606,8 @@
 							$("#posisi").val(data.posisi);
 							$("#masa_kerja").val(data.masa_kerja);
 							$("#sisa_kerja").val(data.sisa_masa_kerja);
+							$("#lama_menjabat").val(data.lama_menjabat);
+							$("#kali_jenjang").val(data.kali_jenjang);
 							$("#kode_olah_pegawai").val(data.kode_olah_forja);
 						}
 						else
@@ -603,6 +618,8 @@
 							$("#posisi").val('');
 							$("#masa_kerja").val('');
 							$("#sisa_kerja").val('');
+							$("#lama_menjabat").val('');
+							$("#kali_jenjang").val('');
 							$("#kode_olah_pegawai").val('');
 						}
 					}
@@ -616,6 +633,8 @@
 				$("#posisi").val('');
 				$("#masa_kerja").val('');
 				$("#sisa_kerja").val('');
+				$("#lama_menjabat").val('');
+				$("#kali_jenjang").val('');
 				$("#kode_olah_pegawai").val('');
 			}
 		});
