@@ -23,6 +23,8 @@ use Carbon\Carbon;
 @section('content')
 
 	<div id="content" class="padding-20">
+		@include('includes.validation_errors')
+
 		<div class="row">
 			<div class="col-md-6">
 				<h4>Monitoring</h4>	
@@ -175,11 +177,11 @@ use Carbon\Carbon;
 												</a>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red" onclick="rejectFunct('{{ $mrp->id }}')">
+												<button type="button" class="btn btn-3d btn-sm btn-red" data-toggle="modal" data-target="#rejectModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -252,11 +254,11 @@ use Carbon\Carbon;
 												</a>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red" onclick="rejectFunct('{{ $mrp->id }}')">
+												<button type="button" class="btn btn-3d btn-sm btn-red" data-toggle="modal" data-target="#rejectModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -330,11 +332,11 @@ use Carbon\Carbon;
 												</a>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red" onclick="rejectFunct('{{ $mrp->id }}')">
+												<button type="button" class="btn btn-3d btn-sm btn-red" data-toggle="modal" data-target="#rejectModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-minus-circle"></i>
 													<span>Reject</span>
 												</button>
@@ -542,26 +544,78 @@ use Carbon\Carbon;
 				</div>
 
 				<!-- Modal Body -->
-				<div class="modal-body">
-					
-					<div class="form-group"> 
-					<h4>Perintah Cetak</h4>
-					<input class="custom-file-upload" type="file" id="file" name="contact[attachment]" id="contact:attachment" data-btn-text="Select a File" />
-					<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
+				<form action="/dashboard/approve_mutasi" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<input class="mrp_id" type="hidden" name="id" value="">
+					<div class="modal-body">
+							
+						<div class="form-group"> 
+							<h4>Perintah Cetak</h4>
+							<input class="custom-file-upload" type="file" id="file" name="dokumen_mutasi" id="contact:attachment" data-btn-text="Select a File" />
+							<small class="text-muted block">Max file size: 10Mb (pdf)</small>
+						</div>
+						
+						<div class="form-group">
+							<h4>No. Dokumen</h4>
+							<input type="text" class="form-control" name="no_dokumen_mutasi">
+						</div>
+
+						<div class="form-group">
+							<h4>Tanggal Aktifasi</h4>
+							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+						</div>
 					</div>
 
-					<div class="form-group">
-
-					<h4>Tanggal Aktifasi</h4>
-					<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+						{{-- <button type="button" class="btn btn-primary toastr-notify" data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button> --}}
 					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+
+    <div id="rejectModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="rejectModalLabel">Reject</h4>
 				</div>
 
-				<!-- Modal Footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-					<button type="button" class="btn btn-primary toastr-notify" data-progressBar="true" data-position="top-right" data-notifyType="success" data-message="Berhasil disimpan dan Dikirim" data-dismiss="modal">Simpan</button>
-				</div>
+				<!-- Modal Body -->
+				<form action="/dashboard/reject_mutasi" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<input class="mrp_id" type="hidden" name="id" value="">
+					<div class="modal-body">
+							
+						<div class="form-group"> 
+							<h4>Surat Penolakan</h4>
+							<input class="custom-file-upload" type="file" name="dokumen_mutasi" id="file" id="contact:attachment" data-btn-text="Select a File" />
+							<small class="text-muted block">Max file size: 10Mb (pdf)</small>
+						</div>
+						
+						<div class="form-group">
+							<h4>No. Dokumen</h4>
+							<input type="text" class="form-control" name="no_dokumen_mutasi">
+						</div>
+
+						<div class="form-group">
+							<h4>Tanggal Aktifasi</h4>
+							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+						</div>
+					</div>
+
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+					</div>
+				</form>
 			</div>
 		</div>
     </div>	
@@ -670,28 +724,29 @@ use Carbon\Carbon;
 	</script>
 
 	<script>
-		function rejectFunct(id){
-			if(confirm('Anda yakin akan reject permintaan mutasi ini?'))
-			{
-				$.ajax({
-					'url': '/dashboard/reject_mutasi',
-					'type': 'post',
-					'data': {
-						'_token': '{{ csrf_token() }}',
-						'id': id
-					},
-					'dataType': 'json',
-					error: function(){
+		function rejectApproveFunct(id){
+			$(".mrp_id").val(id);
+			// if(confirm('Anda yakin akan reject permintaan mutasi ini?'))
+			// {
+			// 	$.ajax({
+			// 		'url': '/dashboard/reject_mutasi',
+			// 		'type': 'post',
+			// 		'data': {
+			// 			'_token': '{{ csrf_token() }}',
+			// 			'id': id
+			// 		},
+			// 		'dataType': 'json',
+			// 		error: function(){
 
-					},
-					success: function(data){
-						if(data)
-						{
-							$("tr#"+id).remove();
-						}
-					}
-				});
-			}
+			// 		},
+			// 		success: function(data){
+			// 			if(data)
+			// 			{
+			// 				$("tr#"+id).remove();
+			// 			}
+			// 		}
+			// 	});
+			// }
 		};
 	</script>
 

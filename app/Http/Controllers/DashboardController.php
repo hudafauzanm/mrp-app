@@ -52,12 +52,45 @@ class DashboardController extends Controller
 
     public function rejectMutasi()
     {
-        // var_dump('wew');
-        // die();
+        $this->validate(request(), [
+            'dokumen_mutasi' => 'required|mimes:pdf|max:10240'
+        ]);
+
         $mrp = MRP::find(request('id'));
+        $mrp->no_dokumen_mutasi = request('no_dokumen_mutasi');
+        $mrp->tgl_dokumen_mutasi = request('tgl_dokumen_mutasi');
         $mrp->status = 99;
         $mrp->save();
 
-        return response()->json(1);
+        $file = request('dokumen_mutasi');
+        $foldername = $mrp->registry_number.'/';
+        $filename = 'tolak_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+        // dd($foldername, $filename);
+        // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+        $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+
+        return back()->with('success', 'Berhasil');
+    }
+
+    public function approveMutasi()
+    {
+        $this->validate(request(), [
+            'dokumen_mutasi' => 'required|mimes:pdf|max:10240'
+        ]);
+
+        $mrp = MRP::find(request('id'));
+        $mrp->no_dokumen_mutasi = request('no_dokumen_mutasi');
+        $mrp->tgl_dokumen_mutasi = request('tgl_dokumen_mutasi');
+        $mrp->status = 3;
+        $mrp->save();
+
+        $file = request('dokumen_mutasi');
+        $foldername = $mrp->registry_number.'/';
+        $filename = 'terima_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+        // dd($foldername, $filename);
+        // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+        $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+
+        return back()->with('success', 'Berhasil');
     }
 }
