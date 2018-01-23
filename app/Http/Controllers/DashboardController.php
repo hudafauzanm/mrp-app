@@ -51,6 +51,7 @@ class DashboardController extends Controller
     }
     public function detaileval()
     {
-        return view('pages.karir2.dataevaluasi');
+        $mrp_e1 = MRP::where('status', 3)->get();
+        return view('pages.karir2.dataevaluasi', compact('mrp_e1'));
     }
 }

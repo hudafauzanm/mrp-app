@@ -53,13 +53,17 @@ use Carbon\Carbon;
 
 			<!-- panel content -->
 			<div class="panel-body" >
-				<div class="btn-group" style="text-align: right;">
-					<button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars" ></i> Export Table Data</button>
+				<!-- <div class="btn-group" style="text-align: right;">
 					<ul class="dropdown-menu " role="menu">
 						<li class="divider"></li>
-						<li><a href="#" onClick ="$('#customers').tableExport({type:'excel',escape:'false'});"> <img src='/assets/icons/xls.png' width='24px'> XLS</a></li>
+						<li><a href="/dashboard/dataevaluasi" onClick ="$('#customers').tableExport({type:'excel',escape:'false'});"> <img src='/assets/icons/xls.png' width='24px'> XLS</a></li>
 						<li><a href="#" onClick ="$('#customers').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});"><img src='/assets/icons/pdf.png' width='24px'> PDF</a></li>	
 					</ul>
+				</div> -->
+				<div class="panel panel-default text-left">
+					<div class="panel-body">
+						<a class="btn btn-success" href="/dashboard/dataevaluasi" target="_blank"><i class="fa fa-print"></i> PRINT INVOICE</a>
+					</div>
 				</div>
 
 				<!-- <button type="button" class="btn btn-default"><a href="/dashboard/dataevaluasi">Export All Tabels</a></button> -->
@@ -92,7 +96,7 @@ use Carbon\Carbon;
 							<!-- <th data-type="numeric" data-hide = "" class="">Nama</th> -->
 							<th data-type="numeric" data-hide = "all" class="">Jabatan Lama</th>
 							<th data-type="numeric" data-hide = "all" class="">Jabatan Baru</th>
-							<th data-type="numeric" data-hide = "all" class="">Evaluasi dan Tindak Lanjut</th>
+							<th data-type="numeric" data-hide = "all" class=""><strong>Evaluasi dan Tindak Lanjut</strong></th>
 							<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
 							<th data-type="numeric" data-hide = "all" class="">Masa Kerja di Jabatan Terakhir</th>
 							<th data-type="numeric" data-hide = "all" class="">Mutasi</th>
@@ -110,7 +114,10 @@ use Carbon\Carbon;
 					<tbody>
 						@foreach ($mrp_e as $mrp)
 						<tr>
-							<td>{{$mrp->unit_pengusul}}</td> <!-- pengusul -->
+							<td>
+								{{ App\PersonnelArea::where('id', $mrp->unit_pengusul)->pluck('nama_pendek')->first() }}
+							</td> <!-- pengusul -->
+
 							<td></td> <!-- surat perintah -->
 							<td>
 								 {{$mrp->no_dokumen_unit_asal}} <!-- no dokumen asal -->
@@ -130,9 +137,9 @@ use Carbon\Carbon;
 
 							<td>{{$mrp->pegawai->ps_group}}</td><!-- ps group -->
 
-							<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br></td><!-- jabatan lama -->
+							<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> <br>{{$mrp->pegawai->formasi_jabatan->posisi}}<br></td><!-- jabatan lama -->
 
-							<td><strong>{{ $mrp->formasi_jabatan->formasi}} {{ $mrp->formasi_jabatan->jabatan}}</strong> {{ $mrp->formasi_jabatan->posisi}}<br></td> <!-- jabatan baru -->
+							<td><strong>{{ $mrp->formasi_jabatan->formasi}} {{ $mrp->formasi_jabatan->jabatan}}</strong> <br> {{ $mrp->formasi_jabatan->posisi}}<br></td> <!-- jabatan baru -->
 							
 							<td></td>
 
