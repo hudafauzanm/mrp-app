@@ -138,8 +138,7 @@ class MutasiController extends Controller
             $foldername = $mrp->registry_number.'/';
             $filename = 'pengusul_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
             // dd($foldername, $filename);
-            // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
-            $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+            // $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
 
             $user_sdm = PersonnelArea::where('user_role', 3)->first();
             $data = array(
@@ -153,7 +152,7 @@ class MutasiController extends Controller
             if($id_proyeksi)
             {
                 $fj_proyeksi = FormasiJabatan::find($id_proyeksi);
-                array_push($data, ['formasi_jabatan' => $fj_proyeksi->formasi.' '.$fj_proyeksi->jabatan]);
+                $data['formasi_jabatan'] = $fj_proyeksi->formasi.' '.$fj_proyeksi->jabatan;
 
                 $user_proyeksi = $fj_proyeksi->personnel_area;
                 $user_proyeksi->notify(new ProyeksiJabatan($data));

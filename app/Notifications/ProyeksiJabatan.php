@@ -48,7 +48,7 @@ class ProyeksiJabatan extends Notification
 
     public function toDatabase($notifiable)
     {
-        $message = $this->data['nip'].'('.$this->data['nama_pendek']).') diproyeksikan untuk menjadi '.$this->data['formasi_jabatan'].' pada unit/divisi anda';
+        $message = $this->data['nip'].'('.$this->data['nama_pendek'].') diproyeksikan untuk menjadi '.$this->data['formasi_jabatan'].' pada unit/divisi anda';
 
         return [
             'message' => $message,
