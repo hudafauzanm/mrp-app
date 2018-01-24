@@ -1,11 +1,11 @@
 <?php 
-
+use Carbon\Carbon;
 
 ?>
 <!doctype html>
 <html lang="en-US">
 	<head>
-		<title>Detail Bursa Jabatan | MRP-App</title>
+		<title>Detail Permintaan Mutasi | MRP-App</title>
 
 		<!-- mobile settings -->
 		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
@@ -54,10 +54,12 @@
 							<table class="table table-condensed nomargin">
 								<thead>
 									<tr>
-										<th width="20%">Detail Unit</th>
-										<th width="20%">Detail Pengusul</th>
-										<th width="30%">Formasi Jabatan</th>
-										<th width="30%">Detail Source</th>
+										<th width="17%">Detail Mutasi</th>
+										<th width="25%">Detail Pegawai</th>
+										<th width="12%">Unit Asal</th>
+										<th width="30%">Jabatan Saat Ini</th>
+										<th width="8%">Masa Kerja</th>
+										<th width="8%">Sisa Masa Kerja</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -65,34 +67,30 @@
 										
 										<td>
 											<ul class="list-unstyled">
-												{{-- {{dd($detail->pegawai)}} --}}
-												<li><strong>Nama:</strong> {{ $detail->personnel_area_pengusul->nama }}</li>
-												<li><strong>Alamat:</strong> {{ $detail->personnel_area_pengusul->alamat }}</li>
-												<li><strong>Kota:</strong> {{ $detail->personnel_area_pengusul->Kota }}</li>
-												<li><strong>Provinsi:</strong> {{ $detail->personnel_area_pengusul->provinsi }}</li>
+												<li><strong>Tanggal Aktifasi:</strong> {{ $detail->tgl_pooling}}</li>
+												<li><strong>Jenis Mutasi:</strong> {{ $detail->jenis_mutasi}}</li>
+												<li><strong>Mutasi:</strong> {{ $detail->mutasi }}</li>
+												<li><strong>Jalur Mutasi:</strong> {{ $detail->jalur_mutasi}}</li>
 											</ul>
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>NIP Pengusul:</strong> {{ $detail->nip_pengusul}}</li>
-												<li><strong>NIP Operator:</strong> {{ $detail->nip_operator}}</li>
+												<li><strong>NIP:</strong> {{ $detail->pegawai->nip }}</li>
+												<li><strong>Nama:</strong> {{ $detail->pegawai->nama_pegawai }}</li>
+												<li><strong>Grade:</strong> {{ $detail->pegawai->ps_group }}</li>
 											</ul>
 										</td>
 										<td>
-											<ul class="list-unstyled">
-												<li><strong>Formasi:</strong> {{ $detail->formasi_jabatan->formasi }}</li>
-												<li><strong>Jabatan:</strong> {{ $detail->formasi_jabatan->jabatan }}</li>
-												<li><strong>Jenjang:</strong> {{ $detail->formasi_jabatan->jenjang }}</li>
-												<li><strong>Posisi:</strong> {{ $detail->formasi_jabatan->posisi }}</li>
-												<li><strong>SPFJ:</strong> {{ $detail->formasi_jabatan->spfj }}</li>
-												<li><strong>Legacy Code:</strong> {{ $detail->formasi_jabatan->legacy_code }}</li>
-											</ul>
+											<div><strong>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}</strong></div>
 										</td>
 										<td>
-											<ul class="list-unstyled">
-												{{-- <li><strong>Source:</strong> {{ $detaill->source }}</li> --}}
-											</ul>
+											<div><strong>{{$detail->pegawai->formasi_jabatan->formasi}} {{$detail->pegawai->formasi_jabatan->jabatan}}</strong></div>
+											<small>{{$detail->pegawai->formasi_jabatan->posisi}}</small>
 										</td>
+
+										<td>{{$detail->pegawai->time_diff(Carbon::parse($detail->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+										<td>{{$detail->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($detail->pegawai->end_date))}}</td>
+										
 									</tr>
 								</tbody>
 							</table>

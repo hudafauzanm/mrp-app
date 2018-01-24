@@ -19,9 +19,7 @@
 		<div class="row">
 			
 			<div class="col-md-6">
-			<form class="validate" action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
-
-			
+			<form class="" action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
 					<div id="content" >
 				
 					{{ csrf_field() }}
@@ -155,7 +153,7 @@
 											<label>Jenis Mutasi *</label>
 											<select name="mrp[jenis_mutasi]" class="form-control required" required>
 												<option>--- Pilih ---</option>
-												<option value="TugasBelajar" {{ old('mrp.jenis_mutasi') == 'TugasBelajar' ? 'selected="selected"' : "" }}>Tugas Belajar</option>
+												<option value="Tugas Belajar" {{ old('mrp.jenis_mutasi') == 'Tugas Belajar' ? 'selected="selected"' : "" }}>Tugas Belajar</option>
 												{{-- <option value="APS" {{ old('mrp.jenis_mutasi') == 'APS' ? 'selected="selected"' : '' }}>APS</option>
 												<option value="Non-dinas" {{ old('mrp.jenis_mutasi') == 'Non-dinas' ? 'selected="selected"' : "" }}>Non-dinas</option> --}}
 											</select>

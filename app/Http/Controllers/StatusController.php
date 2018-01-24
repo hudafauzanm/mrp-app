@@ -44,6 +44,10 @@ class StatusController extends Controller
         {
             return view('pages.unit.detail_bursa',compact('detail'));
         }
+        else if($detail->tipe == '1')
+        {
+            return view('pages.unit.detail_minta',compact('detail'));
+        }
 
     	return view('pages.unit.detail_mutasi',compact('detail'));
     }
