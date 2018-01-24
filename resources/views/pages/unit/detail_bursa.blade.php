@@ -105,7 +105,7 @@
 							<div class="col-md-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>{{$detail->personnel_area_pengusul->nama}}</strong><br>{{$detail->personnel_area_pengusul->direktorat->nama}}<!-- <br>
+									<strong>{{$detail->personnel_area_pengusul->nama}}<br>{{$detail->personnel_area_pengusul->direktorat->nama}}</strong><!-- <br>
 									Jalan Trunojoyo Blok M – I No 135<br>
 									Kebayoran Baru, Jakarta 12160, Indonesia<br>
 									Telp : 021 – 7251234, 7261122<br>

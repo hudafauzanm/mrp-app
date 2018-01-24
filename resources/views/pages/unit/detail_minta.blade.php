@@ -54,9 +54,9 @@ use Carbon\Carbon;
 							<table class="table table-condensed nomargin">
 								<thead>
 									<tr>
-										<th width="12%">Detail Pegawai</th>
-										<th width="12%">Detail Mutasi</th>
-										<th width="30%">Proyeksi Jabatan</th>
+										<th width="17%">Detail Mutasi</th>
+										<th width="25%">Detail Pegawai</th>
+										<th width="12%">Unit Asal</th>
 										<th width="30%">Jabatan Saat Ini</th>
 										<th width="8%">Masa Kerja</th>
 										<th width="8%">Sisa Masa Kerja</th>
@@ -67,13 +67,6 @@ use Carbon\Carbon;
 										
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>NIP:</strong> {{ $detail->pegawai->nip }}</li>
-												<li><strong>Nama:</strong> {{ $detail->pegawai->nama_pegawai }}</li>
-												<li><strong>Grade:</strong> {{ $detail->pegawai->ps_group }}</li>
-											</ul>
-										</td>
-										<td>
-											<ul class="list-unstyled">
 												<li><strong>Tanggal Aktifasi:</strong> {{ $detail->tgl_pooling}}</li>
 												<li><strong>Jenis Mutasi:</strong> {{ $detail->jenis_mutasi}}</li>
 												<li><strong>Mutasi:</strong> {{ $detail->mutasi }}</li>
@@ -81,12 +74,14 @@ use Carbon\Carbon;
 											</ul>
 										</td>
 										<td>
-											@if(isset($detail->formasi_jabatan))
-											<div><strong>{{$detail->formasi_jabatan->formasi}} {{$detail->formasi_jabatan->jabatan}}</strong></div>
-											<small>{{$detail->formasi_jabatan->posisi}}</small>
-											@else
-												Perlu saran
-											@endif
+											<ul class="list-unstyled">
+												<li><strong>NIP:</strong> {{ $detail->pegawai->nip }}</li>
+												<li><strong>Nama:</strong> {{ $detail->pegawai->nama_pegawai }}</li>
+												<li><strong>Grade:</strong> {{ $detail->pegawai->ps_group }}</li>
+											</ul>
+										</td>
+										<td>
+											<div><strong>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}</strong></div>
 										</td>
 										<td>
 											<div><strong>{{$detail->pegawai->formasi_jabatan->formasi}} {{$detail->pegawai->formasi_jabatan->jabatan}}</strong></div>
@@ -108,7 +103,7 @@ use Carbon\Carbon;
 							<div class="col-md-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$detail->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</strong><!-- <br>
+									<strong>{{$detail->personnel_area_pengusul->nama}}<br>{{$detail->personnel_area_pengusul->direktorat->nama}}</strong><!-- <br>
 									Jalan Trunojoyo Blok M – I No 135<br>
 									Kebayoran Baru, Jakarta 12160, Indonesia<br>
 									Telp : 021 – 7251234, 7261122<br>
