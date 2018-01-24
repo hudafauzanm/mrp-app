@@ -32,11 +32,11 @@
 
 			<div class="col-md-6">
 				<div class="row margin-top-20">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="box success"><!-- default, danger, warning, info, success -->
 							
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
-								<h4>{{$ajumut}} Pengajuan Mutasi</h4>
+								<h4>{{$ajumut}} Pengajuan Pegawai</h4>
 								<small class="block">periksa tindak lanjut</small>
 								<i class="fa fa-exclamation"></i>
 							</div>
@@ -48,7 +48,24 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-4">
+						<div class="box default"><!-- default, danger, warning, info, success -->
+
+							<div class="box-title"><!-- add .noborder class if box-body is removed -->
+								<h4>{{$ajumutj}} Pengajuan Jabatan</h4>
+								<small class="block">periksa tindak lanjut</small>
+								<i class="fa fa-exclamation"></i>
+							</div>
+
+							<div class="box-body text-center">
+								<a href="/status?act=reqjab" class="btn btn-3d btn-leaf margin-top-6">
+									<i class="fa fa-arrow-circle-left"></i> Lihat Mutasi Diajukan
+								</a>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-4">
 						<div class="box info"><!-- default, danger, warning, info, success -->
 
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
@@ -65,15 +82,14 @@
 
 						</div>
 					</div>
-
 				</div>
 				
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-8">
-				<div id="panelHelp" class="panel panel-default" style="overflow-y: scroll">
+			<div class="col-md-6">
+				<div id="panelHelp" class="panel panel-default">
 					<div class="panel-heading">
 						<span class="elipsis"><!-- panel title -->
 							<strong>PETUNJUK PENGGUNAAN</strong>
@@ -87,7 +103,7 @@
 					<div class="panel-body">
 						<div class="row tabs nomargin">
 							<!-- tabs -->
-							<div class="col-md-2 col-sm-2 nopadding-right nopadding-left">
+							<div class="col-md-3 col-sm-3 nopadding-right nopadding-left">
 								<ul class="nav nav-tabs nav-stacked">
 									<li class="active">
 										<a href="#tab_a" data-toggle="tab">
@@ -109,7 +125,7 @@
 							</div>
 
 							<!-- tabs content -->
-							<div class="col-md-10 col-sm-10 nopadding-right nopadding-left">
+							<div class="col-md-9 col-sm-9 nopadding-right nopadding-left">
 								<div class="tab-content">
 									<div id="tab_a" class="tab-pane active">
 										<h4>Stacked left</h4>
@@ -122,6 +138,66 @@
 									</div>
 
 									<div id="tab_c" class="tab-pane">
+										<h4>Stacked left</h4>
+										<p>Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div id="panelHelp" class="panel panel-default">
+					<div class="panel-heading">
+						<span class="elipsis"><!-- panel title -->
+							<strong>PETUNJUK PENGGUNAAN</strong>
+						</span>
+						<ul class="options pull-right list-inline">
+							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+						</ul>
+
+					</div>
+
+					<div class="panel-body">
+						<div class="row tabs nomargin">
+							<!-- tabs -->
+							<div class="col-md-3 col-sm-3 nopadding-right nopadding-left">
+								<ul class="nav nav-tabs nav-stacked">
+									<li class="active">
+										<a href="#tab_d" data-toggle="tab">
+											<span class="badge badge-warning pull-right">3</span>
+											Meminta Pegawai
+										</a>
+									</li>
+									<li>
+										<a href="#tab_e" data-toggle="tab">
+											Membursakan Pegawai
+										</a>
+									</li>
+									<li>
+										<a href="#tab_f" data-toggle="tab">
+											Membursakan Jabatan
+										</a>
+									</li>
+								</ul>
+							</div>
+
+							<!-- tabs content -->
+							<div class="col-md-9 col-sm-9 nopadding-right nopadding-left">
+								<div class="tab-content">
+									<div id="tab_d" class="tab-pane active">
+										<h4>Stacked left</h4>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+									</div>
+
+									<div id="tab_e" class="tab-pane">
+										<h4>Stacked left</h4>
+										<p>Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+									</div>
+
+									<div id="tab_f" class="tab-pane">
 										<h4>Stacked left</h4>
 										<p>Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
 									</div>
