@@ -13,6 +13,9 @@ use App\PenilaianPegawai;
 use App\PersonnelArea;
 use App\FormasiJabatan;
 
+use App\Notifications\MutasiMasuk;
+use App\Notifications\ProyeksiJabatan;
+
 class MutasiController extends Controller
 {
     public function __construct()
@@ -146,7 +149,7 @@ class MutasiController extends Controller
                 'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.\Carbon\Carbon::now('Asia/Jakarta'),
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
-                'unit_pengusul' => auth()->user()->id,
+                'unit_pengusul' => $user->id,
                 'pegawai_id' => $pegawai_id,
                 'formasi_jabatan_id' => $id_proyeksi,
             );
@@ -201,10 +204,27 @@ class MutasiController extends Controller
             $foldername = $mrp->registry_number.'/';
             $filename = 'USUL_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
             // dd($foldername, $filename);
-            // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
             // $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
 
-            return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');       
+            $user_sdm = PersonnelArea::where('user_role', 3)->first();
+            $data = array(
+                'user_id' => $user->id,
+                'nama_pendek' => $user->nama_pendek,
+                'mrp_id' => $mrp->id->string, 
+                'nip' => $nip
+            );
+            $user_sdm->notify(new MutasiMasuk($data));
+
+            if($id_proyeksi)
+            {
+                $fj_proyeksi = FormasiJabatan::find($id_proyeksi);
+                $data['formasi_jabatan'] = $fj_proyeksi->formasi.' '.$fj_proyeksi->jabatan;
+
+                $user_proyeksi = $fj_proyeksi->personnel_area;
+                $user_proyeksi->notify(new ProyeksiJabatan($data));
+            }
+
+            return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');
         }
         else if($tipe === '3') 
          {  

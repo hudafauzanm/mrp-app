@@ -80,7 +80,7 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
-											<label>Masa Kerja <small class="text-muted">(di Jabatan Terakhir)</small></label>
+											<label>Masa Kerja</label>
 											<input type="text" name="dis_mk" id="masa_kerja" value="{{ old('dis_mk') }}" class="form-control" disabled>
 										</div>
 										<div class="col-md-6 col-sm-6">
@@ -507,7 +507,7 @@
 					<ol>
 						<li>Isi kolom bertanda * (maka kolom lain akan otomatis terisi)</li>
 						<li>Anda hanya bisa mengusulkan mutasi untuk pegawai di unit anda</li>
-						<li>Dokumen yang dilampirkan berupa CV, Nota Dinas, dan dokumen lain yang diperlukan, dijadikan satu folder dalam bentuk zip/rar</li>
+						<li>Dokumen yang dilampirkan berupa CV, Nota Dinas, dan dokumen lain yang diperlukan, dijadikan satu file dengan format .pdf</li>
 					</ol>
 				</div>
 

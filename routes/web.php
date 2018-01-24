@@ -36,6 +36,11 @@ Route::get('/mutasi/pengajuan/getJabatan', 'MutasiController@getJabatan');
 Route::get('/mutasi/pengajuan/getFormasiJabs', 'MutasiController@getFormasiJabs');
 Route::get('/mutasi/pengajuan/getJabatanInfo', 'MutasiController@getJabatanInfo');
 
+Route::get('/notifications', 'NotificationController@index');
+Route::post('/notifications/read', 'NotificationController@read');
+Route::post('/notifications/readAll', 'NotificationController@readAll');
+Route::post('/notifications/delete/{id}', 'NotificationController@delete');
+
 // sdm
 Route::get('/mrp', 'MRPController@index');
 Route::get('/mrp/edit/{reg_num}', 'MRPController@showEdit');
