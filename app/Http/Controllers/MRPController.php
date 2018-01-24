@@ -79,13 +79,20 @@ class MRPController extends Controller
     }
 
     public function showDetail()
-    {  
+    {
         $mrp = MRP::where('registry_number', request('reg_num'))->firstOrFail();
+        $pengusul = $mrp->personnel_area_pengusul;
+        $skstg = $mrp->skstg;
+
+        if ($mrp->tipe == 3)
+        {
+            $jabatan = $mrp->formasi_jabatan;
+            return view('pages.sdm.mrp_detail_bursa_jabatan', compact('mrp', 'pengusul', 'skstg', 'jabatan'));
+        }
+
         $proyeksi = $mrp->formasi_jabatan;
         $pegawai = $mrp->pegawai;
-        $pengusul = $mrp->personnel_area_pengusul;
-        $sutri = $pegawai->sutri;
-        $skstg = $mrp->skstg;
+        $sutri = $pegawai ? $pegawai->sutri : NULL;
 
         return view('pages.sdm.mrp_detail', compact('mrp', 'pegawai', 'sutri', 'proyeksi', 'pengusul', 'skstg'));
     }
@@ -164,7 +171,7 @@ class MRPController extends Controller
             {
                 //Apa yang akan ditampilkan di tiap2 row
                 $nestedData['registry_number'] = $mrp->registry_number;
-                $nestedData['nama_pegawai'] = $mrp->pegawai->nama_pegawai;
+                $nestedData['nama_pegawai'] = $mrp->pegawai ? $mrp->pegawai->nama_pegawai : NULL;
                 $nestedData['tipe'] = $mrp->tipe;
                 
                 if($mrp->status == 0)
