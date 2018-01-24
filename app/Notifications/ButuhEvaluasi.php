@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ProyeksiJabatan extends Notification
+class ButuhEvaluasi extends Notification
 {
     use Queueable;
     protected $data;
@@ -48,13 +48,12 @@ class ProyeksiJabatan extends Notification
 
     public function toDatabase($notifiable)
     {
-        $message = $this->data['nip'].' ('.$this->data['nama_pendek'].') diproyeksikan untuk menjadi '.$this->data['formasi_jabatan'].' pada unit/divisi anda';
+        $message = $this->data['reg_num'].'(tipe '.$this->data['tipe'].') butuh untuk dievaluasi.';
 
         return [
             'message' => $message,
             'personnel_area_id' => $this->data['user_id'],
-            'mrp_id' => $this->data['mrp_id'],
-            'nip' => $this->data['nip']
+            'mrp_id' => $this->data['mrp_id']
         ];
     }
 }
