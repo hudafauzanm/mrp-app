@@ -14,10 +14,13 @@
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="stylesheet" type="text/css" />
 
 		<!-- CORE CSS -->
-		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/plugins/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
 		
 		<!-- THEME CSS -->
 		<link href="/assets/css/essentials.css" rel="stylesheet" type="text/css" />
+
 		<link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
 
@@ -46,11 +49,30 @@
 							</div>
 						</div>
 
-						<a href="/dashboard" ><button type="button" class="btn btn-success" style="height: 35px;">Back</button></a>
+						<!-- <div class="btn-group" style="text-align: right;">
+							<ul class="dropdown-menu " role="menu">
+								<li class="divider"></li>
+								<li><a href="/dashboard/dataevaluasi" onClick ="$('#customers').tableExport({type:'excel',escape:'false'});"> <img src='/assets/icons/xls.png' width='24px'> XLS</a></li>
+								<li><a href="#" onClick ="$('#customers').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});"><img src='/assets/icons/pdf.png' width='24px'> PDF</a></li>	
+							</ul>
+						</div> -->
+
+						<!-- button -->
+						<a href="/dashboard" ><button type="button" class="btn btn-info btn-3d btn-blue" ><i class="fa fa-chevron-circle-left"></i>Back</button></a> <br>
+						<hr>
+
+						<!-- pdf -->
+						<a href="#" ><button type="button" class="btn btn-sucess btn-3d btn-red" onclick="myFunction()"><img src='/assets/icons/pdf.png' width='24px'>Export to PDF</button></a>
+
+						<!-- excel -->
+						<a href="#" onClick ="$('#customers').tableExport({type:'excel',escape:'false'});"><button type="button" class="btn btn-sucess btn-3d btn-green"><img src='/assets/icons/xls.png' width='24px'>Export to Excel</button></a>
+						<hr>
+
+
 
 						<div >
 
-							<table class="minimalistBlack">
+							<table class="minimalistBlack" id="customers">
 								<thead>
 								<tr>
 								<th width="20" style="text-align: center;">No</th>
@@ -69,7 +91,7 @@
 								@foreach ($mrp_e1 as $mrp)
 									<tr>
 									<td valign="top">1</td>
-									<td valign="top">{{$mrp->no_dokumen_unit_asal}} <!-- no dokumen asal --></td>
+									<td valign="top">{{$mrp->no_dokumen_unit_usul}} <!-- no dokumen asal --></td>
 									<td valign="top">{{$mrp->registry_number}} <!-- registry number --></td>
 									<td valign="top">{{$mrp->pegawai->nip}} <!-- nip pegawai --></td>
 									<td valign="top">{{$mrp->pegawai->nama_pegawai}} <!-- nama pegawai --></td>
@@ -120,18 +142,30 @@
 		<!-- /WRAPPER -->
 
 
-<!-- @section('includes-scripts')
-	@parent -->
+@section('includes-scripts')
+	@parent
 	
 		<!-- JAVASCRIPT FILES -->
 		<script type="text/javascript">var plugin_path = '/assets/plugins/';</script>
 		<script type="text/javascript" src="/assets/plugins/jquery/jquery-2.2.3.min.js"></script>
 		<script type="text/javascript" src="/assets/js/app.js"></script>
+		<!-- <script type="text/javascript" src="/tableExport.js"></script>
+		<script type="text/javascript" src="/jquery.base64.js"></script>
+		<script type="text/javascript" src="/jspdf/libs/sprintf.js"></script>
+		<script type="text/javascript" src="/jspdf/jspdf.js"></script>
+		<script type="text/javascript" src="/jspdf/libs/base64.js"></script> -->
+		
+		<!-- <script type="text/javaScript">	
+			$(document).ready(function(){		
+			});
+		</script> -->
 
-		<script type="text/javascript">
-			window.print();
+		<script>
+			function myFunction() {
+			    window.print();
+			}
 		</script>
-<!-- @endsection -->
+@endsection
 
 	</body>
 </html>

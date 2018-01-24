@@ -19,6 +19,12 @@ use Carbon\Carbon;
 	<link href="/assets/plugins/footable/css/footable.core.min.css" rel="stylesheet" type="text/css" />
 	<link href="/assets/plugins/footable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
 	<link href="/assets/css/sdm_dashboard.css" rel="stylesheet" type="text/css" />
+
+	<!-- THEME CSS -->
+		<link href="/assets/css/essentials.css" rel="stylesheet" type="text/css" />
+
+		<link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
 @endsection
 
 @section('content')
@@ -60,15 +66,16 @@ use Carbon\Carbon;
 						<li><a href="#" onClick ="$('#customers').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});"><img src='/assets/icons/pdf.png' width='24px'> PDF</a></li>	
 					</ul>
 				</div> -->
+
 				<div class="panel panel-default text-left">
 					<div class="panel-body">
-						<a class="btn btn-success" href="/dashboard/dataevaluasi" target="_blank"><i class="fa fa-print"></i> PRINT INVOICE</a>
+						<a class="btn btn-success btn-3d" href="/dashboard/dataevaluasi" target="_blank"><i class="fa fa-chevron-circle-right"></i> SHOW ALL</a>
 					</div>
 				</div>
 
 				<!-- <button type="button" class="btn btn-default"><a href="/dashboard/dataevaluasi">Export All Tabels</a></button> -->
 
-				<table class="footable" id="footable" id="sample_1" data-filter="#filter1" >
+				<table class="footable" id="footable" id="customers" data-filter="#filter1" >
 					<thead>
 						<tr>
 							<th style="text-align: center;">
@@ -118,9 +125,10 @@ use Carbon\Carbon;
 								{{ App\PersonnelArea::where('id', $mrp->unit_pengusul)->pluck('nama_pendek')->first() }}
 							</td> <!-- pengusul -->
 
-							<td></td> <!-- surat perintah -->
+							<td>{{ App\SKSTg::where('id', $mrp->sk_stg_id)->pluck('filename_dokumen_proses_sk')->first() }}
+							</td> <!-- surat perintah -->
 							<td>
-								 {{$mrp->no_dokumen_unit_asal}} <!-- no dokumen asal -->
+								 {{$mrp->no_dokumen_unit_usul}} <!-- no dokumen asal -->
 							</td>
 							<td>
 								 {{$mrp->registry_number}} <!-- registry number -->
@@ -179,7 +187,7 @@ use Carbon\Carbon;
 								 {{ $mrp->tindak_lanjut}} <!-- tindak lanjut -->
 							</td>
 							<td>
-								 Tanggal Aktivasi <!-- tanggal aktivasi -->
+								 {{ $mrp->tanggal_aktivasi}} <!-- tanggal aktivasi -->
 							</td>
 						</tr>
 						
