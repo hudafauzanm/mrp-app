@@ -15,6 +15,9 @@ class CreateSKSTgsTable extends Migration
     public function up()
     {
         Schema::create($this->tablename, function (Blueprint $table) {
+            // penambahan:
+            // filename_dokumen_proses_sk
+            
             $table->uuid('id');
             $table->string('no_dokumen_proses_sk')->nullable();
             $table->string('filename_dokumen_proses_sk')->nullable();

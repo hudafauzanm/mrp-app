@@ -51,8 +51,7 @@ class StatusController extends Controller
         {
             return view('pages.unit.detail_minta',compact('detail'));
         }
-
-    	return view('pages.unit.detail_mutasi',compact('detail'));
+        
         else if($detail->tipe == '2')
         {
     	   return view('pages.unit.detail_mutasi',compact('detail'));

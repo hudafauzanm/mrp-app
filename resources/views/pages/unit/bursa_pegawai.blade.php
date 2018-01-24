@@ -177,7 +177,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>No. Dokumen Mutasi *</label>
-											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ old('mrp.no_dokumen_unit_asal') }}" class="form-control required" required>
+											<input type="text" name="mrp[no_dokumen_unit_usul]" value="{{ old('mrp.no_dokumen_unit_usul') }}" class="form-control required" required>
 										</div>
 									</div>
 								</div>
@@ -186,7 +186,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Tanggal Dokumen Mutasi *</label>
-											<input type="text" name="mrp[tgl_dokumen_unit_asal]" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('mrp.tgl_dokumen_unit_asal') }}" required>
+											<input type="text" name="mrp[tgl_dokumen_unit_usul]" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('mrp.tgl_dokumen_unit_usul') }}" required>
 										</div>
 									</div>
 								</div>

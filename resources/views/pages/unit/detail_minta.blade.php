@@ -45,7 +45,7 @@ use Carbon\Carbon;
 							<div class="col-md-6 col-xs-6 text-left">
 								<h4><strong>Nomor</strong> Nota Dinas</h4>
 								<ul class="list-unstyled ">
-									<li><strong>{{$detail->no_dokumen_unit_asal}}</strong></li>
+									<li><strong>{{$detail->no_dokumen_unit_usul}}</strong></li>
 								</ul>
 							</div>
 						</div>

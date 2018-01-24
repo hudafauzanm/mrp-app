@@ -15,6 +15,19 @@ class CreateMRPsTable extends Migration
     public function up()
     {
         Schema::create($this->tablename, function (Blueprint $table) {
+            // perubahan:
+            // no_dokumen_unit_asal -> no_dokumen_unit_usul
+            // tgl_dokumen_unit_asal -> tgl_dokumen_unit_usul
+            // no_dokumen_unit_mutasi -> no_dokumen_unit_jawab
+            // tgl_dokumen_unit_mutasi -> tgl_dokumen_unit_jawab
+            // no_dokumen_mutasi -> no_dokumen_respon_sdm
+            // tgl_dokumen_mutasi -> tgl_dokumen_respon_sdm
+
+            // penambahan:
+            // tanggal_aktivasi
+            // filename_dokumen_unit_usul
+            // filename_dokumen_unit_jawab
+            // filename_dokumen_respon_sdm
             $table->uuid('id');
             $table->string('registry_number');
             $table->string('jenis_mutasi')->nullable();
