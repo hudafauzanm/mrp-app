@@ -32,7 +32,7 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP *</label>
-											<input type="text" name="nip" value="{{ $mrp->pegawai->nip }}" class="form-control">
+											<input type="text" name="nip" value="{{ $mrp->pegawai ? $mrp->pegawai->nip : '' }}" class="form-control">
 										</div>
 									</div>
 								</div>

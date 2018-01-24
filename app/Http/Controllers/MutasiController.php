@@ -66,9 +66,9 @@ class MutasiController extends Controller
             $pegawai->forja = $fj->formasi.' '.$fj->jabatan;
             $pegawai->posisi = $fj->posisi;
             $pegawai->personnel_area = $fj->personnel_area->nama;
-            $pegawai->masa_kerja = $pegawai->time_diff(Carbon::parse($pegawai->tanggal_pegawai), Carbon::now('Asia/Jakarta'));
-            $pegawai->sisa_masa_kerja = $pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tanggal_lahir)->addYears(56));
-            $pegawai->lama_menjabat = $pegawai->time_diff(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta'));
+            $pegawai->masa_kerja = $pegawai->year_diff_decimal(Carbon::parse($pegawai->tanggal_pegawai), Carbon::now('Asia/Jakarta'));
+            $pegawai->sisa_masa_kerja = $pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tanggal_lahir)->addYears(56));
+            $pegawai->lama_menjabat = $pegawai->year_diff_decimal(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta'));
             $pegawai->kode_olah_forja = $fj->kode_olah;
         }
 

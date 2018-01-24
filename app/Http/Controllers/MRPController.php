@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Middleware\SDM;
+use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\MRP;
 use App\Pegawai;
@@ -79,13 +81,20 @@ class MRPController extends Controller
     }
 
     public function showDetail()
-    {  
+    {
         $mrp = MRP::where('registry_number', request('reg_num'))->firstOrFail();
+        $pengusul = $mrp->personnel_area_pengusul;
+        $skstg = $mrp->skstg;
+
+        if ($mrp->tipe == 3)
+        {
+            $jabatan = $mrp->formasi_jabatan;
+            return view('pages.sdm.mrp_detail_bursa_jabatan', compact('mrp', 'pengusul', 'skstg', 'jabatan'));
+        }
+
         $proyeksi = $mrp->formasi_jabatan;
         $pegawai = $mrp->pegawai;
-        $pengusul = $mrp->personnel_area_pengusul;
-        $sutri = $pegawai->sutri;
-        $skstg = $mrp->skstg;
+        $sutri = $pegawai ? $pegawai->sutri : NULL;
 
         return view('pages.sdm.mrp_detail', compact('mrp', 'pegawai', 'sutri', 'proyeksi', 'pengusul', 'skstg'));
     }
@@ -95,6 +104,161 @@ class MRPController extends Controller
         $path = public_path('storage/uploads/').$reg_num.'/'.$no_dokumen.'.pdf';
 
         return response()->download($path);
+    }
+
+    public function getStatus($status, $withHTML = false)
+    {
+        if($withHTML)
+        {
+            if($status == 0)
+                $retval = '<span class="label label-danger">Ditolak</span>';
+            else if($status == 1)
+                $retval = '<span class="label label-primary">Diajukan</span>';
+            else if($status == 2)
+                $retval = '<span class="label label-warning">Proses Evaluasi (SDM)</span>';
+            else if($status == 3)
+                $retval = '<span class="label label-info">Proses Evaluasi (Karir II)</span>';
+            else if($status == 4)
+                $retval = '<span class="label label-success">Proses SK</span>';
+            else if($status == 5)
+                $retval = '<span class="label label-success">SK Tercetak</span>';
+            else if($status == 6)
+                $retval = '<span class="label label-success">SK Pending</span>';
+            else if($status == 7)
+                $retval = '<span class="label label-success">Clear</span>';
+            else if($status == 99)
+                $retval = '<span class="label label-success">Ditolak (SDM Pusat)</span>';
+            else if($status == 98)
+                $retval = '<span class="label label-success">Ditolak (Karir II Pusat)</span>';
+            else
+                $retval = '<span class="label label-danger">???</span>';
+        }
+        else
+        {
+            if($status == 0)
+                $retval = 'Ditolak';
+            else if($status == 1)
+                $retval = 'Diajukan';
+            else if($status == 2)
+                $retval = 'Proses Evaluasi (SDM)';
+            else if($status == 3)
+                $retval = 'Proses Evaluasi (Karir II)';
+            else if($status == 4)
+                $retval = 'Proses SK';
+            else if($status == 5)
+                $retval = 'SK Tercetak';
+            else if($status == 6)
+                $retval = 'SK Pending';
+            else if($status == 7)
+                $retval = 'Clear';
+            else if($status == 99)
+                $retval = 'Ditolak (SDM Pusat)';
+            else if($status == 98)
+                $retval = 'Ditolak (Karir II Pusat)';
+            else
+                $retval = '???';
+        }
+        
+
+        return $retval;
+    }
+
+    public function export()
+    {
+        $filename = 'MRP-export-'.Carbon::now('Asia/Jakarta');
+        $mrps = MRP::all();
+        $data = [];
+
+        foreach ($mrps as $key => $mrp) 
+        {
+            $pegawai = $mrp->pegawai;
+            $formasi_jabatan = $pegawai ? $pegawai->formasi_jabatan : NULL;
+            $fj_tujuan = $mrp->formasi_jabatan;
+            $sutri = $pegawai ? $pegawai->sutri : NULL;
+            $diklat = $pegawai ? $pegawai->diklat_penjenjangan->first() : NULL;
+            $skstg = $mrp->skstg;
+
+            $arr = [
+                'Registry Number' => $mrp->registry_number,
+                'Status Proses' => $this->getStatus($mrp->status),
+                'Fitur' => $mrp->tipe,
+                'Source' => 'Existing',
+                'Jenis Mutasi' => $mrp->jenis_mutasi,
+                'Mutasi' => $mrp->mutasi,
+                'Jalur Mutasi (pengembangan)' => $mrp->jalur_mutasi,
+                'Perner' => $pegawai ? $pegawai->perner : NULL,
+                'NIP' => $pegawai ? $pegawai->nip : NULL,
+                'Nama Pegawai' => $pegawai ? $pegawai->nama_pegawai : NULL,
+                'No Dokumen Usul' => $mrp->no_dokumen_unit_usul,
+                'Tgl. Dokumen' => $mrp->tgl_dokumen_unit_usul,
+                'PS Group' => $pegawai ? $pegawai->ps_group : NULL,
+                'Jenjang' => $formasi_jabatan ? $formasi_jabatan->jenjang_txt : NULL,
+                'Formasi' => $formasi_jabatan ? $formasi_jabatan->formasi : NULL,
+                'Jabatan' => $formasi_jabatan ? $formasi_jabatan->jabatan : NULL,
+                'SPFJ' => $formasi_jabatan ? $formasi_jabatan->spfj : NULL,
+                'Legacy Code' => $formasi_jabatan ? $formasi_jabatan->legacy_code : NULL,
+                'Personnel Area' => $formasi_jabatan ? $formasi_jabatan->personnel_area->nama : NULL,
+                'Company Code' => '?',
+                'Jenjang Tujuan' => $fj_tujuan ? $fj_tujuan->jenjang_txt : NULL,
+                'Formasi Tujuan' => $fj_tujuan ? $fj_tujuan->formasi : NULL,
+                'Jabatan Tujuan' => $fj_tujuan ? $fj_tujuan->jabatan : NULL,
+                'SPFJ Tujuan' => $fj_tujuan ? $fj_tujuan->spfj : NULL,
+                'Legacy Code Tujuan' => $fj_tujuan ? $fj_tujuan->legacy_code : NULL,
+                'Personnel Area Tujuan' => $fj_tujuan ? $fj_tujuan->personnel_area->nama : NULL,
+                'Company Code Tujuan' => '?',
+                'Tgl. Lahir' => $pegawai ? $pegawai->tanggal_lahir : NULL,
+                'Sisa Masa Kerja' => $pegawai ? $pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tanggal_lahir)->addYears(56)) : NULL,
+                'Masa Kerja Jbtn. Terakhir' => $pegawai ? $pegawai->year_diff_decimal(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta')) : NULL,
+                'Sutri' => $sutri ? 'PLN' : 'Non-PLN',
+                'NIP Sutri' => $sutri ? $sutri->nip : NULL,
+                'Nama Sutri' => $sutri ? $sutri->nama_pegawai : NULL,
+                'Personnel Area Sutri' => $sutri ? $sutri->formasi_jabatan->personnel_area->nama : NULL,
+                'Status Evaluasi Sutri (pengembangan)' => NULL,
+                'Diklat Penjejangan' => $diklat ? $diklat->jenis_diklat : NULL,
+                'No. Sertifikat' =>  $diklat ? $diklat->nomor_sertifikat : NULL,
+                'Tgl. Sertifikat' =>  $diklat ? $diklat->tanggal_lulus : NULL,
+                'Status Domisili (pengembangan)' => NULL,
+                'No. Dokumen Jawab Unit' => $mrp->no_dokumen_unit_jawab,
+                'Tgl. Dokumen Jawab Unit' => $mrp->tgl_dokumen_unit_jawab,
+                'No. Dokumen Respon SDM' => $mrp->no_dokumen_respon_sdm,
+                'Tgl. Evaluasi' => $mrp->tgl_evaluasi,
+                'No. SK' => $skstg ? $skstg->no_sk : NULL,
+                'No. STg' => $skstg ? $skstg->no_stg : NULL,
+                'No. Dokumen Kirim SK' => $skstg ? $skstg->no_dokumen_kirim_sk : NULL,
+                'Tgl. Kirim SK' => $skstg ? $skstg->tanggal_kirim_sk : NULL,
+                'Tgl. Aktivasi SK' => $skstg ? $skstg->tanggal_aktivasi : NULL,
+            ];
+
+            array_push($data, $arr);
+        }
+
+        Excel::create($filename, function($excel) use($data) {
+            $excel->sheet('MRP', function($sheet) use($data) {
+                $column_range = 'A1:AV1';
+
+                $sheet->freezeFirstRow();
+                $sheet->setAutoFilter($column_range);
+                $sheet->cell($column_range, function($row) {
+                    $row->setBackground('#d3d3d3');
+                    $row->setAlignment('center');
+                });
+                $sheet->setColumnFormat(array(
+                    'L' => 'dd/mm/yy',
+                    'AB' => 'dd/mm/yy',
+                    'AL' => 'dd/mm/yy',
+                    'AO' => 'dd/mm/yy',
+                    'AP' => 'dd/mm/yy',
+                    'AU' => 'dd/mm/yy',
+                ));
+                // $sheet->row(1, function($row) {
+                //     $row->setBackground('#d3d3d3');
+                //     $row->setAlignment('center');
+                // });
+                $sheet->with($data);
+            });
+        })->download('xlsx');
+
+        return redirect('/mrp');
     }
 
     public function ajaxDatatables(Request $request)
@@ -164,31 +328,10 @@ class MRPController extends Controller
             {
                 //Apa yang akan ditampilkan di tiap2 row
                 $nestedData['registry_number'] = $mrp->registry_number;
-                $nestedData['nama_pegawai'] = $mrp->pegawai->nama_pegawai;
+                $nestedData['nama_pegawai'] = $mrp->pegawai ? $mrp->pegawai->nama_pegawai : NULL;
                 $nestedData['tipe'] = $mrp->tipe;
-                
-                if($mrp->status == 0)
-                    $nestedData['status'] = '<span class="label label-danger">Ditolak</span>';
-                else if($mrp->status == 1)
-                    $nestedData['status'] = '<span class="label label-primary">Diajukan</span>';
-                else if($mrp->status == 2)
-                    $nestedData['status'] = '<span class="label label-warning">Proses Evaluasi (SDM)</span>';
-                else if($mrp->status == 3)
-                    $nestedData['status'] = '<span class="label label-info">Proses Evaluasi (Karir II)</span>';
-                else if($mrp->status == 4)
-                    $nestedData['status'] = '<span class="label label-success">Proses SK</span>';
-                else if($mrp->status == 5)
-                    $nestedData['status'] = '<span class="label label-success">SK Tercetak</span>';
-                else if($mrp->status == 6)
-                    $nestedData['status'] = '<span class="label label-success">SK Pending</span>';
-                else if($mrp->status == 7)
-                    $nestedData['status'] = '<span class="label label-success">Clear</span>';
-                else if($mrp->status == 99)
-                    $nestedData['status'] = '<span class="label label-success">Ditolak (SDM Pusat)</span>';
-                else if($mrp->status == 98)
-                    $nestedData['status'] = '<span class="label label-success">Ditolak (Karir II Pusat)</span>';
-                else
-                    $nestedData['status'] = '<span class="label label-danger">???</span>';
+
+                $nestedData['status'] = $this->getStatus($mrp->status, true);
 
                 $nestedData['unit_pengusul'] = $mrp->personnel_area_pengusul->nama;
                 $nestedData['created_at'] = $mrp->created_at->format("d F Y h:i:s");
