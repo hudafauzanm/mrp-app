@@ -38,6 +38,8 @@ Route::post('/mrp/edit', 'MRPController@edit');
 Route::get('/mrp/detail/{reg_num}', 'MRPController@showDetail');
 Route::post('/mrp/datatables/ajax', 'MRPController@ajaxDatatables');
 Route::get('/mrp/download/{reg_num}/{no_dokumen}', 'MRPController@downloadDokumen');
+Route::get('/mrp/sk', 'MRPController@pagesk');
+Route::get('/mrp/sk/upload', 'MRPController@uploadSK');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

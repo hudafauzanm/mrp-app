@@ -98,7 +98,7 @@ class MutasiController extends Controller
         $tipe = request('mrp')['tipe'];
         $nip = request('nip');
 
-        if($tipe === '2')
+        if($tipe === '2') 
         {
 
             $this->validate(request(), [

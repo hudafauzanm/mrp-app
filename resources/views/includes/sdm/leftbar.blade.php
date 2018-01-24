@@ -10,6 +10,11 @@
 				<i class="main-icon fa fa-table"></i> <span>Tabel MRP</span>
 			</a>
 		</li>
+		<li>
+			<a href="/mrp/sk">
+				<i class="main-icon fa fa-book"></i> <span>Daftar SK</span>
+			</a>
+		</li>
 	</ul>
 
 </nav>
