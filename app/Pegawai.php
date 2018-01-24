@@ -46,4 +46,11 @@ class Pegawai extends Model
         Carbon::parse($ke);
         return $dari->diff($ke)->format('%y tahun, %m bulan, %d hari');
     }
+
+    public function year_diff_decimal($dari, $ke)
+    {
+        Carbon::parse($dari);
+        Carbon::parse($ke);
+        return round($dari->diffInMonths($ke)/12, 2);
+    }
 }

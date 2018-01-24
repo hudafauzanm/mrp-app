@@ -25,6 +25,7 @@
 
 				<!-- right options -->
 				<ul class="options pull-right list-inline">
+				<li><a href="/mrp/export" class="btn btn-xs btn-success"><i class="fa fa-file-excel-o"></i> Export to Excel</a></li>
 					<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand"></i></a></li>
 				</ul>
 				<!-- /right options -->
