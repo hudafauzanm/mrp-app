@@ -28,7 +28,6 @@ use Carbon\Carbon;
 
 		<!-- WRAPPER -->
 		<div id="wrapper">
-
 			<div class="padding-20">
 
 				<div class="panel panel-default">
@@ -108,7 +107,7 @@ use Carbon\Carbon;
 							<div class="col-md-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$detail->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</strong><!-- <br>
+									<strong>{{$detail->personnel_area_pengusul->nama}}<br>{{$detail->personnel_area_pengusul->direktorat->nama}}</strong><!-- <br>
 									Jalan Trunojoyo Blok M – I No 135<br>
 									Kebayoran Baru, Jakarta 12160, Indonesia<br>
 									Telp : 021 – 7251234, 7261122<br>

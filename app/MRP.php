@@ -17,6 +17,16 @@ class MRP extends Model
     	return $this->belongsTo('App\Pegawai');
     }
 
+    public function pegawai_pengusul()
+    {
+        return $this->belongsTo('App\Pegawai', 'nip_pengusul', 'nip');
+    }
+
+    public function pegawai_operator()
+    {
+        return $this->belongsTo('App\Pegawai', 'nip_operator', 'nip');
+    }
+
     public function skstg()
     {
     	return $this->hasOne('App\SKSTg', 'mrp_id');

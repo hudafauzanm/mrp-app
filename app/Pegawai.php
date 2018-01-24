@@ -14,7 +14,6 @@ class Pegawai extends Model
     protected $hidden = [
         'id', 'password', 'user_role'
     ];
-    
 
     public function formasi_jabatan()
     {
@@ -34,6 +33,11 @@ class Pegawai extends Model
     public function penilaian_pegawai()
     {
         return $this->hasMany('App\PenilaianPegawai');
+    }
+
+    public function sutri()
+    {
+        return $this->belongsTo('App\Pegawai', 'nip_sutri', 'nip');
     }
 
     public function time_diff($dari, $ke)

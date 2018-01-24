@@ -84,7 +84,7 @@ class MRPController extends Controller
         $proyeksi = $mrp->formasi_jabatan;
         $pegawai = $mrp->pegawai;
         $pengusul = $mrp->personnel_area_pengusul;
-        $sutri = Pegawai::where('nip', $pegawai->nip_sutri)->first();
+        $sutri = $pegawai->sutri;
         $skstg = $mrp->skstg;
 
         return view('pages.sdm.mrp_detail', compact('mrp', 'pegawai', 'sutri', 'proyeksi', 'pengusul', 'skstg'));
