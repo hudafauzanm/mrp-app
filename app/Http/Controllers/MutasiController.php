@@ -154,6 +154,7 @@ class MutasiController extends Controller
             $data_mrp = array_merge($tambahan_mrp, request('mrp'));
             $data_nilai = array_merge(request('nilai'), array('pegawai_id' => $pegawai_id));;
             $data_nilai['hubungan_sesama'] = request('hds').'-'.$data_nilai['hubungan_sesama'];
+            $data_nilai['hubungan_atasan'] = request('hda').'-'.$data_nilai['hubungan_atasan'];
             // dd($data_mrp, $data_nilai, request('hds'));
 
             $mrp = MRP::create($data_mrp);

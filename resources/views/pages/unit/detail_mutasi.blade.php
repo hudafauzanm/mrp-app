@@ -50,6 +50,7 @@ use Carbon\Carbon;
 							</div>
 						</div>
 
+						<h4>Informasi<strong> Mutasi</strong></h4>
 						<div class="table-responsive">
 							<table class="table table-condensed nomargin">
 								<thead>
@@ -101,7 +102,219 @@ use Carbon\Carbon;
 							</table>
 						</div>
 
+						<h4>Informasi<strong> Penilaian Pegawai</strong></h4>
+						<div class="table-responsive">
+							<table class="table table-condensed nomargin">
+								<thead>
+									<tr>
+										<th>Key Competencies</th>
+										<th>Kompetensi Harian</th>
+										<th>Deskripsi Penilaian</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<ul class="list-unstyled">
+												<li><strong>Enthusiastic For Challenge:</strong> </li>
+												<li><strong>Creative and Innovative:</strong> {{$detail->pegawai->penilaian_pegawai->creative}}</li>
+												<li><strong>Building Business Partnership:</strong> </li>
+												<li><strong>Strategic Orientation:</strong> </li>
+												<li><strong>Customer Focus Oriented:</strong> </li>
+												<li><strong>Driving Execution:</strong> </li>
+												<li><strong>Visionary Leadership:</strong> </li>
+												<li><strong>Empowering / Developing Others:</strong> </li>
+											</ul>
+										</td>
+										<td>
+											<ul class="list-unstyled">
+												<li><strong>Komunikasi:</strong> </li>
+												<li><strong>Team Work:</strong> </li>
+												<li><strong>Bahasa Indonesia:</strong> </li>
+												<li><strong>Bahasa Inggris:</strong> </li>
+												<li><strong>:</strong> </li>
+											</ul>
+										</td>
+										<td>
+											<ul class="list-unstyled">
+												<li>
+													<strong>Internal Readiness:</strong>
+													Career Willingness: 
+													<br>Kesehatan: 
+												</li>
+												<li><strong>Eksternal Readiness:</strong> </li>
+												<li><strong>Hubungan dengan Rekan Kerja:</strong> </li>
+												<li><strong>Hubungan dengan Atasan:</strong> </li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
 						<hr class="nomargin-top" />
+
+						<!-- <div id="ceknilai">
+							<div class="row">
+								<div class="col-md-6">
+									<div id="panel-graphs-flot-1" class="panel panel-default">
+										<div class="panel-heading">
+											<span class="elipsis">
+												<strong>Key Competences</strong>
+											</span>
+											<ul class="options pull-right list-inline">
+												<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+												<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+											</ul>
+										</div>
+										<div class="panel-body nopadding">
+											<table class="table table-bordered table-vertical-middle nomargin">
+												<thead>
+													<tr>
+														<th>Uraian</th>
+														<th>Skor</th>
+													</tr>
+												</thead>
+												<tbody>
+
+													<tr>
+														<td>Enthusiastic for Challenge</td>
+														
+														<td><div class="rating rating-0 size-13 width-100" id="enthusiastic"></div></td>
+														
+													</tr>
+													<tr>
+														<td>Creative & Innovative</td>
+														<td><div class="rating rating-0 size-13 width-100" id="creative"></div></td>
+													</tr>
+													<tr>
+														<td>Building Business Partnership</td>
+														<td><div class="rating rating-0 size-13 width-100" id="building"></div></td>
+													</tr>
+													<tr>
+														<td>Strategic Orientation</td>
+														<td><div class="rating rating-0 size-13 width-100" id="strategic"></div></td>
+													</tr>
+													<tr>
+														<td>Customer Focus Oriented</td>
+														<td><div class="rating rating-0 size-13 width-100" id="customer"></div></td>
+													</tr>
+													<tr>
+														<td>Driving Execution</td>
+														<td><div class="rating rating-0 size-13 width-100" id="driving"></div></td>
+													</tr>
+													<tr>
+														<td>Visionary Leadership</td>
+														<td><div class="rating rating-0 size-13 width-100" id="visionary"></div></td>
+													</tr>
+													<tr>
+														<td>Empowering / Developing Others</td>
+														<td><div class="rating rating-0 size-13 width-100" id="empowering"></div></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div id="panel-graphs-flot-2" class="panel panel-default">
+
+										<div class="panel-heading">
+											<span class="elipsis">
+												<strong>Kompetensi Harian</strong>
+											</span>
+											<ul class="options pull-right list-inline">
+												<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+												<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+											</ul>
+										</div>
+
+										<div class="panel-body nopadding">
+											<table class="table table-bordered table-vertical-middle nomargin">
+												<thead>
+													<tr>
+														<th>Uraian</th>
+														<th>Skor</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Komunikasi</td>
+														<td><div class="rating rating-0 size-13 width-100" id="komunikasi"></div></td>
+													</tr>
+													<tr>
+														<td>KH2</td>
+														<td><div class="rating rating-0 size-13 width-100" id="team_work"></div></td>
+													</tr>
+													<tr>
+														<td>Bahasa Indonesia</td>
+														<td><div class="rating rating-0 size-13 width-100" id="bahasa_1_nilai"></div></td>
+													</tr>
+													<tr>
+														<td>Bahasa Inggris</td>
+														<td><div class="rating rating-0 size-13 width-100" id="bahasa_2_nilai"></div></td>
+													</tr>
+													<tr>
+														<td id="bahasa_3">Bahasa 3</td>
+														<td><div class="rating rating-0 size-13 width-100" id="bahasa_3_nilai"></div></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="panel-graphs-flot-1" class="panel panel-default">
+
+								<div class="panel-heading">
+									<span class="elipsis">
+										<strong>Personal Endurance</strong>
+									</span>
+
+									<ul class="options pull-right list-inline">
+										<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+										<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+									
+									</ul>
+								</div>
+
+								<div class="panel-body nopadding">
+									<div class="table-responsive">
+										<table class="table table-bordered table-vertical-middle nomargin">
+											<thead>
+												<tr>
+													<th></th>
+													<th>Uraian</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Internal Readiness</td>
+													<td><b>Kesehatan</b></td>
+													<td id="kesehatan"></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td><b>Career Willingness</b></td>
+													<td id="career_willingness"></td>
+												</tr>
+												<tr>
+													<td>External Readiness</td>
+													<td><b>Keluarga</b></td>
+													<td id="external_rediness"></td>
+												</tr>
+												<tr>
+													<td>Hubungan Dengan Sesama</td>
+													<td></td>
+													<td id="hubungan_sesama"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div> -->
 
 						<div class="row">
 

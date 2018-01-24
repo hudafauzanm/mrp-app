@@ -29,20 +29,33 @@
 				</div>
 					
 			</div>
-
 			<div class="col-md-6">
 				<div class="row margin-top-20">
 					<div class="col-md-6">
 						<div class="box success"><!-- default, danger, warning, info, success -->
 							
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
-								<h4>{{$ajumut}} Pengajuan Mutasi</h4>
+								<h4>{{$ajumutp}} Pengajuan Mutasi Pegawai</h4>
 								<small class="block">periksa tindak lanjut</small>
 								<i class="fa fa-exclamation"></i>
 							</div>
-
+							
 							<div class="box-body text-center">
 								<a href="/status?act=req" class="btn btn-3d btn-leaf margin-top-6">
+									<i class="fa fa-arrow-circle-right"></i> Lihat Mutasi Diajukan
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="box success"><!-- default, danger, warning, info, success -->
+							<div class="box-title"><!-- add .noborder class if box-body is removed -->
+								<h4>{{$ajumutj}} Pengajuan Mutasi Jabatan</h4>
+								<small class="block">periksa tindak lanjut</small>
+								<i class="fa fa-exclamation"></i>
+							</div>
+							<div class="box-body text-center">
+								<a href="/status?act=reqjab" class="btn btn-3d btn-leaf margin-top-6">
 									<i class="fa fa-arrow-circle-right"></i> Lihat Mutasi Diajukan
 								</a>
 							</div>

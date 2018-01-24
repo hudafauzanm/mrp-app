@@ -33,7 +33,7 @@ class Pegawai extends Model
 
     public function penilaian_pegawai()
     {
-        return $this->hasMany('App\PenilaianPegawai');
+        return $this->belongsTo('App\PenilaianPegawai');
     }
 
     public function time_diff($dari, $ke)
