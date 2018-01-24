@@ -77,8 +77,8 @@ use Carbon\Carbon;
 											<ul class="list-unstyled">
 												<li><strong>Tanggal Aktifasi:</strong> {{ $detail->tgl_pooling}}</li>
 												<li><strong>Jenis Mutasi:</strong> {{ $detail->jenis_mutasi}}</li>
-												<li><strong>Mutasi:</strong> {{ $detail->mutasi }}</li>
-												<li><strong>Jalur Mutasi:</strong> {{ $detail->jalur_mutasi}}</li>
+												<li><strong>Tipe Mutasi:</strong> {{ $detail->mutasi }}</li>
+												<!-- <li><strong>Jalur Mutasi:</strong> {{ $detail->jalur_mutasi}}</li> -->
 											</ul>
 										</td>
 										<td>
@@ -103,54 +103,70 @@ use Carbon\Carbon;
 						</div>
 
 						<h4>Informasi<strong> Penilaian Pegawai</strong></h4>
-						<div class="table-responsive">
-							<table class="table table-condensed nomargin">
-								<thead>
-									<tr>
-										<th>Key Competencies</th>
-										<th>Kompetensi Harian</th>
-										<th>Deskripsi Penilaian</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<ul class="list-unstyled">
-												<li><strong>Enthusiastic For Challenge:</strong> </li>
-												<li><strong>Creative and Innovative:</strong> {{$detail->pegawai->penilaian_pegawai->creative}}</li>
-												<li><strong>Building Business Partnership:</strong> </li>
-												<li><strong>Strategic Orientation:</strong> </li>
-												<li><strong>Customer Focus Oriented:</strong> </li>
-												<li><strong>Driving Execution:</strong> </li>
-												<li><strong>Visionary Leadership:</strong> </li>
-												<li><strong>Empowering / Developing Others:</strong> </li>
-											</ul>
-										</td>
-										<td>
-											<ul class="list-unstyled">
-												<li><strong>Komunikasi:</strong> </li>
-												<li><strong>Team Work:</strong> </li>
-												<li><strong>Bahasa Indonesia:</strong> </li>
-												<li><strong>Bahasa Inggris:</strong> </li>
-												<li><strong>:</strong> </li>
-											</ul>
-										</td>
-										<td>
-											<ul class="list-unstyled">
-												<li>
-													<strong>Internal Readiness:</strong>
-													Career Willingness: 
-													<br>Kesehatan: 
-												</li>
-												<li><strong>Eksternal Readiness:</strong> </li>
-												<li><strong>Hubungan dengan Rekan Kerja:</strong> </li>
-												<li><strong>Hubungan dengan Atasan:</strong> </li>
-											</ul>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+						<div class="row">
+							<div class="col-md-8">
+								<div class="table-responsive">
+									<table class="table table-condensed nomargin">
+										<thead>
+											<tr>
+												<th>Key Competencies</th>
+												<th>Kompetensi Harian</th>
+												<th>Deskripsi Penilaian</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<ul class="list-unstyled">
+														<li><strong>Enthusiastic For Challenge:</strong> {{$waktunilai->enthusiastic}}</li>
+														<li><strong>Creative and Innovative:</strong> {{$waktunilai->creative}}</li>
+														<li><strong>Building Business Partnership:</strong> {{$waktunilai->building}}</li>
+														<li><strong>Strategic Orientation:</strong> {{$waktunilai->strategic}}</li>
+														<li><strong>Customer Focus Oriented:</strong> {{$waktunilai->customer}}</li>
+														<li><strong>Driving Execution:</strong> {{$waktunilai->driving}}</li>
+														<li><strong>Visionary Leadership:</strong> {{$waktunilai->visionary}}</li>
+														<li><strong>Empowering / Developing Others:</strong> {{$waktunilai->empowering}}</li>
+													</ul>
+												</td>
+												<td>
+													<ul class="list-unstyled">
+														<li><strong>Komunikasi:</strong> {{$waktunilai->komunikasi}}</li>
+														<li><strong>Team Work:</strong> {{$waktunilai->team_work}}</li>
+														<li><strong>Bahasa Indonesia:</strong> {{$waktunilai->bahasa_1_nilai}}</li>
+														<li><strong>Bahasa Inggris:</strong> {{$waktunilai->bahasa_2_nilai}}</li>
+														@if(isset($waktunilai->bahasa_3))
+														<li><strong>{{$waktunilai->bahasa_3}}:</strong> {{$waktunilai->bahasa_3_nilai}}</li>
+														@endif
+													</ul>
+												</td>
+												<td>
+													<ul class="list-unstyled">
+														<li>
+															<strong>Internal Readiness</strong>
+															<br><strong>-Career Willingness:</strong> {{$waktunilai->career_willingness}}
+															<br><strong>-Kesehatan:</strong> {{$waktunilai->kesehatan}}
+														</li>
+														<li><strong>Eksternal Readiness: </strong> {{$waktunilai->external_rediness}}</li>
+														<li><strong>Hubungan dengan Rekan Kerja:</strong> {{$waktunilai->hubungan_sesama}}</li>
+														<li><strong>Hubungan dengan Atasan:</strong> {{$waktunilai->hubungan_atasan}}</li>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="col-md-4 text-right">
+								<br><br><br><br><h4><strong>Unit</strong> Peminta</h4>
+								<address>
+									<strong>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$detail->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</strong><!-- <br>
+									Jalan Trunojoyo Blok M – I No 135<br>
+									Kebayoran Baru, Jakarta 12160, Indonesia<br>
+									Telp : 021 – 7251234, 7261122<br>
+									fax : 021 – 7221330 -->
+								</address>
+							</div>
+						</div>	
 
 						<hr class="nomargin-top" />
 
@@ -318,17 +334,7 @@ use Carbon\Carbon;
 
 						<div class="row">
 
-							<div class="col-md-6">
-								<h4><strong>Unit</strong> Peminta</h4>
-								<address>
-									<strong>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$detail->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</strong><!-- <br>
-									Jalan Trunojoyo Blok M – I No 135<br>
-									Kebayoran Baru, Jakarta 12160, Indonesia<br>
-									Telp : 021 – 7251234, 7261122<br>
-									fax : 021 – 7221330 -->
-								</address>
-
-							</div>
+							
 							@if (session('success'))
 								<div class="col-md-6 text-right">
 									<a href="/dashboard" class="btn btn-lg btn-primary btn-3d">

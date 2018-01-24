@@ -113,8 +113,8 @@
 								<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 								@if(request('act')=='res')
 	                            <td class="text-center">
-	                            	<button type="button" class="btn btn-success btn-md fa fa-check"> Approve</button>
-									<button type="button" class="btn btn-danger btn-md fa fa-close"> Decline</button>
+	                            	<a href="/status/update/{{ $mrps->registry_number }}" type="button" class="btn btn-success btn-md fa fa-check" onclick="aprBtn"> Approve</a>
+									<button type="button" class="btn btn-danger btn-md fa fa-close" onclick="decBtn"> Decline</button>
 	                            </td>
 	                            @endif
 							</tr>
@@ -246,6 +246,12 @@
             $('#statusTable').DataTable({                
             });
         });
+    </script>
+    
+    <script>
+    	$("#aprBtn").click(function(){
+
+    	})
     </script>
 
 	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>

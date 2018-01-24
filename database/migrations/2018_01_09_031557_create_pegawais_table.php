@@ -17,7 +17,7 @@ class CreatePegawaisTable extends Migration
         Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('perner')->unique();
-            $table->string('nip',36)->unique();
+            $table->string('nip')->unique();
             $table->string('no_hp')->nullable()->unique();
             $table->string('email')->nullable()->unique();
             $table->string('kota_asal')->nullable();
@@ -49,7 +49,6 @@ class CreatePegawaisTable extends Migration
             $table->timestamps();
 
             $table->index(['formasi_jabatan_id']);
-            $table->index(['nip']);
 
 
         });
