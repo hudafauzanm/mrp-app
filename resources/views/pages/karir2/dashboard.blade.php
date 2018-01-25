@@ -69,7 +69,7 @@ use Carbon\Carbon;
 
 				<div class="panel panel-default text-left">
 					<div class="panel-body">
-						<a class="btn btn-success btn-3d" href="/dashboard/dataevaluasi"><i class="fa fa-chevron-circle-right"></i> SHOW ALL</a>
+						<a class="btn btn-success btn-3d" href="/dashboard/dataevaluasi"><i class="fa fa-file-excel-o"></i> GENERATE DATA EVALUASI</a>
 					</div>
 				</div>
 

@@ -50,8 +50,8 @@
 							@else
 								Non-PLN ; N/A ; N/A
 							@endif<br>
-						Tindaklanjut {{ $mrp->tindak_lanjut}}<br>
-						Tanggal Aktivasi {{ $mrp->tanggal_aktivasi}}<br>
+						Tindaklanjut : {{ $mrp->tindak_lanjut}}<br>
+						Tanggal Aktivasi : {{ $mrp->tanggal_aktivasi}}<br>
 					</td>
 					
 

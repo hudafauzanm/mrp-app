@@ -109,28 +109,17 @@ class DashboardController extends Controller
     public function detaileval()
     {
         $mrp_e1 = MRP::where('status', 3)->get();
+        $filename = 'Data Evaluasi - '.Carbon::now('Asia/Jakarta');
 
-        Excel::create('Data Evaluasi', function($excel) use($mrp_e1) {
+        Excel::create($filename, function($excel) use($mrp_e1) {
             $excel->sheet('Data Evaluasi', function($sheet) use($mrp_e1) {
                 $sheet->loadView('pages.karir2.dataevaluasi', ['mrp_e1' => $mrp_e1, 'no' => 1]);
                 $sheet->getStyle('B:J')->getAlignment()->setWrapText(true);
-                // $isFirst = true;
-                // foreach($sheet->getRowDimensions() as $rd) { 
-                //     if ($isFirst) {
-                //         $isFirst = false;
-                //         continue;
-                //     }  
-                //     $rd->setRowHeight(100); 
-                // }
-                // $sheet->getRowDimension(2)->setRowHeight(100);
-                // $sheet->setAutoSize(true);
                 $sheet->cell('A1:J1', function($cell) { 
                     $cell->setFontSize(10);
                 });
 
             });
         })->download('xlsx');
-
-        return view('pages.karir2.dataevaluasi', compact('mrp_e1'));
     }
 }
