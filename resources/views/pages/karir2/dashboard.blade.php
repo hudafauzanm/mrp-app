@@ -113,7 +113,7 @@ use Carbon\Carbon;
 							<th data-type="numeric" data-hide = "all" class="">PERDIR Formasi Jabatan untuk Unit yang dituju</th>
 							<th data-type="numeric" data-hide = "all" class="">Letak Domisili dengan Unit Mutasi</th>
 							<th data-type="numeric" data-hide = "all" class="">Suami/Istri</th>
-							<th data-type="numeric" data-hide = "all" class="">Tindaklanjut</th>
+							<th data-type="numeric" data-hide = "all" class="">Tindak Lanjut</th>
 							<th data-type="numeric" data-hide = "all" class="">Tanggal Aktivasi</th>
 							<!-- <th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th> -->
 						</tr>
@@ -141,13 +141,13 @@ use Carbon\Carbon;
 								 {{$mrp->pegawai->nama_pegawai}} <!-- nama pegawai -->
 							</td>
 							<td style="text-align: center;">
-								 <button type="button" class="btn btn-success" style="height: 35px;">Approve</button> <button type="button" class="btn btn-danger" style="height: 35px">Reject</button>
+								 <button type="button" class="btn btn-success" style="height: 35px;">Approve</button><button type="button" class="btn btn-danger" style="height: 35px">Reject</button>
 							</td> <!-- tindak lanjut -->
 
 							<td>{{$mrp->pegawai->ps_group}}</td><!-- ps group -->
 
 							<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> <br>{{$mrp->pegawai->formasi_jabatan->posisi}}<br></td><!-- jabatan lama -->
-
+							
 							<td><strong>{{ $mrp->formasi_jabatan->formasi}} {{ $mrp->formasi_jabatan->jabatan}}</strong> <br> {{ $mrp->formasi_jabatan->posisi}}<br></td> <!-- jabatan baru -->
 							
 							<td></td>
@@ -185,10 +185,10 @@ use Carbon\Carbon;
 								@endif
 							</td>
 							<td>
-								 {{ $mrp->tindak_lanjut}} <!-- tindak lanjut -->
+								 {{ $mrp->requested_tindak_lanjut}} <!-- tindak lanjut -->
 							</td>
 							<td>
-								 {{ $mrp->tanggal_aktivasi}} <!-- tanggal aktivasi -->
+								 {{ $mrp->requested_tanggal_aktivasi}} <!-- tanggal aktivasi -->
 							</td>
 						</tr>
 						

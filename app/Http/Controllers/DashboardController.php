@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use App\Pegawai;
 use App\PenilaianPegawai;
 use App\MRP;
+use App\PersonnelArea;
 
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+
+use App\Notifications\MutasiDitolak;
+use App\Notifications\ProsesEvaluasi;
+use App\Notifications\ButuhEvaluasi;
 
 class DashboardController extends Controller
 {
@@ -64,6 +69,7 @@ class DashboardController extends Controller
         $mrp = MRP::find(request('id'));
         $mrp->no_dokumen_respon_sdm = request('no_dokumen_respon_sdm');
         $mrp->tgl_evaluasi = Carbon::now('Asia/Jakarta');
+        $mrp->tindak_lanjut = 'BATAL';
         $mrp->status = 99;
 
         $file = request('dokumen_mutasi');
@@ -74,6 +80,14 @@ class DashboardController extends Controller
         // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
         $mrp->save();
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+        $pengusul = $mrp->personnel_area_pengusul;
+        $data = [
+            'reg_num' => $mrp->registry_number,
+            'penolak' => 'SDM Kantor Pusat',
+            'user_id' => $pengusul->id,
+            'mrp_id' => $mrp->id
+        ];
+        $pengusul->notify(new MutasiDitolak($data));
 
         return back()->with('success', 'Berhasil');
     }
@@ -87,6 +101,7 @@ class DashboardController extends Controller
         $mrp = MRP::find(request('id'));
         $mrp->no_dokumen_respon_sdm = request('no_dokumen_respon_sdm');
         $mrp->tgl_evaluasi = Carbon::now('Asia/Jakarta');
+        $mrp->tindak_lanjut = request('tindak_lanjut');
         $mrp->status = 3;
 
         if($mrp->tipe == 3)
@@ -103,6 +118,22 @@ class DashboardController extends Controller
         // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
         $mrp->save();
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+        $pengusul = $mrp->personnel_area_pengusul;
+        $data = [
+            'reg_num' => $mrp->registry_number,
+            'user_id' => $pengusul->id,
+            'mrp_id' => $mrp->id
+        ];
+        $pengusul->notify(new ProsesEvaluasi($data));
+
+        $karir2 = PersonnelArea::where('user_role', 2)->first();
+        $data = [
+            'reg_num' => $mrp->registry_number,
+            'tipe' => $mrp->tipe,
+            'user_id' => $pengusul->id,
+            'mrp_id' => $mrp->id
+        ];
+        $karir2->notify(new ButuhEvaluasi($data));
 
         return back()->with('success', 'Berhasil');
     }

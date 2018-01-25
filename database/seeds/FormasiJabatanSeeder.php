@@ -90,7 +90,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->realisasi =1;
         $forjab->spfj ='0032.P/DIR/2017';
         $forjab->status_fj ='';
-        $forjab->personnel_area_id = PersonnelArea::where('user_role', 1)->skip(3)->first()->id;;
+        $forjab->personnel_area_id = PersonnelArea::where('username', 'karir2')->first()->id;;
         $forjab->save();
 
         $forjab = new FormasiJabatan;

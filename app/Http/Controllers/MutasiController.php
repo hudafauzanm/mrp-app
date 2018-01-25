@@ -15,6 +15,8 @@ use App\FormasiJabatan;
 
 use App\Notifications\PegawaiDibursakan;
 use App\Notifications\PegawaiDiproyeksikan;
+use App\Notifications\PegawaiDiminta;
+use App\Notifications\JabatanDibursakan;
 
 class MutasiController extends Controller
 {
@@ -60,7 +62,7 @@ class MutasiController extends Controller
         if($pegawai)
         {
             $fj = $pegawai->formasi_jabatan;
-            if($fj->personnel_area->id != $user->id)
+            if($fj->personnel_area->id != $user->id && !request('option'))
                 return response()->json(NULL);
             
             $pegawai->forja = $fj->formasi.' '.$fj->jabatan;
@@ -138,21 +140,21 @@ class MutasiController extends Controller
                 'file_dokumen_mutasi' => 'required|mimes:pdf|max:10240'
             ]);
 
-            $pegawai_id = Pegawai::where('nip', $nip)->first()->id;
+            $pegawai = Pegawai::where('nip', $nip)->first();
 
-            if(request('rekom_checkbox') === '1')
-                $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
-            else
-                $id_proyeksi = NULL;
+            // if(request('rekom_checkbox') === '1')
+            //     $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
+            // else
+            //     $id_proyeksi = NULL;
 
             $tambahan_mrp = array(
                 'id' => Uuid::generate(),
-                'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.\Carbon\Carbon::now('Asia/Jakarta'),
+                'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.Carbon::now('Asia/Jakarta'),
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,
-                'pegawai_id' => $pegawai_id,
-                'formasi_jabatan_id' => $id_proyeksi,
+                'pegawai_id' => $pegawai->id,
+                // 'formasi_jabatan_id' => $id_proyeksi,
             );
 
             $data_mrp = array_merge($tambahan_mrp, request('mrp'));
@@ -166,6 +168,14 @@ class MutasiController extends Controller
             $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
             $mrp->filename_dokumen_unit_usul = $filename;
             $mrp->save();
+
+            $data = array(
+                'user_id' => $user->id,
+                'nama_pendek' => $user->nama_pendek,
+                'mrp_id' => $mrp->id->string, 
+                'nip' => $nip
+            );
+            $pegawai->formasi_jabatan->personnel_area->notify(new PegawaiDiminta($data));
 
             return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Berhasil Meminta Pegawai');
         }
@@ -185,7 +195,7 @@ class MutasiController extends Controller
 
             $tambahan_mrp = array(
                 'id' => Uuid::generate(),
-                'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.\Carbon\Carbon::now('Asia/Jakarta'),
+                'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.Carbon::now('Asia/Jakarta'),
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,
@@ -239,15 +249,15 @@ class MutasiController extends Controller
                 'file_dokumen_mutasi' => 'required|mimes:pdf|max:10240'
             ]);
 
-            $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
+            $jabatan = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first();
             
             $input_mrp = array(
                 'id' => Uuid::generate(),
-                'registry_number' => $nip.'.Request.'.\Carbon\Carbon::now('Asia/Jakarta'),
+                'registry_number' => $nip.'.Request.'.Carbon::now('Asia/Jakarta'),
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,
-                'formasi_jabatan_id' => $id_proyeksi,
+                'formasi_jabatan_id' => $jabatan->id,
             );
 
             $data_mrp = array_merge($input_mrp, request('mrp'));
@@ -261,6 +271,17 @@ class MutasiController extends Controller
             $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
             $mrp->filename_dokumen_unit_usul = $filename;
             $mrp->save();
+
+            $user_sdm = PersonnelArea::where('user_role', 3)->first();
+            $data = array(
+                'user_id' => $user->id,
+                'nama_pendek' => $user->nama_pendek,
+                'mrp_id' => $mrp->id->string, 
+                'formasi_jabatan' => $jabatan->formasi.' '.$jabatan->jabatan,
+                'formasi_jabatan_id' => $jabatan->id
+            );
+            // kurang yang ke semua unit
+            $user_sdm->notify(new JabatanDibursakan($data));
 
             return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Berhasil Bursa Jabatan');
 

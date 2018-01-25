@@ -639,15 +639,15 @@
 						
 					},
 					success: function(data){
-						if(data)
+						if(!!data)
 						{
 							$("#nama_pegawai").val(data.nama_pegawai);
 							$("#personnel_area").val(data.personnel_area);
 							$("#formasi_jabatan").val(data.forja);
 							$("#posisi").val(data.posisi);
-							$("#masa_kerja").val(data.masa_kerja);
-							$("#sisa_kerja").val(data.sisa_masa_kerja);
-							$("#lama_menjabat").val(data.lama_menjabat);
+							$("#masa_kerja").val(data.masa_kerja+ ' Tahun');
+							$("#sisa_kerja").val(data.sisa_masa_kerja+ ' Tahun');
+							$("#lama_menjabat").val(data.lama_menjabat+ ' Tahun');
 							$("#kali_jenjang").val(data.kali_jenjang);
 							$("#kode_olah_pegawai").val(data.kode_olah_forja);
 						}
