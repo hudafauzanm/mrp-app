@@ -176,7 +176,7 @@ use Carbon\Carbon;
 												</div>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#approveModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
@@ -253,7 +253,7 @@ use Carbon\Carbon;
 												</a>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#approveModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
@@ -537,12 +537,7 @@ use Carbon\Carbon;
 						
 						<div class="form-group">
 							<h4>No. Dokumen</h4>
-							<input type="text" class="form-control" name="no_dokumen_mutasi">
-						</div>
-
-						<div class="form-group">
-							<h4>Tanggal Aktifasi</h4>
-							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+							<input type="text" class="form-control" name="no_dokumen_respon_sdm">
 						</div>
 					</div>
 
@@ -586,12 +581,7 @@ use Carbon\Carbon;
 						
 						<div class="form-group">
 							<h4>No. Dokumen</h4>
-							<input type="text" class="form-control" name="no_dokumen_mutasi">
-						</div>
-
-						<div class="form-group">
-							<h4>Tanggal Aktifasi</h4>
-							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+							<input type="text" class="form-control" name="no_dokumen_respon_sdm">
 						</div>
 					</div>
 
@@ -630,12 +620,7 @@ use Carbon\Carbon;
 						
 						<div class="form-group">
 							<h4>No. Dokumen</h4>
-							<input type="text" class="form-control" name="no_dokumen_mutasi">
-						</div>
-
-						<div class="form-group">
-							<h4>Tanggal Aktifasi</h4>
-							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+							<input type="text" class="form-control" name="no_dokumen_respon_sdm">
 						</div>
 					</div>
 

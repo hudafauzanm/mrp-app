@@ -14,6 +14,11 @@ class PenilaianPegawai extends Model
     	return $this->belongsTo('App\AspekPenilaian');
     }
 
+    public function mrp()
+    {
+        return $this->hasOne('App\MRP', 'mrp_id');
+    }
+
     public function pegawai()
     {
     	return $this->belongsTo('App\Pegawai');
