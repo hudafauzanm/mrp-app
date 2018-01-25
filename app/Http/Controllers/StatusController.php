@@ -62,8 +62,8 @@ class StatusController extends Controller
     }
 
     public function approve($reg_num){
-        $status = MRP::where('registry_number', $reg_num)->first();
-        $status->update(['Status' =>2]);
-        return view('pages.unit.status',compact('status'));
+        $status = MRP::where('registry_number', $reg_num)->first()->update(['Status' => 2]);
+        
+        return redirect('/status?act=res')->with('success', 'Status Diubah');
     }
 }
