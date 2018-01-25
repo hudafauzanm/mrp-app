@@ -18,6 +18,14 @@
 		<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+		
+		<style>
+			body {
+			    -moz-transform: scale(0.95, 0.95); /* Moz-browsers */
+			    zoom: 0.95; /* Other non-webkit browsers */
+			    zoom: 95%; /* Webkit browsers */
+			}
+		</style>
 
 	</head>
 	<!--

@@ -20,10 +20,8 @@
 					All pannels should have an unique ID or the panel collapse status will not be stored!
 		-->
 		<div class="row">
-			<div class="col-md-6 margin-top-8">
+			<div class="col-md-4 margin-top-8">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-					</div>
 					<div class="panel-body">
 						<div class="text-center">
 							@foreach ($nama as $name)
@@ -35,7 +33,7 @@
 				</div>		
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-8">
 				<div class="row margin-top-20">
 					<div class="col-md-4">
 						<div class="box success"><!-- default, danger, warning, info, success -->
@@ -93,7 +91,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-8">
 				<div id="panelHelp" class="panel panel-default">
 					<div class="panel-heading">
 						<span class="elipsis"><!-- panel title -->
@@ -206,7 +204,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div id="panelHelp" class="panel panel-default">
 					<div class="panel-heading">
 						<span class="elipsis"><!-- panel title -->
