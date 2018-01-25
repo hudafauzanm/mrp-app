@@ -35,6 +35,7 @@ class CreatePenilaianPegawaisTable extends Migration
             $table->string('career_willingness');
             $table->string('external_rediness');
             $table->string('hubungan_sesama');
+            $table->string('hubungan_atasan');
             $table->timestamps();
 
             $table->index('pegawai_id');

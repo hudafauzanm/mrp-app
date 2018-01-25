@@ -153,21 +153,20 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Jenis Mutasi *</label>
-											<select name="mrp[jenis_mutasi]" class="form-control required" required>
+											<select name="mrp[jenis_mutasi]" class="form-control required" id="jenismutasi" required >
 												<option>--- Pilih ---</option>
 												<option value="Dinas" {{ old('mrp.jenis_mutasi') == 'Dinas' ? 'selected="selected"' : "" }}>Dinas</option>
-												<option value="APS" {{ old('mrp.jenis_mutasi') == 'APS' ? 'selected="selected"' : '' }}>APS</option>
-												<option value="Non-dinas" {{ old('mrp.jenis_mutasi') == 'Non-dinas' ? 'selected="selected"' : "" }}>Non-dinas</option>
+												<option value="Non-Dinas" {{ old('mrp.jenis_mutasi') == 'Non-Dinas' ? 'selected="selected"' : "" }}>Non Dinas</option>
 											</select>
 										</div>
 
 										<div class="col-md-6 col-sm-6">
 											<label>Tipe *</label>
-											<select name="mrp[mutasi]" class="form-control required" required>
+											<select name="mrp[mutasi]" class="form-control required" value="{{ old('mrp.mutasi') }}" id="tipemutasi" required disabled>
 												<option>--- Pilih ---</option>
-												<option value="Rotasi" {{ old('mrp.mutasi') == 'Rotasi' ? 'selected="selected"' : "" }}>Rotasi</option>
+												<!-- <option >Rotasi</option>
 												<option value="Promosi" {{ old('mrp.mutasi') == 'Promosi' ? 'selected="selected"' : "" }}>Promosi</option>
-												<option value="Demosi" {{ old('mrp.mutasi') == 'Demosi' ? 'selected="selected"' : "" }}>Demosi</option>
+												<option value="Demosi" {{ old('mrp.mutasi') == 'Demosi' ? 'selected="selected"' : "" }}>Demosi</option> -->
 											</select>
 										</div>
 									</div>
@@ -430,7 +429,15 @@
 							<div class="row">
 								<div class="form-group">
 									<div class="col-md-5 col-sm-5">
-										<input type="text" name="nilai[bahasa_3]" id="bahasa_3" min="0" max="100" value="{{ old('nilai.bahasa_3') }}" class="form-control" placeholder="Bahasa .... (opsional)">
+										<input type="text" class="form-control" list="unitsi" name="nilai[bahasa_3]" id="bahasa_3" min="0" max="100" value="{{ old('nilai.bahasa_3') }}" class="form-control pointer required" placeholder="Bahasa .... (opsional)">
+											<datalist id="unitsi">
+												<option value="Bahasa Mandarin">
+												<option value="Bahasa Jepang">
+												<option value="Bahasa Jerman">
+												<option value="Bahasa Arab">
+												<option value="Bahasa Perancis">
+											</datalist>
+										<!-- <input type="text" name="nilai[bahasa_3]" id="bahasa_3" min="0" max="100" value="{{ old('nilai.bahasa_3') }}" class="form-control" placeholder="Bahasa .... (opsional)"> -->
 									</div>
 									<div class="col-md-3 col-sm-3">
 										<input type="number" name="nilai[bahasa_3_nilai]" min="0" max="100" value="{{ old('nilai.bahasa_3_nilai') }}" class="form-control rating_number" target="#rating13" placeholder="0-100">
@@ -444,26 +451,41 @@
 							<hr>
 							<p><strong>DESKRIPSI PENILAIAN</strong></p>
 							<div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
+								<div class="form-group">
+									<div class="col-md-4">
 										<label>Internal Readiness *</label>
-										<input type="text" name="nilai[kesehatan]" value="{{ old('nilai.kesehatan') }}" class="form-control required col-md-6" placeholder="Kesehatan" required>
-										<input type="text" name="nilai[career_willingness]" value="{{ old('nilai.career_willingness') }}" class="form-control required col-md-6" placeholder="Career Willingness">
+									</div>
+									<div class="col-md-8">
+										<input type="text" class="form-control" list="inre" name="nilai[career_willingness]" id="bahasa_3" min="0" max="100" value="{{ old('nilai.career_willingness') }}" class="form-control pointer" placeholder="Career Willingness">
+											<datalist id="inre">
+												<option value="Fungsional">
+												<option value="Supervisori Dasar">
+												<option value="Supervisori Atas">
+												<option value="Manajemen Dasar">
+												<option value="Manajemen Menengah">
+												<option value="Manajemen Atas">
+												<option value="Direksi">
+											</datalist>
+										<textarea rows="2" name="nilai[kesehatan]" value="" class="form-control required col-md-6" placeholder="Kesehatan" required>{{ old('nilai.kesehatan') }}</textarea>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
+								<div class="form-group">
+									<div class="col-md-4">
 										<label>External Readiness *</label>
-										<input type="text" name="nilai[external_rediness]" value="{{ old('nilai.external_rediness') }}" class="form-control required col-md-6" placeholder="From family, friends, etc" required>
+									</div>
+									<div class="col-md-8">
+										<textarea rows="2" name="nilai[external_rediness]" value="" class="form-control required col-md-6" placeholder="From family, friends, etc" required>{{ old('nilai.external_rediness') }}</textarea>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
-										<label>Hubungan dengan Sesama *</label>
+								<div class="form-group">
+									<div class="col-md-4">
+										<label>Hubungan dengan Rekan Kerja <small>(peer)</small> *</label>
+									</div>
+									<div class="col-md-8">
 										<label class="radio">
 											<input type="radio" name="hds" value="Sangat Bagus" {{ old('hds') == 'Sangat Bagus' ? 'selected="selected"' : '' }}>
 											<i></i> Sangat Bagus
@@ -473,7 +495,26 @@
 											<input type="radio" name="hds" value="Bermasalah" {{ old('hds') == 'Bermasalah' ? 'selected="selected"' : '' }}>
 											<i></i> Bermasalah
 										</label>
-										<input type="text" name="nilai[hubungan_sesama]" value="{{ old('nilai.hubungan_sesama') }}" class="form-control required col-md-6" placeholder="Deskripsi" required>
+										<textarea rows="2" name="nilai[hubungan_sesama]" value="" class="form-control required col-md-6" placeholder="Deskripsi" required>{{ old('nilai.hubungan_sesama') }}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<div class="col-md-4">
+										<label>Hubungan dengan Atasan *</label>
+									</div>
+									<div class="col-md-8">
+										<label class="radio">
+											<input type="radio" name="hda" value="Sangat Bagus" {{ old('hda') == 'Sangat Bagus' ? 'selected="selected"' : '' }}>
+											<i></i> Sangat Bagus
+										</label>
+
+										<label class="radio">
+											<input type="radio" name="hda" value="Bermasalah" {{ old('hda') == 'Bermasalah' ? 'selected="selected"' : '' }}>
+											<i></i> Bermasalah
+										</label>
+										<textarea rows="2" name="nilai[hubungan_atasan]" value="" class="form-control required col-md-6" placeholder="Deskripsi" required>{{ old('nilai.hubungan_atasan') }}</textarea>
 									</div>
 								</div>
 							</div>
@@ -695,5 +736,32 @@
 				}
 			});
 		})
+	</script>
+
+	<script>
+		$("#jenismutasi").change(function(){
+			var jenismutasi = $(this).val();
+			if(jenismutasi == "Dinas"){
+				var tipemutasi = $("#tipemutasi")
+				tipemutasi.empty();
+				tipemutasi.append('<option>--- Tipe Mutasi ---</option>');
+				tipemutasi.removeAttr('disabled');
+				tipemutasi.append('<option>Rotasi</option>');
+				tipemutasi.append('<option>Promosi</option>');
+				tipemutasi.append('<option>Demosi</option>');
+				tipemutasi.append('<option>TK Diperbantukan</option>');
+				tipemutasi.append('<option>Tugas Belajar</option>');
+				tipemutasi.append('<option>Aktif dari Tugas Belajar</option>');
+			}
+			else if(jenismutasi == "Non-Dinas"){
+				var tipemutasi = $("#tipemutasi")
+				tipemutasi.empty();
+				tipemutasi.append('<option>--- Tipe Mutasi ---</option>');
+				tipemutasi.removeAttr('disabled');
+				tipemutasi.append('<option>Aktif dari IDT</option>');
+				tipemutasi.append('<option>Ct diluar Tanggungan</option>');
+				tipemutasi.append('<option>APS</option>');
+			}
+		});
 	</script>
 @endsection

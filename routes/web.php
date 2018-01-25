@@ -24,6 +24,7 @@ Route::get('/logout', 'LoginController@logout');
 
 // status proses
 Route::get('/status', 'StatusController@index');
+Route::post('/status/update/{reg_num}', 'StatusController@approve');
 Route::get('/status/detail/{reg_num}', 'StatusController@getDetails');
 
 

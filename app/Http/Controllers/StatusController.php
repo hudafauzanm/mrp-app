@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\Unit;
 use App\MRP;
 use App\Pegawai;
+use App\PenilaianPegawai;
 class StatusController extends Controller
 {
     public function __construct()
@@ -42,7 +43,8 @@ class StatusController extends Controller
     {   
         
         $detail = MRP::where('registry_number', $reg_num)->first();
-        // dd($detail);
+        $waktunilai = PenilaianPegawai::where('created_at', $detail->created_at)->where('pegawai_id', $detail->pegawai_id)->first();
+         // dd($waktunilai);
         if($detail->tipe == '3')
         {
            return view('pages.unit.detail_bursa',compact('detail'));
@@ -54,7 +56,14 @@ class StatusController extends Controller
         
         else if($detail->tipe == '2')
         {
-    	   return view('pages.unit.detail_mutasi',compact('detail'));
+
+    	   return view('pages.unit.detail_mutasi',compact('detail', 'waktunilai'));
         }
+    }
+
+    public function approve($reg_num){
+        $status = MRP::where('registry_number', $reg_num)->first();
+        $status->update(['Status' =>2]);
+        return view('pages.unit.status',compact('status'));
     }
 }
