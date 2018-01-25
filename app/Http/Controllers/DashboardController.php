@@ -23,10 +23,10 @@ class DashboardController extends Controller
             $nip = request()->session()->get('nip_operator');
             $nama = Pegawai::where('nip', $nip)->get();
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray(); 
-            $ajumutp = MRP::where('tipe', 2)->where('unit_pengusul', auth()->user()->id)->count();
+            $ajumut = MRP::where('tipe', 2)->where('unit_pengusul', auth()->user()->id)->count();
             $ajumutj = MRP::where('tipe', 3)->where('unit_pengusul', auth()->user()->id)->count();
-            $dptmut = MRP::where('status', 1)->where('tipe', 2)->where('formasi_jabatan_id', $fj)->count();
-    		return view('pages.unit.dashboard', compact('ajumutp', 'ajumutj', 'dptmut', 'nip', 'nama'));
+            $dptmut = MRP::where('status', 1)->where('formasi_jabatan_id', $fj)->count();
+    		return view('pages.unit.dashboard', compact('ajumutj','ajumut', 'dptmut', 'nip', 'nama'));
     	}
     	else if($user->user_role == 2)
     	{

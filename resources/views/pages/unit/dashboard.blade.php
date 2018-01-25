@@ -20,22 +20,26 @@
 					All pannels should have an unique ID or the panel collapse status will not be stored!
 		-->
 		<div class="row">
-			<div class="col-md-6 margin-top-30">
-				<div class="text-center">
-					@foreach ($nama as $name)
-					<h2 class="text-primary weight-600">Selamat Datang {{auth()->user()->nama_pendek}}</h2>
-					<h4 class="text-primary weight-400">Operator: {{$name->nama_pegawai}} - {{$nip}}</h4> 
-					@endforeach
-				</div>
-					
+			<div class="col-md-4 margin-top-8">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="text-center">
+							@foreach ($nama as $name)
+							<h3 class="text-primary weight-600">SELAMAT DATANG {{auth()->user()->nama_pendek}}</h2>
+							<h4 class="text-primary weight-400">Operator: {{$name->nama_pegawai}} - {{$nip}}</h4> 
+							@endforeach
+						</div>
+					</div>
+				</div>		
 			</div>
-			<div class="col-md-6">
+
+			<div class="col-md-8">
 				<div class="row margin-top-20">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="box success"><!-- default, danger, warning, info, success -->
 							
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
-								<h4>{{$ajumutp}} Pengajuan Mutasi Pegawai</h4>
+								<h4>{{$ajumut}} Pengajuan Pegawai</h4>
 								<small class="block">periksa tindak lanjut</small>
 								<i class="fa fa-exclamation"></i>
 							</div>
@@ -47,21 +51,24 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="box success"><!-- default, danger, warning, info, success -->
+					<div class="col-md-4">
+						<div class="box default"><!-- default, danger, warning, info, success -->
+
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
-								<h4>{{$ajumutj}} Pengajuan Mutasi Jabatan</h4>
+								<h4>{{$ajumutj}} Pengajuan Jabatan</h4>
 								<small class="block">periksa tindak lanjut</small>
 								<i class="fa fa-exclamation"></i>
 							</div>
+
 							<div class="box-body text-center">
 								<a href="/status?act=reqjab" class="btn btn-3d btn-leaf margin-top-6">
-									<i class="fa fa-arrow-circle-right"></i> Lihat Mutasi Diajukan
+									<i class="fa fa-arrow-circle-left"></i> Lihat Mutasi Diajukan
 								</a>
 							</div>
+
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="box info"><!-- default, danger, warning, info, success -->
 
 							<div class="box-title"><!-- add .noborder class if box-body is removed -->
@@ -78,7 +85,6 @@
 
 						</div>
 					</div>
-
 				</div>
 				
 			</div>
@@ -86,7 +92,7 @@
 
 		<div class="row">
 			<div class="col-md-8">
-				<div id="panelHelp" class="panel panel-default" style="overflow-y: scroll">
+				<div id="panelHelp" class="panel panel-default">
 					<div class="panel-heading">
 						<span class="elipsis"><!-- panel title -->
 							<strong>PETUNJUK PENGGUNAAN</strong>
@@ -100,11 +106,10 @@
 					<div class="panel-body">
 						<div class="row tabs nomargin">
 							<!-- tabs -->
-							<div class="col-md-2 col-sm-2 nopadding-right nopadding-left">
-								<ul class="nav nav-tabs nav-stacked">
+							<div class="col-md-3 col-sm-3 nopadding-right nopadding-left">
+								<ul class="nav nav-tabs nav-stacked"  style="font-size: 14px;">
 									<li class="active">
 										<a href="#tab_a" data-toggle="tab">
-											<span class="badge badge-warning pull-right">3</span>
 											Meminta Pegawai
 										</a>
 									</li>
@@ -122,26 +127,105 @@
 							</div>
 
 							<!-- tabs content -->
-							<div class="col-md-10 col-sm-10 nopadding-right nopadding-left">
-								<div class="tab-content">
-									<div id="tab_a" class="tab-pane active">
-										<h4>Stacked left</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+							<div class="col-md-9 col-sm-9 nopadding-right nopadding-left">
+								<div class="tab-content slimscroll height-410"  data-slimscroll-visible="true" style="overflow-y: hidden;width:auto; ">
+									<div id="tab_a" class="tab-pane active " style="width: auto; height: 415px;">
+										<h4>Tata Cara Meminta Pegawai</h4>
+											<ol class=""  style="text-align: justify; font-size: 14px; " >
+												<li>Pilihlah Menu Meminta Pegawai pada side bar yang ada di kiri layar anda.</li>
+												<li>Setelah masuk akan terdapat 2 panel yang dimana dibagian kiri untuk Memasukkan Data Mutasi dan dibagian kanan untuk memonitoring Pagu Unit anda.</li>
+												<li>Berikutnya masukkan NIP untuk Pegawai yang akan anda minta,setelah itu data seperti Nama Pegawai,Personnel Area,Formasi Jabatan,Pada,Masa Kerja,Sisa Masa Kerja,Lama Menjabat,Kali Jenjang akan muncul sesusai dengan NIP Pegawai.</li>
+												<li>Selanjutnya masukkan data pengusul mutasi dengan memasukkan NIP Pengusul,maka nama akan ikut muncul juga.</li>
+												<li>Lalu masukkan alasan untuk memutasi pegawai yang diminta dengan mengisi kolom alasan.</li>
+												<li>Selanjutnya memilih jenis mutasi yang sesuai lalu memilih tipe mutasi tersebut.</li>
+												<li>Mengisi Tanggal Aktifasi untuk memberi kapan waktu Pegawai yang diminta untuk mulai aktif bekerja.</li>
+												<li>Memasukkan nomer dokumen mutasi yang sesuai.</li>
+												<li>Memasukkan tanggal sesuai dengan tanggal dokumen mutasi.</li>
+												<li>Selanjutnya upload dokumen mutasi tersebut dalam format .pdf dengan maksimal file 10MB</li>
+												<li>Lalu Pilihlah tombol Kirim untuk mengirim semua data diatas.</li>
+												<li>Jika data berhasil terkirim maka anda akan dikirim sebuah invoice dari data yang telah dimasukkan tadi.</li>
+												<li>Jika data sudah benar klik tombol Kembali Ke Beranda untuk melakukan aktifitas lainnya.</li>
+												<li>Terima Kasih</li>
+											</ol>
+
 									</div>
 
 									<div id="tab_b" class="tab-pane">
-										<h4>Stacked left</h4>
-										<p>Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+										<h4>Tata Cara Bursa Pegawai</h4>
+											<ol style="text-align: justify; font-size: 14px; ">
+												<li>Pilihlah Menu Bursa Pegawai pada side bar yang ada di kiri layar anda.</li>
+												<li>Setelah masuk akan terdapat 2 panel yang dimana dibagian kiri untuk Memasukkn Data Bursa Pegawai dan dibagian kanan untuk memasukkan nilai pegawai.</li>
+												<li>Berikutnya masukkan NIP untuk Pegawai yang akan anda minta,setelah itu data seperti Nama Pegawai,Personnel Area,Formasi Jabatan Pada,Masa Kerja,Lama Menjabat,Sisa Masa Kerja,Kali Jenjang</li>
+												<li>Selanjutnya masukkan data pengusul mutasi dengan memasukkan NIP Pengusul,maka nama akan ikut muncul juga.</li>
+												<li>Lalu masukkan alasan untuk memutasi pegawai yang diminta dengan mengisi kolom alasan.</li>
+												<li>Selanjutnya memilih jenis mutasi yang sesuai lalu memilih tipe mutasi tersebut.</li>
+												<li>Memasukkan nomer dokumen mutasi.</li>
+												<li>Memasukkan tanggal sesuai dengan tanggal dokumen mutasi.</li>
+												<li>Selanjutnya upload dokumen mutasi tersebut dalam format .pdf dengan maksimal file 10MB.</li>
+												<li>Lalu jika ada rekomendasi jabatan ,maka pilih ya dan pilih unit mana akan di rekomendasikan jabatannya</li>
+												<li>Dibagian panel kanan terdapat nilai pegawai</li>
+												<li>Masukkan skor nilai dari range 1 sampai 100 disetiap Key Competences</li>
+												<li>Berikutnya masukkan skor nilai dari range 1 sampai 100 disetiap Kompetensi Harian
+												<small>*buat bahasa yang ketiga pilih salah satu mana yang dikuasi dengan skor tertinggi bila tidak ada bahasa yang sesuai dengan 
+												yang disediakan maka masukkan bahasa yang anda inginkan</small></li>
+												<li>Selanjutnya masukkan penilaian Internal Readiness,Externall Readiness ,Hubungan dengan Rekan Kerja,Hubungan dengan Sesama.</li>
+												<li>Jika data berhasil terkirim maka anda akan dikirim sebuah invoice dari data yang telah dimasukkan tadi.</li>
+												<li>Jika data sudah benar klik tombol Kembali Ke Beranda untuk melakukan aktifitas lainnya.</li>
+												<li>Terima Kasih</li>
+											</ol>
 									</div>
 
 									<div id="tab_c" class="tab-pane">
-										<h4>Stacked left</h4>
-										<p>Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+										<h4>Tata Cara Bursa Jabatan</h4>
+											<ol style="text-align: justify; font-size: 14px; ">
+												<li>Pilihlah Menu Bursa Jabatan pada side bar yang ada di kiri layar anda.</li>
+												<li>Setelah masuk akan terdapat 2 panel yang dimana dibagian kiri untuk Memasukkan Data Mutasi dan dibagian kanan untuk memonitoring Pagu Unit Anda.</li>
+												<li>Berikutnya nama Unit Anda sudah otomatis tercantumkan.</li>
+												<li>Lalu Pilih Formasi yang kosong pada Unit anda.</li>
+												<li>Maka Jabatan pada Formasi yang anda pilih akan tersedia di field Jabatan,Pilihlah salah satunya.</li>
+												<li>Lalu Jenjang,Posisi,SPFJ dan Legacy Code akan muncul sesuai dengan Formasi Jabatan yang dipilih.</li>
+												<li>Selanjutnya masukkan data pengusul mutasi dengan memasukkan NIP Pengusul,maka nama akan ikut muncul juga.</li>
+												<li>Pilihkan source dari yang diinginkan untuk mengisi jabatan tersebut <small><strong>*untuk saat ini masih ada existing</strong></small></li>
+												<li>Selanjutnya pilih jumlah pegawai yang dibutuhkan untuk mengisi jabatan tersebut.</li>
+												<li>Mengisi Tanggal Aktifasi untuk memberi kapan waktu Pegawai yang diminta untuk mulai aktif bekerja.</li>
+												<li>Memasukkan nomor dokumen mutasi yang sesuai.</li>
+												<li>Memasukkan tanggal sesuai dengan tanggal dokumen mutasi.</li>
+												<li>Selanjutnya upload dokumen mutasi tersebut dalam format .pdf dengan maksimal file 10MB.</li>
+												<li>Lalu Pilihlah tombol Kirim untuk mengirim semua data diatas.</li>
+												<li>Jika data berhasil terkirim maka anda akan dikirim sebuah invoice dari data yang telah dimasukkan tadi.</li>
+												<li>Jika data sudah benar klik tombol Kembali Ke Beranda untuk melakukan aktifitas lainnya.</li>
+												<li>Terima Kasih</li>
+											</ol>
 									</div>
 								</div>
 							</div>
 
 						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div id="panelHelp" class="panel panel-default">
+					<div class="panel-heading">
+						<span class="elipsis"><!-- panel title -->
+							<strong>PAGU UNIT</strong>
+						</span>
+						<ul class="options pull-right list-inline">
+							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+						</ul>
+
+					</div>
+
+					<div class="panel-body" style="height: 445px">
+						<div class="row">
+							<div class="col-md-6" style="height: 300px">
+								<h4 style="text-align: center;color: red;"><strong> JABATAN KOSONG</strong></h4>
+							</div>
+							<div class="col-md-6" style="height: 300px">
+								<h4 class="text-primary" style="text-align: center"><strong>JABATAN TERISI</strong></h4>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
