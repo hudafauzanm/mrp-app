@@ -21,9 +21,9 @@
 		
 		<style>
 			body {
-			    -moz-transform: scale(0.95, 0.95); /* Moz-browsers */
-			    zoom: 0.95; /* Other non-webkit browsers */
-			    zoom: 95%; /* Webkit browsers */
+			    -moz-transform: scale(0.90, 0.90); /* Moz-browsers */
+			    zoom: 0.90; /* Other non-webkit browsers */
+			    zoom: 90%; /* Webkit browsers */
 			}
 		</style>
 
