@@ -30,7 +30,9 @@ class DashboardController extends Controller
     	}
     	else if($user->user_role == 2)
     	{
-    		return view('pages.karir2.dashboard');
+            
+            $mrp_e = MRP::where('status', 3)->get();
+    		return view('pages.karir2.dashboard', compact('mrp_e'));
     	}
     	else if($user->user_role == 3)
     	{
@@ -99,5 +101,10 @@ class DashboardController extends Controller
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
 
         return back()->with('success', 'Berhasil');
+    }
+    public function detaileval()
+    {
+        $mrp_e1 = MRP::where('status', 3)->get();
+        return view('pages.karir2.dataevaluasi', compact('mrp_e1'));
     }
 }

@@ -49,6 +49,9 @@ Route::post('/mrp/edit', 'MRPController@edit');
 Route::get('/mrp/detail/{reg_num}', 'MRPController@showDetail');
 Route::post('/mrp/datatables/ajax', 'MRPController@ajaxDatatables');
 Route::get('/mrp/export', 'MRPController@export');
+Route::get('/mrp/download/{reg_num}/{no_dokumen}', 'MRPController@downloadDokumen');
+Route::get('/mrp/sk', 'MRPController@pagesk');
+Route::get('/mrp/sk/upload', 'MRPController@uploadSK');
 
 Route::get('/download/{reg_num}/{filename}', 'DownloadController@downloader');
 
@@ -60,4 +63,4 @@ Route::post('/profil/edit','ProfilController@input');
 Route::get('/profil/getKota','ProfilController@getKota');
 
 //evaluasi
-Route::get('/dashboard/dataevaluasi', 'DashboardController@detail');
+Route::get('/dashboard/dataevaluasi', 'DashboardController@detaileval');
