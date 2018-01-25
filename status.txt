@@ -1,8 +1,26 @@
-Status:
-0. Gagal
-1. Diajuakan
-2. Dievaluasi
-3. Proses SK
-4. SK tercetak
-6. SK pending
-5. Clear
+if($status == 0)
+    $retval = 'Ditolak';
+else if($status == 1)
+    $retval = 'Diajukan';
+else if($status == 2)
+    $retval = 'Proses Evaluasi (SDM)';
+else if($status == 3)
+    $retval = 'Proses Evaluasi (Karir II)';
+else if($status == 4)
+    $retval = 'Proses SK';
+else if($status == 5)
+    $retval = 'SK Tercetak';
+else if($status == 6)
+    $retval = 'SK Kirim';
+else if($status == 7)
+    $retval = 'Lewat Masa Aktifasi (unconfirmed)';
+else if($status == 8)
+    $retval = 'Clear';
+else if($status == 99)
+    $retval = 'Ditolak (SDM Pusat)';
+else if($status == 98)
+    $retval = 'Ditolak (Karir II Pusat)';
+else if($status == 97)
+    $retval = 'Ditolak (Unit Asal)';
+else
+    $retval = '???';
