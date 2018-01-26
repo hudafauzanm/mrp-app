@@ -74,7 +74,7 @@
 										@foreach ($sk as $mrp)
 										<tr>
 											<td class="foo-cell">{{ $mrp->no_dokumen_respon_sdm }}</td>
-											<td>{{ $mrp->skstg->tgl_aktivasi }}</td>
+											<td>{{ $mrp->skstg->tanggal_aktivasi }}</td>
 											<td>{{ $mrp->skstg->tahun_sk }}</td>
 											<td>{{ $mrp->skstg->no_sk }}</td>
 											<td>{{ $mrp->skstg->tahun_stg }}</td>
