@@ -71,8 +71,20 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach ($sk as $mrp)
+										@foreach ($mrpsk as $mrp)
 										<tr>
+											<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
+											<td>{{ $mrp->skstg->tanggal_aktivasi }}</td>
+											<td>{{ $mrp->skstg->tahun_sk }}</td>
+											<td>{{ $mrp->skstg->no_sk }}</td>
+											<td>{{ $mrp->skstg->no_stg }}</td>
+											<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
+											<td>{{ $mrp->skstg->tanggal_kirim_sk }}</td>
+											<td style="text-align: center;">
+												<button type="button" class="btn btn-3d btn-info" data-toggle="modal" data-target="#myModal">
+													<span>Lihat SK</span>
+												</button>
+											</td>
 										</tr>
 										@endforeach	
 									</tbody>
@@ -108,7 +120,7 @@
 
 																		<div class="fancy-file-upload fancy-file-primary">
 																			<i class="fa fa-upload"></i>
-																			<input type="file" name="file_dokumen_sk" class="form-control required" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" required />
+																			<input type="file" name="file_dokumen_sk" class="form-control"  name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" required />
 																			<input type="text" class="form-control" placeholder="no file selected" readonly="" />
 																			<span class="button">Pilih Dokumen</span>
 																		</div>
@@ -116,12 +128,23 @@
 																	</div>
 																</div>
 															</div>
+
+															<!-- tahun sk -->
+															<!-- <div class="row">
+																<div class="form-group">
+																		<div class="col-md-12 col-sm-12">
+																			<label>Registry Number *</label>
+																			<input type="text" name="tahun_sk" id="tahun_sk" value="{{ old('tahun_sk') }}" class="form-control required">
+																		</div>
+																</div>
+															</div> -->
+
 															<!-- tahun sk -->
 															<div class="row">
 																<div class="form-group">
 																		<div class="col-md-12 col-sm-12">
 																			<label>Tahun SK *</label>
-																			<input type="text" name="tahun_sk" id="tahun_sk" value="{{ old('tahun_sk') }}" class="form-control required">
+																			<input type="text" name="tahun_sk" id="tahun_sk" value="{{ old('tahun_sk') }}" class="form-control" required>
 																		</div>
 																</div>
 															</div>
@@ -131,7 +154,7 @@
 																<div class="form-group">
 																		<div class="col-md-12 col-sm-12">
 																			<label>No. SK *</label>
-																			<input type="text" name="no_sk" id="no_sk" value="{{ old('no_sk') }}" class="form-control required">
+																			<input type="text" name="no_sk" id="no_sk" value="{{ old('no_sk') }}" class="form-control"  required>
 																		</div>
 																</div>
 															</div>
@@ -141,7 +164,7 @@
 																<div class="form-group">
 																	<div class="col-md-12 col-sm-12">
 																		<label>No. Dokumen Kirim SK *</label>
-																		<input type="text" name="no_dokumen_kirim_sk" id="no_dokumen_kirim_sk" value="{{ old('no_dokumen_kirim_sk') }}" class="form-control required">
+																		<input type="text" name="no_dokumen_kirim_sk" id="no_dokumen_kirim_sk" value="{{ old('no_dokumen_kirim_sk') }}" class="form-control" required>
 																	</div>
 																</div>
 															</div>
@@ -252,7 +275,7 @@
 				<!-- Modal Body -->
 				<div class="modal-body">
 					<div class="form-group" >
-						
+						<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
 					</div>
 				</div>
 

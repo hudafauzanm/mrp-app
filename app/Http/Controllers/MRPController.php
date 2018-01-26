@@ -371,8 +371,8 @@ class MRPController extends Controller
 
     public function daftarSK()
     {
-        $sk = MRP::where('status', 4)->get();
-        return view('pages.sdm.mrp_skstg', compact('sk'));
+        $mrpsk = MRP::where('status', 5)->get();
+        return view('pages.sdm.mrp_skstg', compact('mrpsk'));
     }
 
     public function uploadSK(Request $request)
@@ -395,8 +395,8 @@ class MRPController extends Controller
         // $skstg->tahun_stg=$request->input('tahun_stg');
         $skstg->no_stg=$request->input('no_stg');
         $skstg->mrp_id=$request->input('mrp_id');
-        $skstg->updated_at=Carbon::now('Asia/Jakarta');
         $skstg->created_at=Carbon::now('Asia/Jakarta');
+        $skstg->updated_at=Carbon::now('Asia/Jakarta');
 
         $skstg->save();
 
