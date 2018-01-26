@@ -34,7 +34,7 @@ use Carbon\Carbon;
 
 		<div class="row">
 			<div class="col-md-6">
-				<h4>Monitoring</h4>	
+				{{-- <h4>Monitoring</h4>	 --}}
 				<div id="panel-1" class="panel panel-default">
 					<div class="panel-heading">
 						<!-- tabs nav -->
@@ -49,14 +49,15 @@ use Carbon\Carbon;
 
 						<!-- right options -->
 						<ul class="options pull-right list-inline">
-							<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+							{{-- <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li> --}}
+							<li><span class="label label-success">Monitoring</span></li>
 						</ul>
 						<!-- /right options -->
 					</div>
 
 					<!-- panel content -->
-					<div class="panel-body" style="overflow-y: auto" id="verifikasi_body">
+					<div class="panel-body" style="overflow-y: auto" id="monitoring_body">
 						<div class="tab-content transparent ">
 							<div id="formasi_jabatan" class="tab-pane active">
 								<div class="row">
@@ -146,7 +147,7 @@ use Carbon\Carbon;
 
 								<div class="row">
 									<div class="col-md-12">
-										<table class="table table-striped table-bordered table-hover" id="forja_monitor">
+										<table class="table table-bordered dataTable" id="forja_monitor">
 											<thead>
 												<tr>
 													<th>Username</th>
@@ -381,7 +382,7 @@ use Carbon\Carbon;
 			</div>
 
 			<div class="col-md-6">
-				<h4>Verifikasi</h4>
+				{{-- <h4>Verifikasi</h4> --}}
 				<div id="panel-2" class="panel panel-default ">
 					<div class="panel-heading">
 						<!-- tabs nav -->
@@ -399,8 +400,9 @@ use Carbon\Carbon;
 
 						<!-- right options -->
 						<ul class="options pull-right list-inline">
-							<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+							{{-- <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li> --}}
+							<li><span class="label label-success">Evaluasi</span></li>
 						</ul>
 						<!-- /right options -->
 					</div>
@@ -947,8 +949,17 @@ use Carbon\Carbon;
 
 @section('includes-scripts')
 	@parent
-	
+
+	<script>
+        $(function(){
+            $('#forja_monitor').DataTable({
+
+            });
+        });
+    </script>
+
 	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
 	<script type="text/javascript">
 		loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
 			loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
@@ -1063,8 +1074,8 @@ use Carbon\Carbon;
 			});
 
 			var height = $(document).height();
-			$("#monitoring_body").css('height', height*0.50);
-			$("#verifikasi_body").css('height', height*0.50);
+			$("#monitoring_body").css('height', height*0.48);
+			$("#verifikasi_body").css('height', height*0.48);
 
 			loadScript('/bower_components/chart.js/dist/Chart.min.js', function() {
 				var data = {
