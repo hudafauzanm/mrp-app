@@ -208,8 +208,8 @@ class MRPController extends Controller
                 'Legacy Code Tujuan' => $fj_tujuan ? $fj_tujuan->legacy_code : NULL,
                 'Personnel Area Tujuan' => $fj_tujuan ? $fj_tujuan->personnel_area->nama : NULL,
                 'Company Code Tujuan' => '?',
-                'Tgl. Lahir' => $pegawai ? $pegawai->tanggal_lahir : NULL,
-                'Sisa Masa Kerja' => $pegawai ? $pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tanggal_lahir)->addYears(56)) : NULL,
+                'Tgl. Lahir' => $pegawai ? $pegawai->tgl_lahir : NULL,
+                'Sisa Masa Kerja' => $pegawai ? $pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tgl_lahir)->addYears(56)) : NULL,
                 'Masa Kerja Jbtn. Terakhir' => $pegawai ? $pegawai->year_diff_decimal(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta')) : NULL,
                 'Sutri' => $sutri ? 'PLN' : 'Non-PLN',
                 'NIP Sutri' => $sutri ? $sutri->nip : NULL,
@@ -218,7 +218,7 @@ class MRPController extends Controller
                 'Status Evaluasi Sutri (pengembangan)' => NULL,
                 'Diklat Penjejangan' => $diklat ? $diklat->jenis_diklat : NULL,
                 'No. Sertifikat' =>  $diklat ? $diklat->nomor_sertifikat : NULL,
-                'Tgl. Sertifikat' =>  $diklat ? $diklat->tanggal_lulus : NULL,
+                'Tgl. Sertifikat' =>  $diklat ? $diklat->tgl_lulus : NULL,
                 'Status Domisili (pengembangan)' => NULL,
                 'No. Dokumen Jawab Unit' => $mrp->no_dokumen_unit_jawab,
                 'Tgl. Dokumen Jawab Unit' => $mrp->tgl_dokumen_unit_jawab,
@@ -227,8 +227,8 @@ class MRPController extends Controller
                 'No. SK' => $skstg ? $skstg->no_sk : NULL,
                 'No. STg' => $skstg ? $skstg->no_stg : NULL,
                 'No. Dokumen Kirim SK' => $skstg ? $skstg->no_dokumen_kirim_sk : NULL,
-                'Tgl. Kirim SK' => $skstg ? $skstg->tanggal_kirim_sk : NULL,
-                'Tgl. Aktivasi SK' => $skstg ? $skstg->tanggal_aktivasi : NULL,
+                'Tgl. Kirim SK' => $skstg ? $skstg->tgl_kirim_sk : NULL,
+                'Tgl. Aktivasi SK' => $skstg ? $skstg->tgl_aktivasi : NULL,
             ];
 
             array_push($data, $arr);
@@ -371,17 +371,22 @@ class MRPController extends Controller
 
     public function daftarSK()
     {
-        $sk = MRP::where('status', 5)->get();
-        return view('pages.sdm.mrp_skstg', compact('sk'));
+        $mrpsk = MRP::where('status', 5)->get();
+        return view('pages.sdm.mrp_skstg', compact('mrpsk'));
     }
 
     public function uploadSK(Request $request)
     {
-        
+        $reg_num = request('registry_number');
+        // dd(request('registry_number'));
+        // $mrp=MRP::find('registry_number', $reg_num)->first()->id;
+        $mrp_id = MRP::where('registry_number', $reg_num)->first()->id;
+        // dd(request('$mrp_id'));
+        $mrp = MRP::where('registry_number', $reg_num)->update(['status' => 5]);
+        // $mrp->status=5;
 
         $this->validate($request, [
             'file_dokumen_sk' => 'required|mimes:pdf|max:10240',
-
         ]);
 
         $skstg = new SKSTg;
@@ -390,11 +395,19 @@ class MRPController extends Controller
         $skstg->tahun_sk=$request->input('tahun_sk'); 
         $skstg->no_sk=$request->input('no_sk');
         $skstg->no_dokumen_kirim_sk=$request->input('no_dokumen_kirim_sk');
-        $skstg->tanggal_kirim_sk=$request->input('tanggal_kirim_sk');
-        $skstg->tanggal_aktivasi=$request->input('tanggal_aktivasi');
+
+        $file = $request->input('file_dokumen_mutasi');
+        $foldername = $reg_num.'/';
+        $filename = 'SK_'.Carbon::now('Asia/Jakarta')->year.'_'.str_replace('/', '_', $skstg->no_sk).'.'.$file->getClientOriginalExtension();
+
+        $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+        $skstg->filename_dokumen_sk = $request->input($filename);
+
+        $skstg->tgl_kirim_sk=$request->input('tgl_kirim_sk');
+        $skstg->tgl_aktivasi=$request->input('tgl_aktivasi');
         // $skstg->tahun_stg=$request->input('tahun_stg');
         $skstg->no_stg=$request->input('no_stg');
-        $skstg->mrp_id=$request->input('mrp_id');
+        $skstg->mrp_id=$request->input('$mrp_id');
         $skstg->created_at=Carbon::now('Asia/Jakarta');
         $skstg->updated_at=Carbon::now('Asia/Jakarta');
 

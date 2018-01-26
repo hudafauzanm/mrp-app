@@ -71,15 +71,15 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach ($sk as $mrp)
+										@foreach ($mrpsk as $mrp)
 										<tr>
 											<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
-											<td>{{ $mrp->skstg->tanggal_aktivasi }}</td>
+											<td>{{ $mrp->skstg->tgl_aktivasi }}</td>
 											<td>{{ $mrp->skstg->tahun_sk }}</td>
 											<td>{{ $mrp->skstg->no_sk }}</td>
 											<td>{{ $mrp->skstg->no_stg }}</td>
 											<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
-											<td>{{ $mrp->skstg->tanggal_kirim_sk }}</td>
+											<td>{{ $mrp->skstg->tgl_kirim_sk }}</td>
 											<td style="text-align: center;">
 												<button type="button" class="btn btn-3d btn-info" data-toggle="modal" data-target="#myModal">
 													<span>Lihat SK</span>
@@ -109,7 +109,7 @@
 													<form action="{{URL('/mrp/sk/upload')}}" method="post" enctype="multipart/form-data" autocomplete="on">
 														{{ csrf_field() }}
 														<fieldset>
-															<input type="hidden" name="id" value="{{ old('id') }}" />
+															<input class="mrp_id" type="hidden" name="id" value="">
 															<!-- upload dokumen -->
 															<div class="row">
 																<div class="form-group">
@@ -130,14 +130,14 @@
 															</div>
 
 															<!-- tahun sk -->
-															<!-- <div class="row">
+															<div class="row">
 																<div class="form-group">
 																		<div class="col-md-12 col-sm-12">
 																			<label>Registry Number *</label>
-																			<input type="text" name="tahun_sk" id="tahun_sk" value="{{ old('tahun_sk') }}" class="form-control required">
+																			<input type="text" name="registry_number" id="registry_number" value="{{ old('registry_number') }}" class="form-control" required>
 																		</div>
 																</div>
-															</div> -->
+															</div>
 
 															<!-- tahun sk -->
 															<div class="row">
@@ -275,7 +275,7 @@
 				<!-- Modal Body -->
 				<div class="modal-body">
 					<div class="form-group" >
-						<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
+						<td>{{ $mrp->skstg->filename_dokumen_sk }}</td>
 					</div>
 				</div>
 
