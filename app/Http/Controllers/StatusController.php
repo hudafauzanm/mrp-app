@@ -7,6 +7,8 @@ use App\Http\Middleware\Unit;
 use App\MRP;
 use App\Pegawai;
 use App\PenilaianPegawai;
+use Carbon\Carbon;
+
 class StatusController extends Controller
 {
     public function __construct()
@@ -66,16 +68,16 @@ class StatusController extends Controller
             'dokumen_unit_jawab' => 'required|mimes:pdf|max:10240'
         ]);
 
-
-        $status = MRP::find(request('id'));
-        $Status->update(['Status' => 2]);
+        $Status = MRP::where('registry_number', request('reg_num'))->first();
+        // $Status = MRP::find(request('id'));
+        $Status->status = 2;
         $Status->no_dokumen_unit_jawab = request('no_dokumen_unit_jawab');
         $Status->tgl_dokumen_unit_jawab = Carbon::now('Asia/Jakarta');
 
         $file = request('dokumen_unit_jawab');
-        $foldername = $mrp->registry_number.'/';
-        $filename = 'JAWAB_'.str_replace('/', '_', $mrp->no_dokumen_unit_jawab).'.'.$file->getClientOriginalExtension();
-        $Status->filename_no_dokumen_unit_jawab = $filename;
+        $foldername = $Status->registry_number.'/';
+        $filename = 'JAWAB_'.str_replace('/', '_', $Status->no_dokumen_unit_jawab).'.'.$file->getClientOriginalExtension();
+        $Status->filename_dokumen_unit_jawab = $filename;
         // dd($foldername, $filename);
         // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
         $Status->save();

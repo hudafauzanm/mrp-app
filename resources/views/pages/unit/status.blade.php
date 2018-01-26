@@ -118,50 +118,13 @@
 								@if(request('act')=='res')
 									@if($mrps->status == 1)
 			                            <td class="text-center">
-			                            	<button type="button" class="btn btn-success btn-md fa fa-check" data-toggle="modal" data-target="#approveModal" id="approveModal"> Approve</button>
+			                            	<button type="button" class="btn btn-success btn-md fa fa-check btnApprove" data-toggle="modal" data-target="#approveModal" value="{{$mrps->registry_number}}"> Approve</button>
 				                            <form action="/status/decline/{{$mrps->registry_number}}" method="POST">
 			                            		{{ csrf_field() }}
 												<button type="submit" class="btn btn-danger btn-md fa fa-close"> Decline</button>
 			                            	</form>
 			                            </td>
 
-				                        <div id="approveModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-
-													<!-- Modal Header -->
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-														<h4 class="modal-title" id="approveModalLabel">Approve</h4>
-													</div>
-
-													<!-- Modal Body -->
-													<form action="/status/approve/" method="POST" enctype="multipart/form-data">
-														{{ csrf_field() }}
-														<input class="mrp_id" type="hidden" name="id" value="">
-														<div class="modal-body">
-																
-															<div class="form-group"> 
-																<h4>Surat Lolos Butuh</h4>
-																<input class="custom-file-upload" type="file" id="file" name="dokumen_unit_jawab" id="contact:attachment" data-btn-text="Select a File" />
-																<small class="text-muted block">Max file size: 10Mb (pdf)</small>
-															</div>
-															
-															<div class="form-group">
-																<h4>No. Dokumen</h4>
-																<input type="text" class="form-control" name="no_dokumen_unit_jawab">
-															</div>
-														</div>
-
-														<!-- Modal Footer -->
-														<div class="modal-footer">
-															<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-															<button type="submit" class="btn btn-primary">Simpan</button>
-														</div>
-													</form>
-												</div>
-											</div>
-									    </div>
 			                         @else
 			                         	<td class="text-center"><span class="label label-success label-md">Sudah Ditindak Lanjuti</span></td>
 			                         @endif
@@ -176,6 +139,44 @@
 			<!-- /panel content -->
 		</div>
 	</div>
+    
+    <div id="approveModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="approveModalLabel">Approve</h4>
+				</div>
+
+				<!-- Modal Body -->
+				<form action="/status/approve" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+					<input class="mrp_id" type="hidden" id="reg_num" name="reg_num" value="">
+					<div class="modal-body">
+							
+						<div class="form-group"> 
+							<h4>Surat Lolos Butuh</h4>
+							<input class="custom-file-upload" type="file" id="file" name="dokumen_unit_jawab" id="contact:attachment" data-btn-text="Select a File" />
+							<small class="text-muted block">Max file size: 10Mb (pdf)</small>
+						</div>
+						
+						<div class="form-group">
+							<h4>No. Dokumen</h4>
+							<input type="text" class="form-control" name="no_dokumen_unit_jawab">
+						</div>
+					</div>
+
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
 @endsection
 
 
@@ -186,6 +187,12 @@
             $('#statusTable').DataTable({                
             });
         });
+    </script>
+
+    <script>
+    	$(".btnApprove").click(function(){
+    		$("#reg_num").val($(this).val());
+    	});
     </script>
     
     {{--<script>
