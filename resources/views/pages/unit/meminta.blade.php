@@ -220,7 +220,7 @@
 									</div>
 								</div>
 								
-								{{-- <div class="row">
+								<div class="row">
 									<div class="col-md-12 col-sm-12">
 										<label class="switch switch">
 											<input type="checkbox" name="rekom_checkbox" id="rekom_checkbox" value="0" autocomplete="off">
@@ -228,9 +228,9 @@
 											<span> Rekomendasikan proyeksi jabatan? <small> - opsional</small></span>
 										</label>
 									</div>
-								</div> --}}
+								</div>
 
-								{{-- <div id="rekom_proyeksi">
+								<div id="rekom_proyeksi">
 									<div class="row">
 										<div class="form-group">
 											<div class="col-md-12 col-sm-12">
@@ -263,7 +263,7 @@
 											</div>
 										</div>
 									</div>
-								</div> --}}
+								</div>
 							</div>
 						</fieldset>
 					</div>

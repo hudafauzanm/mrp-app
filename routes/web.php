@@ -25,6 +25,7 @@ Route::get('/logout', 'LoginController@logout');
 // status proses
 Route::get('/status', 'StatusController@index');
 Route::post('/status/approve/{reg_num}', 'StatusController@approve')->name('approve');
+Route::post('/status/decline/{reg_num}', 'StatusController@decline')->name('decline');
 Route::get('/status/detail/{reg_num}', 'StatusController@getDetails');
 
 
