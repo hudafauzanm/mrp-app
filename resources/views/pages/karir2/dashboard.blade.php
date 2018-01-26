@@ -69,7 +69,7 @@ use Carbon\Carbon;
 
 				<div class="panel panel-default text-left">
 					<div class="panel-body">
-						<a class="btn btn-success btn-3d" href="/dashboard/dataevaluasi" target="_blank"><i class="fa fa-chevron-circle-right"></i> SHOW ALL</a>
+						<a class="btn btn-success btn-3d" href="/dashboard/dataevaluasi"><i class="fa fa-file-excel-o"></i> GENERATE DATA EVALUASI</a>
 					</div>
 				</div>
 
@@ -85,7 +85,7 @@ use Carbon\Carbon;
 								 Surat Perintah Cetak SK
 							</th>
 							<th style="text-align: center;">
-								 No. Surat Nota Dinas
+								 Surat Usulan Mutasi
 							</th>
 							<th style="text-align: center;">
 								 Registry Number
@@ -113,7 +113,7 @@ use Carbon\Carbon;
 							<th data-type="numeric" data-hide = "all" class="">PERDIR Formasi Jabatan untuk Unit yang dituju</th>
 							<th data-type="numeric" data-hide = "all" class="">Letak Domisili dengan Unit Mutasi</th>
 							<th data-type="numeric" data-hide = "all" class="">Suami/Istri</th>
-							<th data-type="numeric" data-hide = "all" class="">Tindaklanjut</th>
+							<th data-type="numeric" data-hide = "all" class="">Tindak Lanjut</th>
 							<th data-type="numeric" data-hide = "all" class="">Tanggal Aktivasi</th>
 							<!-- <th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th> -->
 						</tr>
@@ -122,14 +122,15 @@ use Carbon\Carbon;
 						@foreach ($mrp_e as $mrp)
 						<tr>
 							<td>
-								{{ App\PersonnelArea::where('id', $mrp->unit_pengusul)->pluck('nama_pendek')->first() }}
+								{{ $mrp->personnel_area_pengusul->nama_pendek }}
 							</td> <!-- pengusul -->
 
-							<td>{{ App\SKSTg::where('id', $mrp->sk_stg_id)->pluck('filename_dokumen_proses_sk')->first() }}
+							<td>
+								<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_respon_sdm }}" class="btn btn-info">{{ $mrp->no_dokumen_respon_sdm }}</a>
 							</td> <!-- surat perintah -->
 							<td>
-								 {{$mrp->no_dokumen_unit_usul}} <!-- no dokumen asal -->
-							</td>
+								<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-info">{{ $mrp->no_dokumen_unit_usul }}</a>
+							</td> <!-- surat perintah -->
 							<td>
 								 {{$mrp->registry_number}} <!-- registry number -->
 							</td>
@@ -140,22 +141,22 @@ use Carbon\Carbon;
 								 {{$mrp->pegawai->nama_pegawai}} <!-- nama pegawai -->
 							</td>
 							<td style="text-align: center;">
-								 <button type="button" class="btn btn-success" style="height: 35px;">Approve</button> <button type="button" class="btn btn-danger" style="height: 35px">Reject</button>
+								 <button type="button" class="btn btn-success" style="height: 35px;">Approve</button><button type="button" class="btn btn-danger" style="height: 35px">Reject</button>
 							</td> <!-- tindak lanjut -->
 
 							<td>{{$mrp->pegawai->ps_group}}</td><!-- ps group -->
 
 							<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> <br>{{$mrp->pegawai->formasi_jabatan->posisi}}<br></td><!-- jabatan lama -->
-
+							
 							<td><strong>{{ $mrp->formasi_jabatan->formasi}} {{ $mrp->formasi_jabatan->jabatan}}</strong> <br> {{ $mrp->formasi_jabatan->posisi}}<br></td> <!-- jabatan baru -->
 							
 							<td></td>
 
 							<td>
-								 ... Tahun <!-- sisa masa kerja -->
+								 {{ $mrp->pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->tanggal_lahir)->addYears(56)) }} Tahun <!-- sisa masa kerja -->
 							</td>
 							<td>
-								 s.d. .... Tahun <!-- masa kerja di jab terakhir -->
+								 s.d. {{ $mrp->pegawai->year_diff_decimal(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta')) }} Tahun <!-- masa kerja di jab terakhir -->
 							</td>
 							<td>
 								 {{$mrp->jenis_mutasi}} ({{$mrp->mutasi}}) <!-- jenis mutasi -->
@@ -184,10 +185,10 @@ use Carbon\Carbon;
 								@endif
 							</td>
 							<td>
-								 {{ $mrp->tindak_lanjut}} <!-- tindak lanjut -->
+								 {{ $mrp->requested_tindak_lanjut}} <!-- tindak lanjut -->
 							</td>
 							<td>
-								 {{ $mrp->tanggal_aktivasi}} <!-- tanggal aktivasi -->
+								 {{ $mrp->requested_tanggal_aktivasi}} <!-- tanggal aktivasi -->
 							</td>
 						</tr>
 						

@@ -176,7 +176,7 @@ use Carbon\Carbon;
 												</div>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#approveModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
@@ -289,7 +289,7 @@ use Carbon\Carbon;
 											<th data-type="numeric" data-hide = "" class="">Proyeksi Jabatan</th>
 											<th data-type="numeric" data-hide = "all" class="">Pengusul</th>
 											<th data-type="numeric" data-hide = "all" class="">Source</th>
-											<th data-type="numeric" data-hide = "all" class="">Tanggal Aktivasi</th>
+											<th data-type="numeric" data-hide = "all" class="">Perkiraan Tanggal Aktivasi</th>
 											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
@@ -303,8 +303,7 @@ use Carbon\Carbon;
 											<td>{{ $mrp->formasi_jabatan->jabatan }}</td>
 											<td>{{ \App\Pegawai::where('nip', $mrp->nip_pengusul)->first()->nama_pegawai }} ({{ $mrp->nip_pengusul }})</td>
 											<td>Existing</td>
-											{{-- <td>{{ $mrp->tanggal_aktivasi }}</td> --}}
-											<td>sementara</td>
+											<td>{{ $mrp->requested_tgl_aktifasi ? $mrp->requested_tgl_aktifasi->format('j F Y') : '-' }}</td>
 											<td class="text-center">
 												<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-3d btn-sm btn-primary">
 													<i class="fa fa-arrow-circle-down"></i>
@@ -517,7 +516,7 @@ use Carbon\Carbon;
 			</div>
 		</div>
     </div>
-
+	
     <div id="approveModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -542,12 +541,25 @@ use Carbon\Carbon;
 						
 						<div class="form-group">
 							<h4>No. Dokumen</h4>
-							<input type="text" class="form-control" name="no_dokumen_mutasi">
+							<input type="text" class="form-control" name="no_dokumen_respon_sdm">
 						</div>
 
 						<div class="form-group">
-							<h4>Tanggal Aktifasi</h4>
-							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+							<h4>Tindak Lanjut</h4>
+							<!-- select -->
+							<div class="fancy-form fancy-form-select">
+								<select class="form-control" name="tindak_lanjut">
+									<option>--- PILIH ---</option>
+									<option value="Cetak SK Definitif">Cetak SK Definitif</option>
+									<option value="Cetak SK Fungsional">Cetak SK Fungsional</option>
+									<option value="Cetak SK Fungsional & Surat Tugas PLT">Cetak SK Fungsional & Surat Tugas PLT</option>
+									<option value="Cetak SK Fungsional Pembatalan SK Lama">Cetak SK Fungsional Pembatalan SK Lama</option>
+									<option value="Cetak SK Ijin di Luar Tanggungan">Cetak SK Ijin di Luar Tanggungan</option>
+									<option value="Cetak Surat Tugas PLT">Cetak Surat Tugas PLT</option>
+									<option value="Pending">Pending</option>
+								</select>
+								<i class="fancy-arrow"></i>
+							</div>
 						</div>
 					</div>
 
@@ -591,12 +603,12 @@ use Carbon\Carbon;
 						
 						<div class="form-group">
 							<h4>No. Dokumen</h4>
-							<input type="text" class="form-control" name="no_dokumen_mutasi">
+							<input type="text" class="form-control" name="no_dokumen_respon_sdm">
 						</div>
 
 						<div class="form-group">
-							<h4>Tanggal Aktifasi</h4>
-							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+							<h4>Tindak Lanjut</h4>
+							<input type="text" class="form-control" name="tindak_lanjut">
 						</div>
 					</div>
 
@@ -635,12 +647,7 @@ use Carbon\Carbon;
 						
 						<div class="form-group">
 							<h4>No. Dokumen</h4>
-							<input type="text" class="form-control" name="no_dokumen_mutasi">
-						</div>
-
-						<div class="form-group">
-							<h4>Tanggal Aktifasi</h4>
-							<input type="text" name="tgl_dokumen_mutasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+							<input type="text" class="form-control" name="no_dokumen_respon_sdm">
 						</div>
 					</div>
 

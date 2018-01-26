@@ -36,9 +36,10 @@ class CreatePenilaianPegawaisTable extends Migration
             $table->string('external_rediness');
             $table->string('hubungan_sesama');
             $table->string('hubungan_atasan');
+            $table->char('mrp_id', 36)->nullable();
             $table->timestamps();
 
-            $table->index('pegawai_id');
+            $table->index(['pegawai_id', 'mrp_id']);
         });
     }
 

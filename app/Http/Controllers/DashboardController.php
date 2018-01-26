@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Pegawai;
 use App\PenilaianPegawai;
 use App\MRP;
+use App\PersonnelArea;
+
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+
+use App\Notifications\MutasiDitolak;
+use App\Notifications\ProsesEvaluasi;
+use App\Notifications\ButuhEvaluasi;
 
 class DashboardController extends Controller
 {
@@ -29,8 +37,7 @@ class DashboardController extends Controller
     		return view('pages.unit.dashboard', compact('ajumutj','ajumut', 'dptmut', 'nip', 'nama'));
     	}
     	else if($user->user_role == 2)
-    	{
-            
+    	{            
             $mrp_e = MRP::where('status', 3)->get();
     		return view('pages.karir2.dashboard', compact('mrp_e'));
     	}
@@ -60,17 +67,27 @@ class DashboardController extends Controller
         ]);
 
         $mrp = MRP::find(request('id'));
-        $mrp->no_dokumen_mutasi = request('no_dokumen_mutasi');
-        $mrp->tgl_dokumen_mutasi = request('tgl_dokumen_mutasi');
+        $mrp->no_dokumen_respon_sdm = request('no_dokumen_respon_sdm');
+        $mrp->tgl_evaluasi = Carbon::now('Asia/Jakarta');
+        $mrp->tindak_lanjut = 'BATAL';
         $mrp->status = 99;
-        $mrp->save();
 
         $file = request('dokumen_mutasi');
         $foldername = $mrp->registry_number.'/';
-        $filename = 'tolak_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+        $filename = 'TOLAK_'.str_replace('/', '_', $mrp->no_dokumen_respon_sdm).'.'.$file->getClientOriginalExtension();
+        $mrp->filename_dokumen_respon_sdm = $filename;
         // dd($foldername, $filename);
         // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+        $mrp->save();
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+        $pengusul = $mrp->personnel_area_pengusul;
+        $data = [
+            'reg_num' => $mrp->registry_number,
+            'penolak' => 'SDM Kantor Pusat',
+            'user_id' => $pengusul->id,
+            'mrp_id' => $mrp->id
+        ];
+        $pengusul->notify(new MutasiDitolak($data));
 
         return back()->with('success', 'Berhasil');
     }
@@ -82,8 +99,9 @@ class DashboardController extends Controller
         ]);
 
         $mrp = MRP::find(request('id'));
-        $mrp->no_dokumen_mutasi = request('no_dokumen_mutasi');
-        $mrp->tgl_dokumen_mutasi = request('tgl_dokumen_mutasi');
+        $mrp->no_dokumen_respon_sdm = request('no_dokumen_respon_sdm');
+        $mrp->tgl_evaluasi = Carbon::now('Asia/Jakarta');
+        $mrp->tindak_lanjut = request('tindak_lanjut');
         $mrp->status = 3;
 
         if($mrp->tipe == 3)
@@ -91,20 +109,48 @@ class DashboardController extends Controller
             $mrp->pegawai_id = Pegawai::where('nip', request('nip'))->first()->id;
         }
 
-        $mrp->save();
 
         $file = request('dokumen_mutasi');
         $foldername = $mrp->registry_number.'/';
-        $filename = 'terima_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
+        $filename = 'TERIMA_'.str_replace('/', '_', $mrp->no_dokumen_respon_sdm).'.'.$file->getClientOriginalExtension();
+        $mrp->filename_dokumen_respon_sdm = $filename;
         // dd($foldername, $filename);
         // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
+        $mrp->save();
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+        $pengusul = $mrp->personnel_area_pengusul;
+        $data = [
+            'reg_num' => $mrp->registry_number,
+            'user_id' => $pengusul->id,
+            'mrp_id' => $mrp->id
+        ];
+        $pengusul->notify(new ProsesEvaluasi($data));
+
+        $karir2 = PersonnelArea::where('user_role', 2)->first();
+        $data = [
+            'reg_num' => $mrp->registry_number,
+            'tipe' => $mrp->tipe,
+            'user_id' => $pengusul->id,
+            'mrp_id' => $mrp->id
+        ];
+        $karir2->notify(new ButuhEvaluasi($data));
 
         return back()->with('success', 'Berhasil');
     }
     public function detaileval()
     {
         $mrp_e1 = MRP::where('status', 3)->get();
-        return view('pages.karir2.dataevaluasi', compact('mrp_e1'));
+        $filename = 'Data Evaluasi - '.Carbon::now('Asia/Jakarta');
+
+        Excel::create($filename, function($excel) use($mrp_e1) {
+            $excel->sheet('Data Evaluasi', function($sheet) use($mrp_e1) {
+                $sheet->loadView('pages.karir2.dataevaluasi', ['mrp_e1' => $mrp_e1, 'no' => 1]);
+                $sheet->getStyle('B:J')->getAlignment()->setWrapText(true);
+                $sheet->cell('A1:J1', function($cell) { 
+                    $cell->setFontSize(10);
+                });
+
+            });
+        })->download('xlsx');
     }
 }

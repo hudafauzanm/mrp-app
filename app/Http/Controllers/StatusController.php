@@ -41,10 +41,9 @@ class StatusController extends Controller
 
     public function getDetails($reg_num)
     {   
-        
         $detail = MRP::where('registry_number', $reg_num)->first();
-        $waktunilai = PenilaianPegawai::where('created_at', $detail->created_at)->where('pegawai_id', $detail->pegawai_id)->first();
-         // dd($waktunilai);
+        $waktunilai = $detail->penilaian_pegawai;
+        
         if($detail->tipe == '3')
         {
            return view('pages.unit.detail_bursa',compact('detail'));
@@ -56,7 +55,6 @@ class StatusController extends Controller
         
         else if($detail->tipe == '2')
         {
-
     	   return view('pages.unit.detail_mutasi',compact('detail', 'waktunilai'));
         }
     }
