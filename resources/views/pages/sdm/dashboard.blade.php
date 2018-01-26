@@ -81,31 +81,33 @@ use Carbon\Carbon;
 								</div>
 
 								<div class="row">
-									<div id="struktural_monitoring" class="panel panel-default">
+									<div class="col-md-6">
+										<div id="struktural_monitoring" class="panel panel-default">
 
-										<div class="panel-heading">
+											<div class="panel-heading">
 
-											<span class="elipsis"><!-- panel title -->
-												<strong>Struktural</strong>
-											</span>
+												<span class="elipsis"><!-- panel title -->
+													<strong>Struktural</strong>
+												</span>
 
-											<!-- right options -->
-											<ul class="options pull-right list-inline">
-												<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-												<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
-												<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
-											</ul>
-											<!-- /right options -->
+												<!-- right options -->
+												<ul class="options pull-right list-inline">
+													<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+													<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
+												</ul>
+												<!-- /right options -->
 
+
+											</div>
+
+											<!-- panel content -->
+											<div class="panel-body nopadding">
+												<canvas id="struktural_chart"></canvas>
+											</div>
+											<!-- /panel content -->
 
 										</div>
-
-										<!-- panel content -->
-										<div class="panel-body nopadding">
-											<canvas id="struktural_chart"></canvas>
-										</div>
-										<!-- /panel content -->
-
 									</div>
 
 								</div>
@@ -957,93 +959,140 @@ use Carbon\Carbon;
 			// $("#monitoring_body").css('height', height*0.45);
 			// $("#verifikasi_body").css('height', height*0.45);
 			loadScript('/bower_components/chart.js/dist/Chart.min.js', function() {
-				var barOptions_stacked = {
-				    tooltips: {
-				        enabled: false
-				    },
-				    hover :{
-				        animationDuration:0
-				    },
-				    scales: {
-				        xAxes: [{
-				            ticks: {
-				                beginAtZero:true,
-				                fontFamily: "'Open Sans Bold', sans-serif",
-				                fontSize:11
-				            },
-				            scaleLabel:{
-				                display:false
-				            },
-				            gridLines: {
-				            }, 
-				            stacked: true
-				        }],
-				        yAxes: [{
-				            gridLines: {
-				                display:false,
-				                color: "#fff",
-				                zeroLineColor: "#fff",
-				                zeroLineWidth: 0
-				            },
-				            ticks: {
-				                fontFamily: "'Open Sans Bold', sans-serif",
-				                fontSize:11
-				            },
-				            stacked: true
-				        }]
-				    },
-				    legend:{
-				        display:false
-				    },
-				    
-				    animation: {
-				        onComplete: function () {
-				            var chartInstance = this.chart;
-				            var ctx = chartInstance.ctx;
-				            ctx.textAlign = "left";
-				            ctx.font = "9px Open Sans";
-				            ctx.fillStyle = "#fff";
-
-				            Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
-				                var meta = chartInstance.controller.getDatasetMeta(i);
-				                Chart.helpers.each(meta.data.forEach(function (bar, index) {
-				                    data = dataset.data[index];
-				                    if(i==0){
-				                        ctx.fillText(data, 50, bar._model.y+4);
-				                    } else {
-				                        ctx.fillText(data, bar._model.x-25, bar._model.y+4);
-				                    }
-				                }),this)
-				            }),this);
+				var data = {
+				    labels: ["MA_KP", "MA_UI", "MM_KP"],
+				    datasets: [
+				        {
+				            label: "First",
+				            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				            borderWidth: 1,
+				            data: [1,3,4],
+				        },        
+				        {
+				            label: "Second",
+				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+				            borderWidth: 1,
+				            data: [5,3,5],
+				        },
+				        {
+				            label: "Third",
+				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+				            borderWidth: 1,
+				            data: [7,4,5],
 				        }
-				    },
-				    pointLabelFontFamily : "Quadon Extra Bold",
-				    scaleFontFamily : "Quadon Extra Bold",
+				    ]
 				};
 
-				var ctx = document.getElementById("struktural_chart");
-				var myChart = new Chart(ctx, {
-				    type: 'horizontalBar',
-				    data: {
-				        labels: ["2014", "2013", "2012", "2011"],
-				        
-				        datasets: [{
-				            data: [727, 589, 537, 543, 574],
-				            backgroundColor: "rgba(63,103,126,1)",
-				            hoverBackgroundColor: "rgba(50,90,100,1)"
-				        },{
-				            data: [238, 553, 746, 884, 903],
-				            backgroundColor: "rgba(163,103,126,1)",
-				            hoverBackgroundColor: "rgba(140,85,100,1)"
-				        },{
-				            data: [1238, 553, 746, 884, 903],
-				            backgroundColor: "rgba(63,203,226,1)",
-				            hoverBackgroundColor: "rgba(46,185,235,1)"
-				        }]
+				var options= {
+					tooltips: {
+				        enabled: false
 				    },
+					scales: {
+						yAxes: [{
+							stacked: true,
+						}],
+						xAxes: [{
+							stacked: false,
+						ticks: {
+							beginAtZero: true
+						},
+						}]
+					}
+				};
 
-				    options: barOptions_stacked,
+				var ctx = document.getElementById("struktural_chart").getContext("2d");
+				var myBarChart = new Chart(ctx, {
+				    type: 'horizontalBar',
+				    data: data,
+				    options: options
 				});
+				// var barOptions_stacked = {
+				//     tooltips: {
+				//         enabled: false
+				//     },
+				//     hover :{
+				//         animationDuration:0
+				//     },
+				//     scales: {
+				//         xAxes: [{
+				//             ticks: {
+				//                 beginAtZero:true,
+				//                 fontFamily: "'Open Sans Bold', sans-serif",
+				//                 fontSize:11
+				//             },
+				//             scaleLabel:{
+				//                 display:false
+				//             },
+				//             gridLines: {
+				//             }, 
+				//             stacked: true
+				//         }],
+				//         yAxes: [{
+				//             gridLines: {
+				//                 display:false,
+				//                 color: "#fff",
+				//                 zeroLineColor: "#fff",
+				//                 zeroLineWidth: 0
+				//             },
+				//             ticks: {
+				//                 fontFamily: "'Open Sans Bold', sans-serif",
+				//                 fontSize:11
+				//             },
+				//             stacked: true
+				//         }]
+				//     },
+				//     legend:{
+				//         display:false
+				//     },
+				    
+				//     animation: {
+				//         onComplete: function () {
+				//             var chartInstance = this.chart;
+				//             var ctx = chartInstance.ctx;
+				//             ctx.textAlign = "left";
+				//             ctx.font = "9px Open Sans";
+				//             ctx.fillStyle = "#fff";
+
+				//             Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
+				//                 var meta = chartInstance.controller.getDatasetMeta(i);
+				//                 Chart.helpers.each(meta.data.forEach(function (bar, index) {
+				//                     data = dataset.data[index];
+				//                     if(i==0){
+				//                         ctx.fillText(data, 50, bar._model.y+4);
+				//                     } else {
+				//                         ctx.fillText(data, bar._model.x-25, bar._model.y+4);
+				//                     }
+				//                 }),this)
+				//             }),this);
+				//         }
+				//     },
+				//     pointLabelFontFamily : "Quadon Extra Bold",
+				//     scaleFontFamily : "Quadon Extra Bold",
+				// };
+
+				// var ctx = document.getElementById("struktural_chart");
+				// var myChart = new Chart(ctx, {
+				//     type: 'horizontalBar',
+				//     data: {
+				//         labels: ["2014", "2013", "2012", "2011"],
+				        
+				//         datasets: [{
+				//             data: [727, 589, 537, 543, 574],
+				//             backgroundColor: "rgba(63,103,126,1)",
+				//             hoverBackgroundColor: "rgba(50,90,100,1)"
+				//         },{
+				//             data: [238, 553, 746, 884, 903],
+				//             backgroundColor: "rgba(163,103,126,1)",
+				//             hoverBackgroundColor: "rgba(140,85,100,1)"
+				//         },{
+				//             data: [1238, 553, 746, 884, 903],
+				//             backgroundColor: "rgba(63,203,226,1)",
+				//             hoverBackgroundColor: "rgba(46,185,235,1)"
+				//         }]
+				//     },
+
+				//     options: barOptions_stacked,
+				// });
 			});
 		}); 
 	</script>
