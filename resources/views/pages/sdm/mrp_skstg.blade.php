@@ -71,7 +71,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach ($mrpsk as $mrp)
+										@foreach ($sk as $mrp)
 										<tr>
 											<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
 											<td>{{ $mrp->skstg->tanggal_aktivasi }}</td>

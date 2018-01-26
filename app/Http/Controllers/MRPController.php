@@ -371,8 +371,8 @@ class MRPController extends Controller
 
     public function daftarSK()
     {
-        $mrpsk = MRP::where('status', 5)->get();
-        return view('pages.sdm.mrp_skstg', compact('mrpsk'));
+        $sk = MRP::where('status', 5)->get();
+        return view('pages.sdm.mrp_skstg', compact('sk'));
     }
 
     public function uploadSK(Request $request)
