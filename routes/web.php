@@ -50,7 +50,7 @@ Route::get('/mrp/detail/{reg_num}', 'MRPController@showDetail');
 Route::post('/mrp/datatables/ajax', 'MRPController@ajaxDatatables');
 Route::get('/mrp/export', 'MRPController@export');
 Route::get('/mrp/download/{reg_num}/{no_dokumen}', 'MRPController@downloadDokumen');
-Route::get('/mrp/sk', 'MRPController@pagesk');
+Route::get('/mrp/sk', 'MRPController@daftarSK');
 Route::post('/mrp/sk/upload', 'MRPController@uploadSK');
 
 Route::get('/download/{reg_num}/{filename}', 'DownloadController@downloader');
