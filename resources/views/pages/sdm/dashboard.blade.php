@@ -58,28 +58,22 @@ use Carbon\Carbon;
 							<div id="formasi_jabatan" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-6">
-										<div class="fancy-form fancy-form-select">
-											<select class="form-control">
-												<option>--- ALL ---</option>
-												<option value="KP">KP</option>
-												<option value="UI">UI</option>
-												<option value="UIP">UIP</option>
-												<option value="SUP">SUP</option>
-											</select>
-											<i class="fancy-arrow"></i>
-										</div>
+										<select class="form-control select2">
+											<option>--- ALL ---</option>
+											<option value="KP">KP</option>
+											<option value="UI">UI</option>
+											<option value="UIP">UIP</option>
+											<option value="SUP">SUP</option>
+										</select>
 									</div>
 
 									<div class="col-md-6">
-										<div class="fancy-form fancy-form-select">
-											<select class="form-control">
-												<option>--- ALL ---</option>
-												@foreach ($personnels as $pers)
-													<option value="{{ $pers->username }}">{{ $pers->nama_pendek }}</option>
-												@endforeach		
-											</select>
-											<i class="fancy-arrow"></i>
-										</div>
+										<select class="form-control select2">
+											<option value="all">--- ALL ---</option>
+											@foreach ($personnels as $pers)
+												<option value="{{ $pers->username }}">{{ $pers->nama_pendek }}</option>
+											@endforeach
+										</select>
 									</div>
 
 								</div>
@@ -240,6 +234,16 @@ use Carbon\Carbon;
 
 
 							<div id="sk" class="tab-pane">
+								<div class="row">
+									<div class="col-md-6 pull-right">
+										<select class="form-control select2" style="width: 100%">
+											<option value="all">--- ALL ---</option>
+											@foreach ($personnels as $pers)
+												<option value="{{ $pers->username }}">{{ $pers->nama_pendek }}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-md-12">
 										<div id="sk_pane" class="panel panel-default">
@@ -1006,26 +1010,6 @@ use Carbon\Carbon;
 	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="/assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
 	<script type="text/javascript">
-		loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
-			loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
-				loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
-					loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
-						loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
-							loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
-								loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
-								
-									// demo js script
-									loadScript("assets/js/view/demo.graphs.flot.js");
-
-								});
-							});
-						});
-					});
-				});
-			});
-		});
-	</script>
-	<script type="text/javascript">
 	$(document).ready(function(){
 		loadScript(plugin_path + "footable/dist/footable.min.js", function(){
 			loadScript(plugin_path + "footable/dist/footable.sort.min.js", function(){
@@ -1181,9 +1165,7 @@ use Carbon\Carbon;
 		}); 
 
 		function ct1() {
-		    alert("triggered");
 		    var ctx = document.getElementById("sk_chart").getContext("2d");
-		    console.log(data, options);
 			var skBarChart = new Chart(ctx, {
 			    type: 'horizontalBar',
 			    data: data,
