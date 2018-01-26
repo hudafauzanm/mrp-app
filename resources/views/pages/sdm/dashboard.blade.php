@@ -40,20 +40,16 @@ use Carbon\Carbon;
 						<!-- tabs nav -->
 						<ul class="nav nav-tabs pull-left">
 							<li class="active">
-								<a class="tabselect" href="#formasi_jabatan" data-toggle="tab">Formasi Jabatan</a>
+								<a class="tabselect monitoring_tab" href="#formasi_jabatan" data-toggle="tab">Formasi Jabatan</a>
 							</li>
 							<li class="">
-								<a  class="tabselect" href="#sk" data-toggle="tab">SK</a>
+								<a  class="tabselect monitoring_tab" href="#sk" data-toggle="tab" id="tabnya_sk">Pergerakan SK</a>
 							</li>
 						</ul>									
 
-						<!-- right options -->
-						<ul class="options pull-right list-inline">
-							{{-- <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li> --}}
-							<li><span class="label label-success">Monitoring</span></li>
-						</ul>
-						<!-- /right options -->
+						<span class="title elipsis pull-right">
+							<strong>MONITORING</strong> <!-- panel title -->
+						</span>
 					</div>
 
 					<!-- panel content -->
@@ -117,7 +113,7 @@ use Carbon\Carbon;
 									</div>
 
 									<div class="col-md-6">
-										<div id="struktural_monitoring" class="panel panel-default">
+										<div id="fungsional_monitoring" class="panel panel-default">
 
 											<div class="panel-heading">
 
@@ -244,84 +240,131 @@ use Carbon\Carbon;
 
 
 							<div id="sk" class="tab-pane">
-								@if ($mrp_1->count())
 								<div class="row">
-									<div class="col-md-3">
-										<input class="form-control" type="text" placeholder="Search" id="filter2">
+									<div class="col-md-12">
+										<div id="sk_pane" class="panel panel-default">
+
+											<div class="panel-heading">
+
+												<span class="elipsis"><!-- panel title -->
+													<strong>Kantor Pusat</strong>
+												</span>
+
+												<!-- right options -->
+												<ul class="options pull-right list-inline">
+													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												</ul>
+												<!-- /right options -->
+
+
+											</div>
+
+											<!-- panel content -->
+											<div class="panel-body nopadding">
+												<canvas id="sk_chart"></canvas>
+											</div>
+											<!-- /panel content -->
+
+										</div>
 									</div>
 								</div>
-								
-								<br>
-								<table class="footable" id="footable1" data-filter="#filter1">
-									<thead>
-										<tr>
-											<th class="foo-cell">Registry Number</th>
-											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
-											<th data-type="numeric" data-hide = "" class="">Nama</th>
-											<th data-type="numeric" data-hide = "all" class="">Grade</th>
-											<th data-type="numeric" data-hide = "all" class="">Jabatan Saat Ini</th>
-											<th data-type="numeric" data-hide = "all" class="">Proyeksi Jabatan</th>
-											<th data-type="numeric" data-hide = "all" class="">Masa Kerja</th>
-											<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
-											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
-											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
-											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
-											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
-											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
-										</tr>
-									</thead>
-									<tbody>
-										@foreach ($mrp_1 as $mrp)
-										<tr>
-											<td class="foo-cell">{{ $mrp->registry_number }}</td>
-											<td>{{$mrp->pegawai->nip}}</td>
-											<td>{{$mrp->pegawai->nama_pegawai}}</td>
-											<td>{{$mrp->pegawai->ps_group}}</td>
-											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
-											<td>
-												@if(isset($mrp->formasi_jabatan_id))
-													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
-													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
-												@else
-													Perlu saran
-												@endif
-											</td>
-											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
-											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
-											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
-											<td>xxx</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
-													<i class="fa fa-check-circle"></i>
-													<span>Nilai {{$mrp->pegawai->nama_pegawai}}</span>
-												</button>												
-											</td>
-											<td>
-												<div class="btn-group">
-													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Download <span class="caret"></span></button>
-													<ul class="dropdown-menu" role="menu">
-														<li><a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}"><i class="fa fa-question-circle"></i> Usulan</a></li>
-														<li><a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_jawab }}"><i class="fa fa-edit"></i> Lolos Butuh</a></li>
-													</ul>
-												</div>
-											</td>
-											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
-													<i class="fa fa-check-circle"></i>
-													<span>Approve</span>
-												</button>
-												<button type="button" class="btn btn-3d btn-sm btn-red" data-toggle="modal" data-target="#rejectModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
-													<i class="fa fa-minus-circle"></i>
-													<span>Reject</span>
-												</button>
-											</td>
-										</tr>
-										@endforeach	
-									</tbody>
-								</table>
-								@else
-									<h3 class="text-center">Tidak ada data</h3>
-								@endif
+
+								<div class="row">
+									<div class="col-md-12">
+										<div id="sk_table_pane" class="panel panel-default">
+											<table class="table table-bordered dataTable" id="sk_table">
+												<thead>
+													<tr>
+														<th>Username</th>
+														<th>Email</th>
+														<th>Points</th>
+														<th>Joined</th>
+														<th>Status</th>
+													</tr>
+												</thead>
+
+												<tbody>
+													<tr class="odd gradeX">
+														<td>
+															 shuxer
+														</td>
+														<td>
+															<a href="mailto:shuxer@gmail.com">
+															shuxer@gmail.com </a>
+														</td>
+														<td>
+															 120
+														</td>
+														<td class="center">
+															 12 Jan 2012
+														</td>
+														<td>
+															<span class="label label-sm label-success">
+															Approved </span>
+														</td>
+													</tr>
+													<tr class="odd gradeX">
+														<td>
+															 looper
+														</td>
+														<td>
+															<a href="mailto:looper90@gmail.com">
+															looper90@gmail.com </a>
+														</td>
+														<td>
+															 120
+														</td>
+														<td class="center">
+															 12.12.2011
+														</td>
+														<td>
+															<span class="label label-sm label-warning">
+															Suspended </span>
+														</td>
+													</tr>
+													<tr class="odd gradeX">
+														<td>
+															 looper
+														</td>
+														<td>
+															<a href="mailto:looper90@gmail.com">
+															looper90@gmail.com </a>
+														</td>
+														<td>
+															 120
+														</td>
+														<td class="center">
+															 12.12.2011
+														</td>
+														<td>
+															<span class="label label-sm label-warning">
+															Suspended </span>
+														</td>
+													</tr>
+													<tr class="odd gradeX">
+														<td>
+															 looper
+														</td>
+														<td>
+															<a href="mailto:looper90@gmail.com">
+															looper90@gmail.com </a>
+														</td>
+														<td>
+															 120
+														</td>
+														<td class="center">
+															 12.12.2011
+														</td>
+														<td>
+															<span class="label label-sm label-warning">
+															Suspended </span>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -398,13 +441,9 @@ use Carbon\Carbon;
 							</li>
 						</ul>									
 
-						<!-- right options -->
-						<ul class="options pull-right list-inline">
-							{{-- <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li> --}}
-							<li><span class="label label-success">Evaluasi</span></li>
-						</ul>
-						<!-- /right options -->
+						<span class="title elipsis pull-right">
+							<strong>EVALUASI</strong> <!-- panel title -->
+						</span>
 					</div>
 
 					<!-- panel content -->
@@ -414,7 +453,7 @@ use Carbon\Carbon;
 								@if ($mrp_1->count())
 								<div class="row">
 									<div class="col-md-3">
-										<input class="form-control" type="text" placeholder="Search" id="filter2">
+										<input class="form-control" type="text" placeholder="Search" id="filter1">
 									</div>
 								</div>
 								
@@ -950,9 +989,15 @@ use Carbon\Carbon;
 @section('includes-scripts')
 	@parent
 
+	<script src="/bower_components/chart.js/dist/Chart.min.js"></script>
+
 	<script>
         $(function(){
             $('#forja_monitor').DataTable({
+
+            });
+
+            $('#sk_table').DataTable({
 
             });
         });
@@ -1074,68 +1119,83 @@ use Carbon\Carbon;
 			});
 
 			var height = $(document).height();
-			$("#monitoring_body").css('height', height*0.48);
-			$("#verifikasi_body").css('height', height*0.48);
+			$("#monitoring_body").css('height', height*0.55);
+			$("#verifikasi_body").css('height', height*0.55);
 
-			loadScript('/bower_components/chart.js/dist/Chart.min.js', function() {
-				var data = {
-				    labels: ["MA_KP", "MA_UI", "MM_KP", 'MM_UI', 'MM_UP', 'MM_KP', 'MD_UI', 'MD_UP'],
-				    datasets: [
-				        {
-				            label: "Kosong",
-				            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
-				            borderWidth: 1,
-				            data: [1,3,4,1,3,4,3,4],
-				        },        
-				        {
-				            label: "Akan",
-				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
-				            borderWidth: 1,
-				            data: [5,3,5,5,3,5,3,5],
-				        },
-				        {
-				            label: "Isi",
-				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
-				            borderWidth: 1,
-				            data: [7,4,5,7,4,5,4,5],
-				        }
-				    ]
-				};
+			window.data = {
+			    labels: ["MA_KP", "MA_UI", "MM_KP", 'MM_UI', 'MM_UP', 'MM_KP', 'MD_UI', 'MD_UP'],
+			    datasets: [
+			        {
+			            label: "Kosong",
+			            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			            borderWidth: 1,
+			            data: [1,3,4,1,3,4,3,4],
+			        },        
+			        {
+			            label: "Akan",
+			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+			            borderWidth: 1,
+			            data: [5,3,5,5,3,5,3,5],
+			        },
+			        {
+			            label: "Isi",
+			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+			            borderWidth: 1,
+			            data: [7,4,5,7,4,5,4,5],
+			        }
+			    ]
+			};
 
-				var options= {
-					responsive: true,
-        			maintainAspectRatio: false,
-					tooltips: {
-				        enabled: false
-				    },
-					scales: {
-						yAxes: [{
-							stacked: true,
-						}],
-						xAxes: [{
-							stacked: false,
-						ticks: {
-							beginAtZero: true
-						},
-						}]
-					}
-				};
+			window.options= {
+				responsive: true,
+    			maintainAspectRatio: false,
+				tooltips: {
+			        enabled: false
+			    },
+				scales: {
+					yAxes: [{
+						stacked: true,
+					}],
+					xAxes: [{
+						stacked: false,
+					ticks: {
+						beginAtZero: true
+					},
+					}]
+				}
+			};
 
-				var ctx = document.getElementById("struktural_chart").getContext("2d");
-				var myBarChart = new Chart(ctx, {
-				    type: 'horizontalBar',
-				    data: data,
-				    options: options
-				});
+			var ctx = document.getElementById("struktural_chart").getContext("2d");
+			var myBarChart = new Chart(ctx, {
+			    type: 'horizontalBar',
+			    data: data,
+			    options: options
+			});
 
-				var ctx = document.getElementById("fungsional_chart").getContext("2d");
-				var anotherBarChart = new Chart(ctx, {
-				    type: 'horizontalBar',
-				    data: data,
-				    options: options
-				});
+			var ctx = document.getElementById("fungsional_chart").getContext("2d");
+			var anotherBarChart = new Chart(ctx, {
+			    type: 'horizontalBar',
+			    data: data,
+			    options: options
 			});
 		}); 
+
+		function ct1() {
+		    alert("triggered");
+		    var ctx = document.getElementById("sk_chart").getContext("2d");
+		    console.log(data, options);
+			var skBarChart = new Chart(ctx, {
+			    type: 'horizontalBar',
+			    data: data,
+			    options: options
+			});
+		    skBarChart.render();
+		  }
+
+		$('#tabnya_sk').on("shown.bs.tab",function(){
+		      ct1();
+		      $('#tabnya_sk').off();//to remove the binded event after initial rendering
+		  });
 	</script>
 
 @endsection
