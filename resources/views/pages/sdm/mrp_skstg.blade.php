@@ -211,15 +211,6 @@
 															</div>
 
 															<div class="row">
-																<div class="form-group">
-																		<div class="col-md-12 col-sm-12">
-																			<label>MRP ID</label>
-																			<input type="text" name="mrp_id" id="mrp_id" value="{{ old('mrp_id') }}" class="form-control ">
-																		</div>
-																</div>
-															</div>
-
-															<div class="row">
 																<div class="col-md-12">
 																	<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
 																		KIRIM
