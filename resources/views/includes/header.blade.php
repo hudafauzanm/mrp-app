@@ -9,7 +9,7 @@
 
 	<!-- Logo -->
 	<span class="logo pull-left">
-		<img src="/assets/images/logo-header.png" alt="admin panel" height="35" />
+		<a href="/dashboard"><img src="/assets/images/logo-header.png" alt="admin panel" height="35" /></a>
 	</span>
 
 	<nav>

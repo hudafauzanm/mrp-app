@@ -54,10 +54,11 @@ use Carbon\Carbon;
 							<table class="table table-condensed nomargin">
 								<thead>
 									<tr>
-										<th width="17%">Detail Mutasi</th>
-										<th width="25%">Detail Pegawai</th>
+										<th width="16%">Detail Mutasi</th>
+										<th width="12%">Detail Pegawai</th>
 										<th width="12%">Unit Asal</th>
-										<th width="30%">Jabatan Saat Ini</th>
+										<th width="22%">Proyeksi Jabatan</th>
+										<th width="22%">Jabatan Saat Ini</th>
 										<th width="8%">Masa Kerja</th>
 										<th width="8%">Sisa Masa Kerja</th>
 									</tr>
@@ -82,6 +83,14 @@ use Carbon\Carbon;
 										</td>
 										<td>
 											<div><strong>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}</strong></div>
+										</td>
+										<td>
+											@if(isset($detail->formasi_jabatan))
+											<div><strong>{{$detail->formasi_jabatan->formasi}} {{$detail->formasi_jabatan->jabatan}}</strong></div>
+											<small>{{$detail->formasi_jabatan->posisi}}</small>
+											@else
+												Perlu saran
+											@endif
 										</td>
 										<td>
 											<div><strong>{{$detail->pegawai->formasi_jabatan->formasi}} {{$detail->pegawai->formasi_jabatan->jabatan}}</strong></div>

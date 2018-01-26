@@ -10,6 +10,7 @@
 	<!-- page title -->
 	<header id="page-header">
 		<h1>Form Meminta Pegawai</h1>
+		<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#helpModal"><i class="fa fa-question-circle"></i> Petunjuk Pengisian</button>
 	</header>
 	<!-- /page title -->
 
@@ -153,7 +154,7 @@
 											<label>Jenis Mutasi *</label>
 											<select name="mrp[jenis_mutasi]" class="form-control required" required>
 												<option>--- Pilih ---</option>
-												<option value="Tugas Belajar" {{ old('mrp.jenis_mutasi') == 'Tugas Belajar' ? 'selected="selected"' : "" }}>Tugas Belajar</option>
+												<option value="Dinas" {{ old('mrp.jenis_mutasi') == 'Dinas' ? 'selected="selected"' : "" }}>Dinas</option>
 												{{-- <option value="APS" {{ old('mrp.jenis_mutasi') == 'APS' ? 'selected="selected"' : '' }}>APS</option>
 												<option value="Non-dinas" {{ old('mrp.jenis_mutasi') == 'Non-dinas' ? 'selected="selected"' : "" }}>Non-dinas</option> --}}
 											</select>
@@ -163,9 +164,7 @@
 											<label>Tipe *</label>
 											<select name="mrp[mutasi]" class="form-control required" required>
 												<option>--- Pilih ---</option>
-												<option value="Rotasi" {{ old('mrp.mutasi') == 'Rotasi' ? 'selected="selected"' : "" }}>Rotasi</option>
-												<option value="Promosi" {{ old('mrp.mutasi') == 'Promosi' ? 'selected="selected"' : "" }}>Promosi</option>
-												<option value="Demosi" {{ old('mrp.mutasi') == 'Demosi' ? 'selected="selected"' : "" }}>Demosi</option>
+												<option value="L" {{ old('mrp.mutasi') == 'Tugas Belajar' ? 'selected="selected"' : "" }}>Tugas Belajar</option>
 											</select>
 										</div>
 									</div>
@@ -175,7 +174,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>
-												Tanggal Aktifasi*
+												Tanggal Aktivasi*
 											</label>
 											<!-- date picker -->
 											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
@@ -220,7 +219,7 @@
 									</div>
 								</div>
 								
-								{{-- <div class="row">
+								<div class="row">
 									<div class="col-md-12 col-sm-12">
 										<label class="switch switch">
 											<input type="checkbox" name="rekom_checkbox" id="rekom_checkbox" value="0" autocomplete="off">
@@ -228,22 +227,14 @@
 											<span> Rekomendasikan proyeksi jabatan? <small> - opsional</small></span>
 										</label>
 									</div>
-								</div> --}}
+								</div>
 
-								{{-- <div id="rekom_proyeksi">
+								<div id="rekom_proyeksi">
 									<div class="row">
 										<div class="form-group">
 											<div class="col-md-12 col-sm-12">
-												<div class="fancy-form fancy-form-select">
-													<select class="form-control select2" id="rekom_unit" disabled>
-														<option>--- Pilih Unit Rekomendasi ---</option>
-														@foreach ($units as $unit)
-															<option value="{{ $unit->id }}">{{ $unit->nama }}</option>
-														@endforeach
-													</select>
-
-													<i class="fancy-arrow"></i>
-												</div>
+												<label>Unit</label>
+												<input type="text" class="form-control"  id="rekom_unit" class="form-control pointer required" required value="{{$personnelarea->nama}}" disabled>
 											</div>
 										</div>
 									</div>
@@ -252,7 +243,10 @@
 										<div class="form-group">
 											<div class="col-md-6 col-sm-6">
 												<select class="form-control" id="rekom_formasi" disabled>
-													<option>--- Formasi ---</option>
+													<option>---Pilih Formasi---</option>
+													@foreach($formasis as $formasi)
+														<option value="{{$formasi->formasi}}"> {{$formasi->formasi }} </option>
+													@endforeach
 												</select>
 											</div>
 
@@ -263,7 +257,7 @@
 											</div>
 										</div>
 									</div>
-								</div> --}}
+								</div>
 							</div>
 						</fieldset>
 					</div>
@@ -421,6 +415,29 @@
 					</div>
 				</div>
 			</div>
+
+				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true" id="helpModal">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+
+							<!-- header modal -->
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="helpModalLabel">Petunjuk Pengisian</h4>
+							</div>
+
+							<!-- body modal -->
+							<div class="modal-body">
+								<ol>
+									<li>Isi kolom bertanda * (maka kolom lain akan otomatis terisi)</li>
+									<li>Anda hanya bisa mengusulkan mutasi untuk pegawai di unit anda</li>
+									<li>Dokumen yang dilampirkan berupa CV, Nota Dinas, dan dokumen lain yang diperlukan, dijadikan satu file dengan format .pdf</li>
+								</ol>
+							</div>
+
+						</div>
+					</div>
+				</div>
 				
 @endsection
 
@@ -447,8 +464,7 @@
 		$("#rekom_checkbox").click(function(){
 			var on_off = $(this).val();
 			$(this).val( on_off == '0' ? '1' : '0');
-			$('#rekom_unit').prop('disabled', function(i, v) { return !v; });
-			$('#rekom_unit').prop('required', function(i, v) { return !v; });
+			$('#rekom_formasi').prop('disabled', function(i, v) { return !v; });
 			$('#rekom_formasi').prop('required', function(i, v) { return !v; });
 			$('#rekom_jabatan').prop('required', function(i, v) { return !v; });
 
@@ -549,38 +565,12 @@
 	</script>
 
 	<script>
-		$("#rekom_unit").change(function(){
-			var unit_id = $(this).val();
-
-			$.ajax({
-				'url': '/mutasi/pengajuan/getFormasi',
-				'type': 'GET',
-				'data': {
-					'unit_id': unit_id,
-				},
-				'dataType': 'json',
-				error: function(){
-
-				},
-				success: function(data){
-					var formasi = $("#rekom_formasi");
-					formasi.empty();
-					formasi.append('<option>--- Formasi ---</option>');
-					formasi.removeAttr('disabled');
-					$.each(data, function(key, value){
-						console.log(value);
-						formasi.append('<option value="'+value.formasi+'">'+value.formasi+'</option>');
-					});
-				}
-			});
-		});
-
 		$("#rekom_formasi").change(function(){
 			var formasi = $(this).val();
 			var unit_id = $("#rekom_unit").val();
 
 			$.ajax({
-				'url': '/mutasi/pengajuan/getJabatan',
+				'url': '/mutasi/pengajuan/getFormasiJabs',
 				'type': 'GET',
 				'data': {
 					'unit_id': unit_id,

@@ -10,6 +10,7 @@
 	<!-- page title -->
 	<header id="page-header">
 		<h1>Form Request Jabatan</h1>
+		<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#helpModal"><i class="fa fa-question-circle"></i> Petunjuk Pengisian</button>
 	</header>
 	<!-- /page title -->
 
@@ -17,7 +18,7 @@
 		@include('includes.validation_errors')
 
 		<div class="row">
-			<div class="col-md-6 scrollable">
+			<div class="col-md-6">
 				<form class="" action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
 				<div id="content" >
 					{{ csrf_field() }}
@@ -117,7 +118,7 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
-											<label>Source</label>
+											<label>Source <small class="text-muted block">(sesuai kebutuhan)</small></label>
 											<select name="source" id="sourceid" class="form-control pointer required" required>
 												<option value="">--- Source ---</option>
 												<option id="frs1" value="frs1">FRS-FreshGraduate</option>
@@ -181,7 +182,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>
-												Tanggal Aktifasi*
+												Tanggal Aktivasi*
 											</label>
 											<!-- date picker -->
 											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
@@ -243,7 +244,7 @@
 				</form>
 			</div>
 
-			<div class="col-md-6 scrollable">
+			<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row">
@@ -384,6 +385,29 @@
 				</div>
 			</div>
 
+		</div>
+	</div>
+
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true" id="helpModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+
+							<!-- header modal -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="helpModalLabel">Petunjuk Pengisian</h4>
+				</div>
+
+							<!-- body modal -->
+				<div class="modal-body">
+					<ol>
+						<li>Isi kolom bertanda * (maka kolom lain akan otomatis terisi)</li>
+						<li>Anda hanya bisa mengusulkan mutasi untuk pegawai di unit anda</li>
+						<li>Dokumen yang dilampirkan berupa CV, Nota Dinas, dan dokumen lain yang diperlukan, dijadikan satu file dengan format .pdf</li>
+					</ol>
+				</div>
+
+			</div>
 		</div>
 	</div>
 @endsection

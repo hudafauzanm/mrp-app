@@ -34,7 +34,7 @@
 			</div>
 
 			<div class="col-md-8">
-				<div class="row margin-top-20">
+				<div class="row margin-top-10">
 					<div class="col-md-4">
 						<div class="box success"><!-- default, danger, warning, info, success -->
 							
