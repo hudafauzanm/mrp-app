@@ -1,0 +1,11 @@
+ketika meminta:
+1. Unit tujuan dinotif
+2. Unit tujuan merespon -> notif unit meminta dan SDM
+
+ketika bursapeg :
+1. SDM dinotif
+2. Unit yg diproyeksikan dinotif
+
+ketika bursajab :
+1. Semua unit dinotif
+2. SDM dinotif
