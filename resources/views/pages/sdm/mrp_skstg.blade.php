@@ -17,6 +17,7 @@
 
 @section('content')
 	<div id="content" class="dashboard padding-20">
+		@include('includes.validation_errors')
 		<div id="panel-1" class="panel panel-default">
 
 			<div class="col-md-12">
@@ -73,7 +74,7 @@
 									<tbody>
 										@foreach ($mrpsk as $mrp)
 										<tr>
-											<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
+											<td>{{ $mrp->no_dokumen_unit_usul }}</td>
 											<td>{{ $mrp->skstg->tgl_aktivasi }}</td>
 											<td>{{ $mrp->skstg->tahun_sk }}</td>
 											<td>{{ $mrp->skstg->no_sk }}</td>
@@ -81,9 +82,9 @@
 											<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
 											<td>{{ $mrp->skstg->tgl_kirim_sk }}</td>
 											<td style="text-align: center;">
-												<button type="button" class="btn btn-3d btn-info" data-toggle="modal" data-target="#myModal">
-													<span>Lihat SK</span>
-												</button>
+												<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->skstg->filename_dokumen_sk }}" class="btn btn-3d btn-info" >
+													<span>Download SK</span>
+												</a>
 											</td>
 										</tr>
 										@endforeach	
@@ -109,7 +110,7 @@
 													<form action="{{URL('/mrp/sk/upload')}}" method="post" enctype="multipart/form-data" autocomplete="on">
 														{{ csrf_field() }}
 														<fieldset>
-															<input class="mrp_id" type="hidden" name="id" value="">
+															
 															<!-- upload dokumen -->
 															<div class="row">
 																<div class="form-group">
@@ -120,7 +121,7 @@
 
 																		<div class="fancy-file-upload fancy-file-primary">
 																			<i class="fa fa-upload"></i>
-																			<input type="file" name="file_dokumen_sk" class="form-control"  name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" required />
+																			<input type="file" name="file_dokumen_sk" class="form-control" onchange="jQuery(this).next('input').val(this.value);" required />
 																			<input type="text" class="form-control" placeholder="no file selected" readonly="" />
 																			<span class="button">Pilih Dokumen</span>
 																		</div>
@@ -174,7 +175,7 @@
 																<div class="form-group">
 																	<div class="col-md-12 col-sm-12">
 																		<label>Tanggal Kirim SK/STg. *</label>
-																		<input type="text" name="tanggal_kirim_sk" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('tanggal_kirim_sk') }}" required>
+																		<input type="text" name="tgl_kirim_sk" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('tgl_kirim_sk') }}" required>
 																	</div>
 																</div>
 															</div>
@@ -184,7 +185,7 @@
 																<div class="form-group">
 																	<div class="col-md-12 col-sm-12">
 																		<label>Tanggal Aktivasi *</label>
-																		<input type="text" name="tanggal_aktivasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('tanggal_aktivasi') }}" required>
+																		<input type="text" name="tgl_aktivasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('tgl_aktivasi') }}" required>
 																	</div>
 																</div>
 															</div>

@@ -369,7 +369,7 @@ class MRPController extends Controller
         //<-- Gak Perlu Diubah END -->
     }
 
-    public function daftarSK()
+    public function tabelSK()
     {
         $mrpsk = MRP::where('status', 5)->get();
         return view('pages.sdm.mrp_skstg', compact('mrpsk'));
@@ -377,13 +377,9 @@ class MRPController extends Controller
 
     public function uploadSK(Request $request)
     {
-        $reg_num = request('registry_number');
-        // dd(request('registry_number'));
-        // $mrp=MRP::find('registry_number', $reg_num)->first()->id;
-        $mrp_id = MRP::where('registry_number', $reg_num)->first()->id;
-        // dd(request('$mrp_id'));
-        $mrp = MRP::where('registry_number', $reg_num)->update(['status' => 5]);
-        // $mrp->status=5;
+        $reg_num = $request->input('registry_number');
+        $mrp = MRP::where('registry_number', $reg_num)->first();
+        
 
         $this->validate($request, [
             'file_dokumen_sk' => 'required|mimes:pdf|max:10240',
@@ -396,34 +392,24 @@ class MRPController extends Controller
         $skstg->no_sk=$request->input('no_sk');
         $skstg->no_dokumen_kirim_sk=$request->input('no_dokumen_kirim_sk');
 
-        $file = $request->input('file_dokumen_mutasi');
+        $file = $request->file('file_dokumen_sk');
+        // dd($file);
         $foldername = $reg_num.'/';
         $filename = 'SK_'.Carbon::now('Asia/Jakarta')->year.'_'.str_replace('/', '_', $skstg->no_sk).'.'.$file->getClientOriginalExtension();
 
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
-        $skstg->filename_dokumen_sk = $request->input($filename);
+        $skstg->filename_dokumen_sk = $filename;
 
         $skstg->tgl_kirim_sk=$request->input('tgl_kirim_sk');
         $skstg->tgl_aktivasi=$request->input('tgl_aktivasi');
-        // $skstg->tahun_stg=$request->input('tahun_stg');
         $skstg->no_stg=$request->input('no_stg');
-        $skstg->mrp_id=$request->input('$mrp_id');
+        $skstg->mrp_id=$mrp->id;
         $skstg->created_at=Carbon::now('Asia/Jakarta');
         $skstg->updated_at=Carbon::now('Asia/Jakarta');
 
         $skstg->save();
 
-
-        // $tambahan_mrp = array(
-        //     'id' => Uuid::generate(),
-        // );
-        // // dd(request('nilai')['hubungan_sesama']);
-
-        // $data_mrp = array_merge($tambahan_mrp, request('skstg'));
-
-        // $mrp = SKSTg::create($data_mrp);
-        // $mrp->save();
-
+        $mrp->update(['status' => 5]);
         return redirect('/mrp/sk#daftar')->with('success', 'SK Berhasil Diupload');
     }
 
