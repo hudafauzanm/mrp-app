@@ -136,7 +136,7 @@
 													</div>
 
 													<!-- Modal Body -->
-													<form action="/status/approve/{{$mrps->registry_number}}" method="POST" enctype="multipart/form-data">
+													<form action="/status/approve/" method="POST" enctype="multipart/form-data">
 														{{ csrf_field() }}
 														<input class="mrp_id" type="hidden" name="id" value="">
 														<div class="modal-body">

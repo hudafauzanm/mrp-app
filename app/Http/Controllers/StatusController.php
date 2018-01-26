@@ -61,14 +61,13 @@ class StatusController extends Controller
     }
 
     // Approve dari Unit
-    public function approve($reg_num){
+    public function approve(){
         $this->validate(request(), [
             'dokumen_unit_jawab' => 'required|mimes:pdf|max:10240'
         ]);
 
 
-        $status = MRP::where('registry_number', $reg_num)->first();
-        dd($Status);
+        $status = MRP::find(request('id'));
         $Status->update(['Status' => 2]);
         $Status->no_dokumen_unit_jawab = request('no_dokumen_unit_jawab');
         $Status->tgl_dokumen_unit_jawab = Carbon::now('Asia/Jakarta');
