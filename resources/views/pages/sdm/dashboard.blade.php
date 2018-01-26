@@ -16,7 +16,14 @@ use Carbon\Carbon;
 	<!-- FOOTABLE TABLE -->
 	<link href="/assets/plugins/footable/css/footable.core.min.css" rel="stylesheet" type="text/css" />
 	<link href="/assets/plugins/footable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 	<link href="/assets/css/sdm_dashboard.css" rel="stylesheet" type="text/css" />
+
+	<style>
+		canvas {
+			height: 400px;
+		}
+	</style>
 
 @endsection
 
@@ -92,9 +99,7 @@ use Carbon\Carbon;
 
 												<!-- right options -->
 												<ul class="options pull-right list-inline">
-													<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
 													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
-													<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
 												</ul>
 												<!-- /right options -->
 
@@ -110,6 +115,128 @@ use Carbon\Carbon;
 										</div>
 									</div>
 
+									<div class="col-md-6">
+										<div id="struktural_monitoring" class="panel panel-default">
+
+											<div class="panel-heading">
+
+												<span class="elipsis"><!-- panel title -->
+													<strong>Fungsional</strong>
+												</span>
+
+												<!-- right options -->
+												<ul class="options pull-right list-inline">
+													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												</ul>
+												<!-- /right options -->
+
+
+											</div>
+
+											<!-- panel content -->
+											<div class="panel-body nopadding">
+												<canvas id="fungsional_chart"></canvas>
+											</div>
+											<!-- /panel content -->
+
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<table class="table table-striped table-bordered table-hover" id="forja_monitor">
+											<thead>
+												<tr>
+													<th>Username</th>
+													<th>Email</th>
+													<th>Points</th>
+													<th>Joined</th>
+													<th>Status</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr class="odd gradeX">
+													<td>
+														 shuxer
+													</td>
+													<td>
+														<a href="mailto:shuxer@gmail.com">
+														shuxer@gmail.com </a>
+													</td>
+													<td>
+														 120
+													</td>
+													<td class="center">
+														 12 Jan 2012
+													</td>
+													<td>
+														<span class="label label-sm label-success">
+														Approved </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														 looper
+													</td>
+													<td>
+														<a href="mailto:looper90@gmail.com">
+														looper90@gmail.com </a>
+													</td>
+													<td>
+														 120
+													</td>
+													<td class="center">
+														 12.12.2011
+													</td>
+													<td>
+														<span class="label label-sm label-warning">
+														Suspended </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														 looper
+													</td>
+													<td>
+														<a href="mailto:looper90@gmail.com">
+														looper90@gmail.com </a>
+													</td>
+													<td>
+														 120
+													</td>
+													<td class="center">
+														 12.12.2011
+													</td>
+													<td>
+														<span class="label label-sm label-warning">
+														Suspended </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														 looper
+													</td>
+													<td>
+														<a href="mailto:looper90@gmail.com">
+														looper90@gmail.com </a>
+													</td>
+													<td>
+														 120
+													</td>
+													<td class="center">
+														 12.12.2011
+													</td>
+													<td>
+														<span class="label label-sm label-warning">
+														Suspended </span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 
@@ -820,7 +947,8 @@ use Carbon\Carbon;
 
 @section('includes-scripts')
 	@parent
-
+	
+	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
 	<script type="text/javascript">
 		loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
 			loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
@@ -923,27 +1051,6 @@ use Carbon\Carbon;
 	<script>
 		function rejectApproveFunct(id){
 			$(".mrp_id").val(id);
-			// if(confirm('Anda yakin akan reject permintaan mutasi ini?'))
-			// {
-			// 	$.ajax({
-			// 		'url': '/dashboard/reject_mutasi',
-			// 		'type': 'post',
-			// 		'data': {
-			// 			'_token': '{{ csrf_token() }}',
-			// 			'id': id
-			// 		},
-			// 		'dataType': 'json',
-			// 		error: function(){
-
-			// 		},
-			// 		success: function(data){
-			// 			if(data)
-			// 			{
-			// 				$("tr#"+id).remove();
-			// 			}
-			// 		}
-			// 	});
-			// }
 		};
 	</script>
 
@@ -955,35 +1062,38 @@ use Carbon\Carbon;
 				$('.footable').trigger('footable_resize'); //fire re-size of footable
 			});
 
-			// var height = $(document).height();
-			// $("#monitoring_body").css('height', height*0.45);
-			// $("#verifikasi_body").css('height', height*0.45);
+			var height = $(document).height();
+			$("#monitoring_body").css('height', height*0.50);
+			$("#verifikasi_body").css('height', height*0.50);
+
 			loadScript('/bower_components/chart.js/dist/Chart.min.js', function() {
 				var data = {
-				    labels: ["MA_KP", "MA_UI", "MM_KP"],
+				    labels: ["MA_KP", "MA_UI", "MM_KP", 'MM_UI', 'MM_UP', 'MM_KP', 'MD_UI', 'MD_UP'],
 				    datasets: [
 				        {
-				            label: "First",
+				            label: "Kosong",
 				            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
 				            borderWidth: 1,
-				            data: [1,3,4],
+				            data: [1,3,4,1,3,4,3,4],
 				        },        
 				        {
-				            label: "Second",
+				            label: "Akan",
 				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
 				            borderWidth: 1,
-				            data: [5,3,5],
+				            data: [5,3,5,5,3,5,3,5],
 				        },
 				        {
-				            label: "Third",
+				            label: "Isi",
 				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
 				            borderWidth: 1,
-				            data: [7,4,5],
+				            data: [7,4,5,7,4,5,4,5],
 				        }
 				    ]
 				};
 
 				var options= {
+					responsive: true,
+        			maintainAspectRatio: false,
 					tooltips: {
 				        enabled: false
 				    },
@@ -1006,93 +1116,13 @@ use Carbon\Carbon;
 				    data: data,
 				    options: options
 				});
-				// var barOptions_stacked = {
-				//     tooltips: {
-				//         enabled: false
-				//     },
-				//     hover :{
-				//         animationDuration:0
-				//     },
-				//     scales: {
-				//         xAxes: [{
-				//             ticks: {
-				//                 beginAtZero:true,
-				//                 fontFamily: "'Open Sans Bold', sans-serif",
-				//                 fontSize:11
-				//             },
-				//             scaleLabel:{
-				//                 display:false
-				//             },
-				//             gridLines: {
-				//             }, 
-				//             stacked: true
-				//         }],
-				//         yAxes: [{
-				//             gridLines: {
-				//                 display:false,
-				//                 color: "#fff",
-				//                 zeroLineColor: "#fff",
-				//                 zeroLineWidth: 0
-				//             },
-				//             ticks: {
-				//                 fontFamily: "'Open Sans Bold', sans-serif",
-				//                 fontSize:11
-				//             },
-				//             stacked: true
-				//         }]
-				//     },
-				//     legend:{
-				//         display:false
-				//     },
-				    
-				//     animation: {
-				//         onComplete: function () {
-				//             var chartInstance = this.chart;
-				//             var ctx = chartInstance.ctx;
-				//             ctx.textAlign = "left";
-				//             ctx.font = "9px Open Sans";
-				//             ctx.fillStyle = "#fff";
 
-				//             Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
-				//                 var meta = chartInstance.controller.getDatasetMeta(i);
-				//                 Chart.helpers.each(meta.data.forEach(function (bar, index) {
-				//                     data = dataset.data[index];
-				//                     if(i==0){
-				//                         ctx.fillText(data, 50, bar._model.y+4);
-				//                     } else {
-				//                         ctx.fillText(data, bar._model.x-25, bar._model.y+4);
-				//                     }
-				//                 }),this)
-				//             }),this);
-				//         }
-				//     },
-				//     pointLabelFontFamily : "Quadon Extra Bold",
-				//     scaleFontFamily : "Quadon Extra Bold",
-				// };
-
-				// var ctx = document.getElementById("struktural_chart");
-				// var myChart = new Chart(ctx, {
-				//     type: 'horizontalBar',
-				//     data: {
-				//         labels: ["2014", "2013", "2012", "2011"],
-				        
-				//         datasets: [{
-				//             data: [727, 589, 537, 543, 574],
-				//             backgroundColor: "rgba(63,103,126,1)",
-				//             hoverBackgroundColor: "rgba(50,90,100,1)"
-				//         },{
-				//             data: [238, 553, 746, 884, 903],
-				//             backgroundColor: "rgba(163,103,126,1)",
-				//             hoverBackgroundColor: "rgba(140,85,100,1)"
-				//         },{
-				//             data: [1238, 553, 746, 884, 903],
-				//             backgroundColor: "rgba(63,203,226,1)",
-				//             hoverBackgroundColor: "rgba(46,185,235,1)"
-				//         }]
-				//     },
-
-				//     options: barOptions_stacked,
-				// });
+				var ctx = document.getElementById("fungsional_chart").getContext("2d");
+				var anotherBarChart = new Chart(ctx, {
+				    type: 'horizontalBar',
+				    data: data,
+				    options: options
+				});
 			});
 		}); 
 	</script>
