@@ -30,6 +30,172 @@ use Carbon\Carbon;
 				<h4>Monitoring</h4>	
 				<div id="panel-1" class="panel panel-default">
 					<div class="panel-heading">
+						<!-- tabs nav -->
+						<ul class="nav nav-tabs pull-left">
+							<li class="active">
+								<a class="tabselect" href="#formasi_jabatan" data-toggle="tab">Formasi Jabatan</a>
+							</li>
+							<li class="">
+								<a  class="tabselect" href="#sk" data-toggle="tab">SK</a>
+							</li>
+						</ul>									
+
+						<!-- right options -->
+						<ul class="options pull-right list-inline">
+							<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+						</ul>
+						<!-- /right options -->
+					</div>
+
+					<!-- panel content -->
+					<div class="panel-body" style="overflow-y: auto" id="verifikasi_body">
+						<div class="tab-content transparent ">
+							<div id="formasi_jabatan" class="tab-pane active">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="fancy-form fancy-form-select">
+											<select class="form-control">
+												<option>--- ALL ---</option>
+												<option value="KP">KP</option>
+												<option value="UI">UI</option>
+												<option value="UIP">UIP</option>
+												<option value="SUP">SUP</option>
+											</select>
+											<i class="fancy-arrow"></i>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="fancy-form fancy-form-select">
+											<select class="form-control">
+												<option>--- ALL ---</option>
+												@foreach ($personnels as $pers)
+													<option value="{{ $pers->username }}">{{ $pers->nama_pendek }}</option>
+												@endforeach		
+											</select>
+											<i class="fancy-arrow"></i>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div id="struktural_monitoring" class="panel panel-default">
+
+										<div class="panel-heading">
+
+											<span class="elipsis"><!-- panel title -->
+												<strong>Struktural</strong>
+											</span>
+
+											<!-- right options -->
+											<ul class="options pull-right list-inline">
+												<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+												<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
+											</ul>
+											<!-- /right options -->
+
+
+										</div>
+
+										<!-- panel content -->
+										<div class="panel-body nopadding">
+											<canvas id="struktural_chart"></canvas>
+										</div>
+										<!-- /panel content -->
+
+									</div>
+
+								</div>
+							</div>
+
+
+
+							<div id="sk" class="tab-pane">
+								@if ($mrp_1->count())
+								<div class="row">
+									<div class="col-md-3">
+										<input class="form-control" type="text" placeholder="Search" id="filter2">
+									</div>
+								</div>
+								
+								<br>
+								<table class="footable" id="footable1" data-filter="#filter1">
+									<thead>
+										<tr>
+											<th class="foo-cell">Registry Number</th>
+											<th data-type="numeric" data-hide = "all" class="">NIP<br></th>
+											<th data-type="numeric" data-hide = "" class="">Nama</th>
+											<th data-type="numeric" data-hide = "all" class="">Grade</th>
+											<th data-type="numeric" data-hide = "all" class="">Jabatan Saat Ini</th>
+											<th data-type="numeric" data-hide = "all" class="">Proyeksi Jabatan</th>
+											<th data-type="numeric" data-hide = "all" class="">Masa Kerja</th>
+											<th data-type="numeric" data-hide = "all" class="">Sisa Masa Kerja</th>
+											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
+											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
+											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
+											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach ($mrp_1 as $mrp)
+										<tr>
+											<td class="foo-cell">{{ $mrp->registry_number }}</td>
+											<td>{{$mrp->pegawai->nip}}</td>
+											<td>{{$mrp->pegawai->nama_pegawai}}</td>
+											<td>{{$mrp->pegawai->ps_group}}</td>
+											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+											<td>
+												@if(isset($mrp->formasi_jabatan_id))
+													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
+													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
+												@else
+													Perlu saran
+												@endif
+											</td>
+											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
+											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
+											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
+											<td>xxx</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
+													<i class="fa fa-check-circle"></i>
+													<span>Nilai {{$mrp->pegawai->nama_pegawai}}</span>
+												</button>												
+											</td>
+											<td>
+												<div class="btn-group">
+													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Download <span class="caret"></span></button>
+													<ul class="dropdown-menu" role="menu">
+														<li><a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}"><i class="fa fa-question-circle"></i> Usulan</a></li>
+														<li><a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_jawab }}"><i class="fa fa-edit"></i> Lolos Butuh</a></li>
+													</ul>
+												</div>
+											</td>
+											<td class="text-center">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
+													<i class="fa fa-check-circle"></i>
+													<span>Approve</span>
+												</button>
+												<button type="button" class="btn btn-3d btn-sm btn-red" data-toggle="modal" data-target="#rejectModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
+													<i class="fa fa-minus-circle"></i>
+													<span>Reject</span>
+												</button>
+											</td>
+										</tr>
+										@endforeach	
+									</tbody>
+								</table>
+								@else
+									<h3 class="text-center">Tidak ada data</h3>
+								@endif
+							</div>
+						</div>
+					</div>
+					{{-- <div class="panel-heading">
 						<!-- right options -->
 						<ul class="options pull-right list-inline">
 							<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
@@ -79,7 +245,7 @@ use Carbon\Carbon;
 								
 							</div>
 						</div>
-					</div>
+					</div> --}}
 					<!-- /panel content -->
 
 				</div>
@@ -787,9 +953,99 @@ use Carbon\Carbon;
 				$('.footable').trigger('footable_resize'); //fire re-size of footable
 			});
 
-			var height = $(document).height();
-			$("#monitoring_body").css('height', height*0.45);
-			$("#verifikasi_body").css('height', height*0.45);
+			// var height = $(document).height();
+			// $("#monitoring_body").css('height', height*0.45);
+			// $("#verifikasi_body").css('height', height*0.45);
+			loadScript('/bower_components/chart.js/dist/Chart.min.js', function() {
+				var barOptions_stacked = {
+				    tooltips: {
+				        enabled: false
+				    },
+				    hover :{
+				        animationDuration:0
+				    },
+				    scales: {
+				        xAxes: [{
+				            ticks: {
+				                beginAtZero:true,
+				                fontFamily: "'Open Sans Bold', sans-serif",
+				                fontSize:11
+				            },
+				            scaleLabel:{
+				                display:false
+				            },
+				            gridLines: {
+				            }, 
+				            stacked: true
+				        }],
+				        yAxes: [{
+				            gridLines: {
+				                display:false,
+				                color: "#fff",
+				                zeroLineColor: "#fff",
+				                zeroLineWidth: 0
+				            },
+				            ticks: {
+				                fontFamily: "'Open Sans Bold', sans-serif",
+				                fontSize:11
+				            },
+				            stacked: true
+				        }]
+				    },
+				    legend:{
+				        display:false
+				    },
+				    
+				    animation: {
+				        onComplete: function () {
+				            var chartInstance = this.chart;
+				            var ctx = chartInstance.ctx;
+				            ctx.textAlign = "left";
+				            ctx.font = "9px Open Sans";
+				            ctx.fillStyle = "#fff";
+
+				            Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
+				                var meta = chartInstance.controller.getDatasetMeta(i);
+				                Chart.helpers.each(meta.data.forEach(function (bar, index) {
+				                    data = dataset.data[index];
+				                    if(i==0){
+				                        ctx.fillText(data, 50, bar._model.y+4);
+				                    } else {
+				                        ctx.fillText(data, bar._model.x-25, bar._model.y+4);
+				                    }
+				                }),this)
+				            }),this);
+				        }
+				    },
+				    pointLabelFontFamily : "Quadon Extra Bold",
+				    scaleFontFamily : "Quadon Extra Bold",
+				};
+
+				var ctx = document.getElementById("struktural_chart");
+				var myChart = new Chart(ctx, {
+				    type: 'horizontalBar',
+				    data: {
+				        labels: ["2014", "2013", "2012", "2011"],
+				        
+				        datasets: [{
+				            data: [727, 589, 537, 543, 574],
+				            backgroundColor: "rgba(63,103,126,1)",
+				            hoverBackgroundColor: "rgba(50,90,100,1)"
+				        },{
+				            data: [238, 553, 746, 884, 903],
+				            backgroundColor: "rgba(163,103,126,1)",
+				            hoverBackgroundColor: "rgba(140,85,100,1)"
+				        },{
+				            data: [1238, 553, 746, 884, 903],
+				            backgroundColor: "rgba(63,203,226,1)",
+				            hoverBackgroundColor: "rgba(46,185,235,1)"
+				        }]
+				    },
+
+				    options: barOptions_stacked,
+				});
+			});
 		}); 
 	</script>
+
 @endsection

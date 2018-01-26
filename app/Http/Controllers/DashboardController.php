@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Pegawai;
 use App\PenilaianPegawai;
 use App\MRP;
+use App\PersonnelArea;
 
 class DashboardController extends Controller
 {
@@ -39,9 +40,10 @@ class DashboardController extends Controller
             $mrp_1 = MRP::where('status', 2)->where('tipe', 1)->get();
             $mrp_2 = MRP::where('status', 1)->where('tipe', 2)->get();
             $mrp_3 = MRP::where('status', 1)->where('tipe', 3)->get();
-            $nilai = MRP::where('status', 2)->get();
 
-    		return view('pages.sdm.dashboard', compact('mrp_1', 'mrp_2', 'mrp_3', 'nilai'));
+            $personnels = PersonnelArea::where('user_role', 1)->get();
+
+    		return view('pages.sdm.dashboard', compact('mrp_1', 'mrp_2', 'mrp_3', 'nilai', 'personnels'));
     	}
     }
     public function getPenilaianPegawai()
