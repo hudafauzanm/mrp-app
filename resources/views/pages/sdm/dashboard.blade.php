@@ -159,7 +159,7 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
-											<td>xxx</td>
+											<td>{{$mrp->alasan_mutasi}}</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
 													<i class="fa fa-check-circle"></i>
@@ -239,7 +239,7 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
 											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
-											<td>xxx</td>
+											<td>{{$mrp->alasan_mutasi}}</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
 													<i class="fa fa-check-circle"></i>
@@ -253,7 +253,7 @@ use Carbon\Carbon;
 												</a>
 											</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#myModal" onclick="rejectApproveFunct('{{ $mrp->id }}');">
+												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#approveReqJabatan" onclick="rejectApproveFunct('{{ $mrp->id }}');">
 													<i class="fa fa-check-circle"></i>
 													<span>Approve</span>
 												</button>
@@ -478,30 +478,35 @@ use Carbon\Carbon;
 									<thead>
 										<tr>
 											<th></th>
+											<th>Keterangan</th>
 											<th>Uraian</th>
-											<th></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>Internal Readiness</td>
-											<td><b>Kesehatan</b></td>
+											<td><b>Internal Readiness</td>
+											<td>Kesehatan</td>
 											<td id="kesehatan"></td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><b>Career Willingness</b></td>
+											<td>Career Willingness</td>
 											<td id="career_willingness"></td>
 										</tr>
 										<tr>
-											<td>External Readiness</td>
-											<td><b>Keluarga</b></td>
+											<td><b>External Readiness</b></td>
+											<td>Keluarga</td>
 											<td id="external_rediness"></td>
 										</tr>
 										<tr>
-											<td>Hubungan Dengan Sesama</td>
+											<td><b>Hubungan Dengan Rekan Kerja (peer)</b></td>
 											<td></td>
 											<td id="hubungan_sesama"></td>
+										</tr>
+										<tr>
+											<td><b>Hubungan Dengan Atasan</b></td>
+											<td></td>
+											<td id="hubungan_atasan"></td>
 										</tr>
 									</tbody>
 								</table>
