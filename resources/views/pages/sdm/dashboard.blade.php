@@ -993,7 +993,6 @@ use Carbon\Carbon;
 @section('includes-scripts')
 	@parent
 
-	<script src="/bower_components/chart.js/dist/Chart.min.js"></script>
 
 	<script>
         $(function(){
@@ -1007,6 +1006,7 @@ use Carbon\Carbon;
         });
     </script>
 
+	<script src="/bower_components/chart.js/dist/Chart.min.js"></script>
 	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="/assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
 	<script type="text/javascript">
@@ -1095,18 +1095,9 @@ use Carbon\Carbon;
 	</script>
 
 	<script>
-		$(document).ready(function() { 
-			$('.tabselect').click(function (e) {
-				e.preventDefault(); //prevents re-size from happening before tab shown
-				$(this).tab('show'); //show tab panel 
-				$('.footable').trigger('footable_resize'); //fire re-size of footable
-			});
-
-			var height = $(document).height();
-			$("#monitoring_body").css('height', height*0.55);
-			$("#verifikasi_body").css('height', height*0.55);
-
-			window.data = {
+		function drawChart(target)
+		{
+			var data = {
 			    labels: ["MA_KP", "MA_UI", "MM_KP", 'MM_UI', 'MM_UP', 'MM_KP', 'MD_UI', 'MD_UP'],
 			    datasets: [
 			        {
@@ -1125,17 +1116,20 @@ use Carbon\Carbon;
 			            label: "Isi",
 			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
 			            borderWidth: 1,
-			            data: [7,4,5,7,4,5,4,5],
+			            data: [15,4,5,7,4,5,4,5],
 			        }
 			    ]
 			};
 
-			window.options= {
+			var options = {
 				responsive: true,
     			maintainAspectRatio: false,
 				tooltips: {
 			        enabled: false
 			    },
+			    hover: {
+					mode: false
+				},
 				scales: {
 					yAxes: [{
 						stacked: true,
@@ -1146,38 +1140,62 @@ use Carbon\Carbon;
 						beginAtZero: true
 					},
 					}]
+				},
+				animation: { 
+	                onProgress: function () { 
+	                    var chartInstance = this.chart;
+	                    var width = chartInstance.width;
+	                    var ctx = chartInstance.ctx; 
+	                    ctx.textAlign = "left"; 
+	                    ctx.font = "9px Open Sans"; 
+	                    ctx.fillStyle = "#000"; 
+	 
+	                    Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) { 
+	                        var meta = chartInstance.controller.getDatasetMeta(i); 
+	                        Chart.helpers.each(meta.data.forEach(function (bar, index) { 
+	                            data = dataset.data[index]; 
+	                            if(i==0){
+	                                ctx.fillText(data, width-25, bar._model.y-10);
+	                            } else if (i==1) { 
+	                                ctx.fillText(data, width-25, bar._model.y);
+	                            } else if (i==2) { 
+	                                ctx.fillText(data, width-25, bar._model.y+10);
+	                            }
+	                        }),this) 
+	                    }),this);
+					}
 				}
 			};
 
-			var ctx = document.getElementById("struktural_chart").getContext("2d");
+			var ctx = document.getElementById(target).getContext("2d");
 			var myBarChart = new Chart(ctx, {
 			    type: 'horizontalBar',
 			    data: data,
 			    options: options
 			});
+		};
+	</script>
 
-			var ctx = document.getElementById("fungsional_chart").getContext("2d");
-			var anotherBarChart = new Chart(ctx, {
-			    type: 'horizontalBar',
-			    data: data,
-			    options: options
+	<script>
+		$(document).ready(function() { 
+			$('.tabselect').click(function (e) {
+				e.preventDefault(); //prevents re-size from happening before tab shown
+				$(this).tab('show'); //show tab panel 
+				$('.footable').trigger('footable_resize'); //fire re-size of footable
+			});
+
+			var height = $(document).height();
+			$("#monitoring_body").css('height', height*0.55);
+			$("#verifikasi_body").css('height', height*0.55);
+
+			drawChart("struktural_chart");
+			drawChart("fungsional_chart");
+
+			$('#tabnya_sk').on("shown.bs.tab",function(){
+				drawChart('sk_chart');
+				$('#tabnya_sk').off();//to remove the binded event after initial rendering
 			});
 		}); 
-
-		function ct1() {
-		    var ctx = document.getElementById("sk_chart").getContext("2d");
-			var skBarChart = new Chart(ctx, {
-			    type: 'horizontalBar',
-			    data: data,
-			    options: options
-			});
-		    skBarChart.render();
-		  }
-
-		$('#tabnya_sk').on("shown.bs.tab",function(){
-		      ct1();
-		      $('#tabnya_sk').off();//to remove the binded event after initial rendering
-		  });
 	</script>
 
 @endsection
