@@ -19,7 +19,9 @@ class CreateFormasiJabatansTable extends Migration
             $table->uuid('id');
             $table->string('kode_olah')->unique();
             $table->string('legacy_code');
+            $table->string('level');
             $table->string('posisi');
+            $table->string('kelas_unit')->nullable();
             $table->string('formasi');
             $table->string('jabatan');
             $table->string('jenjang_id');
