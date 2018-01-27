@@ -28,7 +28,7 @@ class CreateFormasiJabatansTable extends Migration
             $table->string('jenjang_txt');
             // $table->string('nomor_spfj');
             $table->integer('pagu');
-            $table->integer('realisasi');
+            // $table->integer('realisasi'); diambil dari pegawai
             $table->string('spfj');
             $table->string('status_fj');
             $table->char('personnel_area_id', 36);
