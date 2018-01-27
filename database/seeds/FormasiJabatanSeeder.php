@@ -23,6 +23,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jenjang_id ='MA';
         $forjab->jenjang_txt ='Manajemen Atas';
         $forjab->pagu = 1;
+        $forjab->level = 'KP';
         // $forjab->realisasi = 1;
         $forjab->spfj ='0324.P/DIR/2016';
         $forjab->status_fj ='';
@@ -39,6 +40,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jenjang_id ='04';
         $forjab->jenjang_txt ='Fungsional IV';
         $forjab->pagu = 5;
+        $forjab->level = 'KP';
         // $forjab->realisasi = 2;
         $forjab->spfj ='0324.P/DIR/2016';
         $forjab->status_fj ='';
@@ -55,6 +57,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jenjang_id ='MM';
         $forjab->jenjang_txt ='Manajemen Menengah';
         $forjab->pagu =1;
+        $forjab->level ='KP';
         // $forjab->realisasi =1;
         $forjab->spfj ='0037.P/DIR/2016';
         $forjab->status_fj ='';
@@ -71,6 +74,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jenjang_id ='MD';
         $forjab->jenjang_txt ='Manajemen Dasar';
         $forjab->pagu =1;
+        $forjab->level ='UI';
         // $forjab->realisasi =1;
         $forjab->spfj ='0037.P/DIR/2016';
         $forjab->status_fj ='';
@@ -87,6 +91,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jenjang_id ='MM';
         $forjab->jenjang_txt ='Manajemen Menengah';
         $forjab->pagu =1;
+        $forjab->level ='KP';
         // $forjab->realisasi =1;
         $forjab->spfj ='0032.P/DIR/2017';
         $forjab->status_fj ='';
@@ -103,6 +108,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jenjang_id ='05';
         $forjab->jenjang_txt ='Fungsional V';
         $forjab->pagu =1;
+        $forjab->level ='KP';
         // $forjab->realisasi =1;
         $forjab->spfj ='0032.P/DIR/2017';
         $forjab->status_fj ='';
