@@ -34,7 +34,7 @@ class StatusController extends Controller
         {
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             
-            $mrp = MRP::where('tipe', 2)->orWhere('tipe',1)->whereIn('formasi_jabatan_id', $fj)->get();
+            $mrp = MRP::where('tipe', 2)->Orwhere('tipe',1)->whereIn('formasi_jabatan_id', $fj)->get();
             return view('pages.unit.status',compact('mrp'));
             // dd($mrp);
         }

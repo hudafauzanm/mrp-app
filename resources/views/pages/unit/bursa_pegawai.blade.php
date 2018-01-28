@@ -175,6 +175,18 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
+											<label>
+												Tanggal Aktivasi*
+											</label>
+											<!-- date picker -->
+											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-12 col-sm-12">
 											<label>No. Dokumen Mutasi *</label>
 											<input type="text" name="mrp[no_dokumen_unit_usul]" value="{{ old('mrp.no_dokumen_unit_usul') }}" class="form-control required" required>
 										</div>

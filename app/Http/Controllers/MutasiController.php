@@ -31,9 +31,11 @@ class MutasiController extends Controller
 
     	if($tipe === '1')
     	{
-            $units = PersonnelArea::all();
 
-    		return view('pages.unit.meminta',compact('units'));
+            $personnelarea = auth()->user();
+            $formasis = $personnelarea->formasi_jabatan()->select('formasi')->distinct()->get()->all();   
+
+    		return view('pages.unit.meminta',compact('units','personnelarea','formasis'));
     	}
     	else if($tipe === '2')
     	{
@@ -68,9 +70,9 @@ class MutasiController extends Controller
             $pegawai->forja = $fj->formasi.' '.$fj->jabatan;
             $pegawai->posisi = $fj->posisi;
             $pegawai->personnel_area = $fj->personnel_area->nama;
-            $pegawai->masa_kerja = $pegawai->year_diff_decimal(Carbon::parse($pegawai->tanggal_pegawai), Carbon::now('Asia/Jakarta'));
-            $pegawai->sisa_masa_kerja = $pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tanggal_lahir)->addYears(56));
-            $pegawai->lama_menjabat = $pegawai->year_diff_decimal(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta'));
+            $pegawai->masa_kerja = $pegawai->year_diff_decimal(Carbon::parse($pegawai->tanggal_pegawai), Carbon::now('Asia/Jakarta')).' Tahun';
+            $pegawai->sisa_masa_kerja = $pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tanggal_lahir)->addYears(56)).' Tahun';
+            $pegawai->lama_menjabat = $pegawai->year_diff_decimal(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta')).' Tahun';
             $pegawai->kode_olah_forja = $fj->kode_olah;
         }
 
