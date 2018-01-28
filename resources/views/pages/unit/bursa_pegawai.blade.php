@@ -23,7 +23,7 @@
 			<form action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
 				<div class="col-md-6">
 			
-					{{ csrf_field() }}
+					{{ csrf_field() }} 
 					<input type="hidden" name="mrp[tipe]" value="{{ request('tipe') }}">
 					<input type="hidden" id="kode_olah_pegawai" value="">
 					<!-- data pegawai -->

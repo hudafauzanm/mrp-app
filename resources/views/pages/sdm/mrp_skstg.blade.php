@@ -17,6 +17,7 @@
 
 @section('content')
 	<div id="content" class="dashboard padding-20">
+		@include('includes.validation_errors')
 		<div id="panel-1" class="panel panel-default">
 
 			<div class="col-md-12">
@@ -31,7 +32,7 @@
 							<li class="">
 								<a  class="tabselect" href="#upload" data-toggle="tab">Upload SK</a>
 							</li>
-						</ul>									
+						</ul>							 		
 
 						<!-- right options -->
 						<ul class="options pull-right list-inline">
@@ -63,7 +64,7 @@
 											<th data-type="numeric" data-hide = "all" class="">Tanggal Aktivasi</th>
 											<th class="foo-cell">Tahun SK</th>
 											<th class="foo-cell">Nomor SK</th>
-											<th data-type="numeric" data-hide = "all" class="">Tahun STg<br></th>
+											<!-- <th data-type="numeric" data-hide = "all" class="">Tahun STg<br></th> -->
 											<th data-type="numeric" data-hide = "all" class="">Nomor STg<br></th>
 											<th data-type="numeric" data-hide = "" class="">No. Dokumen Kirim SK</th>
 											<th data-type="numeric" data-hide = "all" class="">Tanggal Kirim SK/STg</th>
@@ -71,20 +72,19 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach ($sk as $mrp)
+										@foreach ($mrpsk as $mrp)
 										<tr>
-											<td class="foo-cell">{{ $mrp->no_dokumen_respon_sdm }}</td>
+											<td>{{ $mrp->no_dokumen_unit_usul }}</td>
 											<td>{{ $mrp->skstg->tgl_aktivasi }}</td>
 											<td>{{ $mrp->skstg->tahun_sk }}</td>
 											<td>{{ $mrp->skstg->no_sk }}</td>
-											<td>{{ $mrp->skstg->tahun_stg }}</td>
 											<td>{{ $mrp->skstg->no_stg }}</td>
 											<td>{{ $mrp->skstg->no_dokumen_kirim_sk }}</td>
-											<td>{{ $mrp->skstg->tanggal_kirim_sk }}</td>
+											<td>{{ $mrp->skstg->tgl_kirim_sk }}</td>
 											<td style="text-align: center;">
-												<button type="button" class="btn btn-3d btn-info" data-toggle="modal" data-target="#myModal">
-													<span>Lihat SK</span>
-												</button>
+												<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->skstg->filename_dokumen_sk }}" class="btn btn-3d btn-info" >
+													<span>Download SK</span>
+												</a>
 											</td>
 										</tr>
 										@endforeach	
@@ -107,9 +107,10 @@
 												</div>
 
 												<div class="panel-body">
-													<form class="validate" action="/mrp/sk/upload" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
+													<form action="{{URL('/mrp/sk/upload')}}" method="post" enctype="multipart/form-data" autocomplete="on">
+														{{ csrf_field() }}
 														<fieldset>
-															<input type="hidden" name="action" value="contact_send" />
+															
 															<!-- upload dokumen -->
 															<div class="row">
 																<div class="form-group">
@@ -120,7 +121,7 @@
 
 																		<div class="fancy-file-upload fancy-file-primary">
 																			<i class="fa fa-upload"></i>
-																			<input type="file" name="file_dokumen_sk" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" required />
+																			<input type="file" name="file_dokumen_sk" class="form-control" onchange="jQuery(this).next('input').val(this.value);" required />
 																			<input type="text" class="form-control" placeholder="no file selected" readonly="" />
 																			<span class="button">Pilih Dokumen</span>
 																		</div>
@@ -128,12 +129,23 @@
 																	</div>
 																</div>
 															</div>
+
+															<!-- tahun sk -->
+															<div class="row">
+																<div class="form-group">
+																		<div class="col-md-12 col-sm-12">
+																			<label>Registry Number *</label>
+																			<input type="text" name="registry_number" id="registry_number" value="{{ old('registry_number') }}" class="form-control" required>
+																		</div>
+																</div>
+															</div>
+
 															<!-- tahun sk -->
 															<div class="row">
 																<div class="form-group">
 																		<div class="col-md-12 col-sm-12">
 																			<label>Tahun SK *</label>
-																			<input type="text" name="tahun_sk" id="tahun_sk" value="{{ old('tahun_sk') }}" class="form-control required">
+																			<input type="text" name="tahun_sk" id="tahun_sk" value="{{ old('tahun_sk') }}" class="form-control" required>
 																		</div>
 																</div>
 															</div>
@@ -143,27 +155,7 @@
 																<div class="form-group">
 																		<div class="col-md-12 col-sm-12">
 																			<label>No. SK *</label>
-																			<input type="text" name="no_sk" id="no_sk" value="{{ old('no_sk') }}" class="form-control required">
-																		</div>
-																</div>
-															</div>
-
-															<!-- tahun stg -->
-															<div class="row">
-																<div class="form-group">
-																		<div class="col-md-12 col-sm-12">
-																			<label>Tahun STg.</label>
-																			<input type="text" name="tahun_stg" id="tahun_stg" value="{{ old('tahun_stg') }}" class="form-control required">
-																		</div>
-																</div>
-															</div>
-
-															<!-- no stg -->
-															<div class="row">
-																<div class="form-group">
-																		<div class="col-md-12 col-sm-12">
-																			<label>No. STg.</label>
-																			<input type="text" name="no_stg" id="no_stg" value="{{ old('no_stg') }}" class="form-control required">
+																			<input type="text" name="no_sk" id="no_sk" value="{{ old('no_sk') }}" class="form-control"  required>
 																		</div>
 																</div>
 															</div>
@@ -173,7 +165,7 @@
 																<div class="form-group">
 																	<div class="col-md-12 col-sm-12">
 																		<label>No. Dokumen Kirim SK *</label>
-																		<input type="text" name="no_dokumen_kirim_sk" id="no_dokumen_kirim_sk" value="{{ old('no_dokumen_kirim_sk') }}" class="form-control required">
+																		<input type="text" name="no_dokumen_kirim_sk" id="no_dokumen_kirim_sk" value="{{ old('no_dokumen_kirim_sk') }}" class="form-control" required>
 																	</div>
 																</div>
 															</div>
@@ -183,8 +175,38 @@
 																<div class="form-group">
 																	<div class="col-md-12 col-sm-12">
 																		<label>Tanggal Kirim SK/STg. *</label>
-																		<input type="text" name="tanggal_kirim_sk" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('tanggal_kirim_sk') }}" required>
+																		<input type="text" name="tgl_kirim_sk" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('tgl_kirim_sk') }}" required>
 																	</div>
+																</div>
+															</div>
+
+															<!-- tgl kirim sk -->
+															<div class="row">
+																<div class="form-group">
+																	<div class="col-md-12 col-sm-12">
+																		<label>Tanggal Aktivasi *</label>
+																		<input type="text" name="tgl_aktivasi" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ old('tgl_aktivasi') }}" required>
+																	</div>
+																</div>
+															</div>
+
+															<!-- tahun stg -->
+															<!-- <div class="row">
+																<div class="form-group">
+																		<div class="col-md-12 col-sm-12">
+																			<label>Tahun STg.</label>
+																			<input type="text" name="tahun_stg" id="tahun_stg" value="{{ old('tahun_stg') }}" class="form-control ">
+																		</div>
+																</div>
+															</div> -->
+
+															<!-- no stg -->
+															<div class="row">
+																<div class="form-group">
+																		<div class="col-md-12 col-sm-12">
+																			<label>No. STg.</label>
+																			<input type="text" name="no_stg" id="no_stg" value="{{ old('no_stg') }}" class="form-control ">
+																		</div>
 																</div>
 															</div>
 
@@ -245,7 +267,7 @@
 				<!-- Modal Body -->
 				<div class="modal-body">
 					<div class="form-group" >
-						{{ $mrp->skstg->tanggal_kirim_sk }}
+						<td>{{ $mrp->skstg->filename_dokumen_sk }}</td>
 					</div>
 				</div>
 

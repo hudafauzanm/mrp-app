@@ -81,7 +81,7 @@ use Carbon\Carbon;
 							<th style="text-align: center;">
 								 Pengusul
 							</th>
-							<th style="text-align: center;">
+							<th style="text-align: center;" width="100">
 								 Surat Perintah Cetak SK
 							</th>
 							<th style="text-align: center;">
@@ -199,22 +199,36 @@ use Carbon\Carbon;
 			</div>
 			<!-- /panel content -->
 
-			<!-- panel footer -->
-			<div class="panel-footer">
-
-
-
-			</div>
-			<!-- /panel footer -->
-
 		</div>
 		<!-- /PANEL -->
 
-
-		
-
-
 	</div>
+
+	<!-- modal lihat dokumen respon sdm -->
+	<div id="myModal" class="modal center fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Dokumen Respon SDM</h4>
+				</div>
+
+				<!-- Modal Body -->
+				<div class="modal-body">
+					<div class="form-group" >
+						{{$mrp->filename_dokumen_respon_sdm}}
+					</div>
+				</div>
+
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+				</div>
+			</div>
+		</div>
+    </div>	
 @endsection
 
 @section('includes-scripts')

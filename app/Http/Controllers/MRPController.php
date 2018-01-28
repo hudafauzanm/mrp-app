@@ -12,6 +12,7 @@ use App\Pegawai;
 use App\PersonnelArea;
 use App\FormasiJabatan;
 use App\SKSTg;
+use Uuid;
 
 class MRPController extends Controller
 {
@@ -207,8 +208,8 @@ class MRPController extends Controller
                 'Legacy Code Tujuan' => $fj_tujuan ? $fj_tujuan->legacy_code : NULL,
                 'Personnel Area Tujuan' => $fj_tujuan ? $fj_tujuan->personnel_area->nama : NULL,
                 'Company Code Tujuan' => '?',
-                'Tgl. Lahir' => $pegawai ? $pegawai->tanggal_lahir : NULL,
-                'Sisa Masa Kerja' => $pegawai ? $pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tanggal_lahir)->addYears(56)) : NULL,
+                'Tgl. Lahir' => $pegawai ? $pegawai->tgl_lahir : NULL,
+                'Sisa Masa Kerja' => $pegawai ? $pegawai->year_diff_decimal(Carbon::now('Asia/Jakarta'), Carbon::parse($pegawai->tgl_lahir)->addYears(56)) : NULL,
                 'Masa Kerja Jbtn. Terakhir' => $pegawai ? $pegawai->year_diff_decimal(Carbon::parse($pegawai->start_date), Carbon::now('Asia/Jakarta')) : NULL,
                 'Sutri' => $sutri ? 'PLN' : 'Non-PLN',
                 'NIP Sutri' => $sutri ? $sutri->nip : NULL,
@@ -217,7 +218,7 @@ class MRPController extends Controller
                 'Status Evaluasi Sutri (pengembangan)' => NULL,
                 'Diklat Penjejangan' => $diklat ? $diklat->jenis_diklat : NULL,
                 'No. Sertifikat' =>  $diklat ? $diklat->nomor_sertifikat : NULL,
-                'Tgl. Sertifikat' =>  $diklat ? $diklat->tanggal_lulus : NULL,
+                'Tgl. Sertifikat' =>  $diklat ? $diklat->tgl_lulus : NULL,
                 'Status Domisili (pengembangan)' => NULL,
                 'No. Dokumen Jawab Unit' => $mrp->no_dokumen_unit_jawab,
                 'Tgl. Dokumen Jawab Unit' => $mrp->tgl_dokumen_unit_jawab,
@@ -226,8 +227,8 @@ class MRPController extends Controller
                 'No. SK' => $skstg ? $skstg->no_sk : NULL,
                 'No. STg' => $skstg ? $skstg->no_stg : NULL,
                 'No. Dokumen Kirim SK' => $skstg ? $skstg->no_dokumen_kirim_sk : NULL,
-                'Tgl. Kirim SK' => $skstg ? $skstg->tanggal_kirim_sk : NULL,
-                'Tgl. Aktivasi SK' => $skstg ? $skstg->tanggal_aktivasi : NULL,
+                'Tgl. Kirim SK' => $skstg ? $skstg->tgl_kirim_sk : NULL,
+                'Tgl. Aktivasi SK' => $skstg ? $skstg->tgl_aktivasi : NULL,
             ];
 
             array_push($data, $arr);
@@ -368,53 +369,48 @@ class MRPController extends Controller
         //<-- Gak Perlu Diubah END -->
     }
 
-    public function pagesk()
+    public function tabelSK()
     {
-        $sk = MRP::where('status', 4)->get();
-        return view('pages.sdm.mrp_sk', compact('sk'));
+        $mrpsk = MRP::where('status', 5)->get();
+        return view('pages.sdm.mrp_skstg', compact('mrpsk'));
     }
 
-    public function uploadSK()
+    public function uploadSK(Request $request)
     {
+        $reg_num = $request->input('registry_number');
+        $mrp = MRP::where('registry_number', $reg_num)->first();
+        
 
-        $this->validate(request(), [
-            'file_dokumen_sk' => 'required|mimes:pdf|max:10240'
+        $this->validate($request, [
+            'file_dokumen_sk' => 'required|mimes:pdf|max:10240',
         ]);
 
-        $pegawai_id = Pegawai::where('nip', $nip)->first()->id;
+        $skstg = new SKSTg;
 
-        if(request('rekom_checkbox') === '1')
-            $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
-        else
-            $id_proyeksi = NULL;
+        $skstg->id=Uuid::generate();
+        $skstg->tahun_sk=$request->input('tahun_sk'); 
+        $skstg->no_sk=$request->input('no_sk');
+        $skstg->no_dokumen_kirim_sk=$request->input('no_dokumen_kirim_sk');
 
-        $tambahan_mrp = array(
-            'id' => Uuid::generate(),
-            'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.\Carbon\Carbon::now('Asia/Jakarta'),
-            'status' => 1,
-            'nip_operator' => request()->session()->get('nip_operator'),
-            'unit_pengusul' => auth()->user()->id,
-            'pegawai_id' => $pegawai_id,
-            'formasi_jabatan_id' => $id_proyeksi,
-        );
-        // dd(request('nilai')['hubungan_sesama']);
+        $file = $request->file('file_dokumen_sk');
+        // dd($file);
+        $foldername = $reg_num.'/';
+        $filename = 'SK_'.Carbon::now('Asia/Jakarta')->year.'_'.str_replace('/', '_', $skstg->no_sk).'.'.$file->getClientOriginalExtension();
 
-        $data_mrp = array_merge($tambahan_mrp, request('mrp'));
-        $data_nilai = array_merge(request('nilai'), array('pegawai_id' => $pegawai_id));;
-        $data_nilai['hubungan_sesama'] = request('hds').'-'.$data_nilai['hubungan_sesama'];
-        // dd($data_mrp, $data_nilai, request('hds'));
-
-        $mrp = MRP::create($data_mrp);
-        $nilai = PenilaianPegawai::create($data_nilai);
-
-        $file = request('file_dokumen_mutasi');
-        $foldername = $mrp->registry_number.'/';
-        $filename = 'pengusul_'.str_replace('/', '_', $mrp->no_dokumen_unit_asal).'.'.$file->getClientOriginalExtension();
-        // dd($foldername, $filename);
-        // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+        $skstg->filename_dokumen_sk = $filename;
 
-        return redirect('/status/detail/'.$mrp->registry_number)->with('success', 'Pegawai berhasil dibursakan');
+        $skstg->tgl_kirim_sk=$request->input('tgl_kirim_sk');
+        $skstg->tgl_aktivasi=$request->input('tgl_aktivasi');
+        $skstg->no_stg=$request->input('no_stg');
+        $skstg->mrp_id=$mrp->id;
+        $skstg->created_at=Carbon::now('Asia/Jakarta');
+        $skstg->updated_at=Carbon::now('Asia/Jakarta');
+
+        $skstg->save();
+
+        $mrp->update(['status' => 5]);
+        return redirect('/mrp/sk#daftar')->with('success', 'SK Berhasil Diupload');
     }
 
 

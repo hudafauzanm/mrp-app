@@ -52,7 +52,7 @@ class ProfilController extends Controller
     	$personelarea = auth()->user();
     	$personelarea->alamat=$request->input('alamat');
     	$personelarea->provinsi=$request->input('provinsi');
-    	$personelarea->kota=$request->input('kota');
+    	$personelarea->kota=$request->input('kota'); 
     		if ($request->input('password'))
     			$personelarea->password=bcrypt($request->input('password'));
     	$personelarea->save(); 

@@ -54,7 +54,7 @@
 										<li>
 											<a href="active" data-toggle="tab">Edit</a>
 										</li>
-									</ul>
+									</ul> 
 
 									<div class="tab-content">
 
