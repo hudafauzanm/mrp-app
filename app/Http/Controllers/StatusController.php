@@ -23,12 +23,12 @@ class StatusController extends Controller
            // $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             $mrp = MRP::where('tipe', 2)->where('unit_pengusul', auth()->user()->id)->get();
            // $pegawai = Pegawai::where('formasi_jabatan_id', $fj);
-            return view('pages.unit.status',compact('mrp'));
+            return view('pages.unit.status_diajukan',compact('mrp'));
         }
         if(request('act')=='reqjab')
         {
             $mrp = MRP::where('tipe', 3)->where('unit_pengusul', auth()->user()->id)->get();
-            return view('pages.unit.status',compact('mrp'));
+            return view('pages.unit.status_diajukan',compact('mrp'));
         }
         if(request('act')=='res')
         {
@@ -44,7 +44,7 @@ class StatusController extends Controller
                           });
                 })->get();
 
-            return view('pages.unit.status',compact('mrp'));
+            return view('pages.unit.status_diterima',compact('mrp'));
             // dd($mrp);
         }
     	

@@ -21,9 +21,7 @@
 						<strong>Status Mutasi - Membursakan Pegawai</strong>
 					@elseif(request('act')=='reqjab')
 						<strong>Status Mutasi - Membursakan Jabatan</strong>
-					@elseif(request('act')=='res')
-						<strong>Status Mutasi - Permintaan Mutasi dari Unit Lain</strong>
-					@endif <!-- panel title -->
+					@endif
 				</span>
 
 				<!-- right options -->
@@ -53,9 +51,6 @@
 	                            @endif
 	                            <th >Status</th>
 	                            <th >Lihat Detail</th>
-	                            @if(request('act')=='res')
-	                            <th> Tindak Lanjut</th>
-	                            @endif
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -86,10 +81,8 @@
 								<td>
 									@if($mrps->status == 1)
 										<span class="label label-primary">Diajukan</span>
-									@elseif($mrps->status == 2)
-										<span class="label label-warning">Proses Evaluasi (SDM)</span>
-									@elseif($mrps->status == 3)
-										<span class="label label-info">Proses Evaluasi (Karir II)</span>
+									@elseif($mrps->status == 2 || $mrps->status == 3 || $mrps->status == 97)
+										<span class="label label-warning">Proses Evaluasi (Kantor Pusat)</span>
 									@elseif($mrps->status == 4)
 										<span class="label label-success">Proses SK</span>
 									@elseif($mrps->status == 5)
@@ -102,9 +95,7 @@
 										<span class="label label-danger">Ditolak (SDM Pusat)</span>
 									@elseif($mrps->status == 98)
 										<span class="label label-danger">Ditolak (Karir II Pusat)</span>
-									@elseif($mrps->status == 97)
-										<span class="label label-danger">Ditolak</span>
-									@else											   
+									@else
 										<span class="label label-danger">???</span>
 									@endif
 								</td>
@@ -113,20 +104,6 @@
 								@else
 									<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 								@endif
-								@if(request('act')=='res')
-									@if($mrps->status == 1)
-			                            <td class="text-center">
-			                            	<button type="button" class="btn btn-success btn-md btnApprove" data-toggle="modal" data-target="#approveModal" value="{{$mrps->registry_number}}"><i class="fa fa-check"></i> Approve</button>
-				                            <form action="/status/decline/{{$mrps->registry_number}}" method="POST">
-			                            		{{ csrf_field() }}
-												<button type="submit" class="btn btn-danger btn-md btnDecline"><i class="fa fa-close"></i> Decline</button>
-			                            	</form>
-			                            </td>
-
-			                         @else
-			                         	<td class="text-center"><span class="label label-success label-md">Sudah Ditindak Lanjuti</span></td>
-			                         @endif
-	                            @endif
 							</tr>
 							
 							@endforeach
@@ -137,44 +114,6 @@
 			<!-- /panel content -->
 		</div>
 	</div>
-    
-    <div id="approveModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="approveModalLabel">Approve</h4>
-				</div>
-
-				<!-- Modal Body -->
-				<form action="/status/approve" method="POST" enctype="multipart/form-data">
-					{{ csrf_field() }}
-					<input class="mrp_id" type="hidden" id="reg_num" name="reg_num" value="">
-					<div class="modal-body">
-							
-						<div class="form-group"> 
-							<h4>Surat Lolos Butuh</h4>
-							<input class="custom-file-upload" type="file" id="file" name="dokumen_unit_jawab" id="contact:attachment" data-btn-text="Select a File" />
-							<small class="text-muted block">Max file size: 10Mb (pdf)</small>
-						</div>
-						
-						<div class="form-group">
-							<h4>No. Dokumen</h4>
-							<input type="text" class="form-control" name="no_dokumen_unit_jawab">
-						</div>
-					</div>
-
-					<!-- Modal Footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-						<button type="submit" class="btn btn-primary">Simpan</button>
-					</div>
-				</form>
-			</div>
-		</div>
-    </div>
 @endsection
 
 
