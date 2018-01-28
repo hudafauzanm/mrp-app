@@ -34,7 +34,7 @@ class CreatePegawaisTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('lc_atasan');
-            $table->string('nip_atasan');
+            // $table->string('nip_atasan');
             $table->string('top_unit')->nullable();
             $table->string('top_0')->nullable();
             $table->string('top_1')->nullable();
@@ -42,7 +42,7 @@ class CreatePegawaisTable extends Migration
             $table->string('top_3')->nullable();
             $table->string('nip_sutri')->nullable();
             $table->integer('kali_jenjang')->nullable();
-            $table->date('tanggal_jab_unit_akhir')->nullable();
+            // $table->date('tanggal_jab_unit_akhir')->nullable();
             $table->date('tanggal_unit_induk_akhir')->nullable();
             $table->char('formasi_jabatan_id',36);
 

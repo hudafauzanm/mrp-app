@@ -41,9 +41,13 @@ class DashboardController extends Controller
             $mrp_2 = MRP::where('status', 1)->where('tipe', 2)->get();
             $mrp_3 = MRP::where('status', 1)->where('tipe', 3)->get();
 
+            $fj = FormasiJabatan::all()->groupBy('jenjang_id')->transform(function($item, $k) {
+                    return $item->groupBy('level');
+                })->toArray();
+
             $personnels = PersonnelArea::where('user_role', 1)->get();
 
-    		return view('pages.sdm.dashboard', compact('mrp_1', 'mrp_2', 'mrp_3', 'nilai', 'personnels'));
+    		return view('pages.sdm.dashboard', compact('mrp_1', 'mrp_2', 'mrp_3', 'nilai', 'personnels', 'fj'));
     	}
     }
     public function getPenilaianPegawai()
