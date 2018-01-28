@@ -22,7 +22,7 @@
 					@elseif(request('act')=='reqjab')
 						<strong>Status Mutasi - Membursakan Jabatan</strong>
 					@elseif(request('act')=='res')
-						<strong>Status Mutasi - Menerima Pengajuan Pegawai</strong>
+						<strong>Status Mutasi - Permintaan Mutasi dari Unit Lain</strong>
 					@endif <!-- panel title -->
 				</span>
 
@@ -84,44 +84,42 @@
 	                            <td>Existing</td>
 	                            @endif
 								<td>
-									@if($mrps->status == 0)
-										<span class="label label-danger">Ditolak</span>
-									@elseif($mrps->status == 1)
+									@if($mrps->status == 1)
 										<span class="label label-primary">Diajukan</span>
 									@elseif($mrps->status == 2)
 										<span class="label label-warning">Proses Evaluasi (SDM)</span>
 									@elseif($mrps->status == 3)
 										<span class="label label-info">Proses Evaluasi (Karir II)</span>
 									@elseif($mrps->status == 4)
-										<span class="label label-info">Proses Evaluasi (Karir II)</span>
-									@elseif($mrps->status == 5)
 										<span class="label label-success">Proses SK</span>
-									@elseif($mrps->status == 6)
+									@elseif($mrps->status == 5)
 										<span class="label label-success">SK Tercetak</span>
-									@elseif($mrps->status == 7)
+									@elseif($mrps->status == 6)
 										<span class="label label-success">SK Pending</span>
-									@elseif($mrps->status == 8)
+									@elseif($mrps->status == 7)
 										<span class="label label-success">Clear</span>
 									@elseif($mrps->status == 99)
-										<span class="label label-success">Ditolak (SDM Pusat)</span>
+										<span class="label label-danger">Ditolak (SDM Pusat)</span>
 									@elseif($mrps->status == 98)
-										<span class="label label-success">Ditolak (Karir II Pusat)</span>
+										<span class="label label-danger">Ditolak (Karir II Pusat)</span>
+									@elseif($mrps->status == 97)
+										<span class="label label-danger">Ditolak</span>
 									@else											   
 										<span class="label label-danger">???</span>
 									@endif
 								</td>
 								@if($mrps->tipe == 1)
-									<td><a class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
+									<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 								@else
 									<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
 								@endif
 								@if(request('act')=='res')
 									@if($mrps->status == 1)
 			                            <td class="text-center">
-			                            	<button type="button" class="btn btn-success btn-md fa fa-check btnApprove" data-toggle="modal" data-target="#approveModal" value="{{$mrps->registry_number}}"> Approve</button>
+			                            	<button type="button" class="btn btn-success btn-md btnApprove" data-toggle="modal" data-target="#approveModal" value="{{$mrps->registry_number}}"><i class="fa fa-check"></i> Approve</button>
 				                            <form action="/status/decline/{{$mrps->registry_number}}" method="POST">
 			                            		{{ csrf_field() }}
-												<button type="submit" class="btn btn-danger btn-md fa fa-close"> Decline</button>
+												<button type="submit" class="btn btn-danger btn-md btnDecline"><i class="fa fa-close"></i> Decline</button>
 			                            	</form>
 			                            </td>
 
@@ -192,6 +190,11 @@
     <script>
     	$(".btnApprove").click(function(){
     		$("#reg_num").val($(this).val());
+    	});
+
+    	$(".btnDecline").click(function(e){
+    		if(!confirm('Apakah anda yakin akan menolak permintaan mutasi ini?'))
+    			e.preventDefault();
     	});
     </script>
     

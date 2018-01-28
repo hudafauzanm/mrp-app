@@ -117,7 +117,7 @@ use Carbon\Carbon;
 								@if ($mrp_1->count())
 								<div class="row">
 									<div class="col-md-3">
-										<input class="form-control" type="text" placeholder="Search" id="filter2">
+										<input class="form-control" type="text" placeholder="Search" id="filter1">
 									</div>
 								</div>
 								
@@ -147,18 +147,18 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
 											<td>{{$mrp->pegawai->ps_group}}</td>
-											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama_pendek}}</small></td>
 											<td>
 												@if(isset($mrp->formasi_jabatan_id))
 													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
-													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
+													<br><small>{{$mrp->formasi_jabatan->personnel_area->nama_pendek}}</small>
 												@else
 													Perlu saran
 												@endif
 											</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
-											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
+											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}</td>
 											<td>{{$mrp->alasan_mutasi}}</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
@@ -216,6 +216,7 @@ use Carbon\Carbon;
 											<th data-type="numeric" data-hide = "all" class="">Unit Peminta</th>
 											<th data-type="numeric" data-hide = "all" class="">Alasan</th>
 											<th data-type="numeric" data-hide = "all" class="">Penilaian</th>
+											<th data-type="numeric" data-hide = "" class="">Respon Unit Proyeksi</th>
 											<th data-type="numeric" data-hide = "" class="">Dokumen</th>
 											<th data-type="numeric" data-hide = "" class="">Tindak Lanjut</th>
 										</tr>
@@ -227,18 +228,18 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
 											<td>{{$mrp->pegawai->ps_group}}</td>
-											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->username}}</small></td>
+											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama_pendek}}</small></td>
 											<td>
 												@if(isset($mrp->formasi_jabatan_id))
 													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
-													<br><small>{{$mrp->formasi_jabatan->personnel_area->username}}</small>
+													<br><small>{{$mrp->formasi_jabatan->personnel_area->nama_pendek}}</small>
 												@else
 													Perlu saran
 												@endif
 											</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
-											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}<br>{{$mrp->pegawai->formasi_jabatan->personnel_area->direktorat->nama}}</td>
+											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}</td>
 											<td>{{$mrp->alasan_mutasi}}</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilai('{{ $mrp->pegawai->id }}');">
@@ -247,10 +248,29 @@ use Carbon\Carbon;
 												</button>													
 											</td>
 											<td class="text-center">
-												<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-3d btn-sm btn-primary">
-													<i class="fa fa-arrow-circle-down"></i>
-													<span>Download</span>
-												</a>
+												@if ($mrp->status == 1)
+													Belum ada respon
+												@elseif ($mrp->status == 2)
+													Diterima
+												@elseif($mrp->status == 97)
+													Ditolak
+												@endif
+											</td>
+											<td class="text-center">
+												@if ($mrp->status == 1 || $mrp->status == 97)
+													<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-3d btn-sm btn-primary">
+														<i class="fa fa-arrow-circle-down"></i>
+														<span>Download</span>
+													</a>
+												@elseif ($mrp->status == 2)
+													<div class="btn-group">
+													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Download <span class="caret"></span></button>
+													<ul class="dropdown-menu" role="menu">
+														<li><a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}"><i class="fa fa-question-circle"></i> Usulan</a></li>
+														<li><a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_jawab }}"><i class="fa fa-edit"></i> Lolos Butuh</a></li>
+													</ul>
+												</div>
+												@endif
 											</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green" data-toggle="modal" data-target="#approveReqJabatan" onclick="rejectApproveFunct('{{ $mrp->id }}');">

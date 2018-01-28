@@ -34,7 +34,16 @@ class StatusController extends Controller
         {
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             
-            $mrp = MRP::where('tipe', 2)->Orwhere('tipe',1)->whereIn('formasi_jabatan_id', $fj)->get();
+            $mrp = MRP::where(function($query) use ($fj){
+                    $query->where('tipe', 2)
+                          ->whereIn('formasi_jabatan_id', $fj);
+                })->orWhere(function($query) use ($fj){
+                    $query->where('tipe', 1)
+                          ->whereHas('pegawai', function($q) use ($fj){
+                                $q->whereIn('formasi_jabatan_id', $fj);
+                          });
+                })->get();
+
             return view('pages.unit.status',compact('mrp'));
             // dd($mrp);
         }
@@ -75,7 +84,7 @@ class StatusController extends Controller
 
         $file = request('dokumen_unit_jawab');
         $foldername = $Status->registry_number.'/';
-        $filename = 'JAWAB_'.str_replace('/', '_', $Status->no_dokumen_unit_jawab).'.'.$file->getClientOriginalExtension();
+        $filename = 'JAWAB_'.Carbon::now('Asia/Jakarta')->year.str_replace('/', '_', $Status->no_dokumen_unit_jawab).'.'.$file->getClientOriginalExtension();
         $Status->filename_dokumen_unit_jawab = $filename;
         // dd($foldername, $filename);
         // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
@@ -105,7 +114,7 @@ class StatusController extends Controller
 
     //Decline dari Unit
     public function decline($reg_num){
-        $status = MRP::where('registry_number', $reg_num)->first()->update(['Status' => 0]);
+        $status = MRP::where('registry_number', $reg_num)->first()->update(['Status' => 97]);
         
         return redirect('/status?act=res')->with('success', 'Status Diubah');
     }

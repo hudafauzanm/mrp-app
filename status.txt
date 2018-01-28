@@ -1,6 +1,4 @@
-if($status == 0)
-    $retval = 'Ditolak';
-else if($status == 1)
+if($status == 1)
     $retval = 'Diajukan';
 else if($status == 2)
     $retval = 'Proses Evaluasi (SDM)';
@@ -21,6 +19,6 @@ else if($status == 99)
 else if($status == 98)
     $retval = 'Ditolak (Karir II Pusat)';
 else if($status == 97)
-    $retval = 'Ditolak (Unit Asal)';
+    $retval = 'Ditolak (Unit Lain yang Bersangkutan)';
 else
     $retval = '???';

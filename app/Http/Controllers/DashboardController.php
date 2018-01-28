@@ -44,8 +44,8 @@ class DashboardController extends Controller
     	else if($user->user_role == 3)
     	{
             $mrp_1 = MRP::where('status', 2)->where('tipe', 1)->get();
-            $mrp_2 = MRP::where('status', 2)->where('tipe', 2)->get();
-            $mrp_3 = MRP::where('status', 2)->where('tipe', 3)->get();
+            $mrp_2 = MRP::where('tipe', 2)->whereIn('status', [1,2,97])->get(); #kalo ada jawaban ntar ditampilin
+            $mrp_3 = MRP::where('status', 1)->where('tipe', 3)->get();
             $nilai = MRP::where('status', 2)->get();
 
     		return view('pages.sdm.dashboard', compact('mrp_1', 'mrp_2', 'mrp_3', 'nilai'));

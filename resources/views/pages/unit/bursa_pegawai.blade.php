@@ -176,10 +176,10 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>
-												Tanggal Aktivasi*
+												Perkiraan Tanggal Aktifasi*
 											</label>
 											<!-- date picker -->
-											<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+											<input type="text" class="form-control datepicker" name="mrp[requested_tgl_aktifasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
 										</div>
 									</div>
 								</div>

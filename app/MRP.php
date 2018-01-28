@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class MRP extends Model
 {
@@ -47,13 +48,18 @@ class MRP extends Model
         return $this->belongsTo('App\PersonnelArea', 'unit_pengusul');
     }
 
+    public function getRequestedTglAktifasiAttribute($value)
+    {
+        return Carbon::parse($value);
+    }
+
     public function getTglPoolingAttribute($value)
     {
-        return \Carbon\Carbon::parse($value);
+        return Carbon::parse($value);
     }
 
     public function getTglDokumenMutasiAttribute($value)
     {
-        return \Carbon\Carbon::parse($value);
+        return Carbon::parse($value);
     }
 }
