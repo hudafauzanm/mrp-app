@@ -113,7 +113,7 @@ class MutasiController extends Controller
 
         if($unit)
         {
-            $retval = $unit->formasi_jabatan->where('formasi', request('formasi'))->pluck('jabatan', 'kode_olah')->toArray();
+            $retval = $unit->formasi_jabatan->where('formasi', request('formasi'))->where('kode_olah', '!=', request('kode_olah'))->pluck('jabatan', 'kode_olah')->toArray();
             return response()->json($retval);
         }
         else
@@ -144,19 +144,19 @@ class MutasiController extends Controller
 
             $pegawai = Pegawai::where('nip', $nip)->first();
 
-            // if(request('rekom_checkbox') === '1')
-            //     $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
-            // else
-            //     $id_proyeksi = NULL;
+            if(request('rekom_checkbox') === '1')
+                $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
+            else
+                $id_proyeksi = NULL;
 
             $tambahan_mrp = array(
                 'id' => Uuid::generate(),
-                'registry_number' => $nip.'.'.request('mrp')["mutasi"][0].'.'.Carbon::now('Asia/Jakarta'),
+                'registry_number' => $nip.'.L.'.Carbon::now('Asia/Jakarta'),
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,
                 'pegawai_id' => $pegawai->id,
-                // 'formasi_jabatan_id' => $id_proyeksi,
+                'formasi_jabatan_id' => $id_proyeksi,
             );
 
             $data_mrp = array_merge($tambahan_mrp, request('mrp'));

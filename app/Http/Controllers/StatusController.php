@@ -44,8 +44,7 @@ class StatusController extends Controller
     public function getDetails($reg_num)
     {   
         $detail = MRP::where('registry_number', $reg_num)->first();
-        $waktunilai = PenilaianPegawai::where('created_at', $detail->created_at)->where('pegawai_id', $detail->pegawai_id)->first();
-        //$waktunilai = $detail->penilaian_pegawai;
+        $waktunilai = $detail->penilaian_pegawai;
         
         if($detail->tipe == '3')
         {

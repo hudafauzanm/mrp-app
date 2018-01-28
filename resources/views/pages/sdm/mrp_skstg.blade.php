@@ -21,7 +21,6 @@
 		<div id="panel-1" class="panel panel-default">
 
 			<div class="col-md-12">
-				<h4>Daftar SK</h4>
 				<div id="panel-2" class="panel panel-default ">
 					<div class="panel-heading">
 						<!-- tabs nav -->
@@ -49,6 +48,7 @@
 							<!-- daftar sk -->
 							<div id="daftar" class="tab-pane active">
 								
+								@if ($mrpsk->count())
 								<div class="row">
 									<div class="col-md-3">
 										<input class="form-control" type="text" placeholder="Search" id="filter2">
@@ -90,6 +90,9 @@
 										@endforeach	
 									</tbody>
 								</table>
+								@else
+								<h4>Tidak ada data</h4>
+								@endif
 							</div>
 
 							<!-- upload sk -->
@@ -254,7 +257,7 @@
 	</div>
 
 	<!-- modal lihat sk -->
-	<div id="myModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	{{-- <div id="myModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 
@@ -277,5 +280,5 @@
 				</div>
 			</div>
 		</div>
-    </div>	
+    </div> --}}	
 @endsection

@@ -185,7 +185,7 @@
 												Perkiraan Tanggal Aktifasi*
 											</label>
 											<!-- date picker -->
-											<input type="text" name="mrp[requested_tgl_aktifasi]" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+											<input type="text" name="mrp[requested_tgl_aktifasi]" class="form-control datepicker" id="tgl_aktifasi" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
 										</div>
 									</div>
 								</div>
@@ -212,18 +212,13 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-12">
-											<label>
-												Upload Dokumen
-											</label>
-
-											<!-- custom file upload -->
-											<div class="fancy-file-upload fancy-file-primary">
-												<i class="fa fa-upload"></i>
-												<input type="file" class="form-control" name="file_dokumen_mutasi" onchange="jQuery(this).next('input').val(this.value);" />
-												<input type="text" class="form-control" placeholder="no file selected" readonly="" />
-												<span class="button">Choose File</span>
+											<div class="form-group"> 
+												<label>Lampiran Dokumen 
+													<small class="text-muted">Nota Dinas - *</small>
+												</label>
+												<input class="custom-file-upload" type="file" id="file" name="file_dokumen_mutasi" id="contact:attachment" data-btn-text="Select a File" />
+												<small class="text-muted block">Max file size: 10Mb (pdf)</small>
 											</div>
-											<small class="text-muted block">Max file size: 10Mb (pdf)</small>
 										</div>
 									</div>
 								</div>

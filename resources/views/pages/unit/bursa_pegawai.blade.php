@@ -205,18 +205,13 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-12">
-											<label>
-												Lampiran Dokumen 
-												<small class="text-muted">Curriculum Vitae dan Nota Dinas - *</small>
-											</label>
-
-											<div class="fancy-file-upload fancy-file-primary">
-												<i class="fa fa-upload"></i>
-												<input type="file" name="file_dokumen_mutasi" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" required />
-												<input type="text" class="form-control" placeholder="no file selected" readonly="" />
-												<span class="button">Pilih Dokumen</span>
+											<div class="form-group"> 
+												<label>Lampiran Dokumen 
+													<small class="text-muted">Curriculum Vitae dan Nota Dinas - *</small>
+												</label>
+												<input class="custom-file-upload" type="file" id="file" name="file_dokumen_mutasi" id="contact:attachment" data-btn-text="Select a File" />
+												<small class="text-muted block">Max file size: 10Mb (pdf)</small>
 											</div>
-											<small class="text-muted block">File Maksimal 10 MB (pdf)</small>
 										</div>
 									</div>
 								</div>
@@ -589,11 +584,17 @@
 	</script>
 
 	<script>
-		$("#rekom_checkbox").click(function(){
+		$("#rekom_checkbox").click(function(e){
+			if(!$("#kode_olah_pegawai").val())
+			{
+				alert('NIP tidak ditemukan, pastikan informasi pegawai telah muncul');
+				e.preventDefault();
+				return;
+			}
+
 			var on_off = $(this).val();
 			$(this).val( on_off == '0' ? '1' : '0');
-			$('#rekom_unit').prop('disabled', function(i, v) { return !v; });
-			$('#rekom_unit').prop('required', function(i, v) { return !v; });
+			$('#rekom_formasi').prop('disabled', function(i, v) { return !v; });
 			$('#rekom_formasi').prop('required', function(i, v) { return !v; });
 			$('#rekom_jabatan').prop('required', function(i, v) { return !v; });
 
@@ -657,9 +658,9 @@
 							$("#personnel_area").val(data.personnel_area);
 							$("#formasi_jabatan").val(data.forja);
 							$("#posisi").val(data.posisi);
-							$("#masa_kerja").val(data.masa_kerja+ ' Tahun');
-							$("#sisa_kerja").val(data.sisa_masa_kerja+ ' Tahun');
-							$("#lama_menjabat").val(data.lama_menjabat+ ' Tahun');
+							$("#masa_kerja").val(data.masa_kerja);
+							$("#sisa_kerja").val(data.sisa_masa_kerja);
+							$("#lama_menjabat").val(data.lama_menjabat);
 							$("#kali_jenjang").val(data.kali_jenjang);
 							$("#kode_olah_pegawai").val(data.kode_olah_forja);
 						}
@@ -722,7 +723,6 @@
 
 		$("#rekom_formasi").change(function(){
 			var formasi = $(this).val();
-			var unit_id = $("#rekom_unit").val();
 
 			$.ajax({
 				'url': '/mutasi/pengajuan/getJabatan',

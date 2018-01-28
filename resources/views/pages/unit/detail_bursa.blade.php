@@ -56,8 +56,8 @@
 									<tr>
 										<th width="20%">Detail Unit</th>
 										<th width="20%">Detail Pengusul</th>
-										<th width="30%">Formasi Jabatan</th>
-										<th width="30%">Detail Source</th>
+										<th width="30%">Jabatan yang Dibursakan</th>
+										<th width="30%">Source</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -74,15 +74,15 @@
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>NIP Pengusul:</strong> {{ $detail->nip_pengusul}}</li>
-												<li><strong>NIP Operator:</strong> {{ $detail->nip_operator}}</li>
+												<li><strong>NIP:</strong> {{ $detail->nip_pengusul }}</li>
+												<li><strong>Nama:</strong> {{ $detail->pegawai_pengusul->nama_pegawai }}</li>
 											</ul>
 										</td>
 										<td>
 											<ul class="list-unstyled">
 												<li><strong>Formasi:</strong> {{ $detail->formasi_jabatan->formasi }}</li>
 												<li><strong>Jabatan:</strong> {{ $detail->formasi_jabatan->jabatan }}</li>
-												<li><strong>Jenjang:</strong> {{ $detail->formasi_jabatan->jenjang }}</li>
+												<li><strong>Jenjang:</strong> {{ $detail->formasi_jabatan->jenjang_txt }} ({{ $detail->formasi_jabatan->jenjang_id }})</li>
 												<li><strong>Posisi:</strong> {{ $detail->formasi_jabatan->posisi }}</li>
 												<li><strong>SPFJ:</strong> {{ $detail->formasi_jabatan->spfj }}</li>
 												<li><strong>Legacy Code:</strong> {{ $detail->formasi_jabatan->legacy_code }}</li>
@@ -90,7 +90,7 @@
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												{{-- <li><strong>Source:</strong> {{ $detaill->source }}</li> --}}
+												<li>Existing</li>
 											</ul>
 										</td>
 									</tr>
