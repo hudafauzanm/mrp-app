@@ -57,9 +57,13 @@
 									<small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small>
 								</td>
 								<td>
-									<strong>{{$mrps->formasi_jabatan->formasi}} {{$mrps->formasi_jabatan->jabatan}}</strong>
-									<br>{{$mrps->formasi_jabatan->posisi}}
-									<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
+									@if ($mrps->formasi_jabatan)
+										<strong>{{$mrps->formasi_jabatan->formasi}} {{$mrps->formasi_jabatan->jabatan}}</strong>
+										<br>{{$mrps->formasi_jabatan->posisi}}
+										<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
+									@else
+										Tidak ada proyeksi
+									@endif
 								</td>
 								<td>
 									@if($mrps->status == 1)
@@ -144,7 +148,8 @@
 	@parent
 	<script>
         $(function(){
-            $('#statusTable').DataTable({                
+            $('#statusTable').DataTable({
+            	"order": [[ 7, "asc" ]]
             });
         });
     </script>
@@ -159,54 +164,7 @@
     			e.preventDefault();
     	});
     </script>
-    
-    {{--<script>
-    	function aprBtn(id){
-    		$(".approve").val();
-    		$.ajax({
-				'url': '/status/approve/val',
-				'type': 'post',
-				'data': {
-					'_token': '{{ csrf_token() }}',
-					'id': id
-				},
-				'dataType': 'json',
-				error: function(){
-
-				},
-				success: function(data){
-					if(data)
-					{
-						$("tr#"+id).remove();
-					}
-				}
-			});
-    	})
-    </script>--}}
 
 	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="/assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-
-    {{-- <script>
-    	$("#mySearchBox").keyup(function(){
-    		console.log("pressed");
-    		var items = $("#items>div");
-    		var keyword = $(this).val().toLowerCase();
-    		console.log(keyword);
-    		if(keyword = '') {
-    			items.css('display');
-    			console.log('kosong');
-    			return;
-    		}
-
-
-    		for (var i = 0; i < items.length; i++) {
-    			var item = $(items[i]);
-    			if (item.attr('id').toLowerCase().indexOf(keyword) > -1)
-    				item.css('display');
-    			else
-    				item.css('display', 'none');
-    		}
-    	});
-    </script> --}}
 @endsection

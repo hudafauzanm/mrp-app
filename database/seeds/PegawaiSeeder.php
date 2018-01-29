@@ -125,5 +125,33 @@ class PegawaiSeeder extends Seeder
         $pegawai->tanggal_unit_induk_akhir = Carbon::parse('2017-11-01');
         $pegawai->formasi_jabatan_id = FormasiJabatan::where('kode_olah', 'DITHCM-151665030401.F05')->first()->id;
         $pegawai->save();
+
+        $pegawai = new Pegawai;
+        $pegawai->id = Uuid::generate();
+        $pegawai->perner = '1234562';
+        $pegawai->nip = 'karir2';
+        $pegawai->no_hp = '089431282';
+        $pegawai->email = 'karir2@gmail.com';
+        $pegawai->kota_asal = 'Jakarta';
+        // $pegawai->status_domisili = 'Daerah C';
+        $pegawai->nama_pegawai = 'AKU ORANG karir2';
+        $pegawai->employee_subgroup = 'Struktural';
+        $pegawai->ps_group = 'SYS03';
+        // $pegawai->talent_pool_position = '1';
+        $pegawai->tanggal_grade = Carbon::parse('2016-07-01');
+        $pegawai->tanggal_lahir = Carbon::parse('1979-10-06');
+        $pegawai->tanggal_masuk = Carbon::parse('2006-01-01');
+        $pegawai->tanggal_capeg = Carbon::parse('2006-01-01');
+        $pegawai->tanggal_pegawai = Carbon::parse('2006-01-01');
+        $pegawai->start_date = Carbon::parse('2017-11-01');
+        $pegawai->end_date = Carbon::parse('2021-10-10');
+        $pegawai->lc_atasan = 'test';
+        // $pegawai->nip_atasan = 'test';
+        $pegawai->nip_sutri = '';
+        $pegawai->kali_jenjang = 2;
+        // $pegawai->tanggal_jab_unit_akhir = Carbon::parse('2017-11-01');
+        $pegawai->tanggal_unit_induk_akhir = Carbon::parse('2017-11-01');
+        $pegawai->formasi_jabatan_id = FormasiJabatan::where('kode_olah', 'DITHCM-1516650301.MM')->first()->id;
+        $pegawai->save();
     }
 }

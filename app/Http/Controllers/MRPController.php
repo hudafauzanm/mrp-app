@@ -129,9 +129,11 @@ class MRPController extends Controller
             else if($status == 7)
                 $retval = '<span class="label label-success">Clear</span>';
             else if($status == 99)
-                $retval = '<span class="label label-success">Ditolak (SDM Pusat)</span>';
+                $retval = '<span class="label label-danger">Ditolak (SDM Pusat)</span>';
             else if($status == 98)
-                $retval = '<span class="label label-success">Ditolak (Karir II Pusat)</span>';
+                $retval = '<span class="label label-danger">Ditolak (Karir II Pusat)</span>';
+            else if($status == 97)
+                $retval = '<span class="label label-danger">Ditolak (Unit)</span>';
             else
                 $retval = '<span class="label label-danger">???</span>';
         }
@@ -157,6 +159,8 @@ class MRPController extends Controller
                 $retval = 'Ditolak (SDM Pusat)';
             else if($status == 98)
                 $retval = 'Ditolak (Karir II Pusat)';
+            else if($status == 97)
+                $retval = 'Ditolak (Unit)';
             else
                 $retval = '???';
         }

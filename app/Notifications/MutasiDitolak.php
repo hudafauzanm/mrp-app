@@ -48,7 +48,7 @@ class MutasiDitolak extends Notification
 
     public function toDatabase($notifiable)
     {
-        $message = 'Transaksi '.$this->data['reg_num'].' telah ditolak oleh '.$this->data['penolak'].';
+        $message = 'Transaksi '.$this->data['reg_num'].' telah ditolak oleh '.$this->data['penolak'];
 
         return [
             'message' => $message,

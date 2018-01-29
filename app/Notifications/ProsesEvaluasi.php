@@ -48,7 +48,7 @@ class ProsesEvaluasi extends Notification
 
     public function toDatabase($notifiable)
     {
-        $message = 'Transaksi '.$this->data['reg_num'].' telah masuk dalam proses evaluasi oleh Kantor Pusat.';
+        $message = 'Transaksi '.$this->data['reg_num'].' telah masuk dalam proses evaluasi oleh Kantor Pusat';
 
         return [
             'message' => $message,

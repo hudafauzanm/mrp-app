@@ -68,10 +68,13 @@ use Carbon\Carbon;
 										
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>Tanggal Aktifasi:</strong> {{ $detail->tgl_pooling}}</li>
+												<li><strong>Perkiraan Tanggal Aktivasi:</strong> {{ $detail->requested_tgl_aktivasi->format("d F Y") }}</li>
 												<li><strong>Jenis Mutasi:</strong> {{ $detail->jenis_mutasi}}</li>
 												<li><strong>Mutasi:</strong> {{ $detail->mutasi }}</li>
 												<li><strong>Jalur Mutasi:</strong> {{ $detail->jalur_mutasi}}</li>
+												@if ($detail->skstg)
+													<li><strong>Tanggal Aktivasi:</strong> {{ $detail->skstg->tgl_aktivasi }}</li>
+												@endif
 											</ul>
 										</td>
 										<td>
@@ -82,7 +85,7 @@ use Carbon\Carbon;
 											</ul>
 										</td>
 										<td>
-											<div><strong>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}</strong></div>
+											<div>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}</div>
 										</td>
 										<td>
 											@if(isset($detail->formasi_jabatan))

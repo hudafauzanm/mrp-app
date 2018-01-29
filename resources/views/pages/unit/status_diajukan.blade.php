@@ -65,14 +65,14 @@
 								<td>
 									<strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong>
 									<br>{{$mrps->pegawai->formasi_jabatan->posisi}}<br>
-									<small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small>
+									<strong>{{$mrps->pegawai->formasi_jabatan->personnel_area->nama_pendek}}</strong>
 								</td>
 								@endif
 								<td>
 									@if(isset($mrps->formasi_jabatan_id))
 										<strong>{{$mrps->formasi_jabatan->formasi}} {{$mrps->formasi_jabatan->jabatan}}</strong>
 										<br>{{$mrps->formasi_jabatan->posisi}}
-										<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
+										<br><strong>{{$mrps->formasi_jabatan->personnel_area->nama_pendek}}</strong>
 									@else
 										Perlu saran
 									@endif
@@ -83,7 +83,7 @@
 								<td>
 									@if($mrps->status == 1)
 										<span class="label label-primary">Diajukan</span>
-									@elseif($mrps->status == 2 || $mrps->status == 3 || $mrps->status == 97)
+									@elseif($mrps->status == 2 || $mrps->status == 3 || ($mrps->status == 97 && $mrps->tipe != 1))
 										<span class="label label-warning">Proses Evaluasi (Kantor Pusat)</span>
 									@elseif($mrps->status == 4)
 										<span class="label label-success">Proses SK</span>
@@ -97,6 +97,8 @@
 										<span class="label label-danger">Ditolak (SDM Pusat)</span>
 									@elseif($mrps->status == 98)
 										<span class="label label-danger">Ditolak (Karir II Pusat)</span>
+									@elseif($mrps->status == 97 && $mrps->tipe == 1)
+										<span class="label label-danger">Ditolak ({{ $mrps->pegawai->formasi_jabatan->personnel_area->nama_pendek }})</span>
 									@else
 										<span class="label label-danger">???</span>
 									@endif

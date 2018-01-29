@@ -49,8 +49,11 @@ class SKController extends Controller
         $skstg->filename_dokumen_sk = $filename;
 
         $skstg->save();
+        
+        $mrp->skstg_id = $skstg->id;
+        $mrp->status = 5;
+        $mrp->save();
 
-        $mrp->update(['status' => 5]);
         return redirect('/sk')->with('success', 'SK Berhasil Diupload');
     }
 
@@ -122,7 +125,7 @@ class SKController extends Controller
                 $nestedData['tgl_kirim_sk'] = $skstg->tgl_kirim_sk->format("d F Y");
                 $nestedData['tgl_aktivasi'] = $skstg->tgl_aktivasi->format("d F Y");
                 $nestedData['dokumen'] =     
-                '<a href="/download/'.$skstg->registry_number.'/'.$skstg->filename_dokumen_sk.'" class="btn btn-sm btn-info">
+                '<a href="/download/'.$skstg->mrp->registry_number.'/'.$skstg->filename_dokumen_sk.'" class="btn btn-sm btn-info">
                     <i class="fa fa-download"></i> Download SK
                 </a>';
 

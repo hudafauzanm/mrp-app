@@ -436,7 +436,7 @@
 			var unit_id = $(this).val();
 
 			$.ajax({
-				'url': '/mutasi/pengajuan/getFormasi',
+				'url': '/dashboard/get_formasi',
 				'type': 'GET',
 				'data': {
 					'unit_id': unit_id,
@@ -463,7 +463,7 @@
 			var unit_id = $("#rekom_unit").val();
 
 			$.ajax({
-				'url': '/mutasi/pengajuan/getJabatan',
+				'url': '/dashboard/get_jabatan',
 				'type': 'GET',
 				'data': {
 					'unit_id': unit_id,

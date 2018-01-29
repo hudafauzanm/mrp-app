@@ -13,7 +13,7 @@ class SKSTg extends Model
     
     public function mrp()
     {
-    	return $this->hasOne('App\MRP', 'mrp_id');
+    	return $this->hasOne('App\MRP');
     }
 
     public function getTglAktivasiAttribute($value)

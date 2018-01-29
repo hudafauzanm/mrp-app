@@ -10,9 +10,6 @@
 	@parent
 
 	<link href="/assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-	{{-- <link href="/assets/plugins/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
-	<link href="/assets/plugins/x-editable/src/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css" rel="stylesheet" />
-	<link href="/assets/plugins/x-editable/src/inputs-ext/address/address.css" rel="stylesheet" /> --}}
 @endsection
 
 @section('content')

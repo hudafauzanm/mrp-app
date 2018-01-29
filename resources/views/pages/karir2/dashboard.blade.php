@@ -134,7 +134,7 @@ use Carbon\Carbon;
 							</td>
 							<td style="text-align: center;">
 								<button type="submit" class="btn btn-success approveBtn" style="height: 35px;" value="{{ $mrp->id }}">Approve</button>
-								<button type="submit" class="btn btn-danger rejectBtn" data-toggle="modal" data-target="rejectModal" style="height: 35px" value="{{ $mrp->id }}">Reject</button>
+								<button type="submit" class="btn btn-danger rejectBtn" data-toggle="modal" data-target="#rejectModal" style="height: 35px" value="{{ $mrp->id }}">Reject</button>
 							{{-- </form> --}}
 							</td> <!-- tindak lanjut -->
 
@@ -314,15 +314,8 @@ use Carbon\Carbon;
 
 	<script>
 		$(".rejectBtn").click(function(e){
-			if(!confirm('Apakah anda yakin akan tolak permintaan mutasi ini?'))
-			{
-				e.preventDefault();
-			}
-			else
-			{
-				$(".mrp_id_form").val($(this).val());
-				$(".action").val('0');
-			}
+			$(".mrp_id_form").val($(this).val());
+			$(".action").val('0');
 		});
 
 		$(".approveBtn").click(function(e){

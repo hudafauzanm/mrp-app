@@ -58,22 +58,20 @@ use Carbon\Carbon;
 									<p>Sutri tidak bekerja di PLN</p>
 								@endif
 							</div>
-							<div class="col-md-3 col-xs-3 text-right">
-							</div>
-							<div class="col-md-3 col-xs-3 text-right">
+							<div class="col-md-6 col-xs-6 text-right">
 								<h4><strong>Download</strong> Dokumen</h4>
 								<ul class="list-unstyled ">
 									@if ($mrp->no_dokumen_unit_usul)
-										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-sm btn-3d btn-blue">{{ $mrp->no_dokumen_unit_usul }}</a>
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_usul }}" class="btn btn-sm btn-3d btn-blue">{{ $mrp->filename_dokumen_unit_usul }}</a>
 									@endif
 									@if ($mrp->no_dokumen_unit_jawab)
-										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_jawab }}" class="btn btn-sm btn-3d btn-info">{{ $mrp->no_dokumen_unit_jawab }}</a>
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_jawab }}" class="btn btn-sm btn-3d btn-info">{{ $mrp->filename_dokumen_unit_jawab }}</a>
 									@endif
 									@if ($mrp->no_dokumen_respon_sdm)
-										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_respon_sdm }}</a>
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->filename_dokumen_respon_sdm }}</a>
 									@endif
 									@if ($mrp->sk_stg_id)
-										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_sk }}</a>
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->filename_dokumen_sk }}</a>
 									@endif
 								</ul>
 							</div>
@@ -95,7 +93,7 @@ use Carbon\Carbon;
 										<td>
 											<ul class="list-unstyled">
 												<li><strong>Tanggal Permintaan:</strong> {{ $mrp->created_at->format("d F Y h:i:s") }}</li>
-												<li><strong>Tanggal Pooling:</strong> {{ $mrp->tgl_pooling ? $mrp->tgl_pooling->format("d F Y") : '-' }}
+												<li><strong>Permintaan Tanggal Aktivasi:</strong> {{ $mrp->requested_tgl_aktivasi->format("d F Y") }}
 												</li>
 												<li><strong>Tanggal Aktivasi:</strong> {{ $skstg ? $skstg->tgl_aktivasi->format("d F Y") : '-' }}
 												</li>

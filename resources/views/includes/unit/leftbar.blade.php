@@ -43,7 +43,7 @@
 		<li>
 			<a href="#">
 				<i class="fa fa-menu-arrow pull-right"></i>
-				<i class="main-icon fa fa-arrow-circle-right"></i> <span>Mutasi Diterima</span>
+				<i class="main-icon fa fa-arrow-circle-left"></i> <span>Mutasi Diterima</span>
 			</a>
 			<ul>
 				<li><a href="/status?act=resminta"><span>Pegawai Diminta</span></a></li>

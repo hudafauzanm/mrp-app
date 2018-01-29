@@ -50,7 +50,7 @@ class CreateMRPsTable extends Migration
             $table->integer('tipe')->nullable();
             $table->integer('status')->default(1);
             $table->string('tindak_lanjut')->nullable();
-            $table->char('sk_stg_id',36)->nullable();
+            $table->char('skstg_id',36)->nullable();
             $table->char('pegawai_id',36)->nullable();
             $table->string('nip_pengusul');
             $table->string('nip_operator');

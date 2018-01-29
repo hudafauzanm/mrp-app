@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Middleware\Unit;
+use App\Notifications\MutasiDitolak;
+use App\Notifications\ProsesEvaluasi;
+use App\Notifications\ButuhEvaluasi;
+
 use App\MRP;
 use App\Pegawai;
 use App\PenilaianPegawai;
+use App\PersonnelArea;
 use Carbon\Carbon;
 
 class StatusController extends Controller
@@ -42,8 +47,8 @@ class StatusController extends Controller
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             
             $mrp = MRP::where('tipe', 2)
-                        ->whereIn('formasi_jabatan_id', $fj);
-                })->get();
+                        ->whereIn('formasi_jabatan_id', $fj)
+                        ->get();
 
             return view('pages.unit.status_diterima',compact('mrp'));
             // dd($mrp);
@@ -55,8 +60,8 @@ class StatusController extends Controller
             $mrp = MRP::where('tipe', 1)
                         ->whereHas('pegawai', function($q) use ($fj){
                             $q->whereIn('formasi_jabatan_id', $fj);
-                        });
-                })->get();
+                        })
+                        ->get();
 
             return view('pages.unit.status_diterima',compact('mrp'));
             // dd($mrp);
@@ -124,13 +129,24 @@ class StatusController extends Controller
         $sdm->notify(new ButuhEvaluasi($data));
 
         
-        return redirect('/status?act=res')->with('success', 'Status Diubah');
+        return back()->with('success', 'Status Diubah');
     }
 
     //Decline dari Unit
-    public function decline($reg_num){
-        $status = MRP::where('registry_number', $reg_num)->first()->update(['Status' => 97]);
+    public function decline($reg_num)
+    {
+        $mrp = MRP::where('registry_number', $reg_num)->first();
+        $mrp->update(['status' => 97]);
+
+        $pengusul = $mrp->personnel_area_pengusul;
+        $data = [
+            'reg_num' => $mrp->registry_number,
+            'penolak' => auth()->user()->nama_pendek,
+            'user_id' => $pengusul->id,
+            'mrp_id' => $mrp->id
+        ];
+        $pengusul->notify(new MutasiDitolak($data));
         
-        return redirect('/status?act=res')->with('success', 'Status Diubah');
+        return back()->with('success', 'Status Diubah');
     }
 }

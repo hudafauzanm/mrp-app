@@ -157,13 +157,18 @@ class DashboardController extends Controller
         // $file->move(base_path(). '/storage/uploads/dok_asal/'.$foldername, $filename);
         $mrp->save();
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
+
         $pengusul = $mrp->personnel_area_pengusul;
-        $data = [
-            'reg_num' => $mrp->registry_number,
-            'user_id' => $pengusul->id,
-            'mrp_id' => $mrp->id
-        ];
-        $pengusul->notify(new ProsesEvaluasi($data));
+
+        if ($mrp->tipe != 1) 
+        {
+            $data = [
+                'reg_num' => $mrp->registry_number,
+                'user_id' => $pengusul->id,
+                'mrp_id' => $mrp->id
+            ];
+            $pengusul->notify(new ProsesEvaluasi($data));
+        }
 
         $karir2 = PersonnelArea::where('user_role', 2)->first();
         $data = [
@@ -230,14 +235,26 @@ class DashboardController extends Controller
     {
         $mrp = MRP::find(request('mrp_id'));
         if(request('action') == '1')
+        {
             $mrp->status = 4;
+            $mrp->save();
+        }
         else if(request('action') == '0')
         {
-            $mrp->tindak_lanjut = request('alasan_tolak');
+            $mrp->tindak_lanjut = 'DITOLAK - '.request('alasan_tolak');
             $mrp->status = 98;
+            $mrp->save();
+
+            $pengusul = $mrp->personnel_area_pengusul;
+            $data = [
+                'reg_num' => $mrp->registry_number,
+                'penolak' => 'Karir II Kantor Pusat',
+                'user_id' => $pengusul->id,
+                'mrp_id' => $mrp->id
+            ];
+            $pengusul->notify(new MutasiDitolak($data));
         }
         
-        $mrp->save();
 
         return back()->with('success', 'Berhasil');
     }

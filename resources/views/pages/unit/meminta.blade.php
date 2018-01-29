@@ -427,7 +427,7 @@
 								<ol>
 									<li>Isi kolom bertanda * (maka kolom lain akan otomatis terisi)</li>
 									<li>Anda hanya bisa mengusulkan mutasi untuk pegawai di unit anda</li>
-									<li>Dokumen yang dilampirkan berupa CV, Nota Dinas, dan dokumen lain yang diperlukan, dijadikan satu file dengan format .pdf</li>
+									<li>Dokumen yang dilampirkan berupa Nota Dinas, dan dokumen lain yang diperlukan, dijadikan satu file dengan format .pdf</li>
 								</ol>
 							</div>
 
