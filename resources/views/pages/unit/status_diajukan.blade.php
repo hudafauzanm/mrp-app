@@ -21,6 +21,8 @@
 						<strong>Status Mutasi - Membursakan Pegawai</strong>
 					@elseif(request('act')=='reqjab')
 						<strong>Status Mutasi - Membursakan Jabatan</strong>
+					@elseif(request('act')=='minta')
+						<strong>Status Mutasi - Permintaan Pegawai</strong>
 					@endif
 				</span>
 

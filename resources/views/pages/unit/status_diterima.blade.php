@@ -40,8 +40,8 @@
 	                            <th>Nama</th>
 	                            <th>Posisi & Unit Asal</th>
 	                            <th>Posisi & Unit Tujuan</th>
-	                            <th >Status</th>
-	                            <th >Detail & Dokumen Mutasi</th>
+	                            <th>Status</th>
+	                            <th>Detail & Dokumen Mutasi</th>
 	                            <th> Tindak Lanjut</th>
 	                        </tr>
 	                    </thead>
@@ -86,10 +86,9 @@
 											<button type="submit" class="btn btn-danger btn-md btnDecline"><i class="fa fa-close"></i> Decline</button>
 		                            	</form>
 		                            </td>
-
-		                         @else
-		                         	<td class="text-center"><span class="label label-success label-md">Sudah Ditindak Lanjuti</span></td>
-		                         @endif
+								@else
+									<td class="text-center"><span class="label label-success label-md">Sudah Ditindak Lanjuti</span></td>
+								@endif
 							</tr>
 							
 							@endforeach

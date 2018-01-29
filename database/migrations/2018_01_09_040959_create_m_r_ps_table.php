@@ -45,7 +45,7 @@ class CreateMRPsTable extends Migration
             $table->string('filename_dokumen_respon_sdm')->nullable();
             $table->date('tgl_dokumen_mutasi')->nullable();
             $table->date('tgl_evaluasi')->nullable();
-            $table->date('requested_tgl_aktifasi')->nullable();
+            $table->date('requested_tgl_aktivasi')->nullable();
             $table->date('tgl_pooling')->nullable();
             $table->integer('tipe')->nullable();
             $table->integer('status')->default(1);

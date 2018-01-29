@@ -70,10 +70,10 @@ use Carbon\Carbon;
 										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_unit_jawab }}" class="btn btn-sm btn-3d btn-info">{{ $mrp->no_dokumen_unit_jawab }}</a>
 									@endif
 									@if ($mrp->no_dokumen_respon_sdm)
-										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_proses_sk }}</a>
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_respon_sdm }}</a>
 									@endif
 									@if ($mrp->sk_stg_id)
-										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->skstg->filename_dokumen_proses_sk }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_dokumen_proses_sk }}</a>
+										<a href="/download/{{ $mrp->registry_number }}/{{ $mrp->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $mrp->skstg->no_sk }}</a>
 									@endif
 								</ul>
 							</div>

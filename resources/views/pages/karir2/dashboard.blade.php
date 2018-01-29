@@ -134,7 +134,7 @@ use Carbon\Carbon;
 							</td>
 							<td style="text-align: center;">
 								<button type="submit" class="btn btn-success approveBtn" style="height: 35px;" value="{{ $mrp->id }}">Approve</button>
-								<button type="submit" class="btn btn-danger rejectBtn" style="height: 35px" value="{{ $mrp->id }}">Reject</button>
+								<button type="submit" class="btn btn-danger rejectBtn" data-toggle="modal" data-target="rejectModal" style="height: 35px" value="{{ $mrp->id }}">Reject</button>
 							{{-- </form> --}}
 							</td> <!-- tindak lanjut -->
 
@@ -198,10 +198,46 @@ use Carbon\Carbon;
 
 	</div>
 
+	<div id="rejectModal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="rejectModalLabel">Upload SK</h4>
+				</div>
+
+				<!-- Modal Body -->
+				<form action="/dashboard/karir2_respond" method="POST" enctype="multipart/form-data">
+					<div class="modal-body">
+						{{ csrf_field() }}
+						<input type="hidden" name="mrp_id" class="mrp_id_form" value="">
+						<input type="hidden" name="action" value="" class="action">
+						<div class="row">
+							<div class="form-group">
+								<div class="col-md-12">
+									<label>Alasan Penolakan</label>
+									<input type="text" name="alasan_tolak" class="form-control">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-danger">Tolak</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>	
+
 	<form action="/dashboard/karir2_respond" method="POST" id="respond_form">
 		{{ csrf_field() }}
-		<input type="hidden" name="mrp_id" value="" id="mrp_id_form">
-		<input type="hidden" name="action" value="" id="action">
+		<input type="hidden" name="mrp_id" value="" class="mrp_id_form">
+		<input type="hidden" name="action" value="" class="action">
 	</form>
 @endsection
 
@@ -284,15 +320,14 @@ use Carbon\Carbon;
 			}
 			else
 			{
-				$("#mrp_id_form").val($(this).val());
-				$("#action").val('0');
-				$("#respond_form").submit();
+				$(".mrp_id_form").val($(this).val());
+				$(".action").val('0');
 			}
 		});
 
 		$(".approveBtn").click(function(e){
-			$("#mrp_id_form").val($(this).val());
-			$("#action").val('1');
+			$(".mrp_id_form").val($(this).val());
+			$(".action").val('1');
 			$("#respond_form").submit();
 		});
 	</script>

@@ -25,23 +25,37 @@ class StatusController extends Controller
            // $pegawai = Pegawai::where('formasi_jabatan_id', $fj);
             return view('pages.unit.status_diajukan',compact('mrp'));
         }
+        if(request('act')=='minta')
+        {
+           // $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
+            $mrp = MRP::where('tipe', 1)->where('unit_pengusul', auth()->user()->id)->get();
+           // $pegawai = Pegawai::where('formasi_jabatan_id', $fj);
+            return view('pages.unit.status_diajukan',compact('mrp'));
+        }
         if(request('act')=='reqjab')
         {
             $mrp = MRP::where('tipe', 3)->where('unit_pengusul', auth()->user()->id)->get();
             return view('pages.unit.status_diajukan',compact('mrp'));
         }
-        if(request('act')=='res')
+        if(request('act')=='resjab')
         {
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             
-            $mrp = MRP::where(function($query) use ($fj){
-                    $query->where('tipe', 2)
-                          ->whereIn('formasi_jabatan_id', $fj);
-                })->orWhere(function($query) use ($fj){
-                    $query->where('tipe', 1)
-                          ->whereHas('pegawai', function($q) use ($fj){
-                                $q->whereIn('formasi_jabatan_id', $fj);
-                          });
+            $mrp = MRP::where('tipe', 2)
+                        ->whereIn('formasi_jabatan_id', $fj);
+                })->get();
+
+            return view('pages.unit.status_diterima',compact('mrp'));
+            // dd($mrp);
+        }
+        if(request('act')=='resminta')
+        {
+            $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
+            
+            $mrp = MRP::where('tipe', 1)
+                        ->whereHas('pegawai', function($q) use ($fj){
+                            $q->whereIn('formasi_jabatan_id', $fj);
+                        });
                 })->get();
 
             return view('pages.unit.status_diterima',compact('mrp'));
@@ -71,7 +85,8 @@ class StatusController extends Controller
     }
 
     // Approve dari Unit
-    public function approve(){
+    public function approve()
+    {
         $this->validate(request(), [
             'dokumen_unit_jawab' => 'required|mimes:pdf|max:10240'
         ]);
@@ -91,22 +106,22 @@ class StatusController extends Controller
         $Status->save();
         $file->move(base_path(). '/public/storage/uploads/'.$foldername, $filename);
 
-        // $pengusul = $Status->personnel_area_pengusul;
-        // $data = [
-        //     'reg_num' => $Status->registry_number,
-        //     'user_id' => $pengusul->id,
-        //     'mrp_id' => $Status->id
-        // ];
-        // $pengusul->notify(new ProsesEvaluasi($data));
+        $pengusul = $Status->personnel_area_pengusul;
+        $data = [
+            'reg_num' => $Status->registry_number,
+            'user_id' => $pengusul->id,
+            'mrp_id' => $Status->id
+        ];
+        $pengusul->notify(new ProsesEvaluasi($data));
 
-        // $sdm = PersonnelArea::where('user_role', 3)->first();
-        // $data = [
-        //     'reg_num' => $Status->registry_number,
-        //     'tipe' => $Status->tipe,
-        //     'user_id' => $pengusul->id,
-        //     'mrp_id' => $Status->id
-        // ];
-        // $sdm->notify(new ButuhEvaluasi($data));
+        $sdm = PersonnelArea::where('user_role', 3)->first();
+        $data = [
+            'reg_num' => $Status->registry_number,
+            'tipe' => $Status->tipe,
+            'user_id' => $pengusul->id,
+            'mrp_id' => $Status->id
+        ];
+        $sdm->notify(new ButuhEvaluasi($data));
 
         
         return redirect('/status?act=res')->with('success', 'Status Diubah');

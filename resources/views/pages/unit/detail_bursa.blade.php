@@ -105,14 +105,17 @@
 							<div class="col-md-6">
 								<h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>{{$detail->personnel_area_pengusul->nama}}<br>{{$detail->personnel_area_pengusul->direktorat->nama}}</strong><!-- <br>
-									Jalan Trunojoyo Blok M – I No 135<br>
-									Kebayoran Baru, Jakarta 12160, Indonesia<br>
-									Telp : 021 – 7251234, 7261122<br>
-									fax : 021 – 7221330 -->
+									<strong>{{$detail->personnel_area_pengusul->nama}}<br>{{$detail->personnel_area_pengusul->direktorat->nama}}</strong>
 								</address>
-
 							</div>
+
+							@if ($detail->skstg)
+								<div class="col-md-6 pull-right text-right">
+									<h4>Lihat <strong>SK</strong></h4>
+									<a href="/download/{{ $detail->registry_number }}/{{ $detail->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $detail->skstg->no_sk }}</a>
+								</div>
+							@endif
+
 							@if (session('success'))
 								<div class="col-md-6 text-right">
 									<a href="/dashboard" class="btn btn-lg btn-primary btn-3d">

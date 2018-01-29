@@ -256,7 +256,7 @@ class MutasiController extends Controller
             
             $input_mrp = array(
                 'id' => Uuid::generate(),
-                'registry_number' => $jabatan->kode_olah'.Request.'.Carbon::now('Asia/Jakarta'),
+                'registry_number' => $jabatan->kode_olah.'.Request.'.Carbon::now('Asia/Jakarta'),
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,

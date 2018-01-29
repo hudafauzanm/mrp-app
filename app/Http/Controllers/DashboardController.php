@@ -232,7 +232,11 @@ class DashboardController extends Controller
         if(request('action') == '1')
             $mrp->status = 4;
         else if(request('action') == '0')
+        {
+            $mrp->tindak_lanjut = request('alasan_tolak');
             $mrp->status = 98;
+        }
+        
         $mrp->save();
 
         return back()->with('success', 'Berhasil');
