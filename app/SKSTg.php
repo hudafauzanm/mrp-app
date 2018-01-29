@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class SKSTg extends Model
 {
@@ -17,6 +18,11 @@ class SKSTg extends Model
 
     public function getTglAktivasiAttribute($value)
     {
-    	return \Carbon\Carbon::parse($value);
+    	return Carbon::parse($value);
+    }
+
+    public function getTglKirimSkAttribute($value)
+    {
+        return Carbon::parse($value);
     }
 }

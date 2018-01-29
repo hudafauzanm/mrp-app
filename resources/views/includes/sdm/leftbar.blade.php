@@ -11,7 +11,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="/mrp/sk">
+			<a href="/sk">
 				<i class="main-icon fa fa-book"></i> <span>Daftar SK</span>
 			</a>
 		</li>

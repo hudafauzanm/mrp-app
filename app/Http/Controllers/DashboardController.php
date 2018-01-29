@@ -230,7 +230,7 @@ class DashboardController extends Controller
     {
         $mrp = MRP::find(request('mrp_id'));
         if(request('action') == '1')
-            $mrp->status = 5;
+            $mrp->status = 4;
         else if(request('action') == '0')
             $mrp->status = 98;
         $mrp->save();

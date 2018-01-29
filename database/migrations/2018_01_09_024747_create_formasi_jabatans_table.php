@@ -22,6 +22,7 @@ class CreateFormasiJabatansTable extends Migration
             $table->string('level');
             $table->string('posisi');
             $table->string('kelas_unit')->nullable();
+            $table->string('hgl')->nullable();
             $table->string('formasi');
             $table->string('jabatan');
             $table->string('jenjang_id');
