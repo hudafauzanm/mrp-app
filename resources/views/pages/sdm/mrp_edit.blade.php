@@ -40,13 +40,13 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
-											<label>Nomor Nota Dinas</label>
-											<input type="text" name="mrp[no_dokumen_unit_asal]" value="{{ $mrp->no_dokumen_unit_asal }}" class="form-control">
+											<label>Nomor Dokumen Unit Pengusul</label>
+											<input type="text" name="mrp[no_dokumen_unit_usul]" value="{{ $mrp->no_dokumen_unit_usul }}" class="form-control">
 										</div>
 									
 										<div class="col-md-6 col-sm-6">
-											<label>Tanggal Nota Dinas</label>
-											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_unit_asal]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_unit_asal }}">
+											<label>Tanggal Dokumen Unit Pengusul</label>
+											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_unit_usul]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_unit_usul }}">
 										</div>													
 									</div>
 								</div>
@@ -83,39 +83,35 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>Jenis Mutasi *</label>
-											<select name="mrp[jenis_mutasi]" class="form-control pointer">
+											<select name="mrp[jenis_mutasi]" class="form-control pointer" id="jenismutasi">
 													<option value="">--- Jenis Mutasi ---</option>
-													@if ($mrp->jenis_mutasi == 'APS')
-														<option value="APS" selected>APS</option>
-														<option value="Dinas">Dinas</option>
-														<option value="Non-Dinas">Non-Dinas</option>
-													@elseif ($mrp->jenis_mutasi == 'Dinas')
-														<option value="APS">APS</option>
+													@if ($mrp->jenis_mutasi == 'Dinas')
 														<option value="Dinas" selected>Dinas</option>
 														<option value="Non-Dinas">Non-Dinas</option>
 													@elseif ($mrp->jenis_mutasi == 'Non-Dinas')
-														<option value="APS">APS</option>
 														<option value="Dinas">Dinas</option>
 														<option value="Non-Dinas" selected>Non-Dinas</option>
+													@else
+														<option value="Dinas">Dinas</option>
+														<option value="Non-Dinas">Non-Dinas</option>
 													@endif
 											</select>
 										</div>
 										<div class="col-md-6 col-sm-6">
-											<label>Mutasi *</label>
-											<select name="mrp[mutasi]" class="form-control pointer">
-												<option value="">--- Mutasi ---</option>
-												@if ($mrp->mutasi == 'Rotasi')
-													<option value="Rotasi" selected>Rotasi</option>
-													<option value="Promosi">Promosi</option>
-													<option value="Demosi">Demosi</option>
-												@elseif($mrp->mutasi == 'Promosi')
-													<option value="Rotasi">Rotasi</option>
-													<option value="Promosi" selected>Promosi</option>
-													<option value="Demosi">Demosi</option>
-												@elseif($mrp->mutasi == 'Demosi')
-													<option value="Rotasi">Rotasi</option>
-													<option value="Promosi">Promosi</option>
-													<option value="Demosi" selected>Demosi</option>
+											<label>Tipe Mutasi *</label>
+											<select name="mrp[mutasi]" class="form-control pointer" id="tipemutasi">
+												<option value="">--- Tipe Mutasi ---</option>
+												@if ($mrp->mutasi == 'Dinas')
+													<option>Rotasi</option>
+													<option>Promosi</option>
+													<option>Demosi</option>
+													<option>TK Diperbantukan</option>
+													<option>Tugas Belajar</option>
+													<option>Aktif dari Tugas Belajar</option>
+												@elseif($mrp->mutasi == 'Non-Dinas')
+													<option>Aktif dari IDT</option>
+													<option>Ct diluar Tanggungan</option>
+													<option>APS</option>
 												@endif
 											</select>
 										</div>
@@ -204,15 +200,15 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
-											<label>Nomor Dokumen Mutasi</label>
-											<input type="text" name="mrp[no_dokumen_unit_mutasi]" value="{{ $mrp->no_dokumen_unit_mutasi }}" class="form-control">
+											<label>Nomor Dokumen Unit Jawab</label>
+											<input type="text" name="mrp[no_dokumen_unit_jawab]" value="{{ $mrp->no_dokumen_unit_jawab }}" class="form-control">
 										</div>
 										<div class="col-md-6 col-sm-6">
 											<label>
-												Tanggal Dokumen Mutasi
+												Tanggal Dokumen Unit Jawab
 											</label>
 											<!-- date picker -->
-											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_unit_mutasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_unit_mutasi }}">
+											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_unit_jawab]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_unit_jawab }}">
 										</div>
 									</div>
 								</div>
@@ -490,5 +486,32 @@
 				}
 			});
 		})
+	</script>
+
+	<script>
+		$("#jenismutasi").change(function(){
+			var jenismutasi = $(this).val();
+			if(jenismutasi == "Dinas"){
+				var tipemutasi = $("#tipemutasi")
+				tipemutasi.empty();
+				tipemutasi.append('<option>--- Tipe Mutasi ---</option>');
+				tipemutasi.removeAttr('disabled');
+				tipemutasi.append('<option>Rotasi</option>');
+				tipemutasi.append('<option>Promosi</option>');
+				tipemutasi.append('<option>Demosi</option>');
+				tipemutasi.append('<option>TK Diperbantukan</option>');
+				tipemutasi.append('<option>Tugas Belajar</option>');
+				tipemutasi.append('<option>Aktif dari Tugas Belajar</option>');
+			}
+			else if(jenismutasi == "Non-Dinas"){
+				var tipemutasi = $("#tipemutasi")
+				tipemutasi.empty();
+				tipemutasi.append('<option>--- Tipe Mutasi ---</option>');
+				tipemutasi.removeAttr('disabled');
+				tipemutasi.append('<option>Aktif dari IDT</option>');
+				tipemutasi.append('<option>Ct diluar Tanggungan</option>');
+				tipemutasi.append('<option>APS</option>');
+			}
+		});
 	</script>
 @endsection

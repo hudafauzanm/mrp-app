@@ -7,6 +7,7 @@ use App\Pegawai;
 use App\PenilaianPegawai;
 use App\MRP;
 use App\PersonnelArea;
+use App\FormasiJabatan;
 
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
@@ -53,10 +54,33 @@ class DashboardController extends Controller
     }
     public function getPenilaianPegawai()
     {
-        $nilpegawai = PenilaianPegawai::select('kesehatan', 'career_willingness', 'external_rediness', 'hubungan_sesama', 'hubungan_atasan')->where('pegawai_id', request('pegawai'))->first();
-        $nilpegawai->bintang = PenilaianPegawai::select('creative', 'enthusiastic', 'building', 'strategic', 'customer', 'driving', 'visionary', 'empowering', 'komunikasi', 'team_work', 'bahasa_1_nilai', 'bahasa_2_nilai', 'bahasa_3_nilai')->where('pegawai_id', request('pegawai'))->first();
-        //$user = auth()->user();
-        
+        $nilpegawai = NULL;
+
+        if(request()->has('mrp_id'))
+        {
+            $penilaian = MRP::find(request('mrp_id'))->penilaian_pegawai->toArray();
+            $nilpegawai = array_slice($penilaian, 16, 5);
+            $nilpegawai['bahasa_3'] = $penilaian['bahasa_3'];
+            $nilpegawai['created_at'] = Carbon::parse($penilaian['created_at'])->format("d F Y h:i:s");
+            $nilpegawai['bintang'] = array_slice($penilaian, 2, 12);
+            $nilpegawai['bintang']['bahasa_3_nilai'] = $penilaian['bahasa_3_nilai'];
+        }
+        else if (request()->has('pegawai_id'))
+        {
+            $pegawai = Pegawai::find(request('pegawai_id'));
+            // var_dump($pegawai->nama_pegawai);
+            // die();
+            if($pegawai->penilaian_pegawai->count())
+            {
+                $penilaian = $pegawai->penilaian_pegawai()->latest()->first()->toArray();
+                $nilpegawai = array_slice($penilaian, 16, 5);
+                $nilpegawai['bahasa_3'] = $penilaian['bahasa_3'];
+                $nilpegawai['created_at'] = Carbon::parse($penilaian['created_at'])->format("d F Y h:i:s");
+                $nilpegawai['bintang'] = array_slice($penilaian, 2, 12);
+                $nilpegawai['bintang']['bahasa_3_nilai'] = $penilaian['bahasa_3_nilai'];
+            }
+        }
+
         return response()->json($nilpegawai);
     }
 
@@ -99,6 +123,17 @@ class DashboardController extends Controller
         ]);
 
         $mrp = MRP::find(request('id'));
+
+        if(!$mrp->formasi_jabatan_id)
+        {
+            if(request()->has('kode_olah'))
+            {
+                $mrp->formasi_jabatan_id = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
+            }
+            else
+                return back()->withErrors(['message' => 'FJ tujuan mutasi belum diisi']);
+        }
+
         $mrp->no_dokumen_respon_sdm = request('no_dokumen_respon_sdm');
         $mrp->tgl_evaluasi = Carbon::now('Asia/Jakarta');
         $mrp->tindak_lanjut = request('tindak_lanjut');
@@ -106,7 +141,11 @@ class DashboardController extends Controller
 
         if($mrp->tipe == 3)
         {
-            $mrp->pegawai_id = Pegawai::where('nip', request('nip'))->first()->id;
+            $pegawai = Pegawai::where('nip', request('nip'))->first();
+            if($pegawai)
+                $mrp->pegawai_id = $pegawai->id;
+            else
+                return back()->withErrors(['message' => 'NIP '.request('nip').' tidak ditemukan!']);
         }
 
 
@@ -152,5 +191,38 @@ class DashboardController extends Controller
 
             });
         })->download('xlsx');
+    }
+
+    public function getAllUnit()
+    {
+        $unit = PersonnelArea::all()->pluck('nama', 'id')->toArray();
+
+        return response()->json($unit);
+    }
+
+    public function getFormasi()
+    {
+        $unit = PersonnelArea::find(request('unit_id'));
+
+        if($unit)
+        {
+            $retval = $unit->formasi_jabatan()->select('formasi')->distinct()->get()->all();
+            return response()->json($retval);
+        }
+        else
+            return response()->json(NULL);
+    }
+
+    public function getJabatan()
+    {
+        $unit = PersonnelArea::find(request('unit_id'));
+
+        if($unit)
+        {
+            $retval = $unit->formasi_jabatan->where('formasi', request('formasi'))->where('kode_olah', '!=', request('kode_olah'))->pluck('jabatan', 'kode_olah')->toArray();
+            return response()->json($retval);
+        }
+        else
+            return response()->json(NULL);
     }
 }

@@ -16,6 +16,9 @@ Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/get_pegawai_nilai', 'DashboardController@getPenilaianPegawai');
 Route::post('/dashboard/reject_mutasi', 'DashboardController@rejectMutasi');
 Route::post('/dashboard/approve_mutasi', 'DashboardController@approveMutasi');
+Route::get('/dashboard/get_all_unit', 'DashboardController@getAllUnit');
+Route::get('/dashboard/get_formasi', 'DashboardController@getFormasi');
+Route::get('/dashboard/get_jabatan', 'DashboardController@getJabatan');
 
 // authentication
 Route::get('/login', 'LoginController@index')->name('login');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Middleware\Unit;
+use App\Http\Middleware\SDM;
 use Carbon\Carbon;
 use Uuid;
 
@@ -22,7 +23,7 @@ class MutasiController extends Controller
 {
     public function __construct()
     {
-    	$this->middleware(Unit::class);
+    	$this->middleware('unit');
     }
 
     public function index()
@@ -255,7 +256,7 @@ class MutasiController extends Controller
             
             $input_mrp = array(
                 'id' => Uuid::generate(),
-                'registry_number' => $nip.'.Request.'.Carbon::now('Asia/Jakarta'),
+                'registry_number' => $jabatan->kode_olah'.Request.'.Carbon::now('Asia/Jakarta'),
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,
