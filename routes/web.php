@@ -19,6 +19,7 @@ Route::post('/dashboard/approve_mutasi', 'DashboardController@approveMutasi');
 Route::get('/dashboard/get_all_unit', 'DashboardController@getAllUnit');
 Route::get('/dashboard/get_formasi', 'DashboardController@getFormasi');
 Route::get('/dashboard/get_jabatan', 'DashboardController@getJabatan');
+Route::post('/dashboard/karir2_respond', 'DashboardController@karir2Respond');
 
 // authentication
 Route::get('/login', 'LoginController@index')->name('login');

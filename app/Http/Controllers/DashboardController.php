@@ -225,4 +225,16 @@ class DashboardController extends Controller
         else
             return response()->json(NULL);
     }
+
+    public function karir2Respond()
+    {
+        $mrp = MRP::find(request('mrp_id'));
+        if(request('action') == '1')
+            $mrp->status = 5;
+        else if(request('action') == '0')
+            $mrp->status = 98;
+        $mrp->save();
+
+        return back()->with('success', 'Berhasil');
+    }
 }
