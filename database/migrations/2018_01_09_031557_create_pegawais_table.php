@@ -37,6 +37,7 @@ class CreatePegawaisTable extends Migration
             $table->date('tanggal_unit_induk_akhir')->nullable();
             $table->string('nip_sutri')->nullable();
             $table->string('lc_atasan');
+            // $table->string('nip_atasan');
             $table->string('top_unit')->nullable();
             $table->string('top_0')->nullable();
             $table->string('top_1')->nullable();

@@ -16,7 +16,14 @@ use Carbon\Carbon;
 	<!-- FOOTABLE TABLE -->
 	<link href="/assets/plugins/footable/css/footable.core.min.css" rel="stylesheet" type="text/css" />
 	<link href="/assets/plugins/footable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 	<link href="/assets/css/sdm_dashboard.css" rel="stylesheet" type="text/css" />
+
+	<style>
+		canvas {
+			height: 400px;
+		}
+	</style>
 
 @endsection
 
@@ -27,9 +34,345 @@ use Carbon\Carbon;
 
 		<div class="row">
 			<div class="col-md-6">
-				<h4>Monitoring</h4>	
+				{{-- <h4>Monitoring</h4>	 --}}
 				<div id="panel-1" class="panel panel-default">
 					<div class="panel-heading">
+						<!-- tabs nav -->
+						<ul class="nav nav-tabs pull-left">
+							<li class="active">
+								<a class="tabselect monitoring_tab" href="#formasi_jabatan" data-toggle="tab">Formasi Jabatan</a>
+							</li>
+							<li class="">
+								<a  class="tabselect monitoring_tab" href="#sk" data-toggle="tab" id="tabnya_sk">Pergerakan SK</a>
+							</li>
+						</ul>									
+
+						<span class="title elipsis pull-right">
+							<strong>MONITORING</strong> <!-- panel title -->
+						</span>
+					</div>
+
+					<!-- panel content -->
+					<div class="panel-body" style="overflow-y: auto" id="monitoring_body">
+						<div class="tab-content transparent ">
+							<div id="formasi_jabatan" class="tab-pane active">
+								<div class="row">
+									<div class="col-md-6">
+										<select class="form-control select2">
+											<option>--- ALL ---</option>
+											<option value="KP">KP</option>
+											<option value="UI">UI</option>
+											<option value="UIP">UIP</option>
+											<option value="SUP">SUP</option>
+										</select>
+									</div>
+
+									<div class="col-md-6">
+										<select class="form-control select2">
+											<option value="all">--- ALL ---</option>
+											@foreach ($personnels as $pers)
+												<option value="{{ $pers->username }}">{{ $pers->nama_pendek }}</option>
+											@endforeach
+										</select>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-md-6">
+										<div id="struktural_monitoring" class="panel panel-default">
+
+											<div class="panel-heading">
+
+												<span class="elipsis"><!-- panel title -->
+													<strong>Struktural</strong>
+												</span>
+
+												<!-- right options -->
+												<ul class="options pull-right list-inline">
+													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												</ul>
+												<!-- /right options -->
+
+
+											</div>
+
+											<!-- panel content -->
+											<div class="panel-body nopadding">
+												<canvas id="struktural_chart"></canvas>
+											</div>
+											<!-- /panel content -->
+
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div id="fungsional_monitoring" class="panel panel-default">
+
+											<div class="panel-heading">
+
+												<span class="elipsis"><!-- panel title -->
+													<strong>Fungsional</strong>
+												</span>
+
+												<!-- right options -->
+												<ul class="options pull-right list-inline">
+													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												</ul>
+												<!-- /right options -->
+
+
+											</div>
+
+											<!-- panel content -->
+											<div class="panel-body nopadding">
+												<canvas id="fungsional_chart"></canvas>
+											</div>
+											<!-- /panel content -->
+
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<table class="table table-bordered dataTable" id="forja_monitor">
+											<thead>
+												<tr>
+													<th>Username</th>
+													<th>Email</th>
+													<th>Points</th>
+													<th>Joined</th>
+													<th>Status</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr class="odd gradeX">
+													<td>
+														 shuxer
+													</td>
+													<td>
+														<a href="mailto:shuxer@gmail.com">
+														shuxer@gmail.com </a>
+													</td>
+													<td>
+														 120
+													</td>
+													<td class="center">
+														 12 Jan 2012
+													</td>
+													<td>
+														<span class="label label-sm label-success">
+														Approved </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														 looper
+													</td>
+													<td>
+														<a href="mailto:looper90@gmail.com">
+														looper90@gmail.com </a>
+													</td>
+													<td>
+														 120
+													</td>
+													<td class="center">
+														 12.12.2011
+													</td>
+													<td>
+														<span class="label label-sm label-warning">
+														Suspended </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														 looper
+													</td>
+													<td>
+														<a href="mailto:looper90@gmail.com">
+														looper90@gmail.com </a>
+													</td>
+													<td>
+														 120
+													</td>
+													<td class="center">
+														 12.12.2011
+													</td>
+													<td>
+														<span class="label label-sm label-warning">
+														Suspended </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														 looper
+													</td>
+													<td>
+														<a href="mailto:looper90@gmail.com">
+														looper90@gmail.com </a>
+													</td>
+													<td>
+														 120
+													</td>
+													<td class="center">
+														 12.12.2011
+													</td>
+													<td>
+														<span class="label label-sm label-warning">
+														Suspended </span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+
+
+							<div id="sk" class="tab-pane">
+								<div class="row">
+									<div class="col-md-6 pull-right">
+										<select class="form-control select2" style="width: 100%">
+											<option value="all">--- ALL ---</option>
+											@foreach ($personnels as $pers)
+												<option value="{{ $pers->username }}">{{ $pers->nama_pendek }}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div id="sk_pane" class="panel panel-default">
+
+											<div class="panel-heading">
+
+												<span class="elipsis"><!-- panel title -->
+													<strong>Kantor Pusat</strong>
+												</span>
+
+												<!-- right options -->
+												<ul class="options pull-right list-inline">
+													<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+												</ul>
+												<!-- /right options -->
+
+
+											</div>
+
+											<!-- panel content -->
+											<div class="panel-body nopadding">
+												<canvas id="sk_chart"></canvas>
+											</div>
+											<!-- /panel content -->
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<div id="sk_table_pane" class="panel panel-default">
+											<table class="table table-bordered dataTable" id="sk_table">
+												<thead>
+													<tr>
+														<th>Username</th>
+														<th>Email</th>
+														<th>Points</th>
+														<th>Joined</th>
+														<th>Status</th>
+													</tr>
+												</thead>
+
+												<tbody>
+													<tr class="odd gradeX">
+														<td>
+															 shuxer
+														</td>
+														<td>
+															<a href="mailto:shuxer@gmail.com">
+															shuxer@gmail.com </a>
+														</td>
+														<td>
+															 120
+														</td>
+														<td class="center">
+															 12 Jan 2012
+														</td>
+														<td>
+															<span class="label label-sm label-success">
+															Approved </span>
+														</td>
+													</tr>
+													<tr class="odd gradeX">
+														<td>
+															 looper
+														</td>
+														<td>
+															<a href="mailto:looper90@gmail.com">
+															looper90@gmail.com </a>
+														</td>
+														<td>
+															 120
+														</td>
+														<td class="center">
+															 12.12.2011
+														</td>
+														<td>
+															<span class="label label-sm label-warning">
+															Suspended </span>
+														</td>
+													</tr>
+													<tr class="odd gradeX">
+														<td>
+															 looper
+														</td>
+														<td>
+															<a href="mailto:looper90@gmail.com">
+															looper90@gmail.com </a>
+														</td>
+														<td>
+															 120
+														</td>
+														<td class="center">
+															 12.12.2011
+														</td>
+														<td>
+															<span class="label label-sm label-warning">
+															Suspended </span>
+														</td>
+													</tr>
+													<tr class="odd gradeX">
+														<td>
+															 looper
+														</td>
+														<td>
+															<a href="mailto:looper90@gmail.com">
+															looper90@gmail.com </a>
+														</td>
+														<td>
+															 120
+														</td>
+														<td class="center">
+															 12.12.2011
+														</td>
+														<td>
+															<span class="label label-sm label-warning">
+															Suspended </span>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{-- <div class="panel-heading">
 						<!-- right options -->
 						<ul class="options pull-right list-inline">
 							<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
@@ -79,14 +422,14 @@ use Carbon\Carbon;
 								
 							</div>
 						</div>
-					</div>
+					</div> --}}
 					<!-- /panel content -->
 
 				</div>
 			</div>
 
 			<div class="col-md-6">
-				<h4>Verifikasi</h4>
+				{{-- <h4>Verifikasi</h4> --}}
 				<div id="panel-2" class="panel panel-default ">
 					<div class="panel-heading">
 						<!-- tabs nav -->
@@ -102,12 +445,9 @@ use Carbon\Carbon;
 							</li>
 						</ul>									
 
-						<!-- right options -->
-						<ul class="options pull-right list-inline">
-							<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-							<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
-						</ul>
-						<!-- /right options -->
+						<span class="title elipsis pull-right">
+							<strong>EVALUASI</strong> <!-- panel title -->
+						</span>
 					</div>
 
 					<!-- panel content -->
@@ -742,26 +1082,22 @@ use Carbon\Carbon;
 @section('includes-scripts')
 	@parent
 
-	<script type="text/javascript">
-		loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
-			loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
-				loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
-					loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
-						loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
-							loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
-								loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
-								
-									// demo js script
-									loadScript("assets/js/view/demo.graphs.flot.js");
 
-								});
-							});
-						});
-					});
-				});
-			});
-		});
-	</script>
+	<script>
+        $(function(){
+            $('#forja_monitor').DataTable({
+
+            });
+
+            $('#sk_table').DataTable({
+
+            });
+        });
+    </script>
+
+	<script src="/bower_components/chart.js/dist/Chart.min.js"></script>
+	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		loadScript(plugin_path + "footable/dist/footable.min.js", function(){
@@ -900,15 +1236,85 @@ use Carbon\Carbon;
 			// 		'dataType': 'json',
 			// 		error: function(){
 
-			// 		},
-			// 		success: function(data){
-			// 			if(data)
-			// 			{
-			// 				$("tr#"+id).remove();
-			// 			}
-			// 		}
-			// 	});
-			// }
+	<script>
+		function drawChart(target)
+		{
+			var data = {
+			    labels: ["MA_KP", "MA_UI", "MM_KP", 'MM_UI', 'MM_UP', 'MM_KP', 'MD_UI', 'MD_UP'],
+			    datasets: [
+			        {
+			            label: "Kosong",
+			            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			            borderWidth: 1,
+			            data: [1,3,4,1,3,4,3,4],
+			        },        
+			        {
+			            label: "Akan",
+			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+			            borderWidth: 1,
+			            data: [5,3,5,5,3,5,3,5],
+			        },
+			        {
+			            label: "Isi",
+			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+			            borderWidth: 1,
+			            data: [15,4,5,7,4,5,4,5],
+			        }
+			    ]
+			};
+
+			var options = {
+				responsive: true,
+    			maintainAspectRatio: false,
+				tooltips: {
+			        enabled: false
+			    },
+			    hover: {
+					mode: false
+				},
+				scales: {
+					yAxes: [{
+						stacked: true,
+					}],
+					xAxes: [{
+						stacked: false,
+					ticks: {
+						beginAtZero: true
+					},
+					}]
+				},
+				animation: { 
+	                onProgress: function () { 
+	                    var chartInstance = this.chart;
+	                    var width = chartInstance.width;
+	                    var ctx = chartInstance.ctx; 
+	                    ctx.textAlign = "left"; 
+	                    ctx.font = "9px Open Sans"; 
+	                    ctx.fillStyle = "#000"; 
+	 
+	                    Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) { 
+	                        var meta = chartInstance.controller.getDatasetMeta(i); 
+	                        Chart.helpers.each(meta.data.forEach(function (bar, index) { 
+	                            data = dataset.data[index]; 
+	                            if(i==0){
+	                                ctx.fillText(data, width-25, bar._model.y-10);
+	                            } else if (i==1) { 
+	                                ctx.fillText(data, width-25, bar._model.y);
+	                            } else if (i==2) { 
+	                                ctx.fillText(data, width-25, bar._model.y+10);
+	                            }
+	                        }),this) 
+	                    }),this);
+					}
+				}
+			};
+
+			var ctx = document.getElementById(target).getContext("2d");
+			var myBarChart = new Chart(ctx, {
+			    type: 'horizontalBar',
+			    data: data,
+			    options: options
+			});
 		};
 	</script>
 
@@ -921,8 +1327,16 @@ use Carbon\Carbon;
 			});
 
 			var height = $(document).height();
-			$("#monitoring_body").css('height', height*0.45);
-			$("#verifikasi_body").css('height', height*0.45);
+			$("#monitoring_body").css('height', height*0.55);
+			$("#verifikasi_body").css('height', height*0.55);
+
+			drawChart("struktural_chart");
+			drawChart("fungsional_chart");
+
+			$('#tabnya_sk').on("shown.bs.tab",function(){
+				drawChart('sk_chart');
+				$('#tabnya_sk').off();//to remove the binded event after initial rendering
+			});
 		}); 
 	</script>
 
