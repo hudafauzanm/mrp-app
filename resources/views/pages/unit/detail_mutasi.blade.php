@@ -2,6 +2,7 @@
 use Carbon\Carbon;
 
 ?>
+
 <!doctype html>
 <html lang="en-US">
 	<head>
@@ -35,17 +36,39 @@ use Carbon\Carbon;
 					<div class="panel-body">
 
 						<div class="row">
-							<div class="col-md-6 col-xs-6 text-right">
+							<div class="col-md-3 col-xs-3 text-left">
+								@if ($detail->status == 98)
+									<h4><strong>Ditolak</strong> oleh Karir II (Pusat)</h4>
+									<ul class="list-unstyled ">
+										<li>{{ $detail->tindak_lanjut }}</li>
+									</ul>
+								@endif
+							</div>
+							<div class="col-md-3 col-xs-3 text-right">
 								<h4>Registry<strong> Number</strong></h4>
 								<ul class="list-unstyled ">
 									<li><strong>{{$detail->registry_number}}</strong></li>
 								</ul>
 							</div>
-							<div class="col-md-6 col-xs-6 text-left">
+							<div class="col-md-3 col-xs-3 text-left">
 								<h4><strong>Nomor</strong> Nota Dinas</h4>
 								<ul class="list-unstyled ">
 									<li><strong>{{$detail->no_dokumen_unit_usul}}</strong></li>
 								</ul>
+							</div>
+							<div class="col-md-3 col-xs-3 text-right">
+								@if ($detail->no_dokumen_unit_usul)
+									<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_unit_usul }}" class="btn btn-sm btn-3d btn-blue">{{ $detail->filename_dokumen_unit_usul }}</a>
+								@endif
+								@if ($detail->no_dokumen_unit_jawab)
+									<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_unit_jawab }}" class="btn btn-sm btn-3d btn-info">{{ $detail->filename_dokumen_unit_jawab }}</a>
+								@endif
+								@if ($detail->status == 99 && $detail->no_dokumen_respon_sdm)
+									<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $detail->filename_dokumen_respon_sdm }}</a>
+								@endif
+								@if ($detail->sk_stg_id)
+									<a href="/download/{{ $detail->registry_number }}/{{ $detail->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $detail->skstg->filename_dokumen_sk }}</a>
+								@endif
 							</div>
 						</div>
 
@@ -74,7 +97,7 @@ use Carbon\Carbon;
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>Tanggal Aktifasi:</strong> {{ $detail->tgl_pooling}}</li>
+												<li><strong>Tanggal Aktivasi:</strong> {{ $detail->requested_tgl_aktivasi->format('d F Y') }}</li>
 												<li><strong>Jenis Mutasi:</strong> {{ $detail->jenis_mutasi}}</li>
 												<li><strong>Tipe Mutasi:</strong> {{ $detail->mutasi }}</li>
 												<!-- <li><strong>Jalur Mutasi:</strong> {{ $detail->jalur_mutasi}}</li> -->

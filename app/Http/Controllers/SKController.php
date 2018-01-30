@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Middleware\SDM;
 use Uuid;
-
+use App\Notifications\SKTercetak;
 use App\MRP;
 use App\SKSTg;
 
@@ -53,6 +53,18 @@ class SKController extends Controller
         $mrp->skstg_id = $skstg->id;
         $mrp->status = 5;
         $mrp->save();
+
+        $pengusul = $mrp->personnel_area_pengusul;
+
+        // dd($pengusul);
+
+        $data = [
+            'reg_num' => $mrp->registry_number,
+            'user_id' => $pengusul->id,
+            'mrp_id' => $mrp->id
+        ];
+
+        $pengusul->notify(new SKTercetak($data));
 
         return redirect('/sk')->with('success', 'SK Berhasil Diupload');
     }

@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ProsesSK extends Notification
+class SKTercetak extends Notification
 {
     use Queueable;
     protected $data;
@@ -30,21 +30,7 @@ class ProsesSK extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return ['database'];
     }
 
     /**
@@ -55,7 +41,13 @@ class ProsesSK extends Notification
      */
     public function toArray($notifiable)
     {
-        $message = $this->data['reg_num'].' dalam proses penerbitan SK';
+        return [
+        ];
+    }
+
+    public function toDatabase($notifiable)
+    {
+        $message = 'SK untuk transaksi '.$this->data['reg_num'].' sudah tercetak';
 
         return [
             'message' => $message,

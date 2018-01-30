@@ -172,17 +172,17 @@ use Carbon\Carbon;
 								 {{ $mrp->pegawai->status_domisili}} <!-- status domisili -->
 							</td>
 							<td> <!-- sutri -->
-								@if(isset($mrp->pegawai->nip_sutri))
+								@if($mrp->pegawai->nip_sutri)
 									<strong>PLN</strong> ; {{ \App\Pegawai::where('nip', $mrp->pegawai->nip_sutri)->pluck('nip')->first() }} ; {{ $mrp->pegawai->formasi_jabatan->personnel_area->nama_pendek}}
 								@else
 									Non-PLN ; N/A ; N/A
 								@endif
 							</td>
 							<td>
-								 {{ $mrp->requested_tindak_lanjut}} <!-- tindak lanjut -->
+								 {{ $mrp->tindak_lanjut }} <!-- tindak lanjut -->
 							</td>
 							<td>
-								 {{ $mrp->requested_tanggal_aktivasi}} <!-- tanggal aktivasi -->
+								 {{ $mrp->requested_tgl_aktivasi->format('d F Y') }} <!-- tanggal aktivasi -->
 							</td>
 						</tr>
 						

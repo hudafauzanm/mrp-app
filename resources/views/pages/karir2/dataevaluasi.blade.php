@@ -51,7 +51,7 @@
 								Non-PLN ; N/A ; N/A
 							@endif<br>
 						Tindaklanjut : {{ $mrp->tindak_lanjut}}<br>
-						Tanggal Aktivasi : {{ $mrp->tanggal_aktivasi}}<br>
+						Tanggal Aktivasi : {{ $mrp->requested_tgl_aktivasi->format('d F Y') }}<br>
 					</td>
 					
 

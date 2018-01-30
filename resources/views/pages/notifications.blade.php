@@ -36,7 +36,7 @@
 		            			<h1><i class="fa fa-check"></i></h1>
 		            		</div>
 		            		<div class="col-md-10 col-sm-10 col-xs-10">
-		            			<a href="" style="padding-left: 0">Permintaan mutasi baru dari {{ $notification->data['nama_personnel_area'] }}</a>
+		            			<a href="" style="padding-left: 0">{{ $notification->data['message'] }}</a>
 		            			<br>
 			            		<p class="time">{{ $notification->created_at->toDayDateTimeString() }}</p>
 		            		</div>

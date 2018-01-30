@@ -36,7 +36,15 @@ use Carbon\Carbon;
 					<div class="panel-body">
 
 						<div class="row">
-							<div class="col-md-6 col-xs-6 text-right">
+							<div class="col-md-3 col-xs-3 text-left">
+								@if ($detail->status == 98)
+									<h4><strong>Ditolak</strong> oleh Karir II (Pusat)</h4>
+									<ul class="list-unstyled ">
+										<li>{{ $detail->tindak_lanjut }}</li>
+									</ul>
+								@endif
+							</div>
+							<div class="col-md-3 col-xs-3 text-right">
 								<h4>Registry<strong> Number</strong></h4>
 								<ul class="list-unstyled ">
 									<li><strong>{{$detail->registry_number}}</strong></li>
