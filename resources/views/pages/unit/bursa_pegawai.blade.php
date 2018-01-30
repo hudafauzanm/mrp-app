@@ -594,7 +594,8 @@
 
 			var on_off = $(this).val();
 			$(this).val( on_off == '0' ? '1' : '0');
-			$('#rekom_formasi').prop('disabled', function(i, v) { return !v; });
+			$('#rekom_unit').prop('disabled', function(i, v) { return !v; });
+			$('#rekom_unit').prop('required', function(i, v) { return !v; });
 			$('#rekom_formasi').prop('required', function(i, v) { return !v; });
 			$('#rekom_jabatan').prop('required', function(i, v) { return !v; });
 
@@ -714,7 +715,6 @@
 					formasi.append('<option>--- Formasi ---</option>');
 					formasi.removeAttr('disabled');
 					$.each(data, function(key, value){
-						console.log(value);
 						formasi.append('<option value="'+value.formasi+'">'+value.formasi+'</option>');
 					});
 				}
@@ -723,6 +723,7 @@
 
 		$("#rekom_formasi").change(function(){
 			var formasi = $(this).val();
+			var unit_id = $("#rekom_unit").val();
 
 			$.ajax({
 				'url': '/mutasi/pengajuan/getJabatan',
@@ -742,12 +743,11 @@
 					jabatan.append('<option>--- Jabatan ---</option>');
 					jabatan.removeAttr('disabled');
 					$.each(data, function(key, value){
-						console.log(value);
 						jabatan.append('<option value="'+key+'">'+value+'</option>');
 					});
 				}
 			});
-		})
+	    });
 	</script>
 
 	<script>
