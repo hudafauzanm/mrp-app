@@ -35,7 +35,7 @@ class MRP extends Model
 
     public function skstg()
     {
-    	return $this->hasOne('App\SKSTg');
+    	return $this->hasOne('App\SKSTg', 'mrp_id');
     }
 
     public function formasi_jabatan()

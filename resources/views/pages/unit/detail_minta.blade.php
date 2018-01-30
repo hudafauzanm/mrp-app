@@ -42,10 +42,27 @@ use Carbon\Carbon;
 									<li><strong>{{$detail->registry_number}}</strong></li>
 								</ul>
 							</div>
-							<div class="col-md-6 col-xs-6 text-left">
+							<div class="col-md-3 col-xs-3 text-left">
 								<h4><strong>Nomor</strong> Nota Dinas</h4>
 								<ul class="list-unstyled ">
 									<li><strong>{{$detail->no_dokumen_unit_usul}}</strong></li>
+								</ul>
+							</div>
+							<div class="col-md-3 col-xs-3 text-right">
+								<h4><strong>Download</strong> Dokumen</h4>
+								<ul class="list-unstyled ">
+									@if ($detail->no_dokumen_unit_usul)
+										<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_unit_usul }}" class="btn btn-sm btn-3d btn-blue">{{ $detail->filename_dokumen_unit_usul }}</a>
+									@endif
+									@if ($detail->no_dokumen_unit_jawab)
+										<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_unit_jawab }}" class="btn btn-sm btn-3d btn-info">{{ $detail->filename_dokumen_unit_jawab }}</a>
+									@endif
+									@if ($detail->skstg_id)
+										<a href="/download/{{ $detail->registry_number }}/{{ $detail->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $detail->skstg->filename_dokumen_sk }}</a>
+									@endif
+									@if ($detail->status == 99 && $detail->no_dokumen_respon_sdm)
+										<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $detail->filename_dokumen_respon_sdm }}</a>
+									@endif
 								</ul>
 							</div>
 						</div>

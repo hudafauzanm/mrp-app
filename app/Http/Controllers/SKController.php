@@ -119,7 +119,7 @@ class SKController extends Controller
             {
                 //Apa yang akan ditampilkan di tiap2 row
                 $nestedData['no_sk'] = $skstg->no_sk;
-                $nestedData['no_stg'] = $skstg->no_stg ? $skstg->pegawai->no_stg : '-';
+                $nestedData['no_stg'] = $skstg->no_stg ? $skstg->no_stg : '-';
                 $nestedData['tahun_sk'] = $skstg->tahun_sk;
                 $nestedData['no_dokumen_kirim_sk'] = $skstg->no_dokumen_kirim_sk;
                 $nestedData['tgl_kirim_sk'] = $skstg->tgl_kirim_sk->format("d F Y");

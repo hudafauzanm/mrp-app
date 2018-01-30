@@ -1235,6 +1235,8 @@ use Carbon\Carbon;
 			// 		},
 			// 		'dataType': 'json',
 			// 		error: function(){
+		};
+	</script>
 
 	<script>
 		function drawChart(target)

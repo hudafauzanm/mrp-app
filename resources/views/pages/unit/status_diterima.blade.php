@@ -68,8 +68,12 @@
 								<td>
 									@if($mrps->status == 1)
 										<span class="label label-primary">Perlu Tindak Lanjut</span>
-									@elseif(in_array($mrps->status, [2,3,4,5,6]))
+									@elseif(in_array($mrps->status, [2,3,4]))
 										<span class="label label-warning">Proses Evaluasi (Pusat)</span>
+									@elseif($mrps->status == 5)
+										<span class="label label-success">SK Tercetak</span>
+									@elseif($mrps->status == 6)
+										<span class="label label-success">SK Pending</span>
 									@elseif($mrps->status == 7)
 										<span class="label label-success">Clear</span>
 									@elseif(in_array($mrps->status, [97,98,99]))
