@@ -59,7 +59,7 @@ class CreateMRPsTable extends Migration
             
 
             $table->index(['pegawai_id']);
-            $table->index(['sk_stg_id']);
+            $table->index(['skstg_id']);
             $table->index(['formasi_jabatan_id']);
             $table->index(['unit_pengusul']);
         });
