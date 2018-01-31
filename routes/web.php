@@ -21,6 +21,10 @@ Route::get('/dashboard/get_formasi', 'DashboardController@getFormasi');
 Route::get('/dashboard/get_jabatan', 'DashboardController@getJabatan');
 Route::post('/dashboard/karir2_respond', 'DashboardController@karir2Respond');
 
+// monitoring
+Route::get('/monitoring/ajax/getRealisasiPagu', 'MonitoringController@getRealisasiPagu');
+Route::get('/monitoring/ajax/getPergerakanSK', 'MonitoringController@getPergerakanSK');
+
 // authentication
 Route::get('/login', 'LoginController@index')->name('login');
 Route::post('/login', 'LoginController@login');

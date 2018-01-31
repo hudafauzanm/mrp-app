@@ -22,6 +22,6 @@ class FormasiJabatan extends Model
 
     public function mrp()
     {
-        return $this->belongsTo('App\FormasiJabatan');
+        return $this->hasMany('App\MRP');
     }
 }
