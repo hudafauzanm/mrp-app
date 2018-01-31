@@ -22,6 +22,7 @@ use Carbon\Carbon;
 	<style>
 		canvas {
 			height: 400px;
+			max-height: 400px;
 		}
 
 		.dataTable th, .dataTable td {
@@ -57,7 +58,7 @@ use Carbon\Carbon;
 					</div>
 
 					<!-- panel content -->
-					<div class="panel-body" style="overflow-y: auto" id="monitoring_body">
+					<div class="panel-body" style="overflow-y: scroll" id="monitoring_body">
 						<div class="tab-content transparent ">
 							<div id="formasi_jabatan" class="tab-pane active">
 								<div class="row">
@@ -197,8 +198,7 @@ use Carbon\Carbon;
 											</div>
 
 											<!-- panel content -->
-											<div class="panel-body nopadding">
-												<canvas id="sk_chart"></canvas>
+											<div class="panel-body nopadding" id="sk_chart_container">
 											</div>
 											<!-- /panel content -->
 
@@ -212,91 +212,16 @@ use Carbon\Carbon;
 											<table class="table table-bordered dataTable" id="sk_table">
 												<thead>
 													<tr>
-														<th>Username</th>
-														<th>Email</th>
-														<th>Points</th>
-														<th>Joined</th>
+														<th>No</th>
+														<th>NIP</th>
+														<th>Nama</th>
+														<th>Unit Asal</th>
+														<th>Unit Tujuan</th>
 														<th>Status</th>
 													</tr>
 												</thead>
 
 												<tbody>
-													<tr class="odd gradeX">
-														<td>
-															 shuxer
-														</td>
-														<td>
-															<a href="mailto:shuxer@gmail.com">
-															shuxer@gmail.com </a>
-														</td>
-														<td>
-															 120
-														</td>
-														<td class="center">
-															 12 Jan 2012
-														</td>
-														<td>
-															<span class="label label-sm label-success">
-															Approved </span>
-														</td>
-													</tr>
-													<tr class="odd gradeX">
-														<td>
-															 looper
-														</td>
-														<td>
-															<a href="mailto:looper90@gmail.com">
-															looper90@gmail.com </a>
-														</td>
-														<td>
-															 120
-														</td>
-														<td class="center">
-															 12.12.2011
-														</td>
-														<td>
-															<span class="label label-sm label-warning">
-															Suspended </span>
-														</td>
-													</tr>
-													<tr class="odd gradeX">
-														<td>
-															 looper
-														</td>
-														<td>
-															<a href="mailto:looper90@gmail.com">
-															looper90@gmail.com </a>
-														</td>
-														<td>
-															 120
-														</td>
-														<td class="center">
-															 12.12.2011
-														</td>
-														<td>
-															<span class="label label-sm label-warning">
-															Suspended </span>
-														</td>
-													</tr>
-													<tr class="odd gradeX">
-														<td>
-															 looper
-														</td>
-														<td>
-															<a href="mailto:looper90@gmail.com">
-															looper90@gmail.com </a>
-														</td>
-														<td>
-															 120
-														</td>
-														<td class="center">
-															 12.12.2011
-														</td>
-														<td>
-															<span class="label label-sm label-warning">
-															Suspended </span>
-														</td>
-													</tr>
 												</tbody>
 											</table>
 										</div>
@@ -1041,8 +966,23 @@ use Carbon\Carbon;
 		    }).draw();
 
             window.table_sk = $('#sk_table').DataTable({
-
+				"order": [[ 1, 'asc' ]],
+        		"autoWidth": false,
+        		"columns": [
+                    { "data": "no", "orderable": false, width: "2%" },
+                    { "data": "nip" },
+                    { "data": "nama" },
+                    { "data": "unit_asal" },
+                    { "data": "unit_tujuan" },
+                    { "data": "status" }
+                ],
             });
+
+            table_sk.on('order.dt search.dt', function () {
+		        table_sk.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+		            cell.innerHTML = i+1;
+		        } );
+		    }).draw();
         });
     </script>
 
@@ -1188,36 +1128,9 @@ use Carbon\Carbon;
 		// 		|_ pagu
 		function drawChart(target, value = null)
 		{
-			var data = {
-			    labels: value.labels,
-			    datasets: [
-			        {
-			            label: "Isi",
-			            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
-			            borderWidth: 1,
-			            data: value.data.isi,
-			            backgroundColor: '#4b77a3'
-			        },
-			        {
-			            label: "Akan",
-			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
-			            borderWidth: 1,
-			            data: value.data.akan,
-			            backgroundColor: '#a4a6a8'
-			        },
-			        {
-			            label: "Kosong",
-			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
-			            borderWidth: 1,
-			            data: value.data.pagu,
-			            backgroundColor: '#9db6e0'
-			        }
-			    ]
-			};
-
 			var options = {
 				responsive: true,
-    			// maintainAspectRatio: false,
+    			maintainAspectRatio: true,
 				tooltips: {
 			        enabled: false
 			    },
@@ -1261,6 +1174,66 @@ use Carbon\Carbon;
 				}
 			};
 
+			if(target.substring(0,2) == 'SK')
+			{
+				var data = {
+				    labels: value.labels,
+				    datasets: [
+				        {
+				            label: "Batal",
+				            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				            borderWidth: 1,
+				            data: value.data.batal,
+				            backgroundColor: '#4b77a3'
+				        },
+				        {
+				            label: "Cetak",
+				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+				            borderWidth: 1,
+				            data: value.data.cetak,
+				            backgroundColor: '#a4a6a8'
+				        },
+				        {
+				            label: "Kirim",
+				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+				            borderWidth: 1,
+				            data: value.data.kirim,
+				            backgroundColor: '#9db6e0'
+				        }
+				    ]
+				};	
+				options.scales.yAxes[0].stacked = false;
+			}
+			else
+			{
+				var data = {
+				    labels: value.labels,
+				    datasets: [
+				        {
+				            label: "Isi",
+				            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				            borderWidth: 1,
+				            data: value.data.isi,
+				            backgroundColor: '#4b77a3'
+				        },
+				        {
+				            label: "Akan",
+				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+				            borderWidth: 1,
+				            data: value.data.akan,
+				            backgroundColor: '#a4a6a8'
+				        },
+				        {
+				            label: "Kosong",
+				            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+				            borderWidth: 1,
+				            data: value.data.pagu,
+				            backgroundColor: '#9db6e0'
+				        }
+				    ]
+				};
+			}
+
 			var ctx = document.getElementById(target).getContext("2d");
 			// ctx.height = 400;
 			var newChart = new Chart(ctx, {
@@ -1286,14 +1259,16 @@ use Carbon\Carbon;
 
 			var height = $(document).height();
 			$("#monitoring_body").css('height', height*0.55);
+			$("#monitoring_body").css('max-height', height*0.55);
 			$("#verifikasi_body").css('height', height*0.55);
+			$("#verifikasi_body").css('max-height', height*0.55);
 
 			// drawChart("struktural_chart");
 			// drawChart("fungsional_chart");
-			callAjaxChart();
+			callAjaxFJChart();
 
 			$('#tabnya_sk').on("shown.bs.tab",function(){
-				drawChart('sk_chart');
+				callAjaxSKChart();
 				$('#tabnya_sk').off();//to remove the binded event after initial rendering
 			});
 		}); 
@@ -1400,7 +1375,7 @@ use Carbon\Carbon;
 	</script>
 
 	<script>
-		function callAjaxChart(){
+		function callAjaxFJChart(){
 			var level = $("#unit_level_filter").val();
 			var unit = $("#unit_filter").val();
 
@@ -1462,15 +1437,70 @@ use Carbon\Carbon;
 	</script>
 
 	<script>
+		function callAjaxSKChart(){
+			var unit = $("#sk_unit_filter").val();
+
+			$.ajax({
+				'url': '/monitoring/ajax/getPergerakanSK',
+				'type': 'GET',
+				'data': {
+					'unit': unit
+				},
+				'dataType': 'json',
+				error: function(data){
+
+				},
+				success: function(data){
+					var value = [];
+
+					$.each(data.chart, function(key_unit, val_unit){ //key = unit
+						var obj = {unit: '', chart_data: {labels: [], data:{cetak: [], kirim:[], batal:[]}}}
+						obj.unit = key_unit;
+						obj.chart_data.labels.push(key_unit);
+						obj.chart_data.data.cetak.push(val_unit.cetak);
+						obj.chart_data.data.kirim.push(val_unit.kirim);
+						obj.chart_data.data.batal.push(val_unit.batal);
+						value.push(obj);
+					});
+
+					$.each(value, function(key, val){
+						// console.log(val);
+						$("#sk_chart_container").append('<h4 class="unit_name">'+val.unit+'</h4>');
+						$("#sk_chart_container").append('<canvas id="SK_'+val.unit+'"></canvas>');
+						drawChart('SK_'+val.unit, val.chart_data);
+					});
+
+					table_sk.clear();
+					table_sk.rows.add(data.table);
+					table_sk.draw();
+				}
+			});
+		};
+	</script>
+
+	<script>
 		$("#unit_level_filter, #unit_filter").change(function(){
 			$("#fungsio_container").empty();
 			$.each(chart, function(key, val){
-				if(val.name != 'sk_chart');
+				if(val.name.substring(0,2) != 'SK')
 				{
 					val.chart_obj.destroy();
 				}
 			});
-			callAjaxChart();
+			callAjaxFJChart();
+		});
+	</script>
+
+	<script>
+		$("#sk_unit_filter").change(function(){
+			$("#sk_chart_container").empty();
+			$.each(chart, function(key, val){
+				if(val.name.substring(0,2) == 'SK')
+				{
+					val.chart_obj.destroy();
+				}
+			});
+			callAjaxSKChart();
 		});
 	</script>
 @endsection

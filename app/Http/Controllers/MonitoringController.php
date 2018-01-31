@@ -7,6 +7,7 @@ use Carbon\Carbon;
 
 use App\PersonnelArea;
 use App\SKSTg;
+use App\MRP;
 
 class MonitoringController extends Controller
 {
@@ -54,14 +55,13 @@ class MonitoringController extends Controller
 					|_ pagu
 					|_ delta
 		|_table
-			|_no
-				|_ direktorat
-				|_ personnel area
-				|_ formasi
-				|_ jabatan
-				|_ jenjang
-				|_ nip
-				|_ nama
+			|_ direktorat
+			|_ personnel area
+			|_ formasi
+			|_ jabatan
+			|_ jenjang
+			|_ nip
+			|_ nama
 	*/
     public function getRealisasiPagu()
     {
@@ -222,10 +222,18 @@ class MonitoringController extends Controller
 
     /* expected output
     $data
-		|_ nama_pendek_unit
-			|_ cetak
-			|_ kirim
-			|_ batal
+    	|_ chart
+			|_ nama_pendek_unit
+				|_ cetak
+				|_ kirim
+				|_ batal
+		|_table
+			|_ no
+			|_ nip
+			|_ nama
+			|_ unit asal
+			|_ unit tujuan
+			|_ status
 	*/
     public function getPergerakanSK()
     {
@@ -236,30 +244,46 @@ class MonitoringController extends Controller
 	 	else
 	 	{
 			$unit = PersonnelArea::where('username', $selected_unit)->first();
-			$mrp_ids = MRP::select('id')->where('unit_pengusul', $unit->id)->toArray();
-			$skstg = SKSTg::whereIn('mrp_id', $mrp_ids);
+			$mrp_ids = MRP::select('id')->where('unit_pengusul', $unit->id)->pluck('id')->toArray();
+			$skstg = SKSTg::whereIn('mrp_id', $mrp_ids)->get();
 	 	}
 
-    	$data = [];
+    	$data['chart'] = [];
+    	$data['table'] = [];
 
     	foreach ($skstg as $sk) 
     	{
-    		$unit = $sk->mrp->pegawai->personnel_area->nama_pendek;
-    		if(!isset($data[$unit]))
+    		$mrp = $sk->mrp;
+    		$pegawai = $mrp->pegawai;
+    		$unit = $pegawai->formasi_jabatan->personnel_area->nama_pendek;
+    		$temp_tabel = [
+    			'no' => '',
+    			'nip' => $pegawai->nip,
+    			'nama' => $pegawai->nama_pegawai,
+    			'unit_asal' => $unit,
+    			'unit_tujuan' => $mrp->formasi_jabatan->personnel_area->nama_pendek
+    		];
+
+    		if(!isset($data['chart'][$unit]))
     		{
-    			$data[$unit] = [
+    			$data['chart'][$unit] = [
     				'cetak' => 0,
     				'kirim' => 0,
     				'batal' => 0
     			];
     		}
 
-    		$data[$unit]['cetak'] += 1;
+    		$data['chart'][$unit]['cetak'] += 1;
+    		$temp_tabel['status'] = 'Cetak';
     		if($sk->tgl_kirim_sk <= Carbon::now('Asia/Jakarta'))
-    			$data[$unit]['kirim'] += 1;
+    		{
+    			$data['chart'][$unit]['kirim'] += 1;
+    			$temp_tabel['status'] = 'Kirim';
+    		}
+
+    		array_push($data['table'], $temp_tabel);
     	}
    
-    	dd($data);
     	return response()->json($data);
     }
 }
