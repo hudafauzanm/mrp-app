@@ -24,6 +24,7 @@ Route::post('/dashboard/karir2_respond', 'DashboardController@karir2Respond');
 // monitoring
 Route::get('/monitoring/ajax/getRealisasiPagu', 'MonitoringController@getRealisasiPagu');
 Route::get('/monitoring/ajax/getPergerakanSK', 'MonitoringController@getPergerakanSK');
+Route::get('/monitoring/ajax/getRealisasiPaguUnit', 'MonitoringController@getRealisasiPaguPerUnit');
 
 // authentication
 Route::get('/login', 'LoginController@index')->name('login');

@@ -609,6 +609,7 @@
 	<script>
 		$(document).ready(function() { 
 			window.chart = [];
+			callAjaxUnitChart();
 			callAjaxChart();
 		}); 
 	</script>
@@ -668,6 +669,33 @@
 					table_fj.clear();
 					table_fj.rows.add(data.table);
 					table_fj.draw();
+				}
+			});
+		};
+	</script>
+
+	<script>
+		function callAjaxUnitChart(){
+			$.ajax({
+				'url': '/monitoring/ajax/getRealisasiPaguUnit',
+				'type': 'GET',
+				'data': {
+					
+				},
+				'dataType': 'json',
+				error: function(data){
+
+				},
+				success: function(data){
+					var value = {labels: [], data:{isi: [], akan:[], pagu:[]}};
+
+					$.each(data, function(key_jen, val_jen){ //key = jenjang
+						value.labels.push(key_jen);
+						value.data.isi.push(val_jen.isi);
+						value.data.akan.push(val_jen.akan);
+						value.data.pagu.push(val_jen.pagu);
+					});
+					drawChart("pagu_unit", value);
 				}
 			});
 		};

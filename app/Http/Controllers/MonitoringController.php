@@ -317,4 +317,49 @@ class MonitoringController extends Controller
    
     	return response()->json($data);
     }
+
+    public function getRealisasiPaguPerUnit()
+    {
+        /* 
+        expected data output
+        $data
+            |_jenjang
+                    |_ isi
+                    |_ akan
+                    |_ pagu
+                    |_ delta
+            |_jenjang
+                    |_ isi
+                    |_ akan
+                    |_ pagu
+                    |_ delta
+        */
+        $unit = auth()->user();
+        $forja = $unit->formasi_jabatan->groupBy('jenjang_id')->all();
+
+        foreach ($forja as $jenjang => $nilai) 
+        {
+            if(!isset($data[$jenjang]))
+            {
+                $data[$jenjang] = [
+                    'pagu' => 0,
+                    'isi' => 0,
+                    'akan' => 0,
+                    'delta' => 0,
+                ];
+            }
+
+            $temp_pagu = $nilai->sum('pagu');
+            $temp_isi = $this->getIsi($nilai);
+            $temp_akan = $this->getAkanIsi($nilai, $temp_isi);
+            $temp_delta = $temp_pagu - $temp_isi;
+
+            $data[$jenjang]['pagu'] += $temp_pagu;
+            $data[$jenjang]['isi'] += $temp_isi;
+            $data[$jenjang]['akan'] += $temp_akan;
+            $data[$jenjang]['delta'] += $temp_delta;
+        }
+
+        return response()->json($data);
+    }
 }

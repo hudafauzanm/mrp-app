@@ -20,7 +20,7 @@
 		<div class="row">
 			
 			<div class="col-md-6">
-			<form class="" action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
+				<form class="" action="/mutasi/pengajuan/submit_form" method="post" enctype="multipart/form-data" autocomplete="on">
 					<div id="content" >
 				
 					{{ csrf_field() }}
@@ -268,177 +268,193 @@
 								</div>
 							</div>
 						</div>
-				</div>
-			</form>
+					</div>
+				</form>
 			</div>
 			<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row">
-							<!-- Bar Chart -->
-							<div id="panel-graphs-flot-1" class="panel panel-default">
+							<div class="col-md-12">
+								<!-- Bar Chart -->
+								<div id="panel-graphs-flot-1" class="panel panel-default">
 
-								<div class="panel-heading">
+									<div class="panel-heading">
 
-									<span class="elipsis"><!-- panel title -->
-										<strong>Pagu Unit</strong>
-									</span>
+										<span class="elipsis"><!-- panel title -->
+											<strong>Pagu Unit</strong>
+										</span>
 
-									<!-- right options -->
-									<ul class="options pull-right list-inline">
-										<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-										<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
-										<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
-									</ul>
-									<!-- /right options -->
+										<!-- right options -->
+										<ul class="options pull-right list-inline">
+											<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+											<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+											<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
+										</ul>
+										<!-- /right options -->
+									</div>
+
+									<!-- panel content -->
+									<div class="panel-body nopadding">
+										<canvas id="pagu_unit"></canvas>
+									</div>
+									<!-- /panel content -->
+
 								</div>
-
-								<!-- panel content -->
-								<div class="panel-body nopadding">
-
-									<div id="flot-bar" class="flot-chart"><!-- FLOT CONTAINER --></div>
-
-								</div>
-								<!-- /panel content -->
-
+								<!-- /Bar Chart -->
 							</div>
-							<!-- /Bar Chart -->
 						</div>
 						<div class="row">
-							<!-- Bar Chart Horizontal -->
-							<div id="panel-graphs-flot-1" class="panel panel-default">
+							<div class="col-md-12">
+								<!-- Bar Chart Horizontal -->
+								<div id="panel-graphs-flot-1" class="panel panel-default">
 
-								<div class="panel-heading">
+									<div class="panel-heading">
 
-									<span class="elipsis"><!-- panel title -->
-										<strong>Pagu Struktural</strong>
-									</span>
+										<span class="elipsis"><!-- panel title -->
+											<strong>Pagu Struktural</strong>
+										</span>
 
-									<!-- right options -->
-									<ul class="options pull-right list-inline">
-										<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-										<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
-										<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
-									</ul>
-									<!-- /right options -->
+										<!-- right options -->
+										<ul class="options pull-right list-inline">
+											<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+											<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+											<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
+										</ul>
+										<!-- /right options -->
+
+									</div>
+
+									<!-- panel content -->
+									<div class="panel-body nopadding">
+
+										<canvas id="struktural_chart"></canvas>
+
+									</div>
+									<!-- /panel content -->
 
 								</div>
-
-								<!-- panel content -->
-								<div class="panel-body nopadding">
-
-									<div id="flot-bar-horizontal" class="flot-chart"><!-- FLOT CONTAINER --></div>
-
-								</div>
-								<!-- /panel content -->
-
+								<!-- /Bar Chart Horizontal -->
 							</div>
-							<!-- /Bar Chart Horizontal -->
 						</div>
 						<div class="row">
+							<div class="col-md-12">
+								<!-- Pie Chart -->
+								<div id="panel-graphs-flot-1" class="panel panel-default">
 
-							<!-- Pie Chart -->
-							<div id="panel-graphs-flot-1" class="panel panel-default">
+									<div class="panel-heading">
 
-								<div class="panel-heading">
+										<span class="elipsis"><!-- panel title -->
+											<strong>Pagu Fungsional</strong>
+										</span>
 
-									<span class="elipsis"><!-- panel title -->
-										<strong>Pagu Fungsional</strong>
-									</span>
+										<!-- right options -->
+										<ul class="options pull-right list-inline">
+											<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+											<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+											<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
+										</ul>
+										<!-- /right options -->
 
-									<!-- right options -->
-									<ul class="options pull-right list-inline">
-										<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-										<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
-										<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
-									</ul>
-									<!-- /right options -->
 
+									</div>
+
+									<!-- panel content -->
+									<div class="panel-body nopadding">
+										<canvas id="fungsional_chart"></canvas>
+									</div>
+									<!-- /panel content -->
 
 								</div>
-
-								<!-- panel content -->
-								<div class="panel-body nopadding">
-
-									<div id="flot-pie" class="flot-chart"><!-- FLOT CONTAINER --></div>
-
-								</div>
-								<!-- /panel content -->
-
+								<!-- /Pie Chart -->
 							</div>
-							<!-- /Pie Chart -->
 						</div>
 						<div class="row">
-							<!-- TABEL -->
-							<div id="panel-graphs-flot-1" class="panel panel-default">
-								<div class="panel-heading">
-									<span class="elipsis"><!-- panel title -->
-										<strong>Tabel Formasi Jabatan Kosong</strong>
-									</span>
-									<!-- right options -->
-									<ul class="options pull-right list-inline">
-										<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
-										<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
-										<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
-									</ul>
-									<!-- /right options -->
+							<div class="col-md-12">
+								<!-- TABEL -->
+								<div id="panel-graphs-flot-1" class="panel panel-default">
+									<div class="panel-heading">
+										<span class="elipsis"><!-- panel title -->
+											<strong>Tabel Formasi Jabatan Kosong</strong>
+										</span>
+										<!-- right options -->
+										<ul class="options pull-right list-inline">
+											<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+											<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+											<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
+										</ul>
+										<!-- /right options -->
+									</div>
+									<!-- panel content -->
+									<div class="panel-body padding-3">
+										<div class="table-responsive">
+											<table class="table table-bordered nomargin dataTables" id="fj_kosong_table">
+												<thead>
+													<tr>
+														<th>Formasi</th>
+														<th>Jabatan</th>
+														<th>Kosong</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<!-- /panel content -->
 								</div>
-								<!-- panel content -->
-								<div class="panel-body padding-3">
-									<div class="table-responsive">
-									<table class="table table-bordered nomargin">
-										<thead>
-											<tr>
-												<th>Formasi</th>
-												<th>Jabatan</th>
-												<th>Kosong</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Junior Analyst</td>
-												<td>Kompetensi Organisasi </td>
-												<td>3</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								</div>
-								<!-- /panel content -->
+								<!-- /TABEL -->
 							</div>
-							<!-- /TABEL -->	
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 
-				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true" id="helpModal">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true" id="helpModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
 
-							<!-- header modal -->
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="helpModalLabel">Petunjuk Pengisian</h4>
-							</div>
-
-							<!-- body modal -->
-							<div class="modal-body">
-								<ol>
-									<li>Isi kolom bertanda * (maka kolom lain akan otomatis terisi)</li>
-									<li>Anda hanya bisa mengusulkan mutasi untuk pegawai di unit anda</li>
-									<li>Dokumen yang dilampirkan berupa Nota Dinas, dan dokumen lain yang diperlukan, dijadikan satu file dengan format .pdf</li>
-								</ol>
-							</div>
-
-						</div>
-					</div>
+				<!-- header modal -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="helpModalLabel">Petunjuk Pengisian</h4>
 				</div>
+
+				<!-- body modal -->
+				<div class="modal-body">
+					<ol>
+						<li>Isi kolom bertanda * (maka kolom lain akan otomatis terisi)</li>
+						<li>Anda hanya bisa mengusulkan mutasi untuk pegawai di unit anda</li>
+						<li>Dokumen yang dilampirkan berupa Nota Dinas, dan dokumen lain yang diperlukan, dijadikan satu file dengan format .pdf</li>
+					</ol>
+				</div>
+
+			</div>
+		</div>
+	</div>
 				
 @endsection
 
 @section('includes-scripts')
 	@parent
+
+	<script>
+		$(function(){
+			window.table_fj = $('#fj_kosong_table').DataTable({
+	    		"columns": [
+	                { "data": "formasi" },
+	                { "data": "jabatan" },
+	                { "data": "kosong" }
+	            ],
+	        });
+	    });
+	</script>
+
+	<script src="/bower_components/chart.js/dist/Chart.min.js"></script>
+	<script src="/assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
 
 	<script>
 		$(".rating_number").keyup(function(){
@@ -595,5 +611,185 @@
 				}
 			});
 		})
+	</script>
+
+	<script>
+		// expected value parameter
+		// value
+		// 	|_ labels
+		// 	|_ data
+		// 		|_ isi
+		// 		|_ akan
+		// 		|_ pagu
+		function drawChart(target, value = null)
+		{
+			var options = {
+				responsive: true,
+    			maintainAspectRatio: true,
+				tooltips: {
+			        mode: 'label',
+			        callbacks: {
+		                label: function(tooltipItem, data) {
+		                	var datasetIndex = tooltipItem['datasetIndex'];
+		                	if(datasetIndex == 1)
+		                	{
+		                		//akan terisi (human readable) = akan terisi - realisasi
+		                		return data['datasets'][datasetIndex]['label']+': '+(data['datasets'][1]['data'][tooltipItem['index']] - data['datasets'][0]['data'][tooltipItem['index']]);
+		                	}
+		                  	return data['datasets'][datasetIndex]['label']+': '+data['datasets'][datasetIndex]['data'][tooltipItem['index']];
+		                }
+		            },
+			    },
+			    hover: {
+					mode: true
+				},
+				scales: {
+					yAxes: [{
+						stacked: false,
+						ticks: {
+							beginAtZero: true
+						}
+					}],
+					xAxes: [{
+						stacked: true,
+					}]
+				}
+			};
+
+		    console.log(value.data);
+			var data = {
+			    labels: value.labels,
+			    datasets: [
+			        {
+			            label: "Realisasi",
+			            // backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			            borderWidth: 1,
+			            data: value.data.isi,
+			            backgroundColor: '#4b77a3'
+			        },
+			        {
+			            label: "Akan Terisi",
+			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+			            borderWidth: 1,
+			            data: value.data.akan,
+			            backgroundColor: '#a4a6a8'
+			        },
+			        {
+			            label: "Pagu",
+			            // backgroundColor: 'rgba255(, 206, 86, 0.2)',
+			            borderWidth: 1,
+			            data: value.data.pagu,
+			            backgroundColor: '#9db6e0'
+			        }
+			    ]
+			};
+
+			var ctx = document.getElementById(target).getContext("2d");
+			// ctx.height = 400;
+			var newChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: data,
+			    options: options
+			});
+			var obj = {};
+			obj.name = target;
+			obj.chart_obj = newChart;
+			chart.push(obj);
+		};
+	</script>
+
+	<script>
+		$(document).ready(function() { 
+			window.chart = [];
+			callAjaxUnitChart();
+			callAjaxChart();
+		}); 
+	</script>
+
+	<script>
+		function callAjaxChart(){
+			$.ajax({
+				'url': '/monitoring/ajax/getRealisasiPagu',
+				'type': 'GET',
+				'data': {
+					'unit': '{{ auth()->user()->username }}',
+					'level': 'all',
+					'is_unit': true
+				},
+				'dataType': 'json',
+				error: function(data){
+
+				},
+				success: function(data){
+					var value = {labels: [], data:{isi: [], akan:[], pagu:[]}};
+
+					$.each(data.struktural, function(key_jen, val_jen){ //key = jenjang
+						$.each(val_jen, function(key_lvl, val_lvl){ //key = level
+							value.labels.push(key_jen+'_'+key_lvl);
+							value.data.isi.push(val_lvl.isi);
+							value.data.akan.push(val_lvl.akan);
+							value.data.pagu.push(val_lvl.pagu);
+						});
+					});
+					drawChart("struktural_chart", value);
+
+					var value = [];
+
+					$.each(data.fungsional, function(key_unit, val_unit){ //key = unit
+						// console.log(val_unit.length);
+						if(val_unit.length != 0)
+						{
+							var obj = {unit: '', chart_data: {labels: [], data:{isi: [], akan:[], pagu:[]}}}
+							obj.unit = key_unit;
+							$.each(val_unit, function(key_lvl, val_lvl){ //key = lvl
+								obj.chart_data.labels.push(key_lvl);
+								obj.chart_data.data.isi.push(val_lvl.isi);
+								obj.chart_data.data.akan.push(val_lvl.akan);
+								obj.chart_data.data.pagu.push(val_lvl.pagu);
+							});
+							value.push(obj);
+						}
+					});
+
+					$.each(value, function(key, val){
+						// $("#fungsio_container").append('<h4 class="unit_name">'+val.unit+'</h4>');
+						// $("#fungsio_container").append('<canvas id="'+val.unit+'"></canvas>');
+						// console.log(val);
+						drawChart('fungsional_chart', val.chart_data);
+					});
+
+					table_fj.clear();
+					table_fj.rows.add(data.table);
+					table_fj.draw();
+				}
+			});
+		};
+	</script>
+
+	<script>
+		function callAjaxUnitChart(){
+			$.ajax({
+				'url': '/monitoring/ajax/getRealisasiPaguUnit',
+				'type': 'GET',
+				'data': {
+					
+				},
+				'dataType': 'json',
+				error: function(data){
+
+				},
+				success: function(data){
+					var value = {labels: [], data:{isi: [], akan:[], pagu:[]}};
+
+					$.each(data, function(key_jen, val_jen){ //key = jenjang
+						value.labels.push(key_jen);
+						value.data.isi.push(val_jen.isi);
+						value.data.akan.push(val_jen.akan);
+						value.data.pagu.push(val_jen.pagu);
+					});
+					drawChart("pagu_unit", value);
+				}
+			});
+		};
 	</script>
 @endsection
