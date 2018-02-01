@@ -20,8 +20,13 @@ class FormasiJabatan extends Model
     	return $this->hasMany('App\Pegawai');
     }
 
-    public function mrp()
+    public function mrp_tujuan()
     {
-        return $this->hasMany('App\MRP');
+        return $this->hasMany('App\MRP', 'fj_tujuan');
+    }
+
+    public function mrp_asal()
+    {
+        return $this->hasMany('App\MRP', 'fj_asal');
     }
 }

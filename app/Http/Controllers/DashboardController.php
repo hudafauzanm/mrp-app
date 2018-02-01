@@ -34,7 +34,7 @@ class DashboardController extends Controller
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray(); 
             $ajumut = MRP::where('tipe', 2)->where('unit_pengusul', auth()->user()->id)->count();
             $ajumutj = MRP::where('tipe', 3)->where('unit_pengusul', auth()->user()->id)->count();
-            $dptmut = MRP::where('status', 1)->where('formasi_jabatan_id', $fj)->count();
+            $dptmut = MRP::where('status', 1)->whereIn('fj_tujuan', $fj)->count();
     		return view('pages.unit.dashboard', compact('ajumutj','ajumut', 'dptmut', 'nip', 'nama'));
     	}
     	else if($user->user_role == 2)
@@ -129,15 +129,11 @@ class DashboardController extends Controller
 
         $mrp = MRP::find(request('id'));
 
-        if(!$mrp->formasi_jabatan_id)
-        {
-            if(request()->has('kode_olah'))
-            {
-                $mrp->formasi_jabatan_id = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
-            }
-            else
-                return back()->withErrors(['message' => 'FJ tujuan mutasi belum diisi']);
-        }
+        if(request()->has('kode_olah'))
+            $mrp->fj_tujuan = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
+
+        if(!$mrp->fj_tujuan)
+            return back()->withErrors(['message' => 'FJ tujuan mutasi belum diisi']);
 
         $mrp->no_dokumen_respon_sdm = request('no_dokumen_respon_sdm');
         $mrp->tgl_evaluasi = Carbon::now('Asia/Jakarta');
@@ -198,7 +194,6 @@ class DashboardController extends Controller
                 $sheet->cell('A1:J1', function($cell) { 
                     $cell->setFontSize(10);
                 });
-
             });
         })->download('xlsx');
     }

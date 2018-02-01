@@ -52,15 +52,15 @@
 								<td>{{$mrps->pegawai->nip}}</td>
 								<td>{{$mrps->pegawai->nama_pegawai}}</td>
 								<td>
-									<strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong>
-									<br>{{$mrps->pegawai->formasi_jabatan->posisi}}<br>
-									<small>{{$mrps->pegawai->formasi_jabatan->personnel_area->username}}</small>
+									<strong>{{$mrps->formasi_jabatan_asal->formasi}} {{$mrps->formasi_jabatan_asal->jabatan}}</strong>
+									<br>{{$mrps->formasi_jabatan_asal->posisi}}<br>
+									<small>{{$mrps->formasi_jabatan_asal->personnel_area->username}}</small>
 								</td>
 								<td>
-									@if ($mrps->formasi_jabatan)
-										<strong>{{$mrps->formasi_jabatan->formasi}} {{$mrps->formasi_jabatan->jabatan}}</strong>
-										<br>{{$mrps->formasi_jabatan->posisi}}
-										<br><small>{{$mrps->formasi_jabatan->personnel_area->username}}</small>
+									@if ($mrps->formasi_jabatan_tujuan)
+										<strong>{{$mrps->formasi_jabatan_tujuan->formasi}} {{$mrps->formasi_jabatan_tujuan->jabatan}}</strong>
+										<br>{{$mrps->formasi_jabatan_tujuan->posisi}}
+										<br><small>{{$mrps->formasi_jabatan_tujuan->personnel_area->username}}</small>
 									@else
 										Tidak ada proyeksi
 									@endif
@@ -75,7 +75,9 @@
 									@elseif($mrps->status == 6)
 										<span class="label label-success">SK Pending</span>
 									@elseif($mrps->status == 7)
-										<span class="label label-success">Clear</span>
+    									<span class="label label-success">Lewat Masa Aktifasi (unconfirmed)</span>
+									@elseif($mrps->status == 8)
+    									<span class="label label-success">Clear</span>
 									@elseif(in_array($mrps->status, [97,98,99]))
 										<span class="label label-danger">Ditolak</span>
 									@else											   
@@ -84,7 +86,6 @@
 								</td>
 								<td>
 									<a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a>
-									<a href="/download/{{ $mrps->registry_number }}/{{ $mrps->filename_dokumen_unit_usul }}" class="btn btn-info"><i class="fa fa-download"></i> Dokumen</a>
 								</td>
 								@if($mrps->status == 1)
 		                            <td class="text-center">

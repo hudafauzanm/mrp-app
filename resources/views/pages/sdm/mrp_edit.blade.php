@@ -101,17 +101,17 @@
 											<label>Tipe Mutasi *</label>
 											<select name="mrp[mutasi]" class="form-control pointer" id="tipemutasi">
 												<option value="">--- Tipe Mutasi ---</option>
-												@if ($mrp->mutasi == 'Dinas')
-													<option>Rotasi</option>
-													<option>Promosi</option>
-													<option>Demosi</option>
-													<option>TK Diperbantukan</option>
-													<option>Tugas Belajar</option>
-													<option>Aktif dari Tugas Belajar</option>
-												@elseif($mrp->mutasi == 'Non-Dinas')
-													<option>Aktif dari IDT</option>
-													<option>Ct diluar Tanggungan</option>
-													<option>APS</option>
+												@if ($mrp->jenis_mutasi == 'Dinas')
+													{!! $mrp->mutasi == 'Rotasi' ? '<option selected>Rotasi</option>' : '<option>Rotasi</option>'!!}
+													{!! $mrp->mutasi == 'Promosi' ? '<option selected>Promosi</option>' : '<option>Promosi</option>'!!}
+													{!! $mrp->mutasi == 'Demosi' ? '<option selected>Demosi</option>' : '<option>Demosi</option>'!!}
+													{!! $mrp->mutasi == 'TK Diperbantukan' ? '<option selected>TK Diperbantukan</option>' : '<option>TK Diperbantukan</option>'!!}
+													{!! $mrp->mutasi == 'Tugas Belajar' ? '<option selected>Tugas Belajar</option>' : '<option>Tugas Belajar</option>'!!}
+													{!! $mrp->mutasi == 'Aktif dari Tugas Belajar' ? '<option selected>Aktif dari Tugas Belajar</option>' : '<option>Aktif dari Tugas Belajar</option>'!!}
+												@elseif($mrp->jenis_mutasi == 'Non-Dinas')
+													{!! $mrp->mutasi == 'Aktif dari IDT' ? '<option selected>Aktif dari IDT</option>' : '<option>Aktif dari IDT</option>'!!}
+													{!! $mrp->mutasi == 'Ct diluar Tanggungan' ? '<option selected>Ct diluar Tanggungan</option>' : '<option>Ct diluar Tanggungan</option>'!!}
+													{!! $mrp->mutasi == 'APS' ? '<option selected>APS</option>' : '<option>APS</option>'!!}
 												@endif
 											</select>
 										</div>
@@ -186,7 +186,7 @@
 											@if ($unit_tujuan)
 												<select class="form-control select2" name="kode_olah" id="rekom_jabatan">
 												@foreach ($jabatan as $jab)
-													<option value="{{ $jab->id }}" {{ $jabatan_selected == $for->jabatan ? 'selected="selected"' : '' }}>{{ $jab->jabatan }}</option>
+													<option value="{{ $jab->kode_olah }}" {{ $jabatan_selected == $for->jabatan ? 'selected="selected"' : '' }}>{{ $jab->jabatan }}</option>
 												@endforeach
 											@else
 												<select class="form-control select2" name="kode_olah" id="rekom_jabatan" disabled>
@@ -259,12 +259,12 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Pengusul</label>
-											<input type="text" name="mrp[nip_pengusul]" value="{{ $pengusul->nip }}" class="form-control required col-md-6 nip_to_nama" target="#nama_pengusul">
+											<input type="text" name="mrp[nip_pengusul]" value="{{ $pengusul->nip }}" class="form-control col-md-6 nip_to_nama" target="#nama_pengusul">
 										</div>
 
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Operator</label>
-											<input type="text" name="mrp[nip_operator]" value="{{ $operator->nip }}" class="form-control required col-md-6 nip_to_nama" target="#nama_operator">
+											<input type="text" name="mrp[nip_operator]" value="{{ $operator->nip }}" class="form-control col-md-6 nip_to_nama" target="#nama_operator">
 										</div>
 									</div>
 								</div>
@@ -273,29 +273,11 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Alasan Memutasi *</label>
-											<textarea rows="3" name="mrp[alasan_mutasi]" class="form-control" required>{{ $mrp->alasan_mutasi }}</textarea>
+											<textarea rows="3" name="mrp[alasan_mutasi]" class="form-control">{{ $mrp->alasan_mutasi }}</textarea>
 										</div>
 									</div>
 								</div>
 
-								{{-- <div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Penyetuju</label>
-											<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Nama">
-											<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Formasi Jabatan">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Administrator</label>
-											<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Nama">
-											<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Formasi Jabatan">
-										</div>
-									</div>
-								</div> --}}
 							</fieldset>
 						</div>
 					</div>
@@ -354,13 +336,13 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
-											<label>Tanggal Pooling</label>
-											<input type="text" class="form-control datepicker" name="mrp[tgl_pooling]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_pooling }}">
+											<label>Tanggal Evaluasi	</label>
+											<input type="text" class="form-control datepicker" name="mrp[tgl_evaluasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_evaluasi->format('Y-m-d') }}">
 										</div>
 
 										<div class="col-md-6 col-sm-6">
 											<label>Tanggal Dokumen Mutasi</label>
-											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_mutasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_mutasi }}">
+											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_mutasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_mutasi->format('Y-m-d') }}">
 										</div>
 									</div>
 								</div>
@@ -369,7 +351,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Tindak Lanjut</label>
-											<textarea rows="3" name="mrp[tindak_lanjut]" class="form-control" required>{{ $mrp->tindak_lanjut }}</textarea>
+											<textarea rows="3" name="mrp[tindak_lanjut]" class="form-control">{{ $mrp->tindak_lanjut }}</textarea>
 										</div>
 									</div>
 								</div>
@@ -404,7 +386,6 @@
 		$("#backButton").click(function(){
 			if(confirm("Apakah anda yakin akan meninggalkan halaman ini? (Semua perubahan tidak akan disimpan)"))
 			{
-				console.log('oke');
 				window.location.href = "/mrp";
 			}
 		})
@@ -449,9 +430,9 @@
 					var formasi = $("#rekom_formasi");
 					formasi.empty();
 					formasi.append('<option>--- Formasi ---</option>');
+					formasi.val('').change();
 					formasi.removeAttr('disabled');
 					$.each(data, function(key, value){
-						console.log(value);
 						formasi.append('<option value="'+value.formasi+'">'+value.formasi+'</option>');
 					});
 				}
@@ -478,9 +459,9 @@
 					var jabatan = $("#rekom_jabatan");
 					jabatan.empty();
 					jabatan.append('<option>--- Jabatan ---</option>');
+					jabatan.val('').change();
 					jabatan.removeAttr('disabled');
 					$.each(data, function(key, value){
-						console.log(value);
 						jabatan.append('<option value="'+key+'">'+value+'</option>');
 					});
 				}

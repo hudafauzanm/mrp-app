@@ -139,10 +139,10 @@ use Carbon\Carbon;
 							</td> <!-- tindak lanjut -->
 
 							<td>{{$mrp->pegawai->ps_group}}</td><!-- ps group -->
-
-							<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> <br>{{$mrp->pegawai->formasi_jabatan->posisi}}<br></td><!-- jabatan lama -->
 							
-							<td><strong>{{ $mrp->formasi_jabatan->formasi}} {{ $mrp->formasi_jabatan->jabatan}}</strong> <br> {{ $mrp->formasi_jabatan->posisi}}<br></td> <!-- jabatan baru -->
+							<td><strong>{{$mrp->formasi_jabatan_asal->formasi}} {{$mrp->formasi_jabatan_asal->jabatan}}</strong> <br>{{$mrp->formasi_jabatan_asal->posisi}}<br></td><!-- jabatan lama -->
+							
+							<td><strong>{{ $mrp->formasi_jabatan_tujuan->formasi}} {{ $mrp->formasi_jabatan_tujuan->jabatan }}</strong> <br> {{ $mrp->formasi_jabatan_tujuan->posisi}}<br></td> <!-- jabatan baru -->
 							
 							<td></td>
 
@@ -166,14 +166,14 @@ use Carbon\Carbon;
 								 {{ $mrp->jalur_mutasi }} <!-- jalur mutasi -->
 							</td>
 							<td>
-								 {{ $mrp->formasi_jabatan->spfj}} <!-- perdir untuk unit yang dituju -->
+								 {{ $mrp->formasi_jabatan_tujuan->spfj}} <!-- perdir untuk unit yang dituju -->
 							</td>
 							<td>
 								 {{ $mrp->pegawai->status_domisili}} <!-- status domisili -->
 							</td>
 							<td> <!-- sutri -->
 								@if($mrp->pegawai->nip_sutri)
-									<strong>PLN</strong> ; {{ \App\Pegawai::where('nip', $mrp->pegawai->nip_sutri)->pluck('nip')->first() }} ; {{ $mrp->pegawai->formasi_jabatan->personnel_area->nama_pendek}}
+									<strong>PLN</strong> ; {{ $mrp->pegawai->sutri->nip }} ; {{ $mrp->pegawai->sutri->formasi_jabatan->personnel_area->nama_pendek }}
 								@else
 									Non-PLN ; N/A ; N/A
 								@endif
@@ -205,7 +205,7 @@ use Carbon\Carbon;
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="rejectModalLabel">Upload SK</h4>
+					<h4 class="modal-title" id="rejectModalLabel">Tolak Mutasi</h4>
 				</div>
 
 				<!-- Modal Body -->
@@ -244,26 +244,6 @@ use Carbon\Carbon;
 @section('includes-scripts')
 	@parent
 
-	<script type="text/javascript">
-		loadScript(plugin_path + "chart.flot/jquery.flot.min.js", function(){
-			loadScript(plugin_path + "chart.flot/jquery.flot.resize.min.js", function(){
-				loadScript(plugin_path + "chart.flot/jquery.flot.time.min.js", function(){
-					loadScript(plugin_path + "chart.flot/jquery.flot.fillbetween.min.js", function(){
-						loadScript(plugin_path + "chart.flot/jquery.flot.orderBars.min.js", function(){
-							loadScript(plugin_path + "chart.flot/jquery.flot.pie.min.js", function(){
-								loadScript(plugin_path + "chart.flot/jquery.flot.tooltip.min.js", function(){
-								
-									// demo js script
-									loadScript("assets/js/view/demo.graphs.flot.js");
-
-								});
-							});
-						});
-					});
-				});
-			});
-		});
-	</script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		loadScript(plugin_path + "footable/dist/footable.min.js", function(){
@@ -324,14 +304,4 @@ use Carbon\Carbon;
 			$("#respond_form").submit();
 		});
 	</script>
-
-	<!-- JAVASCRIPT FILES -->
-		{{-- <script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
-		<script type="text/javascript" src="assets/plugins/jquery/jquery-2.2.3.min.js"></script>
-		<script type="text/javascript" src="assets/js/app.js"></script>
-		<script type="text/javascript" src="tableExport.js"></script>
-		<script type="text/javascript" src="jquery.base64.js"></script>
-		<script type="text/javascript" src="jspdf/libs/sprintf.js"></script>
-		<script type="text/javascript" src="jspdf/jspdf.js"></script>
-		<script type="text/javascript" src="jspdf/libs/base64.js"></script> --}}
 @endsection

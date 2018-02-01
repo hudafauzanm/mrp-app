@@ -108,34 +108,34 @@ use Carbon\Carbon;
 											<small>{{ $proyeksi ? $proyeksi->posisi.' '.$proyeksi->personnel_area->nama : '' }}</small>
 										</td>
 										<td>
-											<div><strong>{{ $pegawai->formasi_jabatan->formasi.' '.$pegawai->formasi_jabatan->jabatan }}</strong></div>
-											<small>{{ $pegawai->formasi_jabatan->posisi.' '.$pegawai->formasi_jabatan->personnel_area->nama }}</small>
+											<div><strong>{{ $mrp->formasi_jabatan_asal->formasi.' '.$mrp->formasi_jabatan_asal->jabatan }}</strong></div>
+											<small>{{ $mrp->formasi_jabatan_asal->posisi.' '.$mrp->formasi_jabatan_asal->personnel_area->nama }}</small>
 										</td>
 										<td>{{ $mrp->tipe }}</td>
 										<td>
-											@if($mrp->status == 0)
-												<span class="label label-danger">Ditolak</span>
-											@elseif($mrp->status == 1)
+											@if($mrps->status == 1)
 												<span class="label label-primary">Diajukan</span>
-											@elseif($mrp->status == 2)
+											@elseif($mrps->status == 2)
 												<span class="label label-warning">Proses Evaluasi (SDM)</span>
-											@elseif($mrp->status == 3)
-												<span class="label label-info">Proses Evaluasi (Karir II)</span>
-											@elseif($mrp->status == 4)
-												<span class="label label-info">Proses Evaluasi (Karir II)</span>
-											@elseif($mrp->status == 5)
+											@elseif($mrps->status == 3)
+												<span class="label label-warning">Proses Evaluasi (Karir II)</span>
+											@elseif($mrps->status == 4)
 												<span class="label label-success">Proses SK</span>
-											@elseif($mrp->status == 6)
+											@elseif($mrps->status == 5)
 												<span class="label label-success">SK Tercetak</span>
-											@elseif($mrp->status == 7)
+											@elseif($mrps->status == 6)
 												<span class="label label-success">SK Pending</span>
-											@elseif($mrp->status == 8)
-												<span class="label label-success">Clear</span>
-											@elseif($mrp->status == 99)
-												<span class="label label-success">Ditolak (SDM Pusat)</span>
-											@elseif($mrp->status == 98)
-												<span class="label label-success">Ditolak (Karir II Pusat)</span>
-											@else											   
+											@elseif($mrps->status == 7)
+		    									<span class="label label-success">Lewat Masa Aktifasi (unconfirmed)</span>
+											@elseif($mrps->status == 8)
+		    									<span class="label label-success">Clear</span>
+											@elseif($mrps->status == 99)
+												<span class="label label-danger">Ditolak (SDM Pusat)</span>
+											@elseif($mrps->status == 98)
+												<span class="label label-danger">Ditolak (Karir II Pusat)</span>
+											@elseif($mrps->status == 97 && $mrps->tipe == 1)
+												<span class="label label-danger">Ditolak ({{ $mrps->pegawai->formasi_jabatan->personnel_area->nama_pendek }})</span>
+											@else
 												<span class="label label-danger">???</span>
 											@endif
 										</td>

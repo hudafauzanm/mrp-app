@@ -38,9 +38,14 @@ class MRP extends Model
     	return $this->hasOne('App\SKSTg', 'mrp_id');
     }
 
-    public function formasi_jabatan()
+    public function formasi_jabatan_tujuan()
     {
-    	return $this->belongsTo('App\FormasiJabatan');
+    	return $this->belongsTo('App\FormasiJabatan', 'fj_tujuan');
+    }
+
+    public function formasi_jabatan_asal()
+    {
+        return $this->belongsTo('App\FormasiJabatan', 'fj_asal');
     }
 
     public function personnel_area_pengusul()
@@ -54,6 +59,11 @@ class MRP extends Model
     }
 
     public function getTglPoolingAttribute($value)
+    {
+        return Carbon::parse($value);
+    }
+
+    public function getTglEvaluasiAttribute($value)
     {
         return Carbon::parse($value);
     }

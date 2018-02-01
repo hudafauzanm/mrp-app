@@ -35,6 +35,8 @@ class CreateMRPsTable extends Migration
             $table->string('jalur_mutasi')->nullable();
             $table->string('alasan_mutasi')->nullable();
             $table->char('unit_pengusul', 36);
+            $table->char('fj_asal', 36)->nullable();
+            $table->char('fj_tujuan', 36)->nullable();
             $table->string('no_dokumen_unit_usul')->nullable();
             $table->string('filename_dokumen_unit_usul')->nullable();
             $table->date('tgl_dokumen_unit_usul')->nullable();
@@ -54,13 +56,14 @@ class CreateMRPsTable extends Migration
             $table->char('pegawai_id',36)->nullable();
             $table->string('nip_pengusul');
             $table->string('nip_operator');
-            $table->char('formasi_jabatan_id',36)->nullable();
+            // $table->char('formasi_jabatan_id',36)->nullable();
             $table->timestamps();
             
 
             $table->index(['pegawai_id']);
             $table->index(['skstg_id']);
-            $table->index(['formasi_jabatan_id']);
+            $table->index(['fj_asal']);
+            $table->index(['fj_tujuan']);
             $table->index(['unit_pengusul']);
         });
     }

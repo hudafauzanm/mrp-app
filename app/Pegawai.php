@@ -22,7 +22,7 @@ class Pegawai extends Model
 
     public function diklat_penjenjangan()
     {
-    	return $this->hasMany('App\DiklatPenjenjangan');
+    	return $this->hasMany('App\DiklatPenjenjangan')->latest();
     }
 
     public function mrp()

@@ -25,28 +25,35 @@
 				</thead>
 				<tbody >
 				@foreach ($mrp_e1 as $mrp)
-					<tr style="font-size: 10px; height: 140px;">
+					<tr style="font-size: 10px; height: 150px;">
 					<td valign="top">{{ $no++ }}</td>
-					<td valign="top">{{$mrp->no_dokumen_unit_usul}} <!-- no dokumen asal --></td>
+					<td valign="top">
+						{{$mrp->no_dokumen_unit_usul}} <br>
+						@if ($mrp->no_dokumen_unit_jawab)
+							{{$mrp->no_dokumen_unit_jawab}} <br>
+						@endif
+						{{$mrp->no_dokumen_respon_sdm}} <br>
+					</td>
 					<td valign="top">{{$mrp->registry_number}} <!-- registry number --></td>
 					<td valign="top">{{$mrp->pegawai->nip}} <!-- nip pegawai --></td>
 					<td valign="top">{{$mrp->pegawai->nama_pegawai}} <!-- nama pegawai --></td>
 					<td valign="top">{{$mrp->pegawai->ps_group}} <!-- ps group --></td>
-					<td valign="top">{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}} <br>{{$mrp->pegawai->formasi_jabatan->posisi}}<br> <!-- jabatan lama --></td>
-					<td valign="top">{{ $mrp->formasi_jabatan->formasi}} {{ $mrp->formasi_jabatan->jabatan}} <br> {{ $mrp->formasi_jabatan->posisi}}<br> <!-- jabatan baru --></td>
+					<td valign="top">{{$mrp->formasi_jabatan_asal->formasi}} {{$mrp->formasi_jabatan_asal->jabatan}} <br>{{$mrp->formasi_jabatan_asal->posisi}}<br> <!-- jabatan lama --></td>
+					<td valign="top">{{ $mrp->formasi_jabatan_tujuan->formasi}} {{ $mrp->formasi_jabatan_tujuan->jabatan}} <br> {{ $mrp->formasi_jabatan_tujuan->posisi}}<br> <!-- jabatan baru --></td>
 					<!-- evaluasi dan tindak lanjut -->
 					<td valign="top">
 						Sisa Masa Kerja : 6 Tahun ;<br>
 						Masa Kerja di Jabatan Terakhir : s.d. 1 Tahun<br>
 						Mutasi : {{$mrp->jenis_mutasi}} ({{$mrp->mutasi}})<br>
-						Diklat Penjenjangan Terakhir : {{ App\DiklatPenjenjangan::where('pegawai_id', $mrp->pegawai->id)->pluck('jenis_diklat')->first() }} ;<br>
-						No. Sertifikat : {{ App\DiklatPenjenjangan::where('pegawai_id', $mrp->pegawai->id)->pluck('nomor_sertifikat')->first() }}<br>
+						Alasan Mutasi : {{$mrp->alasan_mutasi }}<br>
+						Diklat Penjenjangan Terakhir : {{ $mrp->pegawai->diklat_penjenjangan->count() ? $mrp->pegawai->diklat_penjenjangan->first()->jenis_diklat : '-' }} ;<br>
+						No. Sertifikat : {{ $mrp->pegawai->diklat_penjenjangan->count() ? $mrp->pegawai->diklat_penjenjangan->first()->nomor_sertifikat : '-' }}<br>
 						Jalur Mutasi : {{ $mrp->jalur_mutasi }}<br>
-						PERDIR Formasi Jabatan untuk Unit yang dituju : {{ $mrp->formasi_jabatan->spfj}}<br>
+						PERDIR Formasi Jabatan untuk Unit yang dituju : {{ $mrp->formasi_jabatan_tujuan->spfj}}<br>
 						Letak Domisili dengan Unit Mutasi: {{ $mrp->pegawai->status_domisili}}<br>
 						Suami/Istri :
 							@if(isset($mrp->pegawai->nip_sutri))
-								PLN ; {{ \App\Pegawai::where('nip', $mrp->pegawai->nip_sutri)->pluck('nip')->first() }} ; {{ $mrp->pegawai->formasi_jabatan->personnel_area->nama_pendek}}
+								PLN ; {{ $mrp->pegawai->sutri->nip }} ; {{ $mrp->pegawai->sutri->formasi_jabatan->personnel_area->nama_pendek}}
 							@else
 								Non-PLN ; N/A ; N/A
 							@endif<br>
@@ -60,7 +67,48 @@
 				@endforeach
 
 				</tbody>
-				</table>
+			</table>
+
+			<table style="border: 0">
+				<tbody >
+					<tr style="height: 50px; text-align: center;">
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 1px solid #000000">DIRHCM</td>
+						<td style="border: 1px solid #000000"></td>
+						<td style="border: 0"></td>
+					</tr>
+					<tr style="height: 50px; text-align: center">
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 1px solid #000000">KADIV TLN</td>
+						<td style="border: 1px solid #000000"></td>
+						<td style="border: 0"></td>
+					</tr>
+					<tr style="height: 50px; text-align: center">
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 1px solid #000000">MS</td>
+						<td style="border: 1px solid #000000"></td>
+						<td style="border: 0"></td>
+					</tr>
+				</tbody>
+			</table>
 			
 		</div>
 

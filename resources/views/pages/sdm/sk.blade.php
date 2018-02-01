@@ -58,13 +58,13 @@
 									<td>{{ $mrp->registry_number }}</td>
 									<td>{{ $mrp->pegawai->nip }}</td>
 									<td>{{ $mrp->pegawai->nama_pegawai }}</td>
-									<td><strong>{{ $mrp->pegawai->formasi_jabatan->formasi.' '.$mrp->pegawai->formasi_jabatan->jabatan }}</strong>
+									<td><strong>{{ $mrp->formasi_jabatan_asal->formasi.' '.$mrp->formasi_jabatan_asal->jabatan }}</strong>
 										<br>
-										{{ $mrp->pegawai->formasi_jabatan->posisi }}
+										{{ $mrp->formasi_jabatan_asal->posisi }}
 									</td>
-									<td><strong>{{ $mrp->formasi_jabatan->formasi.' '.$mrp->formasi_jabatan->jabatan }}</strong>
+									<td><strong>{{ $mrp->formasi_jabatan_tujuan->formasi.' '.$mrp->formasi_jabatan_tujuan->jabatan }}</strong>
 										<br>
-										{{ $mrp->formasi_jabatan->posisi }}
+										{{ $mrp->formasi_jabatan_tujuan->posisi }}
 									</td>
 									<td style="text-align: center;">
 										<button type="button" class="btn btn-primary btnUpload" data-toggle="modal" data-target="#uploadSKModal" value="{{ $mrp->id }}"><i class="fa fa-upload"></i> Upload SK</button>

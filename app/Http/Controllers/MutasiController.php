@@ -157,7 +157,8 @@ class MutasiController extends Controller
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,
                 'pegawai_id' => $pegawai->id,
-                'formasi_jabatan_id' => $id_proyeksi,
+                'fj_asal' => $pegawai->formasi_jabatan->id,
+                'fj_tujuan' => $id_proyeksi,
             );
 
             $data_mrp = array_merge($tambahan_mrp, request('mrp'));
@@ -189,7 +190,7 @@ class MutasiController extends Controller
             'file_dokumen_mutasi' => 'required|mimes:pdf|max:10240'
             ]);
 
-            $pegawai_id = Pegawai::where('nip', $nip)->first()->id;
+            $pegawai = Pegawai::where('nip', $nip)->first();
 
             if(request('rekom_checkbox') === '1')
                 $id_proyeksi = FormasiJabatan::select('id')->where('kode_olah', request('kode_olah'))->first()->id;
@@ -202,13 +203,14 @@ class MutasiController extends Controller
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,
-                'pegawai_id' => $pegawai_id,
-                'formasi_jabatan_id' => $id_proyeksi,
+                'pegawai_id' => $pegawai->id,
+                'fj_asal' => $pegawai->formasi_jabatan->id,
+                'fj_tujuan' => $id_proyeksi,
             );
             // dd(request('nilai')['hubungan_sesama']);
 
             $data_mrp = array_merge($tambahan_mrp, request('mrp'));
-            $data_nilai = array_merge(request('nilai'), array('pegawai_id' => $pegawai_id, 'mrp_id' => $data_mrp['id']));;
+            $data_nilai = array_merge(request('nilai'), array('pegawai_id' => $pegawai->id, 'mrp_id' => $data_mrp['id']));;
             $data_nilai['hubungan_sesama'] = request('hds').'-'.$data_nilai['hubungan_sesama'];
             $data_nilai['hubungan_atasan'] = request('hda').'-'.$data_nilai['hubungan_atasan'];
             // dd($data_mrp, $data_nilai, request('hds'));
@@ -260,7 +262,7 @@ class MutasiController extends Controller
                 'status' => 1,
                 'nip_operator' => request()->session()->get('nip_operator'),
                 'unit_pengusul' => $user->id,
-                'formasi_jabatan_id' => $jabatan->id,
+                'fj_tujuan' => $jabatan->id,
             );
 
             $data_mrp = array_merge($input_mrp, request('mrp'));
@@ -281,7 +283,7 @@ class MutasiController extends Controller
                 'nama_pendek' => $user->nama_pendek,
                 'mrp_id' => $mrp->id->string, 
                 'formasi_jabatan' => $jabatan->formasi.' '.$jabatan->jabatan,
-                'formasi_jabatan_id' => $jabatan->id
+                'fj_tujuan' => $jabatan->id
             );
             // kurang yang ke semua unit
             $user_sdm->notify(new JabatanDibursakan($data));

@@ -32,17 +32,19 @@ class MRPController extends Controller
         $all_unit = PersonnelArea::select('id', 'nama')->get()->all();
         $pengusul = Pegawai::where('nip', $mrp->nip_pengusul)->first();
         $operator = Pegawai::where('nip', $mrp->nip_operator)->first();
-        $fj_tujuan = $mrp->formasi_jabatan;
+        $fj_tujuan = $mrp->formasi_jabatan_tujuan;
         if ($fj_tujuan)
         {
             $unit_tujuan = $fj_tujuan->personnel_area;
             $formasi = $unit_tujuan->formasi_jabatan;
-            $formasi_selected = $mrp->formasi_jabatan->formasi;
+            $formasi_selected = $fj_tujuan->formasi;
             $jabatan = $unit_tujuan->formasi_jabatan()->where('formasi', $formasi_selected)->get();
-            $jabatan_selected = $mrp->formasi_jabatan->jabatan;
+            $jabatan_selected = $fj_tujuan->jabatan;
         }
         else
             $unit_tujuan = NULL;
+
+        // dd($mrp->mutasi == 'Rotasi');
 
     	return view('pages.sdm.mrp_edit', compact('mrp', 'fj_tujuan', 'unit_tujuan', 'all_unit', 'pengusul', 'operator', 'formasi', 'jabatan', 'formasi_selected', 'jabatan_selected'));
     }
@@ -51,10 +53,10 @@ class MRPController extends Controller
     {
         $mrp = MRP::find(request('mrp_id'));
         $pegawai = Pegawai::where('nip', request('nip'))->first();
-        $formasi_jabatan_id = FormasiJabatan::where('kode_olah', request('kode_olah'))->first()->id;
+        $fj_tujuan = FormasiJabatan::where('kode_olah', request('kode_olah'))->first()->id;
         $data = array_merge(request('mrp'), [
             'pegawai_id' => $pegawai->id,
-            'formasi_jabatan_id' => $formasi_jabatan_id
+            'fj_tujuan' => $fj_tujuan
         ]);
         // dd($data);
         $mrp->update($data);
@@ -94,7 +96,7 @@ class MRPController extends Controller
             return view('pages.sdm.mrp_detail_bursa_jabatan', compact('mrp', 'pengusul', 'skstg', 'jabatan'));
         }
 
-        $proyeksi = $mrp->formasi_jabatan;
+        $proyeksi = $mrp->formasi_jabatan_tujuan;
         $pegawai = $mrp->pegawai;
         $sutri = $pegawai ? $pegawai->sutri : NULL;
 
@@ -127,6 +129,8 @@ class MRPController extends Controller
             else if($status == 6)
                 $retval = '<span class="label label-success">SK Pending</span>';
             else if($status == 7)
+                $retval = '<span class="label label-success">Lewat Masa Aktifasi (unconfirmed)</span>';
+            else if($status == 8)
                 $retval = '<span class="label label-success">Clear</span>';
             else if($status == 99)
                 $retval = '<span class="label label-danger">Ditolak (SDM Pusat)</span>';
@@ -154,6 +158,8 @@ class MRPController extends Controller
             else if($status == 6)
                 $retval = 'SK Pending';
             else if($status == 7)
+                $retval = 'Lewat Masa Aktifasi (unconfirmed)';
+            else if($status == 8)
                 $retval = 'Clear';
             else if($status == 99)
                 $retval = 'Ditolak (SDM Pusat)';
@@ -178,8 +184,8 @@ class MRPController extends Controller
         foreach ($mrps as $key => $mrp) 
         {
             $pegawai = $mrp->pegawai;
-            $formasi_jabatan = $pegawai ? $pegawai->formasi_jabatan : NULL;
-            $fj_tujuan = $mrp->formasi_jabatan;
+            $formasi_jabatan = $mrp->formasi_jabatan_asal ? $mrp->formasi_jabatan_asal : NULL;
+            $fj_tujuan = $mrp->formasi_jabatan_tujuan;
             $sutri = $pegawai ? $pegawai->sutri : NULL;
             $diklat = $pegawai ? $pegawai->diklat_penjenjangan->first() : NULL;
             $skstg = $mrp->skstg;

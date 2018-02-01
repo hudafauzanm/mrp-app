@@ -56,7 +56,7 @@ class FormasiJabatanSeeder extends Seeder
         $forjab->jabatan ='Perencanaan dan Pengendalian Regional Jawa Bagian Barat';
         $forjab->jenjang_id ='MM';
         $forjab->jenjang_txt ='Manajemen Menengah';
-        $forjab->pagu =1;
+        $forjab->pagu =5;
         $forjab->level ='KP';
         // $forjab->realisasi =1;
         $forjab->spfj ='0037.P/DIR/2016';

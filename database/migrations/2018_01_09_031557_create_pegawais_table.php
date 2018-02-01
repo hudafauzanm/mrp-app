@@ -24,7 +24,7 @@ class CreatePegawaisTable extends Migration
             $table->string('status_domisili')->nullable();
             $table->string('nama_pegawai');
             $table->string('employee_subgroup');
-            $table->string('ps_group');
+            $table->string('ps_group')->nullable();
             $table->integer('talent_pool_position')->nullable();
             $table->date('tanggal_grade');
             $table->date('tanggal_lahir');
@@ -36,7 +36,7 @@ class CreatePegawaisTable extends Migration
             $table->integer('kali_jenjang')->nullable();
             $table->date('tanggal_unit_induk_akhir')->nullable();
             $table->string('nip_sutri')->nullable();
-            $table->string('lc_atasan');
+            $table->string('lc_atasan')->nullable();
             // $table->string('nip_atasan');
             $table->string('top_unit')->nullable();
             $table->string('top_0')->nullable();

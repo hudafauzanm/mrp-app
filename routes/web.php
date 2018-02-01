@@ -36,6 +36,7 @@ Route::get('/status', 'StatusController@index');
 Route::post('/status/approve', 'StatusController@approve');
 Route::post('/status/decline/{reg_num}', 'StatusController@decline')->name('decline');
 Route::get('/status/detail/{reg_num}', 'StatusController@getDetails');
+Route::get('/status/finish_mutasi/{reg_num}', 'StatusController@finishMutasi');
 
 
 // form pengajuan mutasi (semua tipe)

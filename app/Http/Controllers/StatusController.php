@@ -47,7 +47,7 @@ class StatusController extends Controller
             $fj = auth()->user()->formasi_jabatan->pluck('id')->toArray();
             
             $mrp = MRP::where('tipe', 2)
-                        ->whereIn('formasi_jabatan_id', $fj)
+                        ->whereIn('fj_tujuan', $fj)
                         ->get();
 
             return view('pages.unit.status_diterima',compact('mrp'));
@@ -59,7 +59,7 @@ class StatusController extends Controller
             
             $mrp = MRP::where('tipe', 1)
                         ->whereHas('pegawai', function($q) use ($fj){
-                            $q->whereIn('formasi_jabatan_id', $fj);
+                            $q->whereIn('fj_tujuan', $fj);
                         })
                         ->get();
 
@@ -148,5 +148,14 @@ class StatusController extends Controller
         $pengusul->notify(new MutasiDitolak($data));
         
         return back()->with('success', 'Status Diubah');
+    }
+
+    public function finishMutasi($reg_num)
+    {
+        $mrp = MRP::where('registry_number', $reg_num)->firstOrFail();
+        $mrp->status = 8;
+        $mrp->save();
+
+        return back()->with('success', 'Berhasil konfirmasi aktivasi');
     }
 }

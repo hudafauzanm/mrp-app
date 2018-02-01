@@ -17,8 +17,8 @@ class CreateFormasiJabatansTable extends Migration
     {
         Schema::create($this->tablename, function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('kode_olah')->unique();
-            $table->string('legacy_code');
+            $table->string('kode_olah');
+            $table->string('legacy_code')->nullable();
             $table->string('level');
             $table->string('posisi');
             $table->string('kelas_unit')->nullable();
@@ -30,8 +30,8 @@ class CreateFormasiJabatansTable extends Migration
             // $table->string('nomor_spfj');
             $table->integer('pagu');
             // $table->integer('realisasi'); diambil dari pegawai
-            $table->string('spfj');
-            $table->string('status_fj');
+            $table->string('spfj')->nullable();
+            $table->string('status_fj')->nullable();
             $table->char('personnel_area_id', 36);
             $table->timestamps();
 

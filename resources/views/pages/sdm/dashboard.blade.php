@@ -345,18 +345,18 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
 											<td>{{$mrp->pegawai->ps_group}}</td>
-											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama_pendek}}</small></td>
+											<td><strong>{{$mrp->formasi_jabatan_asal->formasi}} {{$mrp->formasi_jabatan_asal->jabatan}}</strong> {{$mrp->formasi_jabatan_asal->posisi}}<br><small>{{$mrp->formasi_jabatan_asal->personnel_area->nama_pendek}}</small></td>
 											<td>
-												@if(isset($mrp->formasi_jabatan_id))
-													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
-													<br><small>{{$mrp->formasi_jabatan->personnel_area->nama_pendek}}</small>
-												@else
-													(Perlu saran)
-												@endif
+											@if($mrp->formasi_jabatan_tujuan)
+												<strong>{{$mrp->formasi_jabatan_tujuan->formasi}} {{$mrp->formasi_jabatan_tujuan->jabatan}}</strong> {{$mrp->formasi_jabatan_tujuan->posisi}}
+												<br><small>{{$mrp->formasi_jabatan_tujuan->personnel_area->nama_pendek}}</small>
+											@else
+												(Perlu saran)
+											@endif
 											</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
-											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}</td>
+											<td>{{$mrp->personnel_area_pengusul->nama_pendek}}</td>
 											<td>{{$mrp->alasan_mutasi}}</td>
 											@if (!$mrp->pegawai->penilaian_pegawai->count())
 												<td class="text-center">
@@ -432,18 +432,19 @@ use Carbon\Carbon;
 											<td>{{$mrp->pegawai->nip}}</td>
 											<td>{{$mrp->pegawai->nama_pegawai}}</td>
 											<td>{{$mrp->pegawai->ps_group}}</td>
-											<td><strong>{{$mrp->pegawai->formasi_jabatan->formasi}} {{$mrp->pegawai->formasi_jabatan->jabatan}}</strong> {{$mrp->pegawai->formasi_jabatan->posisi}}<br><small>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama_pendek}}</small></td>
+											<td><strong>{{$mrp->formasi_jabatan_asal->formasi}} {{$mrp->formasi_jabatan_asal->jabatan}}</strong> {{$mrp->formasi_jabatan_asal->posisi}}<br><small>{{$mrp->formasi_jabatan_asal->personnel_area->nama_pendek}}</small>
+											</td>
 											<td>
-												@if(isset($mrp->formasi_jabatan_id))
-													<strong>{{$mrp->formasi_jabatan->formasi}}{{$mrp->formasi_jabatan->jabatan}}</strong> {{$mrp->formasi_jabatan->posisi}}
-													<br><small>{{$mrp->formasi_jabatan->personnel_area->nama_pendek}}</small>
-												@else
-													(Perlu saran)
-												@endif
+											@if($mrp->formasi_jabatan_tujuan)
+												<strong>{{$mrp->formasi_jabatan_tujuan->formasi}} {{$mrp->formasi_jabatan_tujuan->jabatan}}</strong> {{$mrp->formasi_jabatan_tujuan->posisi}}
+												<br><small>{{$mrp->formasi_jabatan_tujuan->personnel_area->nama_pendek}}</small>
+											@else
+												(Perlu saran)
+											@endif
 											</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::parse($mrp->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
 											<td>{{$mrp->pegawai->time_diff(Carbon::now('Asia/Jakarta'), Carbon::parse($mrp->pegawai->end_date))}}</td>
-											<td>{{$mrp->pegawai->formasi_jabatan->personnel_area->nama}}</td>
+											<td>{{$mrp->personnel_area_pengusul->nama}}</td>
 											<td>{{$mrp->alasan_mutasi}}</td>
 											<td class="text-center">
 												<button type="button" class="btn btn-3d btn-sm btn-green nilaiBtn" data-toggle="modal" data-target="#ceknilai" onclick="getNilaiWithMRP('{{ $mrp->id }}');">
@@ -527,9 +528,9 @@ use Carbon\Carbon;
 										<tr>
 											<td class="foo-cell">{{ $mrp->registry_number }}</td>
 											<td>{{ $mrp->personnel_area_pengusul->nama_pendek }}</td>
-											<td>{{ $mrp->formasi_jabatan->formasi }}</td>
-											<td>{{ $mrp->formasi_jabatan->jabatan }}</td>
-											<td>{{ \App\Pegawai::where('nip', $mrp->nip_pengusul)->first()->nama_pegawai }} ({{ $mrp->nip_pengusul }})</td>
+											<td>{{ $mrp->formasi_jabatan_tujuan->formasi }}</td>
+											<td>{{ $mrp->formasi_jabatan_tujuan->jabatan }}</td>
+											<td>{{ $mrp->pegawai_pengusul->nama_pegawai }} ({{ $mrp->nip_pengusul }})</td>
 											<td>Existing</td>
 											<td>{{ $mrp->requested_tgl_aktifasi ? $mrp->requested_tgl_aktifasi->format('j F Y') : '-' }}</td>
 											<td class="text-center">
