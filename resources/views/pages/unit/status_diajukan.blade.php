@@ -52,7 +52,7 @@
 	                            <th>Source</th>
 	                            @endif
 	                            <th >Status</th>
-	                            <th >Lihat Detail</th>
+	                            <th >Detail & Tindak Lanjut</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -63,16 +63,16 @@
 								<td>{{$mrps->pegawai->nip}}</td>
 								<td>{{$mrps->pegawai->nama_pegawai}}</td>
 								<td>
-									<strong>{{$mrps->pegawai->formasi_jabatan->formasi}} {{$mrps->pegawai->formasi_jabatan->jabatan}}</strong>
-									<br>{{$mrps->pegawai->formasi_jabatan->posisi}}<br>
-									<strong>{{$mrps->pegawai->formasi_jabatan->personnel_area->nama_pendek}}</strong>
+									<strong>{{$mrps->formasi_jabatan_asal->formasi}} {{$mrps->formasi_jabatan_asal->jabatan}}</strong>
+									<br>{{$mrps->formasi_jabatan_asal->posisi}}<br>
+									<strong>{{$mrps->formasi_jabatan_asal->personnel_area->nama_pendek}}</strong>
 								</td>
 								@endif
 								<td>
-									@if(isset($mrps->formasi_jabatan_id))
-										<strong>{{$mrps->formasi_jabatan->formasi}} {{$mrps->formasi_jabatan->jabatan}}</strong>
-										<br>{{$mrps->formasi_jabatan->posisi}}
-										<br><strong>{{$mrps->formasi_jabatan->personnel_area->nama_pendek}}</strong>
+									@if($mrps->formasi_jabatan_tujuan)
+										<strong>{{$mrps->formasi_jabatan_tujuan->formasi}} {{$mrps->formasi_jabatan_tujuan->jabatan}}</strong>
+										<br>{{$mrps->formasi_jabatan_tujuan->posisi}}
+										<br><strong>{{$mrps->formasi_jabatan_tujuan->personnel_area->nama_pendek}}</strong>
 									@else
 										Perlu saran
 									@endif
@@ -92,7 +92,9 @@
 									@elseif($mrps->status == 6)
 										<span class="label label-success">SK Pending</span>
 									@elseif($mrps->status == 7)
-										<span class="label label-success">Clear</span>
+    									<span class="label label-success">Lewat Masa Aktifasi (unconfirmed)</span>
+									@elseif($mrps->status == 8)
+    									<span class="label label-success">Clear</span>
 									@elseif($mrps->status == 99)
 										<span class="label label-danger">Ditolak (SDM Pusat)</span>
 									@elseif($mrps->status == 98)
@@ -103,11 +105,11 @@
 										<span class="label label-danger">???</span>
 									@endif
 								</td>
-								@if($mrps->tipe == 1)
-									<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
-								@else
-									<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a></td>
+								<td><a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a>
+								@if (in_array($mrps->status, [5,6,7]))
+									<a href="/status/finish_mutasi/{{ $mrps->registry_number }}" class="btn btn-info" ><i class="fa fa-check"> Konfirmasi Aktivasi</i></a>
 								@endif
+								</td>
 							</tr>
 							
 							@endforeach

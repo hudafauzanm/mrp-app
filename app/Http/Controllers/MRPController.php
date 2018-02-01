@@ -129,6 +129,8 @@ class MRPController extends Controller
             else if($status == 6)
                 $retval = '<span class="label label-success">SK Pending</span>';
             else if($status == 7)
+                $retval = '<span class="label label-success">Lewat Masa Aktifasi (unconfirmed)</span>';
+            else if($status == 8)
                 $retval = '<span class="label label-success">Clear</span>';
             else if($status == 99)
                 $retval = '<span class="label label-danger">Ditolak (SDM Pusat)</span>';
@@ -156,6 +158,8 @@ class MRPController extends Controller
             else if($status == 6)
                 $retval = 'SK Pending';
             else if($status == 7)
+                $retval = 'Lewat Masa Aktifasi (unconfirmed)';
+            else if($status == 8)
                 $retval = 'Clear';
             else if($status == 99)
                 $retval = 'Ditolak (SDM Pusat)';

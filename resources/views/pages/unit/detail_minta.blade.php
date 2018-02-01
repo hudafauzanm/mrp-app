@@ -43,6 +43,12 @@ use Carbon\Carbon;
 										<li>{{ $detail->tindak_lanjut }}</li>
 									</ul>
 								@endif
+								@if ($detail->no_dokumen_respon_sdm && $detail->status == 99)
+									<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $detail->filename_dokumen_respon_sdm }}</a>
+								@endif
+								@if ($detail->skstg)
+									<a href="/download/{{ $detail->registry_number }}/{{ $detail->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $detail->skstg->filename_dokumen_sk }}</a>
+								@endif
 							</div>
 							<div class="col-md-3 col-xs-3 text-right">
 								<h4>Registry<strong> Number</strong></h4>
@@ -98,7 +104,7 @@ use Carbon\Carbon;
 												<li><strong>Mutasi:</strong> {{ $detail->mutasi }}</li>
 												<li><strong>Jalur Mutasi:</strong> {{ $detail->jalur_mutasi}}</li>
 												@if ($detail->skstg)
-													<li><strong>Tanggal Aktivasi:</strong> {{ $detail->skstg->tgl_aktivasi }}</li>
+													<li><strong>Tanggal Aktivasi:</strong> {{ $detail->skstg->tgl_aktivasi->format("d F Y") }}</li>
 												@endif
 											</ul>
 										</td>
@@ -110,19 +116,19 @@ use Carbon\Carbon;
 											</ul>
 										</td>
 										<td>
-											<div>{{$detail->pegawai->formasi_jabatan->personnel_area->nama}}</div>
+											<div>{{$detail->formasi_jabatan_asal->personnel_area->nama}}</div>
 										</td>
 										<td>
-											@if(isset($detail->formasi_jabatan))
-											<div><strong>{{$detail->formasi_jabatan->formasi}} {{$detail->formasi_jabatan->jabatan}}</strong></div>
-											<small>{{$detail->formasi_jabatan->posisi}}</small>
+											@if($detail->formasi_jabatan_tujuan)
+											<div><strong>{{$detail->formasi_jabatan_tujuan->formasi}} {{$detail->formasi_jabatan_tujuan->jabatan}}</strong></div>
+											<small>{{$detail->formasi_jabatan_tujuan->posisi}}</small>
 											@else
 												Perlu saran
 											@endif
 										</td>
 										<td>
-											<div><strong>{{$detail->pegawai->formasi_jabatan->formasi}} {{$detail->pegawai->formasi_jabatan->jabatan}}</strong></div>
-											<small>{{$detail->pegawai->formasi_jabatan->posisi}}</small>
+											<div><strong>{{$detail->formasi_jabatan_asal->formasi}} {{$detail->formasi_jabatan_asal->jabatan}}</strong></div>
+											<small>{{$detail->formasi_jabatan_asal->posisi}}</small>
 										</td>
 
 										<td>{{$detail->pegawai->time_diff(Carbon::parse($detail->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>

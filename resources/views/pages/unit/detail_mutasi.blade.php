@@ -66,7 +66,7 @@ use Carbon\Carbon;
 								@if ($detail->status == 99 && $detail->no_dokumen_respon_sdm)
 									<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $detail->filename_dokumen_respon_sdm }}</a>
 								@endif
-								@if ($detail->sk_stg_id)
+								@if ($detail->skstg)
 									<a href="/download/{{ $detail->registry_number }}/{{ $detail->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $detail->skstg->filename_dokumen_sk }}</a>
 								@endif
 							</div>
@@ -104,16 +104,16 @@ use Carbon\Carbon;
 											</ul>
 										</td>
 										<td>
-											@if(isset($detail->formasi_jabatan))
-											<div><strong>{{$detail->formasi_jabatan->formasi}} {{$detail->formasi_jabatan->jabatan}}</strong></div>
-											<small>{{$detail->formasi_jabatan->posisi}}</small>
+											@if($detail->formasi_jabatan_tujuan)
+											<div><strong>{{$detail->formasi_jabatan_tujuan->formasi}} {{$detail->formasi_jabatan_tujuan->jabatan}}</strong></div>
+											<small>{{$detail->formasi_jabatan_tujuan->posisi}}</small>
 											@else
 												Perlu saran
 											@endif
 										</td>
 										<td>
-											<div><strong>{{$detail->pegawai->formasi_jabatan->formasi}} {{$detail->pegawai->formasi_jabatan->jabatan}}</strong></div>
-											<small>{{$detail->pegawai->formasi_jabatan->posisi}}</small>
+											<div><strong>{{$detail->formasi_jabatan_asal->formasi}} {{$detail->formasi_jabatan_asal->jabatan}}</strong></div>
+											<small>{{$detail->formasi_jabatan_asal->posisi}}</small>
 										</td>
 
 										<td>{{$detail->pegawai->time_diff(Carbon::parse($detail->pegawai->start_date), Carbon::now('Asia/Jakarta'))}}</td>
@@ -183,11 +183,7 @@ use Carbon\Carbon;
 							<div class="col-md-4 text-right">
 								<br><br><br><br><h4><strong>Unit</strong> Peminta</h4>
 								<address>
-									<strong>{{$detail->personnel_area_pengusul->nama}}<br>{{$detail->personnel_area_pengusul->direktorat->nama}}</strong><!-- <br>
-									Jalan Trunojoyo Blok M – I No 135<br>
-									Kebayoran Baru, Jakarta 12160, Indonesia<br>
-									Telp : 021 – 7251234, 7261122<br>
-									fax : 021 – 7221330 -->
+									<strong>{{$detail->personnel_area_pengusul->nama}}<br>{{$detail->personnel_area_pengusul->direktorat->nama}}</strong>
 								</address>
 							</div>
 						</div>	

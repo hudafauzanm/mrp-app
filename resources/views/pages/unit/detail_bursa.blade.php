@@ -66,7 +66,7 @@
 								@if ($detail->status == 99 && $detail->no_dokumen_respon_sdm)
 									<a href="/download/{{ $detail->registry_number }}/{{ $detail->filename_dokumen_respon_sdm }}" class="btn btn-sm btn-3d btn-red">{{ $detail->filename_dokumen_respon_sdm }}</a>
 								@endif
-								@if ($detail->sk_stg_id)
+								@if ($detail->skstg)
 									<a href="/download/{{ $detail->registry_number }}/{{ $detail->skstg->filename_dokumen_sk }}" class="btn btn-sm btn-3d btn-red">{{ $detail->skstg->filename_dokumen_sk }}</a>
 								@endif
 							</div>
@@ -102,12 +102,12 @@
 										</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><strong>Formasi:</strong> {{ $detail->formasi_jabatan->formasi }}</li>
-												<li><strong>Jabatan:</strong> {{ $detail->formasi_jabatan->jabatan }}</li>
-												<li><strong>Jenjang:</strong> {{ $detail->formasi_jabatan->jenjang_txt }} ({{ $detail->formasi_jabatan->jenjang_id }})</li>
-												<li><strong>Posisi:</strong> {{ $detail->formasi_jabatan->posisi }}</li>
-												<li><strong>SPFJ:</strong> {{ $detail->formasi_jabatan->spfj }}</li>
-												<li><strong>Legacy Code:</strong> {{ $detail->formasi_jabatan->legacy_code }}</li>
+												<li><strong>Formasi:</strong> {{ $detail->formasi_jabatan_tujuan->formasi }}</li>
+												<li><strong>Jabatan:</strong> {{ $detail->formasi_jabatan_tujuan->jabatan }}</li>
+												<li><strong>Jenjang:</strong> {{ $detail->formasi_jabatan_tujuan->jenjang_txt }} ({{ $detail->formasi_jabatan_tujuan->jenjang_id }})</li>
+												<li><strong>Posisi:</strong> {{ $detail->formasi_jabatan_tujuan->posisi }}</li>
+												<li><strong>SPFJ:</strong> {{ $detail->formasi_jabatan_tujuan->spfj }}</li>
+												<li><strong>Legacy Code:</strong> {{ $detail->formasi_jabatan_tujuan->legacy_code }}</li>
 											</ul>
 										</td>
 										<td>

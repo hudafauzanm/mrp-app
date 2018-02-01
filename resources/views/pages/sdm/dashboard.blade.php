@@ -436,7 +436,7 @@ use Carbon\Carbon;
 											</td>
 											<td>
 											@if($mrp->formasi_jabatan_tujuan)
-												<strong>{{$mrp->formasi_jabatan_tujuan->formasi}}{{$mrp->formasi_jabatan_tujuan->jabatan}}</strong> {{$mrp->formasi_jabatan_tujuan->posisi}}
+												<strong>{{$mrp->formasi_jabatan_tujuan->formasi}} {{$mrp->formasi_jabatan_tujuan->jabatan}}</strong> {{$mrp->formasi_jabatan_tujuan->posisi}}
 												<br><small>{{$mrp->formasi_jabatan_tujuan->personnel_area->nama_pendek}}</small>
 											@else
 												(Perlu saran)
