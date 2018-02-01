@@ -283,7 +283,7 @@ class MutasiController extends Controller
                 'nama_pendek' => $user->nama_pendek,
                 'mrp_id' => $mrp->id->string, 
                 'formasi_jabatan' => $jabatan->formasi.' '.$jabatan->jabatan,
-                'fj_tujuan' => $jabatan->id
+                'formasi_jabatan_id' => $jabatan->id
             );
             // kurang yang ke semua unit
             $user_sdm->notify(new JabatanDibursakan($data));

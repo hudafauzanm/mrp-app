@@ -144,7 +144,10 @@ class DashboardController extends Controller
         {
             $pegawai = Pegawai::where('nip', request('nip'))->first();
             if($pegawai)
+            {
                 $mrp->pegawai_id = $pegawai->id;
+                $mrp->fj_asal = $pegawai->formasi_jabatan->id;
+            }
             else
                 return back()->withErrors(['message' => 'NIP '.request('nip').' tidak ditemukan!']);
         }
