@@ -79,7 +79,12 @@
 										<th width="20%">Detail Unit</th>
 										<th width="20%">Detail Pengusul</th>
 										<th width="30%">Jabatan yang Dibursakan</th>
+										@if ($detail->status >= 5)
+											<th width="10%">Source</th>
+											<th width="20%">Penerima Mutasi</th>
+										@else
 										<th width="30%">Source</th>
+										@endif
 									</tr>
 								</thead>
 								<tbody>
@@ -115,6 +120,17 @@
 												<li>Existing</li>
 											</ul>
 										</td>
+										@if ($detail->status >= 5)
+										<td>
+											<ul class="list-unstyled">
+												<li><strong>NIP:</strong> {{ $detail->pegawai->nip }}</li>
+												<li><strong>Nama:</strong> {{ $detail->pegawai->nama_pegawai }}</li>
+												<li><strong>Jabatan Sebelumnya:</strong><br> {{ $detail->formasi_jabatan_asal->formasi }} {{ $detail->formasi_jabatan_asal->jabatan }} <br>
+													{{ $detail->formasi_jabatan_asal->personnel_area->nama_pendek }}
+												</li>
+											</ul>
+										</td>
+										@endif
 									</tr>
 								</tbody>
 							</table>
