@@ -108,8 +108,8 @@ use Carbon\Carbon;
 											<small>{{ $proyeksi ? $proyeksi->posisi.' '.$proyeksi->personnel_area->nama : '' }}</small>
 										</td>
 										<td>
-											<div><strong>{{ $pegawai->formasi_jabatan->formasi.' '.$pegawai->formasi_jabatan->jabatan }}</strong></div>
-											<small>{{ $pegawai->formasi_jabatan->posisi.' '.$pegawai->formasi_jabatan->personnel_area->nama }}</small>
+											<div><strong>{{ $mrp->formasi_jabatan_asal->formasi.' '.$mrp->formasi_jabatan_asal->jabatan }}</strong></div>
+											<small>{{ $mrp->formasi_jabatan_asal->posisi.' '.$mrp->formasi_jabatan_asal->personnel_area->nama }}</small>
 										</td>
 										<td>{{ $mrp->tipe }}</td>
 										<td>

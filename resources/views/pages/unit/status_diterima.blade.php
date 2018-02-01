@@ -84,7 +84,6 @@
 								</td>
 								<td>
 									<a href="/status/detail/{{ $mrps->registry_number }}" class="btn btn-primary" target="_blank"><i class="fa fa-list"> Detail</i></a>
-									<a href="/download/{{ $mrps->registry_number }}/{{ $mrps->filename_dokumen_unit_usul }}" class="btn btn-info"><i class="fa fa-download"></i> Dokumen</a>
 								</td>
 								@if($mrps->status == 1)
 		                            <td class="text-center">

@@ -259,12 +259,12 @@
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Pengusul</label>
-											<input type="text" name="mrp[nip_pengusul]" value="{{ $pengusul->nip }}" class="form-control required col-md-6 nip_to_nama" target="#nama_pengusul">
+											<input type="text" name="mrp[nip_pengusul]" value="{{ $pengusul->nip }}" class="form-control col-md-6 nip_to_nama" target="#nama_pengusul">
 										</div>
 
 										<div class="col-md-6 col-sm-6">
 											<label>NIP Operator</label>
-											<input type="text" name="mrp[nip_operator]" value="{{ $operator->nip }}" class="form-control required col-md-6 nip_to_nama" target="#nama_operator">
+											<input type="text" name="mrp[nip_operator]" value="{{ $operator->nip }}" class="form-control col-md-6 nip_to_nama" target="#nama_operator">
 										</div>
 									</div>
 								</div>
@@ -273,29 +273,11 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Alasan Memutasi *</label>
-											<textarea rows="3" name="mrp[alasan_mutasi]" class="form-control" required>{{ $mrp->alasan_mutasi }}</textarea>
+											<textarea rows="3" name="mrp[alasan_mutasi]" class="form-control">{{ $mrp->alasan_mutasi }}</textarea>
 										</div>
 									</div>
 								</div>
 
-								{{-- <div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Penyetuju</label>
-											<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Nama">
-											<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Formasi Jabatan">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group">
-										<div class="col-md-12 col-sm-12">
-											<label>Administrator</label>
-											<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Nama">
-											<input type="text" name="contact[phone]" value="" class="form-control required col-md-6" placeholder="Formasi Jabatan">
-										</div>
-									</div>
-								</div> --}}
 							</fieldset>
 						</div>
 					</div>
@@ -369,7 +351,7 @@
 									<div class="form-group">
 										<div class="col-md-12 col-sm-12">
 											<label>Tindak Lanjut</label>
-											<textarea rows="3" name="mrp[tindak_lanjut]" class="form-control" required>{{ $mrp->tindak_lanjut }}</textarea>
+											<textarea rows="3" name="mrp[tindak_lanjut]" class="form-control">{{ $mrp->tindak_lanjut }}</textarea>
 										</div>
 									</div>
 								</div>
@@ -404,7 +386,6 @@
 		$("#backButton").click(function(){
 			if(confirm("Apakah anda yakin akan meninggalkan halaman ini? (Semua perubahan tidak akan disimpan)"))
 			{
-				console.log('oke');
 				window.location.href = "/mrp";
 			}
 		})
@@ -449,9 +430,9 @@
 					var formasi = $("#rekom_formasi");
 					formasi.empty();
 					formasi.append('<option>--- Formasi ---</option>');
+					formasi.val('').change();
 					formasi.removeAttr('disabled');
 					$.each(data, function(key, value){
-						console.log(value);
 						formasi.append('<option value="'+value.formasi+'">'+value.formasi+'</option>');
 					});
 				}
@@ -478,9 +459,9 @@
 					var jabatan = $("#rekom_jabatan");
 					jabatan.empty();
 					jabatan.append('<option>--- Jabatan ---</option>');
+					jabatan.val('').change();
 					jabatan.removeAttr('disabled');
 					$.each(data, function(key, value){
-						console.log(value);
 						jabatan.append('<option value="'+key+'">'+value+'</option>');
 					});
 				}

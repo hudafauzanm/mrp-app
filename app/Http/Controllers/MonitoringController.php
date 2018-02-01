@@ -175,7 +175,7 @@ class MonitoringController extends Controller
 
     	foreach ($formasi_jabatan as $fj) 
     	{
-    		$jumlah += $fj->mrp->where('status', '<', 7)->count();
+    		$jumlah += $fj->mrp_tujuan->where('status', '<', 7)->count();
     	}
 
     	return $jumlah + $data;
