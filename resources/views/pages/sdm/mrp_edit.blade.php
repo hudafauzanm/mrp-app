@@ -101,17 +101,17 @@
 											<label>Tipe Mutasi *</label>
 											<select name="mrp[mutasi]" class="form-control pointer" id="tipemutasi">
 												<option value="">--- Tipe Mutasi ---</option>
-												@if ($mrp->mutasi == 'Dinas')
-													<option>Rotasi</option>
-													<option>Promosi</option>
-													<option>Demosi</option>
-													<option>TK Diperbantukan</option>
-													<option>Tugas Belajar</option>
-													<option>Aktif dari Tugas Belajar</option>
-												@elseif($mrp->mutasi == 'Non-Dinas')
-													<option>Aktif dari IDT</option>
-													<option>Ct diluar Tanggungan</option>
-													<option>APS</option>
+												@if ($mrp->jenis_mutasi == 'Dinas')
+													{!! $mrp->mutasi == 'Rotasi' ? '<option selected>Rotasi</option>' : '<option>Rotasi</option>'!!}
+													{!! $mrp->mutasi == 'Promosi' ? '<option selected>Promosi</option>' : '<option>Promosi</option>'!!}
+													{!! $mrp->mutasi == 'Demosi' ? '<option selected>Demosi</option>' : '<option>Demosi</option>'!!}
+													{!! $mrp->mutasi == 'TK Diperbantukan' ? '<option selected>TK Diperbantukan</option>' : '<option>TK Diperbantukan</option>'!!}
+													{!! $mrp->mutasi == 'Tugas Belajar' ? '<option selected>Tugas Belajar</option>' : '<option>Tugas Belajar</option>'!!}
+													{!! $mrp->mutasi == 'Aktif dari Tugas Belajar' ? '<option selected>Aktif dari Tugas Belajar</option>' : '<option>Aktif dari Tugas Belajar</option>'!!}
+												@elseif($mrp->jenis_mutasi == 'Non-Dinas')
+													{!! $mrp->mutasi == 'Aktif dari IDT' ? '<option selected>Aktif dari IDT</option>' : '<option>Aktif dari IDT</option>'!!}
+													{!! $mrp->mutasi == 'Ct diluar Tanggungan' ? '<option selected>Ct diluar Tanggungan</option>' : '<option>Ct diluar Tanggungan</option>'!!}
+													{!! $mrp->mutasi == 'APS' ? '<option selected>APS</option>' : '<option>APS</option>'!!}
 												@endif
 											</select>
 										</div>
@@ -186,7 +186,7 @@
 											@if ($unit_tujuan)
 												<select class="form-control select2" name="kode_olah" id="rekom_jabatan">
 												@foreach ($jabatan as $jab)
-													<option value="{{ $jab->id }}" {{ $jabatan_selected == $for->jabatan ? 'selected="selected"' : '' }}>{{ $jab->jabatan }}</option>
+													<option value="{{ $jab->kode_olah }}" {{ $jabatan_selected == $for->jabatan ? 'selected="selected"' : '' }}>{{ $jab->jabatan }}</option>
 												@endforeach
 											@else
 												<select class="form-control select2" name="kode_olah" id="rekom_jabatan" disabled>
@@ -336,13 +336,13 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6 col-sm-6">
-											<label>Tanggal Pooling</label>
-											<input type="text" class="form-control datepicker" name="mrp[tgl_pooling]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_pooling }}">
+											<label>Tanggal Evaluasi	</label>
+											<input type="text" class="form-control datepicker" name="mrp[tgl_evaluasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_evaluasi->format('Y-m-d') }}">
 										</div>
 
 										<div class="col-md-6 col-sm-6">
 											<label>Tanggal Dokumen Mutasi</label>
-											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_mutasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_mutasi }}">
+											<input type="text" class="form-control datepicker" name="mrp[tgl_dokumen_mutasi]" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false" value="{{ $mrp->tgl_dokumen_mutasi->format('Y-m-d') }}">
 										</div>
 									</div>
 								</div>

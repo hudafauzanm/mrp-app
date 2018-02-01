@@ -63,6 +63,11 @@ class MRP extends Model
         return Carbon::parse($value);
     }
 
+    public function getTglEvaluasiAttribute($value)
+    {
+        return Carbon::parse($value);
+    }
+
     public function getTglDokumenMutasiAttribute($value)
     {
         return Carbon::parse($value);

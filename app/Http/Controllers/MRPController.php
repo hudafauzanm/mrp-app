@@ -44,6 +44,8 @@ class MRPController extends Controller
         else
             $unit_tujuan = NULL;
 
+        // dd($mrp->mutasi == 'Rotasi');
+
     	return view('pages.sdm.mrp_edit', compact('mrp', 'fj_tujuan', 'unit_tujuan', 'all_unit', 'pengusul', 'operator', 'formasi', 'jabatan', 'formasi_selected', 'jabatan_selected'));
     }
 
