@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div id="panelHelp" class="panel panel-default">
 					<div class="panel-heading">
 						<span class="elipsis"><!-- panel title -->
@@ -130,27 +130,28 @@
 							<div class="col-md-9 col-sm-9 nopadding-right nopadding-left">
 								<div class="tab-content slimscroll height-410"  data-slimscroll-visible="true" style="overflow-y: hidden;width:auto; ">
 									<div id="tab_a" class="tab-pane active " style="width: auto; height: 415px;">
+										Meminta pegawai adalah fitur MRP dimana anda dapat meminta pegawai dari unit lain untuk dimutasi ke unit anda.
 										<h4>Tata Cara Meminta Pegawai</h4>
 											<ol class=""  style="text-align: justify; font-size: 14px; " >
-												<li>Pilihlah Menu Meminta Pegawai pada side bar yang ada di kiri layar anda.</li>
-												<li>Setelah masuk akan terdapat 2 panel yang dimana dibagian kiri untuk Memasukkan Data Mutasi dan dibagian kanan untuk memonitoring Pagu Unit anda.</li>
-												<li>Berikutnya masukkan NIP untuk Pegawai yang akan anda minta,setelah itu data seperti Nama Pegawai,Personnel Area,Formasi Jabatan,Pada,Masa Kerja,Sisa Masa Kerja,Lama Menjabat,Kali Jenjang akan muncul sesusai dengan NIP Pegawai.</li>
-												<li>Selanjutnya masukkan data pengusul mutasi dengan memasukkan NIP Pengusul,maka nama akan ikut muncul juga.</li>
-												<li>Lalu masukkan alasan untuk memutasi pegawai yang diminta dengan mengisi kolom alasan.</li>
-												<li>Selanjutnya memilih jenis mutasi yang sesuai lalu memilih tipe mutasi tersebut.</li>
-												<li>Mengisi Tanggal Aktifasi untuk memberi kapan waktu Pegawai yang diminta untuk mulai aktif bekerja.</li>
-												<li>Memasukkan nomer dokumen mutasi yang sesuai.</li>
-												<li>Memasukkan tanggal sesuai dengan tanggal dokumen mutasi.</li>
-												<li>Selanjutnya upload dokumen mutasi tersebut dalam format .pdf dengan maksimal file 10MB</li>
+												<li>Pilih menu Meminta Pegawai pada side bar.</li>
+												<li>Akan muncul halaman yang terbagi 2 sisi. Sisi kiri adalah form permintaan pegawai, sisi kanan adalah monitoring FTK unit anda.</li>
+												<li>Masukkan NIP pegawai yang akan anda minta, apabila NIP nitemukan, maka informasi detail pegawai akan otomatis muncul.</li>
+												<li>Masukkan data pengusul mutasi dan sertakan alasan anda meminta pegawai tersebut pada kolom alasan mutasi.</li>
+												<li>Pilih jenis dan tipe mutasi yang sesuai.</li>
+												<li>Isi tanggal aktifasi yang berisi perkiraan tanggal pegawai yang diminta untuk mulai aktif bekerja.</li>
+												<li>Lengkapi data dokumen mutasi</li>
+												<li>Selanjutnya upload dokumen mutasi tersebut <b>dalam format .pdf</b> dengan <b>maksimal file 10MB</b></li>
+												<li>Pilih proyeksi jabatan pegawai yang diminta (opsional)</li>
 												<li>Lalu Pilihlah tombol Kirim untuk mengirim semua data diatas.</li>
-												<li>Jika data berhasil terkirim maka anda akan dikirim sebuah invoice dari data yang telah dimasukkan tadi.</li>
+												<li>Jika permintaan mutasi berhasil dikirim maka akan muncul informasi detail mutasi anda.</li>
 												<li>Jika data sudah benar klik tombol Kembali Ke Beranda untuk melakukan aktifitas lainnya.</li>
-												<li>Terima Kasih</li>
+												<li>Anda dapat melihat status permintaan pegawai di menu Mutasi Diajukan > Permintaan Pegawai</li>
 											</ol>
 
 									</div>
 
 									<div id="tab_b" class="tab-pane">
+										Bursa pegawai adalah fitur MRP dimana anda dapat membursakan pegawai anda untuk dimutasi ke unit lain.
 										<h4>Tata Cara Bursa Pegawai</h4>
 											<ol style="text-align: justify; font-size: 14px; ">
 												<li>Pilihlah Menu Bursa Pegawai pada side bar yang ada di kiri layar anda.</li>
@@ -204,7 +205,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
+			{{-- <div class="col-md-4">
 				<div id="panelHelp" class="panel panel-default">
 					<div class="panel-heading">
 						<span class="elipsis"><!-- panel title -->
@@ -228,7 +229,7 @@
 
 					</div>
 				</div>
-			</div>
+			</div> --}}
 		</div>
 
 	</div>

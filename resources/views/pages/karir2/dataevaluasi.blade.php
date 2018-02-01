@@ -25,9 +25,15 @@
 				</thead>
 				<tbody >
 				@foreach ($mrp_e1 as $mrp)
-					<tr style="font-size: 10px; height: 140px;">
+					<tr style="font-size: 10px; height: 150px;">
 					<td valign="top">{{ $no++ }}</td>
-					<td valign="top">{{$mrp->no_dokumen_unit_usul}} <!-- no dokumen asal --></td>
+					<td valign="top">
+						{{$mrp->no_dokumen_unit_usul}} <br>
+						@if ($mrp->no_dokumen_unit_jawab)
+							{{$mrp->no_dokumen_unit_jawab}} <br>
+						@endif
+						{{$mrp->no_dokumen_respon_sdm}} <br>
+					</td>
 					<td valign="top">{{$mrp->registry_number}} <!-- registry number --></td>
 					<td valign="top">{{$mrp->pegawai->nip}} <!-- nip pegawai --></td>
 					<td valign="top">{{$mrp->pegawai->nama_pegawai}} <!-- nama pegawai --></td>
@@ -39,6 +45,7 @@
 						Sisa Masa Kerja : 6 Tahun ;<br>
 						Masa Kerja di Jabatan Terakhir : s.d. 1 Tahun<br>
 						Mutasi : {{$mrp->jenis_mutasi}} ({{$mrp->mutasi}})<br>
+						Alasan Mutasi : {{$mrp->alasan_mutasi}}<br>
 						Diklat Penjenjangan Terakhir : {{ App\DiklatPenjenjangan::where('pegawai_id', $mrp->pegawai->id)->pluck('jenis_diklat')->first() }} ;<br>
 						No. Sertifikat : {{ App\DiklatPenjenjangan::where('pegawai_id', $mrp->pegawai->id)->pluck('nomor_sertifikat')->first() }}<br>
 						Jalur Mutasi : {{ $mrp->jalur_mutasi }}<br>
@@ -60,7 +67,48 @@
 				@endforeach
 
 				</tbody>
-				</table>
+			</table>
+
+			<table style="border: 0">
+				<tbody >
+					<tr style="height: 50px; text-align: center;">
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 1px solid #000000">DIRHCM</td>
+						<td style="border: 1px solid #000000"></td>
+						<td style="border: 0"></td>
+					</tr>
+					<tr style="height: 50px; text-align: center">
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 1px solid #000000">KADIV TLN</td>
+						<td style="border: 1px solid #000000"></td>
+						<td style="border: 0"></td>
+					</tr>
+					<tr style="height: 50px; text-align: center">
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 0"></td>
+						<td style="border: 1px solid #000000">MS</td>
+						<td style="border: 1px solid #000000"></td>
+						<td style="border: 0"></td>
+					</tr>
+				</tbody>
+			</table>
 			
 		</div>
 

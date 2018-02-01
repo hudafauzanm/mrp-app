@@ -198,7 +198,6 @@ class DashboardController extends Controller
                 $sheet->cell('A1:J1', function($cell) { 
                     $cell->setFontSize(10);
                 });
-
             });
         })->download('xlsx');
     }
