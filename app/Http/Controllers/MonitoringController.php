@@ -60,6 +60,7 @@ class MonitoringController extends Controller
 			|_ formasi
 			|_ jabatan
 			|_ jenjang
+            |_ status
 			|_ nip
 			|_ nama
 	*/
@@ -68,6 +69,7 @@ class MonitoringController extends Controller
     	$units = PersonnelArea::where('user_role', 1)->get();
     	$selected_unit = request('unit');
     	$selected_level = request('level');
+        $is_unit = request()->has('is_unit') ? request('is_unit') : false;
     	// $selected_unit = 'all';
     	// $selected_level = 'all';
     	// $fungsional = ['F00', 'F01', 'F02', 'F03', 'F04', 'F05'];
@@ -94,7 +96,7 @@ class MonitoringController extends Controller
 	    		$fjs = $fjs->where('level', $selected_level);
 	    	}
 
-	    	$this->getTableData($fjs, $unit, $data['table']);
+	    	$this->getTableData($fjs, $unit, $data['table'], $is_unit);
     		// dd($fjs->whereIn('jenjang_id', $struktural)->groupBy('jenjang_id')->all());
     		$struks = $fjs->whereIn('jenjang_id', $struktural)->groupBy('jenjang_id')->all();
     		$fungs = $fjs->whereIn('jenjang_id', $fungsional);
@@ -179,43 +181,72 @@ class MonitoringController extends Controller
     	return $jumlah + $data;
     }
 
-    public function getTableData($forja_perunit, $unit, &$retval)
-    {
-    	foreach ($forja_perunit as $fj) 
-    	{
-    		$data = [
-    			'no' => '',
-    			'direktorat' => $unit->direktorat->nama,
-    			'personnel_area' => $unit->nama_pendek,
-    			'formasi' => $fj->formasi,
-    			'jabatan' => $fj->jabatan,
-    			'jenjang' => $fj->jenjang_txt,
-    			'status' => 'kosong'
-    		];
+    /*
+    expected output if unit
+        $retval => array
+            |_ 0
+                |_ formasi
+                |_ jabatan
+                |_ jumlah kosong
+            |_ 1
+                |_ formasi
+                |_ jabatan
+                |_ jumlah kosong            
+    */
 
+    public function getTableData($forja_perunit, $unit, &$retval, $is_unit)
+    {
+        foreach ($forja_perunit as $fj) 
+        {
     		$realisasi = $fj->pegawai->count();
 
-    		if($realisasi)
-    		{
-    			if ($realisasi < $fj->pagu) 
-    				$data['status'] = 'terisi';
-    			else if ($realisasi >= $fj->pagu)
-    				$data['status'] = 'penuh';
+            if($is_unit)
+            {
+                if($realisasi < $fj->pagu)
+                {
+                    $data = [
+                        'formasi' => $fj->formasi,
+                        'jabatan' => $fj->jabatan,
+                        'kosong' => $fj->pagu - $realisasi
+                    ];
+                    array_push($retval, $data);
+                }
+                else
+                    continue;
+            }
+            else
+            {
+                $data = [
+                    'no' => '',
+                    'direktorat' => $unit->direktorat->nama,
+                    'personnel_area' => $unit->nama_pendek,
+                    'formasi' => $fj->formasi,
+                    'jabatan' => $fj->jabatan,
+                    'jenjang' => $fj->jenjang_txt,
+                    'status' => 'kosong'
+                ];
 
-				$data_peg = [];
-    			foreach ($fj->pegawai as $pegawai) 
-    			{
-    				$data['nip'] = $pegawai->nip;
-    				$data['nama'] = $pegawai->nama_pegawai;
-    				array_push($retval, $data);
-    			}
-    		}
-    		else
-    		{
-    			$data['nip'] = '-';
-				$data['nama'] = '-';
-				array_push($retval, $data);
-    		}
+                if($realisasi)
+                {
+                    if ($realisasi < $fj->pagu) 
+                        $data['status'] = 'terisi';
+                    else if ($realisasi >= $fj->pagu)
+                        $data['status'] = 'penuh';
+
+                    foreach ($fj->pegawai as $pegawai) 
+                    {
+                        $data['nip'] = $pegawai->nip;
+                        $data['nama'] = $pegawai->nama_pegawai;
+                        array_push($retval, $data);
+                    }
+                }
+                else
+                {
+                    $data['nip'] = '-';
+                    $data['nama'] = '-';
+                    array_push($retval, $data);
+                }
+            }
     	}
     	return;
     }

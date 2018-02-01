@@ -171,7 +171,7 @@ use Carbon\Carbon;
 								<div class="row">
 									<div class="col-md-6 pull-right">
 										<select class="form-control select2" style="width: 100%" id="sk_unit_filter">
-											<option value="all">--- ALL ---</option>
+											<option value="all">--- ALL PERSONNEL AREA ---</option>
 											@foreach ($personnels as $pers)
 												<option value="{{ $pers->username }}">{{ $pers->nama_pendek }}</option>
 											@endforeach
@@ -299,7 +299,7 @@ use Carbon\Carbon;
 								<a  class="tabselect" href="#bursa" data-toggle="tab">Bursa Pegawai</a>
 							</li>
 							<li class="">
-								<a class="tabselect" href="#request" data-toggle="tab">Request Jabatan</a>
+								<a class="tabselect" href="#request" data-toggle="tab">Bursa Jabatan</a>
 							</li>
 						</ul>									
 
@@ -1456,11 +1456,11 @@ use Carbon\Carbon;
 					$.each(data.chart, function(key_unit, val_unit){ //key = unit
 						var obj = {unit: '', chart_data: {labels: [], data:{cetak: [], kirim:[], batal:[]}}}
 						obj.unit = key_unit;
-						obj.chart_data.labels.push(key_unit);
 						obj.chart_data.data.cetak.push(val_unit.cetak);
 						obj.chart_data.data.kirim.push(val_unit.kirim);
 						obj.chart_data.data.batal.push(val_unit.batal);
 						value.push(obj);
+						// obj.chart_data.labels.push(Object.keys(val_unit));
 					});
 
 					$.each(value, function(key, val){
